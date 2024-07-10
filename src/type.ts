@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 /**
  * IChatItemProps Interface
@@ -34,40 +34,40 @@ import React from 'react'
  * @prop expanded The Chat Item's expanded and optional.
  */
 export interface IChatItemProps {
-  id: string | number
-  avatar: string
-  unread?: number
-  className?: string
-  avatarFlexible?: boolean
-  avatarSize?: 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge';
-  alt?: string
-  title?: string
-  subtitle?: string
-  date?: Date
-  dateString?: string
-  statusColor?: string
-  statusColorType?: string
-  statusText?: string
-  lazyLoadingImage?: string
-  muted?: boolean
-  showMute?: boolean
-  showVideoCall?: boolean
-  onAvatarError?: React.MouseEventHandler
-  onContextMenu?: React.MouseEventHandler
-  onClick?: React.MouseEventHandler
-  onClickMute?: React.MouseEventHandler
-  onClickVideoCall?: React.MouseEventHandler
-  onDragOver?: Function
-  onDragEnter?: Function
-  onDrop?: Function
-  onDragLeave?: Function
-  setDragStates?: Function
-  onDragComponent?: any
-  letterItem?: ILetterItem
-  customStatusComponents?: React.ElementType<any>[]
-  subList?: IChatItemProps[]
-  onExpandItem?: Function
-  expanded?: boolean;
+	id: string | number;
+	avatar: string;
+	unread?: number;
+	className?: string;
+	avatarFlexible?: boolean;
+	avatarSize?: "xsmall" | "small" | "medium" | "large" | "xlarge";
+	alt?: string;
+	title?: string;
+	subtitle?: string;
+	date?: Date;
+	dateString?: string;
+	statusColor?: string;
+	statusColorType?: string;
+	statusText?: string;
+	lazyLoadingImage?: string;
+	muted?: boolean;
+	showMute?: boolean;
+	showVideoCall?: boolean;
+	onAvatarError?: React.MouseEventHandler;
+	onContextMenu?: React.MouseEventHandler;
+	onClick?: React.MouseEventHandler;
+	onClickMute?: React.MouseEventHandler;
+	onClickVideoCall?: React.MouseEventHandler;
+	onDragOver?: Function;
+	onDragEnter?: Function;
+	onDrop?: Function;
+	onDragLeave?: Function;
+	setDragStates?: Function;
+	onDragComponent?: any;
+	letterItem?: ILetterItem;
+	customStatusComponents?: React.ElementType<any>[];
+	subList?: IChatItemProps[];
+	onExpandItem?: Function;
+	expanded?: boolean;
 }
 
 /**
@@ -76,8 +76,8 @@ export interface IChatItemProps {
  * @prop letter The Letter Item's letter is a component and optional.
  */
 export interface ILetterItem {
-  id: string
-  letter?: React.ReactChild
+	id: string;
+	letter?: React.ReactChild;
 }
 
 /**
@@ -100,22 +100,22 @@ export interface ILetterItem {
  * @prop onExpand The Chat Item's expand function and optional.
  */
 export interface IChatListProps {
-  id: string | number
-  className?: string
-  lazyLoadingImage: string
-  dataSource: IChatItemProps[]
-  cmpRef?: React.Ref<HTMLButtonElement>
-  onAvatarError?: ChatListEvent
-  onContextMenu?: ChatListEvent
-  onClick?: ChatListEvent
-  onClickMute?: ChatListEvent
-  onClickVideoCall?: ChatListEvent
-  onDragOver?: Function
-  onDragEnter?: Function
-  onDrop?: Function
-  onDragLeave?: Function
-  onDragComponent?: Function
-  onExpand?: Function
+	id: string | number;
+	className?: string;
+	lazyLoadingImage: string;
+	dataSource: IChatItemProps[];
+	cmpRef?: React.Ref<HTMLButtonElement>;
+	onAvatarError?: ChatListEvent;
+	onContextMenu?: ChatListEvent;
+	onClick?: ChatListEvent;
+	onClickMute?: ChatListEvent;
+	onClickVideoCall?: ChatListEvent;
+	onDragOver?: Function;
+	onDragEnter?: Function;
+	onDrop?: Function;
+	onDragLeave?: Function;
+	onDragComponent?: Function;
+	onExpand?: Function;
 }
 
 /**
@@ -124,16 +124,20 @@ export interface IChatListProps {
  * @param index The Chat List's index.
  * @param event The Chat List's event.
  */
-export type ChatListEvent = (item: IChatItemProps, index: number, event: React.MouseEvent<HTMLElement>) => any
+export type ChatListEvent = (
+	item: IChatItemProps,
+	index: number,
+	event: React.MouseEvent<HTMLElement>,
+) => any;
 
 /**
  *
  */
 export interface IDefaultProps {
-  style: {
-    [key: string]: unknown
-  }
-  onClick: Function
+	style: {
+		[key: string]: unknown;
+	};
+	onClick: Function;
 }
 
 /**
@@ -160,28 +164,28 @@ export interface IDefaultProps {
  * @prop reply The Message's reply and optional.
  */
 export interface IMessage {
-  id: string | number
-  position: string
-  text: string
-  title: string
-  focus: boolean
-  date: number | Date
-  dateString?: string
-  avatar?: string
-  titleColor: string
-  forwarded: boolean
-  replyButton: boolean
-  removeButton: boolean
-  status: 'waiting' | 'sent' | 'received' | 'read'
-  statusTitle?: string
-  notch: boolean
-  copiableDate?: boolean
-  retracted: boolean
-  className?: string
-  letterItem?: ILetterItem
-  reply?: IReplyMessage | any
-  type: string
-  forwardedMessageText?: String
+	id: string | number;
+	position: string;
+	text: string;
+	title: string;
+	focus: boolean;
+	date: number | Date;
+	dateString?: string;
+	avatar?: string;
+	titleColor: string;
+	forwarded: boolean;
+	replyButton: boolean;
+	removeButton: boolean;
+	status: "waiting" | "sent" | "received" | "read";
+	statusTitle?: string;
+	notch: boolean;
+	copiableDate?: boolean;
+	retracted: boolean;
+	className?: string;
+	letterItem?: ILetterItem;
+	reply?: IReplyMessage | any;
+	type: string;
+	forwardedMessageText?: string;
 }
 
 /**
@@ -193,17 +197,17 @@ export interface IMessage {
  * @prop alt The Photo Message's alt and optional.
  */
 export interface IPhotoMessage extends IMessage {
-  data?: {
-    status: IMessageDataStatus
-    uri: string
-    width?: number
-    height?: number
-    name?: string
-    extension?: string
-    size?: number
-    id?: string
-    alt?: string
-  }
+	data?: {
+		status: IMessageDataStatus;
+		uri: string;
+		width?: number;
+		height?: number;
+		name?: string;
+		extension?: string;
+		size?: number;
+		id?: string;
+		alt?: string;
+	};
 }
 
 /**
@@ -216,10 +220,10 @@ export interface IPhotoMessage extends IMessage {
  * @prop onError The Photo Message's function onError(event: React.MouseEvent<T, MouseEvent>) and optional.
  */
 export interface IPhotoMessageProps extends IPhotoMessage {
-  onDownload?: React.MouseEventHandler
-  onOpen?: React.MouseEventHandler
-  onLoad?: React.ReactEventHandler
-  onPhotoError?: React.ReactEventHandler
+	onDownload?: React.MouseEventHandler;
+	onOpen?: React.MouseEventHandler;
+	onLoad?: React.ReactEventHandler;
+	onPhotoError?: React.ReactEventHandler;
 }
 
 /**
@@ -229,8 +233,8 @@ export interface IPhotoMessageProps extends IPhotoMessage {
  * @prop message The Reply Message's message and optional.
  */
 export interface IReplyMessage extends IMessage {
-  message: string
-  photoURL: string
+	message: string;
+	photoURL: string;
 }
 
 /**
@@ -240,7 +244,7 @@ export interface IReplyMessage extends IMessage {
  * @prop onClick The Reply Message's function onClick(event: React.MouseEvent<T, MouseEvent>) and optional.
  */
 export interface IReplyMessageProps extends IReplyMessage {
-  onClick?: React.MouseEventHandler
+	onClick?: React.MouseEventHandler;
 }
 
 /**
@@ -252,19 +256,19 @@ export interface IReplyMessageProps extends IReplyMessage {
  * @prop record The Meeting Message's record and optional.
  */
 export interface IMeetingMessage extends IMessage {
-  message?: string
-  avatarFlexible?: boolean
-  event?: {
-    title?: string
-    avatars?: IAvatarProps[]
-    avatarsLimit?: any
-  }
-  record?: {
-    avatar: string
-    title?: string
-    savedBy?: string
-    time?: string
-  }
+	message?: string;
+	avatarFlexible?: boolean;
+	event?: {
+		title?: string;
+		avatars?: IAvatarProps[];
+		avatarsLimit?: any;
+	};
+	record?: {
+		avatar: string;
+		title?: string;
+		savedBy?: string;
+		time?: string;
+	};
 }
 
 /**
@@ -286,28 +290,28 @@ export interface IMeetingMessage extends IMessage {
  * @prop onMeetingMoreSelect The Meeting Message's function onMeetingMoreSelect  and optional.
  */
 export interface IMeetingMessageProps extends IMeetingMessage {
-  subject?: string
-  dateString?: string
-  collapseTitle?: string
-  participants?: Array<{
-    id?: number | string
-    title?: string
-  }>
-  moreItems?: Array<{
-    text?: string
-    icon?: {
-      component?: any
-      float?: string
-      color?: string
-      size?: number
-    }
-  }>
-  dataSource?: IMeetingMessage[]
-  participantsLimit?: number
-  onClick?: React.MouseEventHandler
-  onMeetingTitleClick?: MeetingMessageEvent
-  onMeetingVideoLinkClick?: MeetingMessageEvent
-  onMeetingMoreSelect?: Function
+	subject?: string;
+	dateString?: string;
+	collapseTitle?: string;
+	participants?: Array<{
+		id?: number | string;
+		title?: string;
+	}>;
+	moreItems?: Array<{
+		text?: string;
+		icon?: {
+			component?: any;
+			float?: string;
+			color?: string;
+			size?: number;
+		};
+	}>;
+	dataSource?: IMeetingMessage[];
+	participantsLimit?: number;
+	onClick?: React.MouseEventHandler;
+	onMeetingTitleClick?: MeetingMessageEvent;
+	onMeetingVideoLinkClick?: MeetingMessageEvent;
+	onMeetingMoreSelect?: Function;
 }
 
 /**
@@ -320,20 +324,20 @@ export interface IMeetingMessageProps extends IMeetingMessage {
  * @prop alt The Video Message's alt and optional.
  */
 export interface IVideoMessage extends IMessage {
-  controlsList: string
-  data: {
-    videoURL?: string
-    thumbnailURL?: string
-    width?: number
-    height?: number
-    name?: string
-    extension?: string
-    size?: string
-    alt?: string
-    id?: string
-    uri?: string
-    status?: IMessageDataStatus
-  }
+	controlsList: string;
+	data: {
+		videoURL?: string;
+		thumbnailURL?: string;
+		width?: number;
+		height?: number;
+		name?: string;
+		extension?: string;
+		size?: string;
+		alt?: string;
+		id?: string;
+		uri?: string;
+		status?: IMessageDataStatus;
+	};
 }
 
 /**
@@ -346,10 +350,10 @@ export interface IVideoMessage extends IMessage {
  * @prop onPhotoError The Video Message's function onPhotoError(event: React.SyntheticEvent<T, Event>) and optional.
  */
 export interface IVideoMessageProps extends IVideoMessage {
-  onDownload?: React.MouseEventHandler
-  onOpen?: React.MouseEventHandler
-  onLoad?: React.ReactEventHandler
-  onPhotoError?: React.ReactEventHandler
+	onDownload?: React.MouseEventHandler;
+	onOpen?: React.MouseEventHandler;
+	onLoad?: React.ReactEventHandler;
+	onPhotoError?: React.ReactEventHandler;
 }
 
 /**
@@ -358,7 +362,7 @@ export interface IVideoMessageProps extends IVideoMessage {
  * @prop text The System Message's text and requried.
  */
 export interface ISystemMessage extends IMessage {
-  text: string
+	text: string;
 }
 
 /**
@@ -368,7 +372,7 @@ export interface ISystemMessage extends IMessage {
  * @prop className The System Message's className and optional.
  */
 export interface ISystemMessageProps extends ISystemMessage {
-  className?: string
+	className?: string;
 }
 
 /**
@@ -379,16 +383,16 @@ export interface ISystemMessageProps extends ISystemMessage {
  * @prop controlsList The Audio Message's controls list and optional.
  */
 export interface IAudioMessage extends IMessage {
-  data: {
-    audioURL?: string
-    extension?: string
-    name?: string
-    size?: string
-    duration?: number
-    id?: string
-    audioType?: 'audio/mp3' | string
-    controlsList?: string
-  }
+	data: {
+		audioURL?: string;
+		extension?: string;
+		name?: string;
+		size?: string;
+		duration?: number;
+		id?: string;
+		audioType?: "audio/mp3" | string;
+		controlsList?: string;
+	};
 }
 
 /**
@@ -402,13 +406,13 @@ export interface IAudioMessage extends IMessage {
  * @prop onLoad The Audio Message's function onLoad(event: React.SyntheticEvent<T, Event>) and optional.
  */
 export interface IAudioMessageProps extends IAudioMessage {
-  audioProps?: {
-    [key: string]: unknown
-  }
-  customStyle?: any
-  onOpen?: React.MouseEventHandler
-  onDownload?: React.MouseEventHandler
-  onLoad?: React.ReactEventHandler
+	audioProps?: {
+		[key: string]: unknown;
+	};
+	customStyle?: any;
+	onOpen?: React.MouseEventHandler;
+	onDownload?: React.MouseEventHandler;
+	onLoad?: React.ReactEventHandler;
 }
 
 /**
@@ -417,14 +421,14 @@ export interface IAudioMessageProps extends IAudioMessage {
  * @prop size The File Message's size and optional.
  */
 export interface IFileMessage extends IMessage {
-  data: {
-    name?: string
-    extension?: string
-    size?: string
-    id?: string
-    uri?: string
-    status?: IMessageDataStatus
-  }
+	data: {
+		name?: string;
+		extension?: string;
+		size?: string;
+		id?: string;
+		uri?: string;
+		status?: IMessageDataStatus;
+	};
 }
 
 /**
@@ -436,8 +440,8 @@ export interface IFileMessage extends IMessage {
  * @prop onOpen The File Message's function onOpen(event: React.MouseEvent<Element, MouseEvent>) and optional.
  */
 export interface IFileMessageProps extends IFileMessage {
-  onDownload?: Function
-  onOpen?: React.MouseEventHandler
+	onDownload?: Function;
+	onOpen?: React.MouseEventHandler;
 }
 
 /**
@@ -449,12 +453,12 @@ export interface IFileMessageProps extends IFileMessage {
  * @prop mapURL The Location Message's map url and optional.
  */
 export interface ILocationMessage extends IMessage {
-  data: {
-    latitude: string
-    longitude: string
-    staticURL: string
-    mapURL?: string
-  }
+	data: {
+		latitude: string;
+		longitude: string;
+		staticURL: string;
+		mapURL?: string;
+	};
 }
 
 /**
@@ -473,15 +477,15 @@ export interface ILocationMessage extends IMessage {
  * @prop onError The Location Message's function onError(event: React.SyntheticEvent<T, Event>) and optional.
  */
 export interface ILocationMessageProps extends ILocationMessage {
-  markerColor: string
-  zoom: string
-  apiKey: string
-  className?: string
-  src?: string
-  target?: string
-  href?: string
-  onOpen?: React.MouseEventHandler
-  onError?: React.ReactEventHandler
+	markerColor: string;
+	zoom: string;
+	apiKey: string;
+	className?: string;
+	src?: string;
+	target?: string;
+	href?: string;
+	onOpen?: React.MouseEventHandler;
+	onError?: React.ReactEventHandler;
 }
 
 /**
@@ -495,11 +499,11 @@ export interface ILocationMessageProps extends ILocationMessage {
  * @prop text The Spotify Message's text and optional.
  */
 export interface ISpotifyMessage extends IMessage {
-  uri: string
-  theme?: string
-  view?: string
-  width?: number | string
-  height?: number | string
+	uri: string;
+	theme?: string;
+	view?: string;
+	width?: number | string;
+	height?: number | string;
 }
 
 /**
@@ -530,25 +534,25 @@ export interface ISpotifyMessageProps extends ISpotifyMessage {}
  * @prop onMeetingVideoLinkClick The Message Box'es function onMeetingVideoLinkClick(event: React.MouseEvent<T, MouseEvent>) and optional.
  */
 export interface IMessageBoxProps {
-  onMessageFocused?: any
-  renderAddCmp?: JSX.Element | (() => JSX.Element)
-  onClick?: React.MouseEventHandler
-  onOpen?: React.MouseEventHandler
-  onPhotoError?: React.MouseEventHandler
-  onContextMenu?: React.MouseEventHandler
-  onForwardClick?: React.MouseEventHandler
-  onReplyClick?: React.MouseEventHandler
-  onRemoveMessageClick?: React.MouseEventHandler
-  onTitleClick?: React.MouseEventHandler
-  onReplyMessageClick?: React.MouseEventHandler
-  onMeetingMessageClick?: React.MouseEventHandler
-  onDownload?: React.MouseEventHandler
-  onMeetingMoreSelect?: React.MouseEventHandler
-  onMeetingLinkClick?: React.MouseEventHandler
-  onMeetingTitleClick?: React.MouseEventHandler
-  onMeetingVideoLinkClick?: React.MouseEventHandler
-  styles?: React.CSSProperties
-  notchStyle?: React.CSSProperties
+	onMessageFocused?: any;
+	renderAddCmp?: JSX.Element | (() => JSX.Element);
+	onClick?: React.MouseEventHandler;
+	onOpen?: React.MouseEventHandler;
+	onPhotoError?: React.MouseEventHandler;
+	onContextMenu?: React.MouseEventHandler;
+	onForwardClick?: React.MouseEventHandler;
+	onReplyClick?: React.MouseEventHandler;
+	onRemoveMessageClick?: React.MouseEventHandler;
+	onTitleClick?: React.MouseEventHandler;
+	onReplyMessageClick?: React.MouseEventHandler;
+	onMeetingMessageClick?: React.MouseEventHandler;
+	onDownload?: React.MouseEventHandler;
+	onMeetingMoreSelect?: React.MouseEventHandler;
+	onMeetingLinkClick?: React.MouseEventHandler;
+	onMeetingTitleClick?: React.MouseEventHandler;
+	onMeetingVideoLinkClick?: React.MouseEventHandler;
+	styles?: React.CSSProperties;
+	notchStyle?: React.CSSProperties;
 }
 
 /**
@@ -583,40 +587,40 @@ export interface IMessageBoxProps {
  * @prop onMeetingLinkClick The Message List's function onMeetingLinkClick(item: IMessageBoxProps, index: number, event: React.MouseEvent<HTMLElement, MouseEvent>) and optional.
  */
 export interface IMessageListProps {
-  className?: string
-  customProps?: {
-    [key: string]: unknown
-  }
-  children?: React.ReactNode
-  isShowChild?: boolean
-  referance: any
-  dataSource: MessageType[]
-  actionButtons?: MeetingLinkActionButtons[]
-  lockable: boolean
-  toBottomHeight?: String | number
-  downButton?: boolean
-  downButtonBadge?: number
-  sendMessagePreview?: boolean
-  onScroll?: React.UIEventHandler
-  onContextMenu?: MessageListEvent
-  onDownButtonClick?: React.RefObject<HTMLButtonElement>
-  onOpen?: MessageListEvent
-  onDownload?: MessageListEvent
-  onPhotoError?: MessageListEvent
-  onMeetingMoreSelect?: MessageListEvent
-  onMessageFocused?: MessageListEvent
-  onClick?: MessageListEvent
-  onForwardClick?: MessageListEvent
-  onReplyClick?: MessageListEvent
-  onReplyMessageClick?: MessageListEvent
-  onTitleClick?: MessageListEvent
-  onRemoveMessageClick?: MessageListEvent
-  onMeetingMessageClick?: MessageListEvent
-  onMeetingTitleClick?: React.MouseEventHandler
-  onMeetingVideoLinkClick?: React.MouseEventHandler
-  onMeetingLinkClick?: MessageListEvent
-  messageBoxStyles?: React.CSSProperties
-  notchStyle?: React.CSSProperties
+	className?: string;
+	customProps?: {
+		[key: string]: unknown;
+	};
+	children?: React.ReactNode;
+	isShowChild?: boolean;
+	referance: any;
+	dataSource: MessageType[];
+	actionButtons?: MeetingLinkActionButtons[];
+	lockable: boolean;
+	toBottomHeight?: string | number;
+	downButton?: boolean;
+	downButtonBadge?: number;
+	sendMessagePreview?: boolean;
+	onScroll?: React.UIEventHandler;
+	onContextMenu?: MessageListEvent;
+	onDownButtonClick?: React.RefObject<HTMLButtonElement>;
+	onOpen?: MessageListEvent;
+	onDownload?: MessageListEvent;
+	onPhotoError?: MessageListEvent;
+	onMeetingMoreSelect?: MessageListEvent;
+	onMessageFocused?: MessageListEvent;
+	onClick?: MessageListEvent;
+	onForwardClick?: MessageListEvent;
+	onReplyClick?: MessageListEvent;
+	onReplyMessageClick?: MessageListEvent;
+	onTitleClick?: MessageListEvent;
+	onRemoveMessageClick?: MessageListEvent;
+	onMeetingMessageClick?: MessageListEvent;
+	onMeetingTitleClick?: React.MouseEventHandler;
+	onMeetingVideoLinkClick?: React.MouseEventHandler;
+	onMeetingLinkClick?: MessageListEvent;
+	messageBoxStyles?: React.CSSProperties;
+	notchStyle?: React.CSSProperties;
 }
 
 /**
@@ -625,17 +629,21 @@ export interface IMessageListProps {
  * @param index The MessageListEvent's index.
  * @param event The MessageListEvent's event.
  */
-export type MessageListEvent = (item: MessageType, index: number, event: React.MouseEvent<HTMLElement>) => any
+export type MessageListEvent = (
+	item: MessageType,
+	index: number,
+	event: React.MouseEvent<HTMLElement>,
+) => any;
 
 /**
  * IProgressOptions Interface
  * @prop state The Progress Options's state is a object.
  */
 export interface IProgressOptions {
-  state?: {
-    color?: string
-    width?: string
-  }
+	state?: {
+		color?: string;
+		width?: string;
+	};
 }
 
 /**
@@ -644,15 +652,15 @@ export interface IProgressOptions {
  * @prop title The Meeting Link Message's title and optional.
  */
 export interface IMeetingLinkMessage extends IMessage {
-  meetingID?: string
+	meetingID?: string;
 }
 
-export type TActionButton = React.FunctionComponent<any>
+export type TActionButton = React.FunctionComponent<any>;
 
 export interface MeetingLinkActionButtons {
-  // return meeting id
-  onClickButton: (id: string) => void
-  Component: TActionButton
+	// return meeting id
+	onClickButton: (id: string) => void;
+	Component: TActionButton;
 }
 
 /**
@@ -663,7 +671,7 @@ export interface MeetingLinkActionButtons {
  * @prop onMeetingMoreSelect The Meeting More Select Message's function onMeetingMoreSelect(event: React.MouseEvent<T, MouseEvent>) and optional.
  */
 export interface IMeetingLinkMessageProps extends IMeetingLinkMessage {
-  actionButtons?: MeetingLinkActionButtons[]
+	actionButtons?: MeetingLinkActionButtons[];
 }
 
 /**
@@ -672,7 +680,11 @@ export interface IMeetingLinkMessageProps extends IMeetingLinkMessage {
  * @param index The MessageListEvent's index.
  * @param event The MessageListEvent's event.
  */
-export type MeetingMessageEvent = (item: IMeetingMessage, index: number, event: React.MouseEvent<HTMLElement>) => any
+export type MeetingMessageEvent = (
+	item: IMeetingMessage,
+	index: number,
+	event: React.MouseEvent<HTMLElement>,
+) => any;
 
 /**
  * ITextMessage Interface extends IMessage
@@ -686,20 +698,20 @@ export interface ITextMessage extends IMessage {}
  * @prop message The Text Message's message is a ITextMessage and required.
  */
 export interface ITextMessageProps extends ITextMessage {
-  // copyClipboard: function;
+	// copyClipboard: function;
 }
 
 export interface IMeetingListProps {
-  cmpRef?: any
-  className?: string
-  dataSource?: IMeetingItemProps[]
-  lazyLoadingImage?: string
-  onClick?: MeetingListEvent
-  onMeetingClick?: MeetingListEvent
-  onShareClick?: MeetingListEvent
-  onCloseClick?: MeetingListEvent
-  onContextMenu?: MeetingListEvent
-  onAvatarError?: MeetingListEvent
+	cmpRef?: any;
+	className?: string;
+	dataSource?: IMeetingItemProps[];
+	lazyLoadingImage?: string;
+	onClick?: MeetingListEvent;
+	onMeetingClick?: MeetingListEvent;
+	onShareClick?: MeetingListEvent;
+	onCloseClick?: MeetingListEvent;
+	onContextMenu?: MeetingListEvent;
+	onAvatarError?: MeetingListEvent;
 }
 
 /**
@@ -708,7 +720,11 @@ export interface IMeetingListProps {
  * @param index The MessageListEvent's index.
  * @param event The MessageListEvent's event.
  */
-export type MeetingListEvent = (item: IMeetingItemProps, index: number, event: React.MouseEvent<HTMLElement>) => any
+export type MeetingListEvent = (
+	item: IMeetingItemProps,
+	index: number,
+	event: React.MouseEvent<HTMLElement>,
+) => any;
 
 /**
  * IMeetingItemProps Interface
@@ -737,29 +753,29 @@ export type MeetingListEvent = (item: IMeetingItemProps, index: number, event: R
  * @prop onCloseClick The Meeting Item's function onCloseClick(event: React.MouseEvent<T, MouseEvent>) and optional.
  */
 export interface IMeetingItemProps {
-  id: string | number
-  closable?: boolean
-  date?: any
-  subject?: string
-  subjectLimit?: number
-  avatarFlexible?: boolean
-  alt?: string
-  title?: string
-  subtitle?: string
-  statusColorType?: string
-  className?: string
-  dateString?: string
-  lazyLoadingImage?: string
-  avatarLimit?: number
-  avatars?: IAvatarProps[]
-  audioMuted?: boolean
-  audioSource?: string
-  onClick?: React.MouseEventHandler
-  onAvatarError?: React.MouseEventHandler
-  onMeetingClick?: React.MouseEventHandler
-  onShareClick?: React.MouseEventHandler
-  onContextMenu?: React.MouseEventHandler
-  onCloseClick?: React.MouseEventHandler
+	id: string | number;
+	closable?: boolean;
+	date?: any;
+	subject?: string;
+	subjectLimit?: number;
+	avatarFlexible?: boolean;
+	alt?: string;
+	title?: string;
+	subtitle?: string;
+	statusColorType?: string;
+	className?: string;
+	dateString?: string;
+	lazyLoadingImage?: string;
+	avatarLimit?: number;
+	avatars?: IAvatarProps[];
+	audioMuted?: boolean;
+	audioSource?: string;
+	onClick?: React.MouseEventHandler;
+	onAvatarError?: React.MouseEventHandler;
+	onMeetingClick?: React.MouseEventHandler;
+	onShareClick?: React.MouseEventHandler;
+	onContextMenu?: React.MouseEventHandler;
+	onCloseClick?: React.MouseEventHandler;
 }
 
 /**
@@ -794,35 +810,35 @@ export interface IMeetingItemProps {
  * @prop onKeyUp The Input's function onKeyUp(event: React.KeyboardEvent<T>) and optional.
  */
 export interface IInputProps {
-  autofocus?: boolean
-  referance?: any // sor ve 46.satır
-  clear?: Function
-  maxlength?: number
-  maxHeight: number
-  onMaxLengthExceed?: Function
-  onChange?: Function
-  multiline?: boolean
-  autoHeight?: boolean
-  minHeight?: number
-  className?: string
-  leftButtons?: React.ReactNode
-  rightButtons?: React.ReactNode
-  type?: React.HTMLInputTypeAttribute
-  placeholder?: string
-  defaultValue?: string
-  inputStyle?: Object
-  value?: string
-  onCopy?: React.ClipboardEventHandler
-  onCut?: React.ClipboardEventHandler
-  onPaste?: React.ClipboardEventHandler
-  onBlur?: React.FocusEventHandler
-  onFocus?: React.FocusEventHandler
-  onSelect?: React.ReactEventHandler
-  onSubmit?: React.FormEventHandler
-  onReset?: React.FormEventHandler
-  onKeyDown?: React.KeyboardEventHandler
-  onKeyPress?: React.KeyboardEventHandler
-  onKeyUp?: React.KeyboardEventHandler
+	autofocus?: boolean;
+	referance?: any; // sor ve 46.satır
+	clear?: Function;
+	maxlength?: number;
+	maxHeight: number;
+	onMaxLengthExceed?: Function;
+	onChange?: Function;
+	multiline?: boolean;
+	autoHeight?: boolean;
+	minHeight?: number;
+	className?: string;
+	leftButtons?: React.ReactNode;
+	rightButtons?: React.ReactNode;
+	type?: React.HTMLInputTypeAttribute;
+	placeholder?: string;
+	defaultValue?: string;
+	inputStyle?: Object;
+	value?: string;
+	onCopy?: React.ClipboardEventHandler;
+	onCut?: React.ClipboardEventHandler;
+	onPaste?: React.ClipboardEventHandler;
+	onBlur?: React.FocusEventHandler;
+	onFocus?: React.FocusEventHandler;
+	onSelect?: React.ReactEventHandler;
+	onSubmit?: React.FormEventHandler;
+	onReset?: React.FormEventHandler;
+	onKeyDown?: React.KeyboardEventHandler;
+	onKeyPress?: React.KeyboardEventHandler;
+	onKeyUp?: React.KeyboardEventHandler;
 }
 
 /**
@@ -833,11 +849,11 @@ export interface IInputProps {
  * @prop loading The File Message Data Status's loading and optional.
  */
 export interface IMessageDataStatus {
-  autoDownload?: boolean
-  error?: boolean
-  download?: Function | boolean
-  click?: Function | boolean
-  loading?: boolean | number
+	autoDownload?: boolean;
+	error?: boolean;
+	download?: Function | boolean;
+	click?: Function | boolean;
+	loading?: boolean | number;
 }
 
 /**
@@ -852,17 +868,17 @@ export interface IMessageDataStatus {
  * @prop style The Dropdown's style is an object containing color, borderColor and optional.
  */
 export interface IDropdownProps {
-  className?: string
-  buttonProps?: Object
-  animationType?: string
-  animationPosition?: string
-  title?: string
-  items: IDropdownItemType[]
-  onSelect: Function
-  style?: {
-    color?: string
-    borderColor?: string
-  }
+	className?: string;
+	buttonProps?: Object;
+	animationType?: string;
+	animationPosition?: string;
+	title?: string;
+	items: IDropdownItemType[];
+	onSelect: Function;
+	style?: {
+		color?: string;
+		borderColor?: string;
+	};
 }
 
 /**
@@ -872,9 +888,9 @@ export interface IDropdownProps {
  * @prop className The Circle's className and optional.
  */
 export interface ICircleProps {
-  animate: number
-  progressOptions?: Object
-  className?: string
+	animate: number;
+	progressOptions?: Object;
+	className?: string;
 }
 
 /**
@@ -891,16 +907,16 @@ export interface ICircleProps {
  * @prop icon The Button's icon is a IButtonIcon and optional.
  */
 export interface IButtonProps {
-  title?: string
-  text?: string
-  buttonRef?: React.RefObject<HTMLButtonElement>
-  type?: string
-  className?: string
-  backgroundColor?: string
-  color?: string
-  disabled?: boolean
-  onClick?: React.MouseEventHandler
-  icon?: IButtonIcon
+	title?: string;
+	text?: string;
+	buttonRef?: React.RefObject<HTMLButtonElement>;
+	type?: string;
+	className?: string;
+	backgroundColor?: string;
+	color?: string;
+	disabled?: boolean;
+	onClick?: React.MouseEventHandler;
+	icon?: IButtonIcon;
 }
 
 /**
@@ -910,16 +926,16 @@ export interface IButtonProps {
  * @prop components The Button Icon's components and optional.
  */
 export interface IButtonIcon {
-  float?: any
-  size?: number
-  component?: React.ReactChild
+	float?: any;
+	size?: number;
+	component?: React.ReactChild;
 }
 
 /**
  * IDropDownItemType Type
  * @prop text The Dropdown Item's text and optional.
  */
-export type IDropdownItemType = IDropdownItem | string
+export type IDropdownItemType = IDropdownItem | string;
 
 /**
  * IDropdownItem Interface
@@ -927,8 +943,8 @@ export type IDropdownItemType = IDropdownItem | string
  * @prop text The Dropdown Item's text and optional.
  */
 export interface IDropdownItem {
-  icon?: IDropdownItemIcon
-  text?: string
+	icon?: IDropdownItemIcon;
+	text?: string;
 }
 
 /**
@@ -940,11 +956,11 @@ export interface IDropdownItem {
  * @prop component The Dropdown Item Icon's component and optional.
  */
 export interface IDropdownItemIcon {
-  float?: any
-  color?: string
-  size?: number
-  className?: string
-  component?: React.ReactChild
+	float?: any;
+	color?: string;
+	size?: number;
+	className?: string;
+	component?: React.ReactChild;
 }
 
 /**
@@ -953,8 +969,8 @@ export interface IDropdownItemIcon {
  * @type data The Side Bar's data is ISideBar and optional.
  */
 export interface ISideBarProps extends ISideBar {
-  type?: string
-  data: ISideBar
+	type?: string;
+	data: ISideBar;
 }
 
 /**
@@ -965,10 +981,10 @@ export interface ISideBarProps extends ISideBar {
  * @prop className The Side Bar's className and optional.
  */
 export interface ISideBar {
-  top?: any
-  center?: any
-  bottom?: any
-  className?: string
+	top?: any;
+	center?: any;
+	bottom?: any;
+	className?: string;
 }
 
 /**
@@ -984,28 +1000,28 @@ export interface ISideBar {
  * @prop color The Popup's color and optional.
  */
 export interface IPopup {
-  show?: boolean
-  header?: string
-  text?: string
-  footerButtons?: Array<{
-    color?: string
-    backgroundColor?: string
-    text?: string
-    onClick?: React.MouseEventHandler
-  }>
-  headerButtons?: Array<{
-    type?: string
-    color?: string
-    icon?: {
-      component?: React.ReactChild
-      size?: number
-    }
-    onClick?: React.MouseEventHandler
-  }>
-  renderHeader?: Function
-  renderContent?: Function
-  renderFooter?: Function
-  color?: string
+	show?: boolean;
+	header?: string;
+	text?: string;
+	footerButtons?: Array<{
+		color?: string;
+		backgroundColor?: string;
+		text?: string;
+		onClick?: React.MouseEventHandler;
+	}>;
+	headerButtons?: Array<{
+		type?: string;
+		color?: string;
+		icon?: {
+			component?: React.ReactChild;
+			size?: number;
+		};
+		onClick?: React.MouseEventHandler;
+	}>;
+	renderHeader?: Function;
+	renderContent?: Function;
+	renderFooter?: Function;
+	color?: string;
 }
 
 /**
@@ -1015,9 +1031,9 @@ export interface IPopup {
  * @prop className The Popup's className and optional.
  */
 export interface IPopupProps {
-  popup: IPopup
-  type?: string
-  className?: string
+	popup: IPopup;
+	type?: string;
+	className?: string;
 }
 
 /**
@@ -1037,19 +1053,19 @@ export interface IPopupProps {
  * @prop statusText The Avatar's status text and optional.
  */
 export interface IAvatarProps {
-  src: string
-  title?: string
-  lazyLoadingImage?: string
-  letterItem?: ILetterItem
-  type?: string
-  size?: Object
-  className?: string
-  alt?: string
-  sideElement?: React.ReactElement
-  onError?: React.ReactEventHandler
-  statusColorType?: string
-  statusColor?: string
-  statusText?: string
+	src: string;
+	title?: string;
+	lazyLoadingImage?: string;
+	letterItem?: ILetterItem;
+	type?: string;
+	size?: Object;
+	className?: string;
+	alt?: string;
+	sideElement?: React.ReactElement;
+	onError?: React.ReactEventHandler;
+	statusColorType?: string;
+	statusColor?: string;
+	statusText?: string;
 }
 
 /**
@@ -1061,11 +1077,11 @@ export interface IAvatarProps {
  * @prop bottom The Side Bar's bottom is a component and optional.
  */
 export interface INavbarProps {
-  type?: string
-  className?: string
-  left?: any
-  center?: any
-  right?: any
+	type?: string;
+	className?: string;
+	left?: any;
+	center?: any;
+	right?: any;
 }
 
 /**
@@ -1082,18 +1098,18 @@ export interface INavbarProps {
  * @type IMeetingMessageProps
  */
 export type MessageType =
-  | ({ type: 'location' } & ILocationMessageProps)
-  | ({ type: 'photo' } & IPhotoMessageProps)
-  | ({ type: 'video' } & IVideoMessageProps)
-  | ({ type: 'spotify' } & ISpotifyMessageProps)
-  | ({ type: 'audio' } & IAudioMessageProps)
-  | ({ type: 'meetingLink' } & IMeetingLinkMessageProps)
-  | ({ type: 'file' } & IFileMessageProps)
-  | ({ type: 'text' } & ITextMessageProps)
-  | ({ type: 'system' } & ISystemMessageProps)
-  | ({ type: 'meeting' } & IMeetingMessageProps)
+	| ({ type: "location" } & ILocationMessageProps)
+	| ({ type: "photo" } & IPhotoMessageProps)
+	| ({ type: "video" } & IVideoMessageProps)
+	| ({ type: "spotify" } & ISpotifyMessageProps)
+	| ({ type: "audio" } & IAudioMessageProps)
+	| ({ type: "meetingLink" } & IMeetingLinkMessageProps)
+	| ({ type: "file" } & IFileMessageProps)
+	| ({ type: "text" } & ITextMessageProps)
+	| ({ type: "system" } & ISystemMessageProps)
+	| ({ type: "meeting" } & IMeetingMessageProps);
 
-export type MessageBoxType = MessageType & IMessageBoxProps
+export type MessageBoxType = MessageType & IMessageBoxProps;
 
 export class ChatItem extends React.Component<IChatItemProps> {}
 export class ChatList extends React.Component<IChatListProps> {}

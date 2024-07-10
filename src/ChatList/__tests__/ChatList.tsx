@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import { describe, expect, it } from 'vitest'
 import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
-import Avatar from "../Avatar";
+import ChatList from "../ChatList";
 
-describe("Avatar component", () => {
+describe("ChatList component", () => {
 	it("should render without issues", () => {
-		const component = shallow(<Avatar />);
+		const component = shallow(<ChatList />);
+
 		expect(component.length).toBe(1);
 		expect(toJson(component)).toMatchSnapshot();
 	});
