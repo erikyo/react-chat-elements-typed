@@ -5,11 +5,11 @@ import classNames from "classnames";
 import Button from "../Button/Button";
 import type { IDropdownProps, IDropdownItemType } from "../type";
 
-const Dropdown: React.FC<IDropdownProps> = ({
+const Dropdown = ({
 	animationPosition = "nortwest",
 	animationType = "default",
 	...props
-}) => {
+}: IDropdownProps): JSX.Element => {
 	const [show, setShow] = useState<boolean | undefined>(undefined);
 
 	const onBlur = () => {
@@ -26,7 +26,7 @@ const Dropdown: React.FC<IDropdownProps> = ({
 				className={classNames(
 					"rce-dropdown",
 					animationType,
-					"rce-dropdown-open__" + animationPosition,
+					`rce-dropdown-open__${animationPosition}`,
 					{ "dropdown-hide": show === false },
 					{ "dropdown-show": show === true },
 				)}
@@ -37,11 +37,11 @@ const Dropdown: React.FC<IDropdownProps> = ({
 					)}
 					{props.items?.map((x: IDropdownItemType, i: number) => (
 						<li key={i} onMouseDown={(e) => props.onSelect(i)}>
-							{x instanceof Object ? (
+							{typeof x !== "string" ? (
 								x.icon ? (
 									<span className="rce-button-icon--container">
 										{(x.icon.float === "right" || !x.icon.float) && (
-											<a>{x.text}</a>
+											<a href={"#"}>{x.text}</a>
 										)}
 
 										<span

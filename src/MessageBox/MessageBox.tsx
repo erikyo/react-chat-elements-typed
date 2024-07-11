@@ -178,7 +178,8 @@ const MessageBox = ({
 
 						{!props.forwardedMessageText && props.reply ? (
 							<ReplyMessage
-								onClick={props.onReplyMessageClick}
+								onClick={props?.onReplyMessageClick}
+								onKeyDown={props?.onReplyMessageClick}
 								{...props.reply}
 							/>
 						) : null}

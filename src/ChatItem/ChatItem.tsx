@@ -79,8 +79,7 @@ const ChatItem = ({
 	) => {
 		e.preventDefault();
 		e.stopPropagation();
-		if (props.onExpandItem instanceof Function)
-			props.onExpandItem(id.toString());
+		if (props.onExpandItem instanceof Function) props.onExpandItem(e, id);
 	};
 
 	return (
@@ -141,7 +140,7 @@ const ChatItem = ({
 							lazyLoadingImage={lazyLoadingImage}
 							type={classNames("circle", { flexible: avatarFlexible })}
 						/>
-						{props.subList && props.subList.length > 0 && (
+						{props.subList?.length && (
 							<button
 								type="button"
 								className="rce-citem-expand-button"
@@ -201,7 +200,7 @@ const ChatItem = ({
 							<div className="rce-citem-body--bottom-status">
 								{unread && unread > 0 ? <span>{unread}</span> : null}
 							</div>
-							{props.customStatusComponents
+							{props.customStatusComponents?.length
 								? props.customStatusComponents.map((item, index) => {
 										return item;
 									})

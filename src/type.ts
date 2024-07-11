@@ -1,5 +1,12 @@
-import type { CSSProperties, JSX, RefObject } from "react";
+import type {
+	CSSProperties,
+	Dispatch,
+	JSX,
+	RefObject,
+	SetStateAction,
+} from "react";
 import type React from "react";
+import IntrinsicAttributes = React.JSX.IntrinsicAttributes;
 
 /**
  * IChatItemProps Interface
@@ -34,7 +41,7 @@ import type React from "react";
  * @prop onExpandItem The Chat Item's expand function onExpandItem(id: string) and optional.
  * @prop expanded The Chat Item's expanded and optional.
  */
-export interface IChatItemProps {
+export interface IChatItemProps extends IntrinsicAttributes {
 	id: string | number;
 	avatar: string;
 	unread?: number;
@@ -58,22 +65,20 @@ export interface IChatItemProps {
 	onContextMenu?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	onClickVideoCall?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-	onDragOver?: (
-		mouseEvent: React.MouseEvent,
-		id: string | number,
-	) => ((e: React.DragEvent, id: number | string) => void) | undefined;
+	onDragOver?: (mouseEvent: React.MouseEvent, id: string | number) => void;
 	onDragEnter?: (mouseEvent: React.MouseEvent, id: string | number) => void;
 	onDrop?: (mouseEvent: React.MouseEvent, id: string | number) => void;
 	onDragLeave?: (e: React.MouseEvent, id: string | number) => void;
 	onKeyDown?: (e: React.KeyboardEvent) => void;
-	setDragStates?: (
-		state: React.Dispatch<React.SetStateAction<boolean>>,
-	) => void;
+	setDragStates?: (state: Dispatch<SetStateAction<boolean>>) => void;
 	onDragComponent?: (id: string | number) => JSX.Element;
 	letterItem?: ILetterItem;
 	customStatusComponents?: JSX.Element[];
 	subList?: IChatItemProps[];
-	onExpandItem?: (id: string) => void;
+	onExpandItem?: (
+		e: React.MouseEvent | React.KeyboardEvent,
+		id: string,
+	) => void;
 	expanded?: boolean;
 }
 
@@ -116,16 +121,8 @@ export interface IChatListProps {
 	onClick?: ChatListEvent;
 	onClickMute?: ChatListEvent;
 	onClickVideoCall?: ChatListEvent;
-	onDragOver?:
-		| ((
-				mouseEvent: React.MouseEvent,
-				id: string | number,
-		  ) => ((e: React.DragEvent, id: number | string) => void) | undefined)
-		| undefined;
-	onDragEnter?: (
-		e: React.MouseEvent<HTMLElement>,
-		id: number | string,
-	) => (e: React.DragEventHandler, id: number) => void;
+	onDragOver?: (index: number, event: React.MouseEvent<HTMLElement>) => void;
+	onDragEnter?: (e: React.DragEventHandler, id: number | string) => void;
 	onDrop?: (e: React.MouseEvent<HTMLElement>, id: number | string) => void;
 	onDragLeave?: (e: React.MouseEvent<HTMLElement>, id: number | string) => void;
 	onDragComponent?: ((id: string | number) => JSX.Element) | undefined;
@@ -141,7 +138,7 @@ export interface IChatListProps {
 export type ChatListEvent = (
 	item: IChatItemProps,
 	index: number,
-	event: React.MouseEvent<HTMLElement>,
+	event: React.MouseEvent | React.KeyboardEvent,
 ) => void;
 
 /**
@@ -260,10 +257,12 @@ export interface IReplyMessage extends IMessage {
  * IReplyMessageProps Interface
  * @prop type The Reply Message's type is "reply" and required.
  * @prop message The Reply Message's message is a IReplyMessage and required.
- * @prop onClick The Reply Message's function onClick(event: React.MouseEvent<T, MouseEvent>) and optional.
+ * @prop onClick The Reply Message's function.
+ * @prop onKeyDown The k
  */
 export interface IReplyMessageProps extends IReplyMessage {
 	onClick?: React.MouseEventHandler;
+	onKeyDown?: React.KeyboardEvent;
 }
 
 /**
@@ -280,7 +279,7 @@ export interface IMeetingMessage extends IMessage {
 	event?: {
 		title?: string;
 		avatars?: IAvatarProps[];
-		avatarsLimit?: any;
+		avatarsLimit?: number;
 	};
 	record?: {
 		avatar: string;
@@ -567,7 +566,7 @@ export interface IMessageBoxProps {
 	onReplyClick?: React.MouseEventHandler;
 	onRemoveMessageClick?: React.MouseEventHandler;
 	onTitleClick?: React.MouseEventHandler;
-	onReplyMessageClick?: React.MouseEventHandler;
+	onReplyMessageClick?: React.MouseEventHandler | React.KeyboardEvent;
 	onMeetingMessageClick?: React.MouseEventHandler;
 	onDownload?: React.MouseEventHandler;
 	onMeetingMoreSelect?: React.MouseEventHandler;
@@ -584,10 +583,8 @@ export interface IMessageBoxProps {
  * @prop customProps The Message List's customProps and optional.
  * @prop children The Message List's children and optional.
  * @prop referance The Message List's referance is a ref and required.
- * @prop datasource The Message List's datasource is IMessageBoxProps and required.
  * @prop lockable The Message List's lockable and required.
  * @prop toBottomHeight The Message List's to bottom height and optional.
- * @prop down button The Message List's down button and required.
  * @prop downButtonBadge The Message List's down button badge and required.
  * @prop sendMessagePreview The Message List's send message preview and required.
  * @prop onScroll The Message List's function onScroll(event: React.UIEvent<T, UIEvent>) and optional.
@@ -761,7 +758,6 @@ export type MeetingListEvent = (
  * @prop title The Meeting Item's title and optional.
  * @prop subtitle The Meeting Item's subtitle and optional.
  * @prop statusColorType The Meeting Item's status color type and optional.
- * @prop classname The Meeting Item's classname and optional.
  * @prop dateString The Meeting Item's date string and optional.
  * @prop lazyLoadingImage The Meeting Item's lazyLoadingImage and optional.
  * @prop avatarLimit The Meeting Item's avatar limit and optional.
@@ -778,7 +774,7 @@ export type MeetingListEvent = (
 export interface IMeetingItemProps {
 	id: string | number;
 	closable?: boolean;
-	date?: any;
+	date?: Date | string;
 	subject?: string;
 	subjectLimit?: number;
 	avatarFlexible?: boolean;

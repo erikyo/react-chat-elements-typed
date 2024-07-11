@@ -117,131 +117,129 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 				</div>
 				<div
 					className={classNames("rce-mtmg-toogleContent", {
-						"rce-mtmg-toogleContent--click": toogle === true,
+						"rce-mtmg-toogleContent--click": toogle,
 					})}
 				>
-					{dataSource &&
-						dataSource.map((x, i) => {
-							return (
-								<div key={i}>
-									{!x.event && (
-										<div className="rce-mitem">
-											<div
-												className={classNames("rce-mitem avatar", {
-													"rce-mitem no-avatar": !x.avatar,
-												})}
-											>
-												{x.avatar ? (
-													<Avatar src={x.avatar} />
-												) : (
-													<IoMdChatboxes />
-												)}
-											</div>
-											<div className="rce-mitem-body">
-												<div className="rce-mitem-body--top">
-													<div
-														className="rce-mitem-body--top-title"
-														onClick={(e: React.MouseEvent<HTMLElement>) =>
-															_onMeetingLinkClick(x, i, e)
-														}
-													>
-														{x.title}
-													</div>
-													<div className="rce-mitem-body--top-time">
-														{x.dateString
-															? x.dateString
-															: x.date && x.date && format(x.date)}
-													</div>
+					{dataSource?.map((x, i) => {
+						return (
+							<div key={`mtmg-toggle-${i}`}>
+								{!x.event && (
+									<div className="rce-mitem">
+										<div
+											className={classNames("rce-mitem avatar", {
+												"rce-mitem no-avatar": !x.avatar,
+											})}
+										>
+											{x.avatar ? <Avatar src={x.avatar} /> : <IoMdChatboxes />}
+										</div>
+										<div className="rce-mitem-body">
+											<div className="rce-mitem-body--top">
+												<div
+													className="rce-mitem-body--top-title"
+													onClick={(e: React.MouseEvent<HTMLElement>) =>
+														_onMeetingLinkClick(x, i, e)
+													}
+													onKeyDown={(e: React.KeyboardEvent) => {
+														// TODO: handle keyboard
+														console.log(e);
+													}}
+												>
+													{x.title}
 												</div>
-												<div className="rce-mitem-body--bottom">
-													<div className="rce-mitem-body--bottom-title">
-														{x.message}
-													</div>
+												<div className="rce-mitem-body--top-time">
+													{x.dateString
+														? x.dateString
+														: x.date && x.date && format(x.date)}
+												</div>
+											</div>
+											<div className="rce-mitem-body--bottom">
+												<div className="rce-mitem-body--bottom-title">
+													{x.message}
 												</div>
 											</div>
 										</div>
-									)}
-									{x.event && (
-										<div className="rce-mitem-event">
-											<div className="rce-mitem-bottom-body">
-												<div className="rce-mitem-body avatar">
-													<HiOutlineVideoCamera />
+									</div>
+								)}
+								{x.event && (
+									<div className="rce-mitem-event">
+										<div className="rce-mitem-bottom-body">
+											<div className="rce-mitem-body avatar">
+												<HiOutlineVideoCamera />
+											</div>
+											<div className="rce-mitem-bottom-body-top">
+												{x.event.title}
+												<div className="rce-mitem-body--top-time">
+													{x.dateString
+														? x.dateString
+														: x.date && format(x.date)}
 												</div>
-												<div className="rce-mitem-bottom-body-top">
-													{x.event.title}
-													<div className="rce-mitem-body--top-time">
-														{x.dateString
-															? x.dateString
-															: x.date && format(x.date)}
-													</div>
-													<div className="rce-mitem-avatar-content">
-														{
-															<div className="rce-mitem-avatar">
-																{x.event.avatars &&
-																	// x.event.avatars.slice(0, x.event.avatarsLimit).map((x, i) => x instanceof Avatar ? x : (
-																	x.event.avatars
-																		.slice(0, x.event.avatarsLimit)
-																		.map((x, i) => (
-																			<Avatar key={i} src={x.src} />
-																		))}
-																{x.event.avatars &&
-																	x.event.avatarsLimit &&
-																	x.event.avatars.length >
-																		x.event.avatarsLimit && (
-																		<div
-																			className="rce-mitem-length rce-mitem-tooltip"
-																			tooltip={x.event.avatars
-																				.slice(
-																					x.event.avatarsLimit,
-																					x.event.avatars.length,
-																				)
-																				.map((avatar) => avatar.title)
-																				.join(",")
-																				.toString()}
-																		>
-																			<span className="rce-mitem-tooltip-text">
-																				{"+" +
-																					(x.event.avatars.length -
-																						x.event.avatarsLimit)}
-																			</span>
-																		</div>
-																	)}
-															</div>
-														}
-													</div>
-													{x.record && (
-														<div className="rce-mtmg-call-record">
-															<div className="rce-mtmg-call-body">
-																<div
-																	onClick={(e: React.MouseEvent<HTMLElement>) =>
-																		_onMeetingVideoLinkClick(x, i, e)
-																	}
-																	className="rce-mtmg-call-avatars"
-																>
-																	<Avatar
-																		className={"rce-mtmg-call-avatars"}
-																		src={x.record.avatar}
-																	/>
-																	<div className={"rce-mtmg-record-time"}>
-																		{x.record.time}
+												<div className="rce-mitem-avatar-content">
+													{
+														<div className="rce-mitem-avatar">
+															{x.event.avatars
+																?.slice(0, x.event.avatarsLimit)
+																.map((x, i) => (
+																	<Avatar key={`avatar-${i}`} src={x.src} />
+																))}
+															{x.event.avatars &&
+																x.event.avatarsLimit &&
+																x.event.avatars.length >
+																	x.event.avatarsLimit && (
+																	<div
+																		className="rce-mitem-length rce-mitem-tooltip"
+																		tooltip={x.event.avatars
+																			.slice(
+																				x.event.avatarsLimit,
+																				x.event.avatars.length,
+																			)
+																			.map((avatar) => avatar.title)
+																			.join(",")
+																			.toString()}
+																	>
+																		<span className="rce-mitem-tooltip-text">
+																			{`+${
+																				x.event.avatars.length -
+																				x.event.avatarsLimit
+																			}`}
+																		</span>
 																	</div>
+																)}
+														</div>
+													}
+												</div>
+												{x.record && (
+													<div className="rce-mtmg-call-record">
+														<div className="rce-mtmg-call-body">
+															<div
+																onClick={(e: React.MouseEvent<HTMLElement>) =>
+																	_onMeetingVideoLinkClick(x, i, e)
+																}
+																className="rce-mtmg-call-avatars"
+															>
+																<Avatar
+																	className={"rce-mtmg-call-avatars"}
+																	src={x.record.avatar}
+																/>
+																<div className={"rce-mtmg-record-time"}>
+																	{x.record.time}
 																</div>
-																<div className="rce-mtmg-call-body-title">
-																	<span>{x.record.title}</span>
-																	<div className="rce-mtmg-call-body-bottom">
-																		{x.record.savedBy}
-																	</div>
+															</div>
+															<div className="rce-mtmg-call-body-title">
+																<span>{x.record.title}</span>
+																<div className="rce-mtmg-call-body-bottom">
+																	{x.record.savedBy}
 																</div>
 															</div>
 														</div>
-													)}
-												</div>
+													</div>
+												)}
 											</div>
 										</div>
-									)}
-								</div>
-							);
-						})}
+									</div>
+								)}
+							</div>
+						);
+					})}
 				</div>
 			</div>
 		</div>

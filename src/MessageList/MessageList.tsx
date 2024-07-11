@@ -205,11 +205,10 @@ const MessageList: FC<IMessageListProps> = ({
 		>
 			{!!props.children && props.isShowChild && props.children}
 			<div ref={referance} onScroll={onScroll} className="rce-mlist">
-				{props.dataSource.map((x, i: number) => {
+				{props.dataSource.map((x, i) => {
 					return (
 						<MessageBox
-							{...(x as any)}
-							key={i}
+							{...x}
 							onOpen={
 								props.onOpen &&
 								((e: React.MouseEvent<HTMLElement>) => onOpen(x, i, e))

@@ -9,37 +9,28 @@ import type { IChatListProps, ChatListEvent, IChatItemProps } from "../type";
 const list: Dispatch<SetStateAction<boolean>>[] = [];
 
 const ChatList: React.FC<IChatListProps> = (props) => {
-	const onClick: (
+	const onClick = (
 		item: IChatItemProps,
 		index: number,
 		event: React.MouseEvent<HTMLElement>,
-	) => void = (
-		item: IChatItemProps,
-		index: number,
-		event: React.MouseEvent<HTMLElement>,
-	) => {
+	): void => {
 		if (props.onClick instanceof Function) props.onClick(item, index, event);
 	};
 
-	const onContextMenu: (
+	const onContextMenu = (
 		item: IChatItemProps,
 		index: number,
 		event: React.MouseEvent<HTMLElement>,
-	) => void = (
-		item: IChatItemProps,
-		index: number,
-		event: React.MouseEvent<HTMLElement>,
-	) => {
-		event.preventDefault();
+	): void => {
 		if (props.onContextMenu instanceof Function)
 			props.onContextMenu(item, index, event);
 	};
 
-	const onAvatarError: ChatListEvent = (
+	const onAvatarError = (
 		item: IChatItemProps,
 		index: number,
 		event: React.MouseEvent<HTMLElement>,
-	) => {
+	): void => {
 		if (props.onAvatarError instanceof Function)
 			props.onAvatarError(item, index, event);
 	};
@@ -67,63 +58,45 @@ const ChatList: React.FC<IChatListProps> = (props) => {
 		<div className={classNames("rce-container-clist", props.className)}>
 			{props.dataSource?.map((x, i) => {
 				if (!x) return null;
-				const key = x.id || i;
+				const key = x.id || `item-${i}`;
 				return (
 					<div key={key}>
 						<ChatItem
 							{...x}
 							lazyLoadingImage={props.lazyLoadingImage}
-							onAvatarError={(e: React.MouseEvent<HTMLElement>) =>
-								onAvatarError(x, i, e)
-							}
-							onContextMenu={(e: React.MouseEvent<HTMLElement>) =>
-								onContextMenu(x, i, e)
-							}
-							onClick={(e: React.MouseEvent<HTMLElement>) => onClick(x, i, e)}
-							onClickMute={(e: React.MouseEvent<HTMLElement>) =>
-								props.onClickMute?.(x, i, e)
-							}
-							onClickVideoCall={(e: React.MouseEvent<HTMLElement>) =>
-								props.onClickVideoCall?.(x, i, e)
-							}
-							onDragOver={props?.onDragOver}
-							onDragEnter={props?.onDragEnter}
+							onAvatarError={(e) => onAvatarError(x, i, e)}
+							onContextMenu={(e) => onContextMenu(x, i, e)}
+							onClick={(e) => onClick(x, i, e)}
+							onClickMute={(e) => props.onClickMute?.(x, i, e)}
+							onClickVideoCall={(e) => props.onClickVideoCall?.(x, i, e)}
+							onDragOver={(e, i) => props?.onDragOver}
+							onDragEnter={(e, i) => props?.onDragEnter}
 							onDrop={props.onDrop}
 							onDragLeave={onDragLeaveMW}
 							onDragComponent={props?.onDragComponent}
 							setDragStates={setDragStates}
-							onExpandItem={(e: React.MouseEvent<HTMLElement>) =>
-								onExpand(x, i, e)
-							}
+							onExpandItem={(e) => onExpand(x, i, e)}
 							expanded={x.expanded}
 						/>
-						{x.subList &&
-							x.subList.length > 0 &&
+						{x.subList?.length &&
 							x.expanded &&
 							x.subList.map((sub, j) => {
 								return (
 									<ChatItem
 										{...sub}
+										key={`${i}-${j.toString()}`}
 										className="subitem"
 										avatarSize="xsmall"
 										lazyLoadingImage={props.lazyLoadingImage}
-										onAvatarError={(e: React.MouseEvent<HTMLElement>) =>
-											onAvatarError(sub, j, e)
-										}
-										onContextMenu={(e: React.MouseEvent<HTMLElement>) =>
-											onContextMenu(sub, j, e)
-										}
-										onClick={(e: React.MouseEvent<HTMLElement>) =>
-											onClick(sub, j, e)
-										}
-										onClickMute={(e: React.MouseEvent<HTMLElement>) =>
-											props.onClickMute?.(sub, j, e)
-										}
-										onClickVideoCall={(e: React.MouseEvent<HTMLElement>) =>
+										onAvatarError={(e) => onAvatarError(sub, j, e)}
+										onContextMenu={(e) => onContextMenu(sub, j, e)}
+										onClick={(e) => onClick(sub, j, e)}
+										onClickMute={(e) => props.onClickMute?.(sub, j, e)}
+										onClickVideoCall={(e) =>
 											props.onClickVideoCall?.(sub, j, e)
 										}
-										onDragOver={props?.onDragOver}
-										onDragEnter={props?.onDragEnter}
+										onDragOver={(e, i) => props?.onDragOver}
+										onDragEnter={(e, i) => props?.onDragEnter}
 										onDrop={props.onDrop}
 										onDragLeave={onDragLeaveMW}
 										onDragComponent={props.onDragComponent}

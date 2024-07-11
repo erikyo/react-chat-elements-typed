@@ -15,7 +15,7 @@ const Input: React.FC<IInputProps> = ({
 	...props
 }) => {
 	useEffect(() => {
-		if (autofocus) props.referance?.current?.focus();
+		if (autofocus) (props.referance?.current as HTMLElement)?.focus();
 
 		if (props.clear instanceof Function) {
 			props.clear(clear);
@@ -33,8 +33,8 @@ const Input: React.FC<IInputProps> = ({
 				}
 
 				let height: string;
-				if (e.target.scrollHeight <= maxHeight)
-					height = `${e.target.scrollHeight}px`;
+				if ((e.target as HTMLElement).scrollHeight <= maxHeight)
+					height = `${(e.target as HTMLElement).scrollHeight}px`;
 				else height = `${maxHeight}px`;
 
 				if (element.style.height !== height) {
@@ -44,8 +44,8 @@ const Input: React.FC<IInputProps> = ({
 		}
 
 		if (props.maxlength && (element.value || "").length > props.maxlength) {
-			if (props.onMaxLengthExceed instanceof Function)
-				props.onMaxLengthExceed();
+			if (props.onMaxLengthExceed instanceof "Function")
+				props?.onMaxLengthExceed?.();
 
 			if (props.referance?.current) {
 				props.referance.current.value = (element.value || "").substring(
@@ -56,7 +56,7 @@ const Input: React.FC<IInputProps> = ({
 			return;
 		}
 
-		if (props.onChange instanceof Function) props.onChange(e);
+		if (props.onChange instanceof "Function") props.onChange(e);
 	};
 
 	const clear = (): void => {
@@ -69,7 +69,9 @@ const Input: React.FC<IInputProps> = ({
 			props.referance.current.value = "";
 		}
 
-		onChangeEvent(_event);
+		onChangeEvent(
+			_event as React.SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>,
+		);
 	};
 
 	return (
