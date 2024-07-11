@@ -1,11 +1,11 @@
 import type React from "react";
 import type { RefObject } from "react";
-import { useEffect } from "react";
+import { type JSX, useEffect } from "react";
 import "./Input.css";
 import classNames from "classnames";
 import type { IInputProps } from "../type";
 
-const Input: React.FC<IInputProps> = ({
+const Input = ({
 	type = "text",
 	multiline = false,
 	minHeight = 25,
@@ -13,14 +13,14 @@ const Input: React.FC<IInputProps> = ({
 	autoHeight = true,
 	autofocus = false,
 	...props
-}) => {
+}: IInputProps): JSX.Element => {
 	useEffect(() => {
 		if (autofocus) (props.referance?.current as HTMLElement)?.focus();
 
 		if (props.clear instanceof Function) {
 			props.clear(clear);
 		}
-	}, [autofocus, props.clear, props.referance?.current?.focus]);
+	}, [autofocus, props.clear, props.referance?.current]);
 
 	const onChangeEvent = (
 		e: React.SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -44,7 +44,7 @@ const Input: React.FC<IInputProps> = ({
 		}
 
 		if (props.maxlength && (element.value || "").length > props.maxlength) {
-			if (props.onMaxLengthExceed instanceof "Function")
+			if (props.onMaxLengthExceed instanceof Function)
 				props?.onMaxLengthExceed?.();
 
 			if (props.referance?.current) {
@@ -56,7 +56,7 @@ const Input: React.FC<IInputProps> = ({
 			return;
 		}
 
-		if (props.onChange instanceof "Function") props.onChange(e);
+		if (props.onChange instanceof Function) props.onChange(e);
 	};
 
 	const clear = (): void => {

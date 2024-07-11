@@ -5,10 +5,11 @@ import "./ChatList.css";
 
 import ChatItem from "../ChatItem/ChatItem";
 import type { IChatListProps, ChatListEvent, IChatItemProps } from "../type";
+import type { JSX } from "react";
 
 const list: Dispatch<SetStateAction<boolean>>[] = [];
 
-const ChatList: React.FC<IChatListProps> = (props) => {
+const ChatList = (props: IChatListProps): JSX.Element => {
 	const onClick = (
 		item: IChatItemProps,
 		index: number,
@@ -71,8 +72,8 @@ const ChatList: React.FC<IChatListProps> = (props) => {
 							onClickVideoCall={(e) => props.onClickVideoCall?.(x, i, e)}
 							onDragOver={(e, i) => props?.onDragOver}
 							onDragEnter={(e, i) => props?.onDragEnter}
-							onDrop={props.onDrop}
-							onDragLeave={onDragLeaveMW}
+							onDrop={(e, i) => props.onDrop}
+							onDragLeave={(e, i) => onDragLeaveMW}
 							onDragComponent={props?.onDragComponent}
 							setDragStates={setDragStates}
 							onExpandItem={(e) => onExpand(x, i, e)}
@@ -97,8 +98,8 @@ const ChatList: React.FC<IChatListProps> = (props) => {
 										}
 										onDragOver={(e, i) => props?.onDragOver}
 										onDragEnter={(e, i) => props?.onDragEnter}
-										onDrop={props.onDrop}
-										onDragLeave={onDragLeaveMW}
+										onDrop={(e, i) => props?.onDrop}
+										onDragLeave={(e, i) => onDragLeaveMW}
 										onDragComponent={props.onDragComponent}
 										setDragStates={setDragStates}
 									/>

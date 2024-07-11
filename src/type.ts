@@ -1,3 +1,4 @@
+import type React from "react";
 import type {
 	CSSProperties,
 	Dispatch,
@@ -5,8 +6,6 @@ import type {
 	RefObject,
 	SetStateAction,
 } from "react";
-import type React from "react";
-import IntrinsicAttributes = React.JSX.IntrinsicAttributes;
 
 /**
  * IChatItemProps Interface
@@ -38,10 +37,10 @@ import IntrinsicAttributes = React.JSX.IntrinsicAttributes;
  * @prop onDragComponent The Chat Item's drag component and optional.
  * @prop letterItem The Chat Item's avatar letterItem and optional.
  * @prop subList The Chat Item's sub chat items and optional.
- * @prop onExpandItem The Chat Item's expand function onExpandItem(id: string) and optional.
+ * @prop onExpandItem The Chat Items expand function onExpandItem(id: string) and optional.
  * @prop expanded The Chat Item's expanded and optional.
  */
-export interface IChatItemProps extends IntrinsicAttributes {
+export interface IChatItemProps extends JSX.IntrinsicAttributes {
 	id: string | number;
 	avatar: string;
 	unread?: number;
@@ -70,8 +69,8 @@ export interface IChatItemProps extends IntrinsicAttributes {
 	onDrop?: (mouseEvent: React.MouseEvent, id: string | number) => void;
 	onDragLeave?: (e: React.MouseEvent, id: string | number) => void;
 	onKeyDown?: (e: React.KeyboardEvent) => void;
-	setDragStates?: (state: Dispatch<SetStateAction<boolean>>) => void;
 	onDragComponent?: (id: string | number) => JSX.Element;
+	setDragStates?: (state: Dispatch<SetStateAction<boolean>>) => void;
 	letterItem?: ILetterItem;
 	customStatusComponents?: JSX.Element[];
 	subList?: IChatItemProps[];
@@ -835,7 +834,9 @@ export interface IInputProps {
 	maxlength?: number;
 	maxHeight: number;
 	onMaxLengthExceed?: () => void;
-	onChange?: (event: React.SyntheticEvent<HTMLInputElement>) => void;
+	onChange?: (
+		event: React.SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => void;
 	multiline?: boolean;
 	autoHeight?: boolean;
 	minHeight?: number;
@@ -897,6 +898,7 @@ export interface IDropdownProps {
 		color?: string;
 		borderColor?: string;
 	};
+	onSelect?: (event: React.MouseEvent, item: number) => void;
 }
 
 /**
@@ -929,7 +931,7 @@ export interface ICircleProps {
  * @prop onClick The Button's onClick function and optional.
  * @prop icon The Button's icon is a IButtonIcon and optional.
  */
-export interface IButtonProps {
+export interface IButtonProps extends JSX.IntrinsicAttributes {
 	title?: string;
 	text?: string;
 	buttonRef?: React.RefObject<HTMLButtonElement>;
@@ -946,7 +948,7 @@ export interface IButtonProps {
  * IButtonIcon Interface
  * @prop float The Button Icon's float and optional.
  * @prop size The Button Icon's size and optional.
- * @prop components The Button Icon's components and optional.
+ * @prop component The Button Icon's components and optional.
  */
 export interface IButtonIcon {
 	float?: "left" | "right" | "none";

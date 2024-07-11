@@ -21,7 +21,9 @@ const Popup: React.FC<IPopupProps> = ({ ...props }) => {
 						<div className="rce-popup-header">
 							<span>{props.popup?.header}</span>
 							{props.popup?.header &&
-								props.popup?.headerButtons?.map((x, i) => <Button {...x} />)}
+								props.popup?.headerButtons?.map((x, i) => {
+									return <Button {...x} />;
+								})}
 						</div>
 					)}
 					<div
@@ -35,7 +37,9 @@ const Popup: React.FC<IPopupProps> = ({ ...props }) => {
 					<div className="rce-popup-footer">
 						{props.popup?.renderFooter
 							? props.popup?.renderFooter()
-							: props.popup?.footerButtons?.map((x, i) => <Button {...x} />)}
+							: props.popup?.footerButtons?.map((x, i) => {
+									return <Button {...x} />;
+								})}
 					</div>
 				</div>
 			</div>

@@ -35,8 +35,11 @@ const Dropdown = ({
 					{props.title && (
 						<span className="rce-dropdown-title">{props.title}</span>
 					)}
-					{props.items?.map((x: IDropdownItemType, i: number) => (
-						<li key={i} onMouseDown={(e) => props.onSelect(i)}>
+					{props.items?.map((x: IDropdownItemType, i) => (
+						<li
+							key={`dropdown-item-${i.toString()}`}
+							onMouseDown={(e) => props?.onSelect?.(e, i)}
+						>
 							{typeof x !== "string" ? (
 								x.icon ? (
 									<span className="rce-button-icon--container">
@@ -58,13 +61,13 @@ const Dropdown = ({
 											{x.icon.component}
 										</span>
 
-										{x.icon.float === "left" && <a>{x.text}</a>}
+										{x.icon.float === "left" && <a href={"#"}>{x.text}</a>}
 									</span>
 								) : (
-									<a>{x.text}</a>
+									<a href={"#"}>{x.text}</a>
 								)
 							) : (
-								<a>{x}</a>
+								<a href={"#"}>{x}</a>
 							)}
 						</li>
 					))}

@@ -16,8 +16,8 @@ const ReplyMessage = ({
 				"rce-mbox-reply-border": !!props.titleColor,
 			})}
 			style={{ ...(props.titleColor && { borderColor: props.titleColor }) }}
-			onClick={onClick}
-			onKeyDown={onKeyDown}
+			onClick={(e) => onClick}
+			onKeyDown={(e) => onKeyDown}
 		>
 			<div className="rce-mbox-reply-left">
 				<div
