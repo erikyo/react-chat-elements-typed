@@ -1,4 +1,5 @@
 import type React from "react";
+import type { RefObject } from "react";
 import { useEffect } from "react";
 import "./Input.css";
 import classNames from "classnames";
@@ -14,37 +15,40 @@ const Input: React.FC<IInputProps> = ({
 	...props
 }) => {
 	useEffect(() => {
-		if (autofocus === true) props.referance?.current?.focus();
+		if (autofocus) props.referance?.current?.focus();
 
 		if (props.clear instanceof Function) {
 			props.clear(clear);
 		}
-	}, []);
+	}, [autofocus, props.clear, props.referance?.current?.focus]);
 
-	const onChangeEvent = (e: any) => {
-		if (multiline === true) {
-			if (autoHeight === true) {
-				if (e.target.style.height !== minHeight + "px") {
-					e.target.style.height = minHeight + "px";
+	const onChangeEvent = (
+		e: React.SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => {
+		const element = e.target as HTMLTextAreaElement;
+		if (multiline) {
+			if (autoHeight) {
+				if (element.style.height !== `${minHeight}px`) {
+					element.style.height = `${minHeight}px`;
 				}
 
-				let height;
+				let height: string;
 				if (e.target.scrollHeight <= maxHeight)
-					height = e.target.scrollHeight + "px";
-				else height = maxHeight + "px";
+					height = `${e.target.scrollHeight}px`;
+				else height = `${maxHeight}px`;
 
-				if (e.target.style.height !== height) {
-					e.target.style.height = height;
+				if (element.style.height !== height) {
+					element.style.height = height;
 				}
 			}
 		}
 
-		if (props.maxlength && (e.target.value || "").length > props.maxlength) {
+		if (props.maxlength && (element.value || "").length > props.maxlength) {
 			if (props.onMaxLengthExceed instanceof Function)
 				props.onMaxLengthExceed();
 
-			if (props.referance) {
-				props.referance.current.value = (e.target.value || "").substring(
+			if (props.referance?.current) {
+				props.referance.current.value = (element.value || "").substring(
 					0,
 					props.maxlength,
 				);
@@ -55,8 +59,8 @@ const Input: React.FC<IInputProps> = ({
 		if (props.onChange instanceof Function) props.onChange(e);
 	};
 
-	const clear = () => {
-		var _event = {
+	const clear = (): void => {
+		const _event = {
 			FAKE_EVENT: true,
 			target: props.referance?.current,
 		};
@@ -73,9 +77,9 @@ const Input: React.FC<IInputProps> = ({
 			{props.leftButtons && (
 				<div className="rce-input-buttons">{props.leftButtons}</div>
 			)}
-			{multiline === false ? (
+			{!multiline ? (
 				<input
-					ref={props.referance}
+					ref={props.referance as RefObject<HTMLInputElement>}
 					type={type}
 					className={classNames("rce-input")}
 					placeholder={props.placeholder}
@@ -97,7 +101,7 @@ const Input: React.FC<IInputProps> = ({
 				/>
 			) : (
 				<textarea
-					ref={props.referance}
+					ref={props.referance as RefObject<HTMLTextAreaElement>}
 					className={classNames("rce-input", "rce-input-textarea")}
 					placeholder={props.placeholder}
 					defaultValue={props.defaultValue}

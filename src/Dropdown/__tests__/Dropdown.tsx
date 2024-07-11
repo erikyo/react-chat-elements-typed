@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { shallow } from "enzyme";
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it } from "vitest";
 import toJson from "enzyme-to-json";
 import Dropdown from "../Dropdown";
 

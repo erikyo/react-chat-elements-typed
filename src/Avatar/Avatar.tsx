@@ -1,14 +1,14 @@
-import { useEffect } from "react";
+import { type FC, type JSX, useEffect } from "react";
 import "./Avatar.css";
 import classNames from "classnames";
 import type { IAvatarProps } from "../type";
 
-const Avatar: React.FC<IAvatarProps> = ({
+const Avatar = ({
 	type = "default",
 	size = "default",
 	lazyLoadingImage = undefined,
 	...props
-}) => {
+}: IAvatarProps): JSX.Element => {
 	const loadedAvatars: string[] = [];
 	let loading = false;
 	let src = props.src;
@@ -28,7 +28,7 @@ const Avatar: React.FC<IAvatarProps> = ({
 				isLazyImage = false;
 			}
 		}
-	}, []);
+	}, [loading, src, props.src, lazyLoadingImage, isLazyImage]);
 
 	const isLoaded = (src: string) => {
 		return loadedAvatars.indexOf(src) !== -1;
@@ -37,27 +37,27 @@ const Avatar: React.FC<IAvatarProps> = ({
 	const requestImage = (src: string) => {
 		loading = true;
 
-		var loaded = () => {
+		const loaded = () => {
 			loadedAvatars.push(src);
 			loading = false;
 		};
 
-		var img: HTMLImageElement = document.createElement("img");
+		const img: HTMLImageElement = document.createElement("img");
 		img.src = src;
 		img.onload = loaded;
 		img.onerror = loaded;
 	};
 
 	const stringToColour = (str: string) => {
-		var hash = 0;
+		let hash = 0;
 		for (let i = 0; i < str.length; i++) {
 			hash = str.charCodeAt(i) + ((hash << 5) - hash);
 		}
-		var colour = "#";
+		let colour = "#";
 		for (let i = 0; i < 3; i++) {
-			var value: number = (hash >> (i * 8)) & 0xff;
+			let value: number = (hash >> (i * 8)) & 0xff;
 			value = (value % 150) + 50;
-			colour += ("00" + value.toString(16)).substr(-2);
+			colour += `00${value.toString(16)}`.substr(-2);
 		}
 		return colour;
 	};

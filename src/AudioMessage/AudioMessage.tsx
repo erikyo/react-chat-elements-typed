@@ -6,7 +6,7 @@ const AudioMessage: React.FC<IAudioMessageProps> = (props) => {
 	const controlsList = props.data.controlsList;
 
 	return (
-		<div className={"rce-mbox-audio"} style={props.customStyle}>
+		<div className={"rce-mbox-audio"} style={props?.customStyle ?? {}}>
 			<audio
 				{...props.audioProps}
 				controls

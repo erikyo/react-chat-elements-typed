@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it } from "vitest";
 import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
 import Button from "../Button";

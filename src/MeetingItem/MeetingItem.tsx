@@ -9,8 +9,9 @@ import { format } from "timeago.js";
 
 import classNames from "classnames";
 import type { IMeetingItemProps } from "../type";
+import type { JSX } from "react";
 
-const MeetingItem: FC<IMeetingItemProps> = ({
+const MeetingItem = ({
 	subjectLimit = 60,
 	onClick = () => void 0,
 	avatarFlexible = false,
@@ -19,11 +20,11 @@ const MeetingItem: FC<IMeetingItemProps> = ({
 	avatarLimit = 5,
 	avatars = [],
 	audioMuted = true,
-	onAvatarError = () => void 0,
-	onMeetingClick = () => void 0,
-	onShareClick = () => void 0,
+	onAvatarError,
+	onMeetingClick,
+	onShareClick,
 	...props
-}) => {
+}: IMeetingItemProps): JSX.Element => {
 	const statusColorType = props.statusColorType;
 	const AVATAR_LIMIT = avatarLimit;
 
@@ -39,6 +40,7 @@ const MeetingItem: FC<IMeetingItemProps> = ({
 		<div
 			className={classNames("rce-container-mtitem", props.className)}
 			onClick={onClick}
+			onKeyDown={(e) => e.key === "Enter" && onClick}
 			onContextMenu={props.onContextMenu}
 		>
 			<audio autoPlay loop muted={audioMuted} src={props.audioSource} />
@@ -56,58 +58,68 @@ const MeetingItem: FC<IMeetingItemProps> = ({
 							// props.avatars?.slice(0, AVATAR_LIMIT).map((x, i) => x instanceof Avatar ? x : (
 							avatars
 								?.slice(0, AVATAR_LIMIT)
-								.map((x, i) => (
-									<Avatar
-										key={i}
-										src={x.src}
-										alt={x.alt}
-										className={
-											x.statusColorType === "encircle"
-												? "rce-mtitem-avatar-encircle-status"
-												: ""
-										}
-										size={"small"}
-										letterItem={x.letterItem}
-										sideElement={
-											x.statusColor ? (
-												<span
-													className="rce-mtitem-status"
-													style={
-														statusColorType === "encircle"
-															? {
-																	boxShadow: `inset 0 0 0 2px ${x.statusColor}, inset 0 0 0 5px #FFFFFF`,
-																}
-															: {
-																	backgroundColor: x.statusColor,
-																}
-													}
-												>
-													{x.statusText}
-												</span>
-											) : (
-												<></>
-											)
-										}
-										onError={onAvatarError}
-										lazyLoadingImage={lazyLoadingImage}
-										type={classNames("circle", { flexible: avatarFlexible })}
-									/>
-								))
+								.map((x, i) => {
+									return (
+										<Avatar
+											key={i}
+											src={x.src}
+											alt={x.alt}
+											className={
+												x.statusColorType === "encircle"
+													? "rce-mtitem-avatar-encircle-status"
+													: ""
+											}
+											size={"small"}
+											letterItem={x.letterItem}
+											sideElement={
+												x.statusColor ? (
+													<span
+														className="rce-mtitem-status"
+														style={
+															statusColorType === "encircle"
+																? {
+																		boxShadow: `inset 0 0 0 2px ${x.statusColor}, inset 0 0 0 5px #FFFFFF`,
+																	}
+																: {
+																		backgroundColor: x.statusColor,
+																	}
+														}
+													>
+														{x.statusText}
+													</span>
+												) : (
+													<></>
+												)
+											}
+											onError={onAvatarError}
+											lazyLoadingImage={lazyLoadingImage}
+											type={classNames("circle", { flexible: avatarFlexible })}
+										/>
+									);
+								})
 						}
 
 						{avatars && AVATAR_LIMIT && avatars.length > AVATAR_LIMIT && (
 							<div className="rce-avatar-container circle small rce-mtitem-letter">
-								<span>{"+" + (avatars.length - AVATAR_LIMIT)}</span>
+								<span>{`+${avatars.length - AVATAR_LIMIT}`}</span>
 							</div>
 						)}
 					</div>
 					<div className="rce-mtitem-body--functions">
 						{props.closable && (
-							<div className="rce-mtitem-closable" onClick={props.onCloseClick}>
+							<div
+								className="rce-mtitem-closable"
+								onClick={props.onCloseClick}
+								onKeyDown={(e) => e.key === "Enter" && props.onCloseClick}
+							>
 								<MdCall />
 							</div>
 						)}
-						<div className="rce-mtitem-button" onClick={onMeetingClick}>
+						<div
+							className="rce-mtitem-button"
+							onClick={onMeetingClick}
+							onKeyDown={(e) => e.key === "Enter" && onMeetingClick}
+						>
 							<MdVideoCall />
 						</div>
 					</div>

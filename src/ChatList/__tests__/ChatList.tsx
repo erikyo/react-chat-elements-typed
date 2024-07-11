@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-import { describe, expect, it } from 'vitest'
-import { shallow } from "enzyme";
-import toJson from "enzyme-to-json";
+import { describe, expect, it } from "vitest";
 import ChatList from "../ChatList";
+import { render } from "@testing-library/react";
 
 describe("ChatList component", () => {
 	it("should render without issues", () => {
-		const component = shallow(<ChatList />);
+		render(<ChatList />);
 
-		expect(component.length).toBe(1);
-		expect(toJson(component)).toMatchSnapshot();
+		expect(screen.get("rce-container-clist").length).toBe(1);
+		expect(screen.getbyClass("rce-container-clist")).toMatchSnapshot();
 	});
 });

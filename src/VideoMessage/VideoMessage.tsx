@@ -9,7 +9,7 @@ import ProgressCircle from "../Circle/Circle";
 import type { IProgressOptions, IVideoMessageProps } from "../type";
 
 const VideoMessage: React.FC<IVideoMessageProps> = (props) => {
-	var progressOptions = {
+	const progressOptions = {
 		strokeWidth: 2.3,
 		color: "#efe",
 		trailColor: "#aaa",
@@ -22,23 +22,17 @@ const VideoMessage: React.FC<IVideoMessageProps> = (props) => {
 				setText: (arg0: string | number) => void;
 			},
 		) => {
-			circle.path.setAttribute(
-				"trail",
-				(data.state !== undefined && data?.state?.color) || "",
-			);
-			circle.path.setAttribute(
-				"trailwidth-width",
-				(data.state !== undefined && data?.state?.width) || "",
-			);
+			circle.path.setAttribute("trail", data?.state?.color || "");
+			circle.path.setAttribute("trailwidth-width", data?.state?.width || "");
 
-			var value = Math.round(circle?.value() * 100);
+			const value = Math.round(circle?.value() * 100);
 			if (value === 0) circle?.setText("");
 			else circle?.setText(value);
 		},
 	};
 
 	const error = props?.data?.status && props?.data?.status.error === true;
-	const downloaded = props?.data?.status && props?.data?.status.download;
+	const downloaded = props?.data?.status?.download;
 
 	return (
 		<div
@@ -84,6 +78,7 @@ const VideoMessage: React.FC<IVideoMessageProps> = (props) => {
 					<div className="rce-mbox-video--video__block">
 						{!props.data.status.click && (
 							<button
+								type={"button"}
 								onClick={props.onDownload}
 								className="rce-mbox-video--video__block-item rce-mbox-video--download"
 							>

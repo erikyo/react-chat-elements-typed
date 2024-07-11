@@ -32,26 +32,27 @@ import { format } from "timeago.js";
 import classNames from "classnames";
 import type { MessageBoxType } from "../type";
 
-const MessageBox: React.FC<MessageBoxType> = ({
+const MessageBox = ({
 	focus = false,
 	notch = true,
 	styles,
+	actionButtons,
 	...props
-}) => {
+}: MessageBoxType): React.ReactElement => {
 	const prevProps = useRef(focus);
-	const messageRef = useRef<HTMLDivElement>(null);
+	const messageRef = useRef<HTMLDivElement>();
 
-	var positionCls = classNames("rce-mbox", {
+	const positionCls = classNames("rce-mbox", {
 		"rce-mbox-right": props.position === "right",
 	});
-	var thatAbsoluteTime =
+	const thatAbsoluteTime =
 		!/(text|video|file|meeting|audio)/g.test(props.type || "text") &&
 		!(props.type === "location" && props.text);
 	const dateText = props.date && (props.dateString || format(props.date));
 
 	useEffect(() => {
-		if (prevProps.current !== focus && focus === true) {
-			if (messageRef) {
+		if (prevProps.current !== focus && focus) {
+			if (messageRef?.current) {
 				messageRef.current?.scrollIntoView({
 					block: "center",
 					behavior: "smooth",
@@ -61,7 +62,7 @@ const MessageBox: React.FC<MessageBoxType> = ({
 			}
 		}
 		prevProps.current = focus;
-	}, [focus, prevProps]);
+	}, [focus, prevProps, props.onMessageFocused]);
 
 	return (
 		<div
@@ -85,7 +86,7 @@ const MessageBox: React.FC<MessageBoxType> = ({
 					)}
 				>
 					<div className="rce-mbox-body" onContextMenu={props.onContextMenu}>
-						{!props.retracted && props.forwarded === true && (
+						{!props.retracted && props.forwarded && (
 							<div
 								className={classNames(
 									"rce-mbox-forward",
@@ -98,10 +99,10 @@ const MessageBox: React.FC<MessageBoxType> = ({
 							</div>
 						)}
 
-						{!props.retracted && props.replyButton === true && (
+						{!props.retracted && props.replyButton && (
 							<div
 								className={
-									props.forwarded !== true
+									!props.forwarded
 										? classNames(
 												"rce-mbox-forward",
 												{ "rce-mbox-forward-right": props.position === "left" },
@@ -227,7 +228,7 @@ const MessageBox: React.FC<MessageBoxType> = ({
 								focus={focus}
 								notch={notch}
 								{...props}
-								actionButtons={props?.actionButtons}
+								actionButtons={actionButtons}
 							/>
 						)}
 

@@ -2,14 +2,15 @@ import "./Button.css";
 import classNames from "classnames";
 import type { IButtonProps } from "../type";
 
-const Button: React.FC<IButtonProps> = ({
+const Button = ({
 	disabled = false,
 	backgroundColor = "#3979aa",
 	color = "white",
 	...props
-}) => {
+}: IButtonProps): JSX.Element => {
 	return (
 		<button
+			type={"button"}
 			ref={props.buttonRef}
 			title={props.title}
 			className={classNames("rce-button", props.type, props.className)}
