@@ -1,24 +1,23 @@
 {
-  "compilerOptions": {
-    "module": "ESNext",
-    "target": "ESNext",
-    "lib": ["dom", "dom.iterable", "ES2015", "ES2022", "ESNext"],
-    "jsx": "react-jsx",
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "outDir": "dist/",
-    "declaration": true,
-    "types": [
-      "react",
-      "react-dom",
-      "vitest/globals",
-      "@testing-library/jest-dom"
-    ]
-  },
-  "assets":["**/*.css"],
-  "include": ["./src/**/*"],
-  "exclude": ["./example", "**/__tests__/**", "./node_modules"]
+	"compilerOptions": {
+		"module": "ESNext",
+		"target": "ESNext",
+		"lib": ["dom", "dom.iterable", "ES2015", "ES2022", "ESNext"],
+		"jsx": "react-jsx",
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"moduleResolution": "node",
+		"outDir": "dist/",
+		"declaration": true,
+		"types": [
+			"react",
+			"react-dom",
+			"vitest/globals",
+			"@testing-library/jest-dom"
+		]
+	},
+	"include": ["./src/**/*"],
+	"exclude": ["./example", "**/__tests__/**", "./node_modules"]
 }
