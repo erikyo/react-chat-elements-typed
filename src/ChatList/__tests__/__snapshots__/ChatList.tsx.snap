@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Avatar component > should render without issues 1`] = `
+<div>
+  <div
+    class="rce-container-clist"
+  />
+</div>
+`;
+
+exports[`ChatList component > should render without issues 1`] = `
+<div
+  class="rce-container-clist"
+/>
+`;

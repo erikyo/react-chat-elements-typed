@@ -1,0 +1,24 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Avatar component > should render without issues 1`] = `
+<div>
+  <div
+    class="rce-mtlink"
+  >
+    <div
+      class="rce-mtlink-content"
+    >
+      <div
+        class="rce-mtlink-item"
+      >
+        <div
+          class="rce-mtlink-title"
+        />
+      </div>
+      <div
+        class="rce-mtlink-btn"
+      />
+    </div>
+  </div>
+</div>
+`;

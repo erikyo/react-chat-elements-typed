@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Avatar component > should render without issues 1`] = `
+<div>
+  <div
+    class="rce-navbar light"
+  >
+    <div
+      class="rce-navbar-item rce-navbar-item__left"
+    />
+    <div
+      class="rce-navbar-item rce-navbar-item__center"
+    />
+    <div
+      class="rce-navbar-item rce-navbar-item__right"
+    />
+  </div>
+</div>
+`;

@@ -1,0 +1,24 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Avatar component > should render without issues 1`] = `
+<div>
+  <div
+    class="rce-mbox-reply"
+  >
+    <div
+      class="rce-mbox-reply-left"
+    >
+      <div
+        class="rce-mbox-reply-owner"
+      >
+        Unknown
+      </div>
+      <div
+        class="rce-mbox-reply-message"
+      >
+        ...
+      </div>
+    </div>
+  </div>
+</div>
+`;

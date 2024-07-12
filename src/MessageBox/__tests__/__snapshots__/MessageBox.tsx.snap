@@ -1,0 +1,81 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Avatar component > should render without issues 1`] = `
+<div>
+  <div
+    class="rce-container-mbox"
+  >
+    <div
+      class="rce-mbox"
+    >
+      <div
+        class="rce-mbox-body"
+      >
+        <div
+          class="rce-mbox-time non-copiable"
+        >
+          <span
+            class="rce-mbox-status"
+          >
+            <svg
+              color="#4FC3F7"
+              fill="currentColor"
+              height="1em"
+              stroke="currentColor"
+              stroke-width="0"
+              style="color: rgb(79, 195, 247);"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                d="m18 7-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41 6 19l1.41-1.41L1.83 12 .41 13.41z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div>
+        <svg
+          class="rce-mbox-left-notch"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <filter
+              id="filter1"
+              x="0"
+              y="0"
+            >
+              <feoffset
+                dx="-2"
+                dy="-5"
+                in="SourceAlpha"
+                result="offOut"
+              />
+              <fegaussianblur
+                in="offOut"
+                result="blurOut"
+                stdDeviation="3"
+              />
+              <feblend
+                in="SourceGraphic"
+                in2="blurOut"
+                mode="normal"
+              />
+            </filter>
+          </defs>
+          <path
+            d="M20 0v20L0 0"
+            filter="url(#filter1)"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;

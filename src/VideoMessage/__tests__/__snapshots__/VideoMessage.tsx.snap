@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Avatar component > should render without issues 1`] = `
+<div>
+  <div
+    class="rce-mbox-video padding-time"
+  >
+    <div
+      class="rce-mbox-video--video"
+    >
+      <img />
+    </div>
+  </div>
+</div>
+`;

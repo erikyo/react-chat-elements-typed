@@ -1,0 +1,87 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MeetingItem component > should render without issues 1`] = `
+<div>
+  <div
+    class="rce-container-mtitem"
+  >
+    <audio
+      autoplay=""
+      loop=""
+    />
+    <div
+      class="rce-mtitem"
+    >
+      <div
+        class="rce-mtitem-top"
+      >
+        <div
+          class="rce-mtitem-subject"
+        />
+        <div
+          class="rce-mtitem-share"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 0h24v24H0z"
+              fill="none"
+            />
+            <path
+              d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="rce-mtitem-body"
+      >
+        <div
+          class="rce-mtitem-body--avatars"
+        />
+        <div
+          class="rce-mtitem-body--functions"
+        >
+          <div
+            class="rce-mtitem-button"
+          >
+            <svg
+              fill="currentColor"
+              height="1em"
+              stroke="currentColor"
+              stroke-width="0"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0V0z"
+                fill="none"
+              />
+              <path
+                d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div
+        class="rce-mtitem-footer"
+      >
+        <span
+          class="rce-mtitem-date"
+        >
+          12/07/2024 03:23:45
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

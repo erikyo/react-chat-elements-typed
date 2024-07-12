@@ -33,7 +33,7 @@
 		"postbuild": "postcss src/**/*.css --base src --dir dist",
 		"lint": "npx @biomejs/biome check --apply-unsafe -- src",
 		"clear:build": "rimraf dist build",
-		"test": "vitest --coverage",
+		"test": "vitest",
 		"test:ui": "vitest --ui",
 		"test:watch": "vitest --watch",
 		"test:coverage": "vitest --coverage --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/index.js",

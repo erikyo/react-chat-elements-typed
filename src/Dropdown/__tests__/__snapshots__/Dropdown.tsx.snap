@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Avatar component > should render without issues 1`] = `
+<div>
+  <div
+    class="rce-dropdown-container"
+  >
+    <button
+      class="rce-button"
+      style="background-color: rgb(57, 121, 170); color: white; border-color: #3979aa;"
+      type="button"
+    >
+      <span />
+    </button>
+    <div
+      class="rce-dropdown default rce-dropdown-open__nortwest"
+    >
+      <ul />
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Avatar component > should render without issues 1`] = `
+<div>
+  <div
+    class="rce-container-smsg"
+  >
+    <div
+      class="rce-smsg"
+    >
+      <div
+        class="rce-smsg-text"
+      />
+    </div>
+  </div>
+</div>
+`;

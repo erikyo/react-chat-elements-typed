@@ -1,0 +1,57 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Avatar component > should render without issues 1`] = `
+<div>
+  <div
+    class="rce-container-citem"
+  >
+    <div
+      class="rce-citem"
+    >
+      <div
+        class="rce-citem-avatar"
+      >
+        <div
+          class="rce-avatar-container circle large"
+        >
+          <img
+            class="rce-avatar"
+          />
+        </div>
+      </div>
+      <div
+        class="rce-citem-body"
+      >
+        <div
+          class="rce-citem-body--top"
+        >
+          <div
+            class="rce-citem-body--top-title"
+          />
+          <div
+            class="rce-citem-body--top-time"
+          >
+            09:44
+          </div>
+        </div>
+        <div
+          class="rce-citem-body--bottom"
+        >
+          <div
+            class="rce-citem-body--bottom-title"
+          />
+          <div
+            class="rce-citem-body--bottom-tools"
+          />
+          <div
+            class="rce-citem-body--bottom-tools-item-hidden-hover"
+          />
+          <div
+            class="rce-citem-body--bottom-status"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AudioMessage component > should render without issues 1`] = `
+<div>
+  <div
+    class="rce-mbox-audio"
+  >
+    <audio
+      controls=""
+      controlslist="nodownload"
+    >
+      <source
+        type="audio/mp3"
+      />
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+</div>
+`;

@@ -1,0 +1,75 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Avatar component > should render without issues 1`] = `
+<div>
+  <div
+    class="rce-mbox-mtmg"
+  >
+    <div
+      class="rce-mtmg"
+    >
+      <div
+        class="rce-mtmg-subject"
+      >
+        Unknown Meeting
+      </div>
+      <div
+        class="rce-mtmg-body"
+      >
+        <div
+          class="rce-mtmg-item"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 448 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"
+            />
+          </svg>
+          <div
+            class="rce-mtmg-content"
+          >
+            <span
+              class="rce-mtmg-title"
+            />
+            <span
+              class="rce-mtmg-date"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="rce-mtmg-body-bottom"
+      >
+        <div
+          class="rce-mtmg-body-bottom--bttitle"
+        >
+          <svg
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 192 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"
+            />
+          </svg>
+          <span />
+        </div>
+      </div>
+      <div
+        class="rce-mtmg-toogleContent"
+      />
+    </div>
+  </div>
+</div>
+`;
