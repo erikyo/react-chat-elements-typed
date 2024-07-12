@@ -1,27 +1,8 @@
 [![npm](https://img.shields.io/npm/dt/react-chat-elements.svg?label=npm-install&style=flat)]() [![Github pre-)release](https://img.shields.io/github/release-pre/Detaysoft/react-chat-elements.svg?style=flat)]()
 
-# react-chat-elements
-
-## Reactjs chat elements
-
-## NOTE: this package not support react-native anymore.
+# this is a fork of react-chat-elements - you can find the original repository [here](https://github.com/Detaysoft/react-chat-elements)
 
 ## **[Full Documentation](https://detaysoft.github.io/docs-react-chat-elements/)**, **[Changelog](https://github.com/Detaysoft/react-chat-elements/blob/master/CHANGELOG.md)**
-
-## Install
-
-```
-npm install react-chat-elements --save
-```
-
-### Imports
-
-```javascript
-// RCE CSS
-import 'react-chat-elements/dist/main.css'
-// MessageBox component
-import { MessageBox } from 'react-chat-elements'
-```
 
 ## Components
 
