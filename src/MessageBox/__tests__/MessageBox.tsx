@@ -1,14 +1,12 @@
 import { describe, expect, it } from "vitest";
-import React, { Component } from "react";
-import { shallow } from "enzyme";
-import toJson from "enzyme-to-json";
+import React from "react";
 import MessageBox from "../MessageBox";
+import { render } from "@testing-library/react";
 
-describe("MessageBox component", () => {
+describe("Avatar component", () => {
 	it("should render without issues", () => {
-		const component = shallow(<MessageBox status="read" />);
-
-		expect(component.length).toBe(1);
-		expect(toJson(component)).toMatchSnapshot();
+		const component = render(<MessageBox status="read" />);
+		expect(component.container).toBeTruthy();
+		expect(component.container).toMatchSnapshot();
 	});
 });

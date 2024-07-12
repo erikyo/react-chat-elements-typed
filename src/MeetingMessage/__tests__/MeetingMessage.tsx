@@ -1,14 +1,12 @@
 import { describe, expect, it } from "vitest";
-import React, { Component } from "react";
-import { shallow } from "enzyme";
-import toJson from "enzyme-to-json";
+import React from "react";
 import MeetingMessage from "../MeetingMessage";
+import { render } from "@testing-library/react";
 
-describe("MeetingMessage component", () => {
+describe("Avatar component", () => {
 	it("should render without issues", () => {
-		const component = shallow(<MeetingMessage />);
-
-		expect(component.length).toBe(1);
-		expect(toJson(component)).toMatchSnapshot();
+		const component = render(<MeetingMessage />);
+		expect(component.container).toBeTruthy();
+		expect(component.container).toMatchSnapshot();
 	});
 });

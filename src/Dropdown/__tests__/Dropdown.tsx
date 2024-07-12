@@ -1,13 +1,12 @@
-import React, { Component } from "react";
-import { shallow } from "enzyme";
 import { describe, expect, it } from "vitest";
-import toJson from "enzyme-to-json";
+import React from "react";
 import Dropdown from "../Dropdown";
+import { render } from "@testing-library/react";
 
-describe("Dropdown component", () => {
+describe("Avatar component", () => {
 	it("should render without issues", () => {
-		const component = shallow(<Dropdown />);
-		expect(component.length).toBe(1);
-		expect(toJson(component)).toMatchSnapshot();
+		const component = render(<Dropdown />);
+		expect(component.container).toBeTruthy();
+		expect(component.container).toMatchSnapshot();
 	});
 });

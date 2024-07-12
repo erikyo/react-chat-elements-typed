@@ -1,14 +1,12 @@
-import React, { Component } from "react";
-import { shallow } from "enzyme";
 import { describe, expect, it } from "vitest";
-import toJson from "enzyme-to-json";
+import React from "react";
 import FileMessage from "../FileMessage";
+import { render } from "@testing-library/react";
 
-describe("FileMessage component", () => {
+describe("Avatar component", () => {
 	it("should render without issues", () => {
-		const component = shallow(<FileMessage />);
-
-		expect(component.length).toBe(1);
-		expect(toJson(component)).toMatchSnapshot();
+		const component = render(<FileMessage />);
+		expect(component.container).toBeTruthy();
+		expect(component.container).toMatchSnapshot();
 	});
 });

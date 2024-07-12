@@ -1,14 +1,12 @@
 import { describe, expect, it } from "vitest";
-import React, { Component } from "react";
-import { shallow } from "enzyme";
-import toJson from "enzyme-to-json";
+import React from "react";
 import SideBar from "../SideBar";
+import { render } from "@testing-library/react";
 
-describe("SideBar component", () => {
+describe("Avatar component", () => {
 	it("should render without issues", () => {
-		const component = shallow(<SideBar />);
-
-		expect(component.length).toBe(1);
-		expect(toJson(component)).toMatchSnapshot();
+		const component = render(<SideBar />);
+		expect(component.container).toBeTruthy();
+		expect(component.container).toMatchSnapshot();
 	});
 });

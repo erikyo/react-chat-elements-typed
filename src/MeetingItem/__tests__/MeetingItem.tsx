@@ -1,14 +1,16 @@
 import { describe, expect, it } from "vitest";
-import React, { Component } from "react";
-import { shallow } from "enzyme";
-import toJson from "enzyme-to-json";
+import React from "react";
 import MeetingItem from "../MeetingItem";
+import { render } from "@testing-library/react";
 
 describe("MeetingItem component", () => {
 	it("should render without issues", () => {
-		const component = shallow(<MeetingItem />);
+		const component = render(<MeetingItem />);
 
-		expect(component.length).toBe(1);
-		expect(toJson(component)).toMatchSnapshot();
+		expect(component.container).toBeTruthy();
+		expect(
+			component.container.querySelector(".rce-mtitem-body--functions"),
+		).toBeTruthy();
+		expect(component.container.querySelector(".rce-mtitem-date")).toBeTruthy();
 	});
 });

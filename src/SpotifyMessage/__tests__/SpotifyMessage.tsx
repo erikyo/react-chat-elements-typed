@@ -1,13 +1,12 @@
 import { describe, expect, it } from "vitest";
-import React, { Component } from "react";
-import { shallow } from "enzyme";
-import toJson from "enzyme-to-json";
+import React from "react";
 import SpotifyMessage from "../SpotifyMessage";
+import { render } from "@testing-library/react";
 
-describe("SpotifyMessage component", () => {
+describe("Avatar component", () => {
 	it("should render without issues", () => {
-		const component = shallow(<SpotifyMessage />);
-		expect(component.length).toBe(1);
-		expect(toJson(component)).toMatchSnapshot();
+		const component = render(<SpotifyMessage />);
+		expect(component.container).toBeTruthy();
+		expect(component.container).toMatchSnapshot();
 	});
 });
