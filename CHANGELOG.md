@@ -86,7 +86,7 @@ Fixed issues:
 
 1.  All react-chat-elements components turneded to function component for "ref" property problems.
 
-2.  In the [Input](https://github.com/Detaysoft/react-chat-elements#input-component) component `referance={...}` instead of use `ref={...}`
+2.  In the [Input](https://github.com/Detaysoft/react-chat-elements#input-component) component `reference={...}` instead of use `ref={...}`
 
 3.  **10.16.2** and before vesion usage
 
@@ -116,7 +116,7 @@ Fixed issues:
     this.inputReferance = React.createRef();
 
     <Input
-    	referance={this.inputReferance}
+    	reference={this.inputReferance}
     	clear={(clear) => clearRef = clear}
     	placeholder="Type here..."
     	multiline={true}
@@ -136,7 +136,7 @@ Fixed issues:
     const inputReferance = React.useRef();
 
     <Input
-    	referance={inputReferance}
+    	reference={inputReferance}
     	clear={(clear) => clearRef = clear}
     	placeholder="Type here..."
     	multiline={true}
@@ -147,7 +147,7 @@ Fixed issues:
 
     ```
 
-4.  In the [MessageList](https://github.com/Detaysoft/react-chat-elements#messagelist-component) component usage `referance={...}` instead of use `ref={...}`
+4.  In the [MessageList](https://github.com/Detaysoft/react-chat-elements#messagelist-component) component usage `reference={...}` instead of use `ref={...}`
 
     **Class Component:**
 
@@ -156,7 +156,7 @@ Fixed issues:
     this.messageList = React.createRef();
 
     <MessageList
-    	referance={this.messageList}
+    	reference={this.messageList}
     	className='message-list'
     	lockable={true}
     	toBottomHeight={'100%'}
@@ -180,7 +180,7 @@ Fixed issues:
     const messageListReferance = React.useRef();
 
     <MessageList
-    	referance={messageListReferance}
+    	reference={messageListReferance}
     	className='message-list'
     	lockable={true}
     	toBottomHeight={'100%'}

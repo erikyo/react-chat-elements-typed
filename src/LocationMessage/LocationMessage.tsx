@@ -1,13 +1,14 @@
 import "./LocationMessage.css";
 import classNames from "classnames";
 import type { ILocationMessageProps } from "../type";
+import type { FC } from "react";
 
 const STATIC_URL =
 	"https://maps.googleapis.com/maps/api/staticmap?markers=color:MARKER_COLOR|LATITUDE,LONGITUDE&zoom=ZOOM&size=270x200&scale=2&key=KEY";
 const MAP_URL =
 	"https://www.google.com/maps/search/?api=1&query=LATITUDE,LONGITUDE&zoom=ZOOM";
 
-const LocationMessage: React.FC<ILocationMessageProps> = ({
+const LocationMessage: FC<ILocationMessageProps> = ({
 	markerColor = "red",
 	target = "_blank",
 	zoom = "14",
@@ -15,14 +16,14 @@ const LocationMessage: React.FC<ILocationMessageProps> = ({
 }) => {
 	const buildURL = (url: string) => {
 		return url
-			.replace(/LATITUDE/g, props?.data.latitude)
-			.replace(/LONGITUDE/g, props?.data.longitude)
+			.replace(/LATITUDE/g, props?.data?.latitude)
+			.replace(/LONGITUDE/g, props?.data?.longitude)
 			.replace("MARKER_COLOR", markerColor)
 			.replace("ZOOM", zoom)
 			.replace("KEY", props.apiKey);
 	};
 	const className = () => {
-		var _className = classNames("rce-mbox-location", props.className);
+		let _className = classNames("rce-mbox-location", props.className);
 
 		if (props.text) {
 			_className = classNames(_className, "rce-mbox-location-has-text");
@@ -36,13 +37,16 @@ const LocationMessage: React.FC<ILocationMessageProps> = ({
 			<a
 				onClick={props.onOpen}
 				target={target}
-				href={props.href || props.src || buildURL(props.data.mapURL || MAP_URL)}
+				href={
+					props.href || props.src || buildURL(props.data?.mapURL || MAP_URL)
+				}
 				className={className()}
 			>
 				<img
+					alt={"location"}
 					onError={props.onError}
 					className="rce-mbox-location-img"
-					src={props.src || buildURL(props.data.staticURL || STATIC_URL)}
+					src={props.src || buildURL(props.data?.staticURL || STATIC_URL)}
 				/>
 			</a>
 			{props.text && (

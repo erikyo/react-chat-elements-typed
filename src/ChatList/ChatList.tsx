@@ -1,36 +1,37 @@
+import type { Dispatch, FC, SetStateAction, SyntheticEvent } from "react";
 import type React from "react";
-import type { Dispatch, Key, SetStateAction } from "react";
 import classNames from "classnames";
 import "./ChatList.css";
 
 import ChatItem from "../ChatItem/ChatItem";
-import type { IChatListProps, ChatListEvent, IChatItemProps } from "../type";
-import type { JSX } from "react";
+import type { ChatListEvent, IChatItemProps, IChatListProps } from "../type";
 
 const list: Dispatch<SetStateAction<boolean>>[] = [];
 
-const ChatList = (props: IChatListProps): JSX.Element => {
-	const onClick = (
+const ChatList: FC<IChatListProps> = (props): React.ReactElement => {
+	const onClicked = (
 		item: IChatItemProps,
 		index: number,
-		event: React.MouseEvent<HTMLElement>,
+		event: React.MouseEvent<HTMLElement, MouseEvent>,
 	): void => {
-		if (props.onClick instanceof Function) props.onClick(item, index, event);
+		if (props?.onClicked) {
+			props?.onClicked(item, index, event);
+		}
 	};
 
-	const onContextMenu = (
+	const onContextMenuHandler = (
 		item: IChatItemProps,
 		index: number,
-		event: React.MouseEvent<HTMLElement>,
+		event: React.MouseEvent<HTMLElement, MouseEvent>,
 	): void => {
-		if (props.onContextMenu instanceof Function)
-			props.onContextMenu(item, index, event);
+		if (props.onContextMenuHandler instanceof Function)
+			props.onContextMenuHandler(item, index, event);
 	};
 
 	const onAvatarError = (
 		item: IChatItemProps,
 		index: number,
-		event: React.MouseEvent<HTMLElement>,
+		event?: SyntheticEvent<Element>,
 	): void => {
 		if (props.onAvatarError instanceof Function)
 			props.onAvatarError(item, index, event);
@@ -40,15 +41,14 @@ const ChatList = (props: IChatListProps): JSX.Element => {
 		list.push(state);
 	};
 
-	const onDragLeaveMW = (
-		e: React.MouseEvent<HTMLElement>,
-		id: number | string,
-	) => {
+	const onDragLeaveMW = (event: React.DragEvent<HTMLElement>) => {
 		if (list.length > 0)
 			for (const item of list) {
 				item(false);
 			}
-		props.onDragLeave?.(e, id);
+		if (props?.onDragLeave) {
+			props?.onDragLeave(event);
+		}
 	};
 
 	const onExpand: ChatListEvent = (item, index, event) => {
@@ -57,23 +57,22 @@ const ChatList = (props: IChatListProps): JSX.Element => {
 
 	return (
 		<div className={classNames("rce-container-clist", props.className)}>
-			{props.dataSource?.map((x, i) => {
-				if (!x) return null;
+			{props.dataSource?.map((x: IChatItemProps, i: number) => {
 				const key = x.id || `item-${i}`;
 				return (
 					<div key={key}>
 						<ChatItem
 							{...x}
 							lazyLoadingImage={props.lazyLoadingImage}
-							onAvatarError={(e) => onAvatarError(x, i, e)}
-							onContextMenu={(e) => onContextMenu(x, i, e)}
-							onClick={(e) => onClick(x, i, e)}
+							onAvatarError={(e: React.MouseEvent) => onAvatarError(x, i, e)}
+							onContextMenuHandler={(e) => onContextMenuHandler(x, i, e)}
+							onClick={(e) => onClicked(x, i, e)}
 							onClickMute={(e) => props.onClickMute?.(x, i, e)}
 							onClickVideoCall={(e) => props.onClickVideoCall?.(x, i, e)}
-							onDragOver={(e, i) => props?.onDragOver}
-							onDragEnter={(e, i) => props?.onDragEnter}
-							onDrop={(e, i) => props.onDrop}
-							onDragLeave={(e, i) => onDragLeaveMW}
+							onDragOver={props?.onDragOver}
+							onDragEnter={props?.onDragEnter}
+							onDrop={props?.onDrop}
+							onDragLeave={onDragLeaveMW}
 							onDragComponent={props?.onDragComponent}
 							setDragStates={setDragStates}
 							onExpandItem={(e) => onExpand(x, i, e)}
@@ -90,16 +89,18 @@ const ChatList = (props: IChatListProps): JSX.Element => {
 										avatarSize="xsmall"
 										lazyLoadingImage={props.lazyLoadingImage}
 										onAvatarError={(e) => onAvatarError(sub, j, e)}
-										onContextMenu={(e) => onContextMenu(sub, j, e)}
-										onClick={(e) => onClick(sub, j, e)}
-										onClickMute={(e) => props.onClickMute?.(sub, j, e)}
+										onContextMenu={(e) => onContextMenuHandler(sub, j, e)}
+										onClick={(e) => onClicked(sub, j, e)}
+										onClickMute={(e) =>
+											props.onClickMute ? props.onClickMute(sub, j, e) : null
+										}
 										onClickVideoCall={(e) =>
 											props.onClickVideoCall?.(sub, j, e)
 										}
-										onDragOver={(e, i) => props?.onDragOver}
-										onDragEnter={(e, i) => props?.onDragEnter}
-										onDrop={(e, i) => props?.onDrop}
-										onDragLeave={(e, i) => onDragLeaveMW}
+										onDragOver={props?.onDragOver}
+										onDragEnter={props?.onDragEnter}
+										onDrop={props?.onDrop}
+										onDragLeave={(e) => onDragLeaveMW}
 										onDragComponent={props.onDragComponent}
 										setDragStates={setDragStates}
 									/>

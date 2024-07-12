@@ -58,7 +58,7 @@ const MeetingList: FC<IMeetingListProps> = (props) => {
 				return (
 					<MeetingItem
 						{...x}
-						key={`meeting-item-${i}`}
+						key={`meeting-item-${i.toString()}`}
 						lazyLoadingImage={props.lazyLoadingImage}
 						onAvatarError={(e: React.MouseEvent<HTMLElement>) =>
 							onAvatarError(x, i, e)

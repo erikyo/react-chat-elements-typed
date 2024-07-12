@@ -15,12 +15,12 @@ const Input = ({
 	...props
 }: IInputProps): JSX.Element => {
 	useEffect(() => {
-		if (autofocus) (props.referance?.current as HTMLElement)?.focus();
+		if (autofocus) (props.reference?.current as HTMLElement)?.focus();
 
 		if (props.clear instanceof Function) {
 			props.clear(clear);
 		}
-	}, [autofocus, props.clear, props.referance?.current]);
+	}, [autofocus, props.clear, props.reference?.current]);
 
 	const onChangeEvent = (
 		e: React.SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -47,8 +47,8 @@ const Input = ({
 			if (props.onMaxLengthExceed instanceof Function)
 				props?.onMaxLengthExceed?.();
 
-			if (props.referance?.current) {
-				props.referance.current.value = (element.value || "").substring(
+			if (props.reference?.current) {
+				props.reference.current.value = (element.value || "").substring(
 					0,
 					props.maxlength,
 				);
@@ -62,16 +62,15 @@ const Input = ({
 	const clear = (): void => {
 		const _event = {
 			FAKE_EVENT: true,
-			target: props.referance?.current,
+			target: props.reference?.current,
 		};
 
-		if (props.referance?.current?.value) {
-			props.referance.current.value = "";
+		if (props.reference?.current?.value) {
+			props.reference.current.value = "";
 		}
 
-		onChangeEvent(
-			_event as React.SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>,
-		);
+		const onChangeEvent = (e: React.SyntheticEvent<HTMLInputElement>) =>
+			onChangeEvent;
 	};
 
 	return (
@@ -81,7 +80,7 @@ const Input = ({
 			)}
 			{!multiline ? (
 				<input
-					ref={props.referance as RefObject<HTMLInputElement>}
+					ref={props.reference as RefObject<HTMLInputElement>}
 					type={type}
 					className={classNames("rce-input")}
 					placeholder={props.placeholder}
@@ -103,7 +102,7 @@ const Input = ({
 				/>
 			) : (
 				<textarea
-					ref={props.referance as RefObject<HTMLTextAreaElement>}
+					ref={props.reference as RefObject<HTMLTextAreaElement>}
 					className={classNames("rce-input", "rce-input-textarea")}
 					placeholder={props.placeholder}
 					defaultValue={props.defaultValue}

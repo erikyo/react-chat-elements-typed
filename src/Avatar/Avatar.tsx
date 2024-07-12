@@ -3,12 +3,12 @@ import "./Avatar.css";
 import classNames from "classnames";
 import type { IAvatarProps } from "../type";
 
-const Avatar = ({
+const Avatar: FC<IAvatarProps> = ({
 	type = "default",
 	size = "default",
 	lazyLoadingImage = undefined,
 	...props
-}: IAvatarProps): JSX.Element => {
+}): JSX.Element => {
 	const loadedAvatars: string[] = [];
 	let loading = false;
 	let src = props.src;

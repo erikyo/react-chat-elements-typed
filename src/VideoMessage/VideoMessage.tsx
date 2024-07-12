@@ -43,8 +43,8 @@ const VideoMessage: React.FC<IVideoMessageProps> = (props) => {
 			<div
 				className="rce-mbox-video--video"
 				style={{
-					...(props?.data.width &&
-						props?.data.height && {
+					...(props?.data?.width &&
+						props?.data?.height && {
 							width: props.data.width,
 							height: props.data.height,
 						}),
@@ -52,8 +52,8 @@ const VideoMessage: React.FC<IVideoMessageProps> = (props) => {
 			>
 				{!downloaded && (
 					<img
-						src={props?.data.uri}
-						alt={props?.data.alt}
+						src={props?.data?.uri}
+						alt={props?.data?.alt}
 						onClick={props.onOpen}
 						onLoad={props.onLoad}
 						onError={props.onPhotoError}
@@ -62,7 +62,7 @@ const VideoMessage: React.FC<IVideoMessageProps> = (props) => {
 
 				{downloaded && (
 					<video controls controlsList={props.controlsList}>
-						<source src={props?.data.videoURL} type="video/mp4" />
+						<source src={props?.data?.videoURL} type="video/mp4" />
 						Your browser does not support HTML video.
 					</video>
 				)}

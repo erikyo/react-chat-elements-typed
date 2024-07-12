@@ -1,10 +1,11 @@
 import type React from "react";
-import { type JSX, useEffect, useState } from "react";
+import type { ReactElement } from "react";
+import { useEffect, useState } from "react";
 import "./ChatItem.css";
 
 import Avatar from "../Avatar/Avatar";
 
-import { format } from "timeago.js";
+import { format } from "date-fns";
 
 import classNames from "classnames";
 
@@ -12,15 +13,15 @@ import { MdVideoCall, MdVolumeOff, MdVolumeUp } from "react-icons/md";
 import type { IChatItemProps } from "../type";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 
-const ChatItem = ({
+const ChatItem: React.FC<IChatItemProps> = ({
 	avatarFlexible = false,
 	date = new Date(),
 	unread = 0,
 	statusColorType = "badge",
 	lazyLoadingImage = undefined,
-	onAvatarError = () => void 0,
+	onAvatarError,
 	...props
-}: IChatItemProps): JSX.Element => {
+}) => {
 	const [onHoverTool, setOnHoverTool] = useState(false);
 	const [onDrag, setOnDrag] = useState(false);
 
@@ -36,7 +37,9 @@ const ChatItem = ({
 		setOnHoverTool(false);
 	};
 
-	const handleOnClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+	const handleOnClick = (
+		e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>,
+	) => {
 		e.preventDefault();
 
 		if (onHoverTool) return;
@@ -44,32 +47,34 @@ const ChatItem = ({
 		props?.onClick?.(e);
 	};
 
-	const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
+	const handleKeyDown = (
+		e: React.KeyboardEvent<HTMLDivElement | HTMLButtonElement>,
+	) => {
 		if (e.key === "Enter") {
 			props?.onKeyDown?.(e);
 		}
 	};
 
-	const onDragOver = (e: React.MouseEvent) => {
+	const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
-		if (props.onDragOver instanceof Function) props.onDragOver(e, props.id);
+		if (props.onDragOver instanceof Function) props.onDragOver(e);
 	};
 
-	const onDragEnter = (e: React.MouseEvent) => {
+	const onDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
-		if (props.onDragEnter instanceof Function) props.onDragEnter(e, props.id);
+		if (props.onDragEnter instanceof Function) props.onDragEnter(e);
 		if (!onDrag) setOnDrag(true);
 	};
 
-	const onDragLeave = (e: React.MouseEvent) => {
+	const onDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
-		if (props.onDragLeave instanceof Function) props.onDragLeave(e, props.id);
+		if (props.onDragLeave instanceof Function) props.onDragLeave(e);
 		if (onDrag) setOnDrag(false);
 	};
 
-	const onDrop = (e: React.MouseEvent) => {
+	const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
-		if (props.onDrop instanceof Function) props.onDrop(e, props.id);
+		if (props.onDrop instanceof Function) props.onDrop(e);
 		if (onDrag) setOnDrag(false);
 	};
 
@@ -91,10 +96,10 @@ const ChatItem = ({
 		>
 			<div
 				className="rce-citem"
-				onDragOver={onDragOver}
-				onDragEnter={onDragEnter}
-				onDragLeave={onDragLeave}
-				onDrop={onDrop}
+				onDragOver={(e) => onDragOver}
+				onDragEnter={(e) => onDragEnter}
+				onDragLeave={(e) => onDragLeave}
+				onDrop={(e) => onDrop}
 			>
 				{typeof props.onDragComponent === "function" &&
 					onDrag &&
@@ -155,7 +160,7 @@ const ChatItem = ({
 						<div className="rce-citem-body--top">
 							<div className="rce-citem-body--top-title">{props.title}</div>
 							<div className="rce-citem-body--top-time">
-								{date && (props.dateString || format(date))}
+								{date && (props.dateString || format(date, "HH:mm"))}
 							</div>
 						</div>
 
@@ -201,7 +206,7 @@ const ChatItem = ({
 								{unread && unread > 0 ? <span>{unread}</span> : null}
 							</div>
 							{props.customStatusComponents?.length
-								? props.customStatusComponents.map((item, index) => {
+								? props.customStatusComponents?.map((item, index) => {
 										return item;
 									})
 								: null}

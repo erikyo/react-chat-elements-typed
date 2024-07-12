@@ -7,7 +7,6 @@ import type { JSX } from "react";
 
 const ReplyMessage = ({
 	onClick,
-	onKeyDown,
 	...props
 }: IReplyMessageProps): JSX.Element => {
 	return (
@@ -17,7 +16,7 @@ const ReplyMessage = ({
 			})}
 			style={{ ...(props.titleColor && { borderColor: props.titleColor }) }}
 			onClick={(e) => onClick}
-			onKeyDown={(e) => onKeyDown}
+			onKeyDown={(e) => console.log(e)}
 		>
 			<div className="rce-mbox-reply-left">
 				<div

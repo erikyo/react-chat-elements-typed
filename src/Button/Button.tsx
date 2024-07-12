@@ -1,13 +1,14 @@
 import "./Button.css";
 import classNames from "classnames";
 import type { IButtonProps } from "../type";
+import type { ReactElement } from "react";
 
 const Button = ({
 	disabled = false,
 	backgroundColor = "#3979aa",
 	color = "white",
 	...props
-}: IButtonProps): JSX.Element => {
+}: IButtonProps): ReactElement => {
 	return (
 		<button
 			type={"button"}

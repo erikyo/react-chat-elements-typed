@@ -269,7 +269,7 @@ import { MessageList } from 'react-chat-elements'
 messageListReferance = React.createRef();
 
 <MessageList
-	referance={messageListReferance}
+	reference={messageListReferance}
 	className='message-list'
 	lockable={true}
 	toBottomHeight={'100%'}
@@ -290,7 +290,7 @@ messageListReferance = React.createRef();
 
 | prop                | default | type                       | description                                                                                                                                                                                                                                                                                                                    |
 | ------------------- | ------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| referance           | none    | object                     | message list ref                                                                                                                                                                                                                                                                                                               |
+| reference           | none    | object                     | message list ref                                                                                                                                                                                                                                                                                                               |
 | className           | none    | string                     | optional message list className                                                                                                                                                                                                                                                                                                |
 | dataSource          | []      | array                      | message list array                                                                                                                                                                                                                                                                                                             |
 | lockable            | false   | boolean                    | It locks to scroll position when the dataSource has been changed                                                                                                                                                                                                                                                               |
@@ -349,7 +349,7 @@ import { ChatList } from 'react-chat-elements'
 import { Input } from 'react-chat-elements'
 inputReferance = React.createRef()
 ;<Input
-  referance={inputReferance}
+  reference={inputReferance}
   placeholder='Type here...'
   multiline={true}
   value={inputValue}
@@ -369,7 +369,7 @@ inputClear()
 
 | prop              | default | type              | description                   |
 | ----------------- | ------- | ----------------- | ----------------------------- |
-| referance         | none    | object            | input ref                     |
+| reference         | none    | object            | input ref                     |
 | className         | none    | string            | optional input className      |
 | placeholder       | none    | string            | input placeholder text        |
 | defaultValue      | none    | string            | input default value           |

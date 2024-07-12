@@ -15,6 +15,7 @@
 			"react",
 			"react-dom",
 			"vitest/globals",
+			"vitest/importMeta",
 			"@testing-library/jest-dom"
 		]
 	},

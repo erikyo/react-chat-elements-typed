@@ -1,5 +1,5 @@
 import type React from "react";
-import { type FC, useState } from "react";
+import { useState } from "react";
 import "./MeetingMessage.css";
 
 import { FaCalendar, FaCaretDown, FaCaretRight } from "react-icons/fa";
@@ -7,7 +7,7 @@ import { HiOutlineVideoCamera } from "react-icons/hi";
 import { IoMdChatboxes } from "react-icons/io";
 import { MdMoreHoriz } from "react-icons/md";
 
-import { format } from "timeago.js";
+import { format } from "date-fns";
 
 import Avatar from "../Avatar/Avatar";
 import Dropdown from "../Dropdown/Dropdown";
@@ -19,7 +19,7 @@ import type {
 	MeetingMessageEvent,
 } from "../type";
 
-const MeetingMessage: FC<IMeetingMessageProps> = ({
+const MeetingMessage = ({
 	date,
 	dateString,
 	title,
@@ -28,22 +28,23 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 	moreItems,
 	participants,
 	dataSource,
-
 	onClick,
 	onMeetingTitleClick,
 	onMeetingVideoLinkClick,
 	onMeetingMoreSelect,
 	...props
-}) => {
-	const [toogle, setToogle] = useState(false);
+}: IMeetingMessageProps) => {
+	const [toggle, setToggle] = useState(false);
 
 	const PARTICIPANT_LIMIT = props.participantsLimit;
-	const dateText = dateString ? dateString : date && format(date);
+	const dateText = dateString
+		? dateString
+		: date && format(date, "dd/MM/yyyy hh:mm");
 
 	const _onMeetingLinkClick: MeetingMessageEvent = (
 		item: IMeetingMessage,
 		index: number,
-		event: React.MouseEvent<HTMLElement, MouseEvent>,
+		event: React.MouseEvent<HTMLDivElement>,
 	) => {
 		if (onMeetingTitleClick instanceof Function)
 			onMeetingTitleClick(item, index, event);
@@ -52,21 +53,25 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 	const _onMeetingVideoLinkClick: MeetingMessageEvent = (
 		item: IMeetingMessage,
 		index: number,
-		event: React.MouseEvent<HTMLElement, MouseEvent>,
+		event: React.MouseEvent<HTMLDivElement>,
 	) => {
 		if (onMeetingVideoLinkClick instanceof Function)
 			onMeetingVideoLinkClick(item, index, event);
 	};
 
 	const toggleClick = () => {
-		setToogle(!toogle);
+		setToggle(!toggle);
 	};
 
 	return (
 		<div className="rce-mbox-mtmg">
 			<div className="rce-mtmg">
 				<div className="rce-mtmg-subject">{subject || "Unknown Meeting"}</div>
-				<div className="rce-mtmg-body" onClick={onClick}>
+				<div
+					className="rce-mtmg-body"
+					onClick={(e) => onClick}
+					onKeyDown={(e) => e.key === "Enter" && onClick}
+				>
 					<div className="rce-mtmg-item">
 						<FaCalendar />
 						<div className="rce-mtmg-content">
@@ -75,7 +80,7 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 						</div>
 					</div>
 
-					{onMeetingMoreSelect && moreItems && moreItems.length > 0 && (
+					{onMeetingMoreSelect && moreItems?.length && (
 						<div>
 							<Dropdown
 								animationType="bottom"
@@ -88,13 +93,17 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 									},
 								}}
 								items={moreItems}
-								onSelect={onMeetingMoreSelect}
+								onSelect={(e) => onMeetingMoreSelect}
 							/>
 						</div>
 					)}
 				</div>
-				<div className="rce-mtmg-body-bottom" onClick={toggleClick}>
-					{toogle === true ? (
+				<div
+					className="rce-mtmg-body-bottom"
+					onClick={toggleClick}
+					onKeyDown={() => {}}
+				>
+					{toggle ? (
 						<div className="rce-mtmg-bottom--tptitle">
 							<FaCaretDown />
 							<span>{collapseTitle}</span>
@@ -105,7 +114,7 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 							<span>
 								{participants
 									?.slice(0, PARTICIPANT_LIMIT)
-									.map((x) => x.title || "Unknow")
+									.map((x) => x.title || "Unknown")
 									.join(", ")}
 								{participants &&
 									PARTICIPANT_LIMIT &&
@@ -117,7 +126,7 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 				</div>
 				<div
 					className={classNames("rce-mtmg-toogleContent", {
-						"rce-mtmg-toogleContent--click": toogle,
+						"rce-mtmg-toogleContent--click": toggle,
 					})}
 				>
 					{dataSource?.map((x, i) => {
@@ -136,7 +145,7 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 											<div className="rce-mitem-body--top">
 												<div
 													className="rce-mitem-body--top-title"
-													onClick={(e: React.MouseEvent<HTMLElement>) =>
+													onClick={(e: React.MouseEvent<HTMLDivElement>) =>
 														_onMeetingLinkClick(x, i, e)
 													}
 													onKeyDown={(e: React.KeyboardEvent) => {
@@ -149,7 +158,9 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 												<div className="rce-mitem-body--top-time">
 													{x.dateString
 														? x.dateString
-														: x.date && x.date && format(x.date)}
+														: x.date &&
+															x.date &&
+															format(x.date, "dd/MM/yyyy hh:mm")}
 												</div>
 											</div>
 											<div className="rce-mitem-body--bottom">
@@ -171,7 +182,7 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 												<div className="rce-mitem-body--top-time">
 													{x.dateString
 														? x.dateString
-														: x.date && format(x.date)}
+														: x.date && format(x.date, "dd/MM/yyyy hh:mm")}
 												</div>
 												<div className="rce-mitem-avatar-content">
 													{
@@ -211,9 +222,13 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 													<div className="rce-mtmg-call-record">
 														<div className="rce-mtmg-call-body">
 															<div
-																onClick={(e: React.MouseEvent<HTMLElement>) =>
+																onClick={(e) =>
 																	_onMeetingVideoLinkClick(x, i, e)
 																}
+																onKeyDown={(e) => {
+																	// TODO: handle keyboard
+																	console.log(e);
+																}}
 																className="rce-mtmg-call-avatars"
 															>
 																<Avatar

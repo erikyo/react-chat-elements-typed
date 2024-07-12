@@ -38,7 +38,7 @@ const Dropdown = ({
 					{props.items?.map((x: IDropdownItemType, i) => (
 						<li
 							key={`dropdown-item-${i.toString()}`}
-							onMouseDown={(e) => props?.onSelect?.(e, i)}
+							onMouseDown={(e) => props?.onSelect}
 						>
 							{typeof x !== "string" ? (
 								x.icon ? (

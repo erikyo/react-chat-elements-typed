@@ -7,7 +7,7 @@ import ProgressCircle from "../Circle/Circle";
 import type { IPhotoMessageProps, IProgressOptions } from "../type";
 
 const PhotoMessage: React.FC<IPhotoMessageProps> = (props) => {
-	var progressOptions = {
+	const progressOptions = {
 		strokeWidth: 2.3,
 		color: "#efe",
 		trailColor: "#aaa",
@@ -15,15 +15,18 @@ const PhotoMessage: React.FC<IPhotoMessageProps> = (props) => {
 		step: (
 			state: IProgressOptions,
 			circle: {
-				path: { setAttribute: (arg0: string, arg1: any) => void };
+				path: { setAttribute: (arg0: string, arg1: string) => void };
 				value: () => number;
 				setText: (arg0: string | number) => void;
 			},
 		) => {
-			circle.path.setAttribute("trail", state?.state?.color);
-			circle.path.setAttribute("trailwidth-width", state?.state?.width);
+			if (state?.state?.color)
+				circle.path.setAttribute("trail", state.state.color);
 
-			var value = Math.round(circle.value() * 100);
+			if (state?.state?.width)
+				circle.path.setAttribute("trailwidth-width", state.state.width);
+
+			const value = Math.round(circle.value() * 100);
 			if (value === 0) circle.setText("");
 			else circle.setText(value);
 		},
@@ -47,6 +50,13 @@ const PhotoMessage: React.FC<IPhotoMessageProps> = (props) => {
 					src={props?.data?.uri}
 					alt={props?.data?.alt}
 					onClick={props.onOpen}
+					onKeyDown={(e) => {
+						if (e.key === "Enter") {
+							if (props.onOpen) {
+								props.onOpen;
+							}
+						}
+					}}
 					onLoad={props.onLoad}
 					onError={props.onPhotoError}
 				/>
@@ -61,6 +71,7 @@ const PhotoMessage: React.FC<IPhotoMessageProps> = (props) => {
 					<div className="rce-mbox-photo--img__block">
 						{!props?.data?.status.click && (
 							<button
+								type="button"
 								onClick={props.onDownload}
 								className="rce-mbox-photo--img__block-item rce-mbox-photo--download"
 							>
@@ -70,7 +81,7 @@ const PhotoMessage: React.FC<IPhotoMessageProps> = (props) => {
 						{typeof props?.data?.status.loading === "number" &&
 							props?.data?.status.loading !== 0 && (
 								<ProgressCircle
-									animate={props?.data?.status.loading}
+									animate={props?.data?.status.loading as number}
 									progressOptions={progressOptions}
 									className="rce-mbox-photo--img__block-item"
 								/>

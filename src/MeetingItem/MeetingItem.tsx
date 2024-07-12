@@ -5,13 +5,13 @@ import { MdVideoCall, MdLink, MdCall } from "react-icons/md";
 
 import Avatar from "../Avatar/Avatar";
 
-import { format } from "timeago.js";
+import { format } from "date-fns";
 
 import classNames from "classnames";
 import type { IMeetingItemProps } from "../type";
 import type { JSX } from "react";
 
-const MeetingItem = ({
+const MeetingItem: FC<IMeetingItemProps> = ({
 	subjectLimit = 60,
 	onClick = () => void 0,
 	avatarFlexible = false,
@@ -24,11 +24,12 @@ const MeetingItem = ({
 	onMeetingClick,
 	onShareClick,
 	...props
-}: IMeetingItemProps): JSX.Element => {
+}): JSX.Element => {
 	const statusColorType = props.statusColorType;
 	const AVATAR_LIMIT = avatarLimit;
 
-	const dateText = date && (props.dateString || format(date));
+	const dateText =
+		date && (props.dateString || format(date, "dd/MM/yyyy HH:mm:ss"));
 
 	const subject =
 		props.subject &&
@@ -61,7 +62,7 @@ const MeetingItem = ({
 								.map((x, i) => {
 									return (
 										<Avatar
-											key={i}
+											key={`avatar-${i.toString()}`}
 											src={x.src}
 											alt={x.alt}
 											className={

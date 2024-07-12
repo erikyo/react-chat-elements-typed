@@ -9,7 +9,7 @@ import type { IFileMessageProps } from "../type";
 import "./FileMessage.css";
 
 const FileMessage: React.FC<IFileMessageProps> = (props) => {
-	var progressOptions = {
+	const progressOptions = {
 		strokeWidth: 5,
 		color: "#333",
 		trailColor: "#aaa",
@@ -25,7 +25,7 @@ const FileMessage: React.FC<IFileMessageProps> = (props) => {
 			circle.path.setAttribute("trail", state.color);
 			circle.path.setAttribute("trailwidth-width", state.width);
 
-			var value = Math.round(circle.value() * 100);
+			const value = Math.round(circle.value() * 100);
 			if (value === 0) circle.setText("");
 			else circle.setText(value);
 		},
@@ -44,10 +44,10 @@ const FileMessage: React.FC<IFileMessageProps> = (props) => {
 
 	return (
 		<div className="rce-mbox-file">
-			<button onClick={onClick}>
+			<button type={"button"} onClick={onClick}>
 				<div className="rce-mbox-file--icon">
 					<FaFile color="#aaa" />
-					<div className="rce-mbox-file--size">{props?.data.size}</div>
+					<div className="rce-mbox-file--size">{props?.data?.size}</div>
 				</div>
 				<div className="rce-mbox-file--text">{props.text}</div>
 				<div className="rce-mbox-file--buttons">
@@ -65,7 +65,7 @@ const FileMessage: React.FC<IFileMessageProps> = (props) => {
 						typeof props?.data?.status.loading === "number" &&
 						props?.data?.status.loading !== 0 && (
 							<ProgressCircle
-								animate={props?.data?.status.loading}
+								animate={props?.data?.status.loading ?? 0}
 								className="rce-mbox-file--loading"
 								progressOptions={progressOptions}
 							/>
