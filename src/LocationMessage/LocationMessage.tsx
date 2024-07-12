@@ -16,8 +16,8 @@ const LocationMessage: FC<ILocationMessageProps> = ({
 }) => {
 	const buildURL = (url: string) => {
 		return url
-			.replace(/LATITUDE/g, props?.data?.latitude)
-			.replace(/LONGITUDE/g, props?.data?.longitude)
+			.replace(/LATITUDE/g, props?.data?.latitude || "0")
+			.replace(/LONGITUDE/g, props?.data?.longitude || "0")
 			.replace("MARKER_COLOR", markerColor)
 			.replace("ZOOM", zoom)
 			.replace("KEY", props.apiKey);
