@@ -3,25 +3,25 @@
 	"version": "13.0.0",
 	"description": "Reactjs chat components",
 	"author": "Avare Kodcu <abdurrahmaneker58@gmail.com>",
-	"main": "dist/index.cjs",
-	"types": "dist/index.d.ts",
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
 	"sideEffects": false,
 	"exports": {
 		".": {
 			"import": "./dist/index.mjs",
 			"require": "./dist/index.js",
-			"default": "./dist/index.js"
-		},
-		"./types": {
-			"import": "./dist/index.d.mts",
-			"require": "./dist/index.d.ts"
+			"default": "./dist/index.js",
+			"types": {
+				"import": "./dist/index.d.mts",
+				"require": "./dist/index.d.ts",
+				"default": "./dist/index.d.ts"
+			}
 		},
 		"./styles.css": {
 			"import": "./dist/index.css",
 			"require": "./dist/index.css"
 		}
 	},
-	"files": ["dist", "*.json"],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/detaysoft/react-chat-elements.git"
@@ -41,8 +41,8 @@
 	},
 	"homepage": "https://github.com/detaysoft/react-chat-elements#readme",
 	"scripts": {
-		"watch": "tsc --watch",
-		"build": "yarn run clear:build && tsup",
+		"watch": "tsup --watch",
+		"build": "npm run clear:build && tsup",
 		"postbuild": "postcss src/**/*.css --base src --dir dist",
 		"lint": "npx @biomejs/biome check --apply-unsafe -- src",
 		"clear:build": "rimraf dist build",
@@ -60,12 +60,12 @@
 		"@testing-library/jest-dom": "^6.4.6",
 		"@testing-library/react": "^16.0.0",
 		"@types/identicon.js": "^2.3.4",
-		"@types/node": "^20.14.10",
+		"@types/node": "^20.14.11",
 		"@types/progressbar.js": "^1.1.7",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
 		"@types/react-icons": "^3.0.0",
-		"@vitest/coverage-v8": "^2.0.2",
+		"@vitest/coverage-v8": "^2.0.3",
 		"autoprefixer": "^10.4.19",
 		"identicon.js": "^2.3.1",
 		"jsdom": "^24.1.0",
@@ -76,36 +76,28 @@
 		"react-test-renderer": "^18.3.1",
 		"rimraf": "^6.0.1",
 		"tailwindcss": "^3.4.6",
-		"tsup": "^8.1.2",
+		"tsup": "^8.2.0",
 		"typescript": "^5.5.3",
-		"vitest": "^2.0.2"
+		"vitest": "^2.0.3"
 	},
 	"dependencies": {
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1",
 		"classnames": "^2.5.1",
 		"date-fns": "^3.6.0",
 		"progressbar.js": "^1.1.1",
+		"react": "^17 || ^18 || ^19",
+		"react-dom": "^17 || ^18 || ^19",
 		"react-icons": "^5.2.1"
 	},
 	"browserslist": {
-		"production": [">0.2%", "not dead", "not op_mini all"],
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
 		"development": [
 			"last 1 chrome version",
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
-	},
-	"tsup": {
-		"clean": true,
-		"sourcemap": true,
-		"dts": true,
-		"minify": false,
-		"strict": false,
-		"splitting": false,
-		"tsconfig": "./tsconfig.json",
-		"entry": ["./src/**/*.ts?(x)", "!**/__tests__/**/*.{ts,tsx}"],
-		"format": ["cjs", "esm"],
-		"outDir": "dist/"
 	}
 }

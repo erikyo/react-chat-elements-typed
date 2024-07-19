@@ -6,7 +6,7 @@ import {
 	FaExclamationTriangle,
 } from "react-icons/fa";
 import ProgressCircle from "../Circle/Circle.js";
-import type { IFileMessageProps } from "../type.js";
+import type { IFileMessageProps } from "../types.js";
 import "./FileMessage.css";
 
 const FileMessage: FC<IFileMessageProps> = (props) => {

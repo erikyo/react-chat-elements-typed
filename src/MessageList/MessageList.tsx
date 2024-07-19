@@ -19,7 +19,7 @@ import type {
 	MeetingMessageEvent,
 	MessageListEvent,
 	MessageType,
-} from "../type.js";
+} from "../types.js";
 
 const MessageList: FC<IMessageListProps> = ({
 	reference,

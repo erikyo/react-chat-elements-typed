@@ -13,7 +13,7 @@ import Avatar from "../Avatar/Avatar.js";
 import Dropdown from "../Dropdown/Dropdown.js";
 
 import classNames from "classnames";
-import type { IMeetingMessageProps, MeetingMessageEvent } from "../type.js";
+import type { IMeetingMessageProps, MeetingMessageEvent } from "../types.js";
 
 const MeetingMessage: FC<IMeetingMessageProps> = ({
 	date,
@@ -31,9 +31,10 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 	onMeetingMoreSelect,
 	...props
 }) => {
-	const [toogle, setToogle] = useState(false);
+	const [toggle, setToggle] = useState(false);
 
-	const PARTICIPANT_LIMIT = props.participantsLimit;
+	const PARTICIPANT_LIMIT: number =
+		props.participantsLimit || Number.POSITIVE_INFINITY;
 	const dateText = dateString
 		? dateString
 		: date && format(date, "yyyy-MM-dd HH:mm:ss");
@@ -53,7 +54,7 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 	};
 
 	const toggleClick = () => {
-		setToogle(!toogle);
+		setToggle(!toggle);
 	};
 
 	return (
@@ -91,8 +92,12 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 						</div>
 					)}
 				</div>
-				<div className="rce-mtmg-body-bottom" onClick={toggleClick}>
-					{toogle ? (
+				<div
+					className="rce-mtmg-body-bottom"
+					onClick={toggleClick}
+					onKeyDown={console.log}
+				>
+					{toggle ? (
 						<div className="rce-mtmg-bottom--tptitle">
 							<FaCaretDown />
 							<span>{collapseTitle}</span>
@@ -115,12 +120,12 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 				</div>
 				<div
 					className={classNames("rce-mtmg-toogleContent", {
-						"rce-mtmg-toogleContent--click": toogle === true,
+						"rce-mtmg-toogleContent--click": toggle,
 					})}
 				>
 					{dataSource?.map((x, i) => {
 						return (
-							<div key={i}>
+							<div key={x.id ?? i.toString()}>
 								{!x.event && (
 									<div className="rce-mitem">
 										<div
@@ -137,6 +142,7 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 													onClick={(e: MouseEvent) =>
 														_onMeetingLinkClick(x, i, e)
 													}
+													onKeyDown={console.log}
 												>
 													{x.title}
 												</div>
@@ -173,7 +179,7 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 													{
 														<div className="rce-mitem-avatar">
 															{x.event.avatars
-																?.slice(0, x.event.avatarsLimit)
+																?.slice(0, PARTICIPANT_LIMIT)
 																.map((x, i) => (
 																	<Avatar key={i.toString()} src={x.src} />
 																))}
@@ -210,6 +216,7 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 																onClick={(e: MouseEvent<HTMLElement>) =>
 																	_onMeetingVideoLinkClick(x, i, e)
 																}
+																onKeyDown={console.log}
 																className="rce-mtmg-call-avatars"
 															>
 																<Avatar

@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import type { IAudioMessageProps } from "../type.js";
+import type { IAudioMessageProps } from "../types.js";
 import "./AudioMessage.css";
 
 const AudioMessage: FC<IAudioMessageProps> = (props) => {

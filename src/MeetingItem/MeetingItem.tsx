@@ -8,7 +8,7 @@ import Avatar from "../Avatar/Avatar.js";
 import { format } from "date-fns";
 
 import classNames from "classnames";
-import type { IMeetingItemProps } from "../type.js";
+import type { IMeetingItemProps } from "../types.js";
 
 const MeetingItem: FC<IMeetingItemProps> = ({
 	subjectLimit = 60,

@@ -32,7 +32,7 @@ import Popup from "./Popup/Popup.js";
 import Circle from "./Circle/Circle.js";
 
 /** Types exported from the library */
-export type * from "./type.js";
+export * from "./types.js";
 
 /** All exported components */
 export {

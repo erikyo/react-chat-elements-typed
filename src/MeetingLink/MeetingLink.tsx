@@ -4,7 +4,7 @@ import "./MeetingLink.css";
 import type {
 	IMeetingLinkMessageProps,
 	MeetingLinkActionButtons,
-} from "../type.js";
+} from "../types.js";
 
 const MeetingLink: FC<IMeetingLinkMessageProps> = (props) => {
 	return (

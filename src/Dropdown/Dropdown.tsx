@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./Dropdown.css";
 import classNames from "classnames";
 import Button from "../Button/Button.js";
-import type { IDropdownItem, IDropdownProps } from "../type.js";
+import type { IDropdownItem, IDropdownProps } from "../types.js";
 
 const Dropdown: FC<IDropdownProps> = ({
 	animationPosition = "nortwest",

@@ -3,7 +3,7 @@ import type { LegacyRef, FC, SyntheticEvent } from "react";
 import { useEffect } from "react";
 import "./Input.css";
 import classNames from "classnames";
-import type { IInputProps } from "../type.js";
+import type { IInputProps } from "../types.js";
 
 const Input: FC<IInputProps> = ({
 	type = "text",

@@ -7,7 +7,7 @@ import type {
 	IChatListProps,
 	ChatListEvent,
 	ChatListElement,
-} from "../type.js";
+} from "../types.js";
 
 const list: SetStateAction<boolean>[] = [];
 

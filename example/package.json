@@ -1,5 +1,5 @@
 {
-	"name": "code-sandbox-examples",
+	"name": "react-chat-sandbox-examples",
 	"version": "0.1.0",
 	"private": true,
 	"module": "true",
@@ -13,7 +13,11 @@
 		"extends": "react-app"
 	},
 	"browserslist": {
-		"production": [">0.2%", "not dead", "not op_mini all"],
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
 		"development": [
 			"last 1 chrome version",
 			"last 1 firefox version",
@@ -25,9 +29,9 @@
 		"react-dom": "^18"
 	},
 	"dependencies": {
-		"react": "file:../node_modules/react",
+		"react": "^18",
 		"react-chat-elements-typed": "file:..",
-		"react-dom": "file:../node_modules/react-dom"
+		"react-dom": "^18"
 	},
 	"devDependencies": {
 		"@tsconfig/react-native": "^3.0.5",

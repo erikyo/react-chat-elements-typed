@@ -1,8 +1,9 @@
 import { loremIpsum } from "lorem-ipsum";
 import { getRandomColor, photo, token } from "./common";
 import { MdOutlineVideoCall } from "react-icons/md";
+import type { MessageType } from "react-chat-elements-typed";
 
-export const photoMessage = {
+export const photoMessage: MessageType = {
 	type: "photo",
 	id: String(Math.random()),
 	position: token() >= 1 ? "right" : "left",
@@ -21,9 +22,9 @@ export const photoMessage = {
 	data: {
 		uri: `data:image/png;base64,${photo(150)}`,
 		status: {
-			click: true,
-			loading: 0.5,
-			download: false, //type === "video",
+			click: () => {},
+			download: () => {},
+			loading: false,
 			error: false,
 		},
 		width: 300,
@@ -31,7 +32,14 @@ export const photoMessage = {
 	},
 };
 
-export const locationMessage = {
+export const photoMessageMinimal: MessageType = {
+	type: "photo",
+	text: "photo text",
+	title: "photo title",
+	date: new Date(),
+};
+
+export const locationMessage: MessageType = {
 	type: "location",
 	markerColor: "",
 	zoom: "",
@@ -72,12 +80,21 @@ export const locationMessage = {
 			: undefined,
 };
 
-export const fileMessage = {
+export const locationMessageMinimal: MessageType = {
+	type: "location",
+	data: { latitude: "", longitude: "", staticURL: "" },
+	date: undefined,
+	id: "",
+	text: "",
+	title: "",
+};
+
+export const fileMessage: MessageType = {
 	type: "file",
 	data: {
 		status: {
 			click: () => {},
-			loading: 0.5,
+			loading: true,
 			download: () => {}, //item === "video",
 			error: false,
 		},
@@ -113,7 +130,7 @@ export const fileMessage = {
 			: undefined,
 };
 
-export const systemMessage = {
+export const systemMessage: MessageType = {
 	type: "system",
 	id: String(Math.random()),
 	position: token() >= 1 ? "right" : "left",
@@ -135,7 +152,7 @@ export const systemMessage = {
 	className: "",
 };
 
-export const spotifyMessage = {
+export const spotifyMessage: MessageType = {
 	type: "spotify",
 	id: String(Math.random()),
 	position: token() >= 1 ? "right" : "left",
@@ -171,7 +188,7 @@ export const spotifyMessage = {
 			: undefined,
 };
 
-export const videoMessage = {
+export const videoMessage: MessageType = {
 	type: "video",
 	id: String(Math.random()),
 	position: token() >= 1 ? "right" : "left",
@@ -196,9 +213,13 @@ export const videoMessage = {
 				? "https://www.w3schools.com/html/mov_bbb.mp4"
 				: "http://www.exit109.com/~dnn/clips/RW20seconds_1.mp4",
 		status: {
-			click: true,
-			loading: 0.5,
-			download: true, //item === "video",
+			click: (e) => {
+				console.log(e, "click");
+			},
+			loading: true,
+			download: (e) => {
+				console.log(e, "download");
+			},
 			error: false,
 		},
 		width: 300,
@@ -219,7 +240,7 @@ export const videoMessage = {
 			: undefined,
 };
 
-export const audioMessage = {
+export const audioMessage: MessageType = {
 	type: "audio",
 	id: String(Math.random()),
 	position: token() >= 1 ? "right" : "left",
@@ -255,7 +276,7 @@ export const audioMessage = {
 			: undefined,
 };
 
-export const meetingMessage = {
+export const meetingMessage: MessageType = {
 	type: "meeting",
 	message: "asd",
 	id: String(Math.random()),
@@ -333,7 +354,7 @@ export const meetingMessage = {
 		})),
 };
 
-export const meetingLinkMessage = {
+export const meetingLinkMessage: MessageType = {
 	type: "meetingLink",
 	actionButtons: [
 		{
@@ -379,7 +400,7 @@ export const meetingLinkMessage = {
 			: undefined,
 };
 
-export const textMessage = {
+export const textMessage: MessageType = {
 	type: "text",
 	id: String(Math.random()),
 	position: token() >= 1 ? "right" : "left",

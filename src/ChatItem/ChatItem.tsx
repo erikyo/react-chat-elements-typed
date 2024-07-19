@@ -11,7 +11,7 @@ import type {
 	IChatItemProps,
 	ChatItemDragEvent,
 	ChatItemEvent,
-} from "../type.js";
+} from "../types.js";
 
 const ChatItem: React.FC<IChatItemProps> = ({
 	avatarFlexible = false,

@@ -7,7 +7,7 @@ import { FaCloudDownloadAlt, FaExclamationTriangle } from "react-icons/fa";
 
 import classNames from "classnames";
 import ProgressCircle from "../Circle/Circle.js";
-import type { IProgressOptions, IVideoMessageProps } from "../type.js";
+import type { IProgressOptions, IVideoMessageProps } from "../types.js";
 
 const VideoMessage: FC<IVideoMessageProps> = (props) => {
 	const progressOptions = {

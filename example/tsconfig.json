@@ -3,7 +3,8 @@
 	"compilerOptions": {
 		"lib": ["dom", "dom.iterable", "ES2015", "ES2022", "ESNext"],
 		"strict": false,
-		"baseUrl": "./src"
+		"baseUrl": "./src",
+		"types": ["react", "react-native", "../node_modules/"]
 	},
 	"include": ["src", "!**/__tests__/**/*.{ts,tsx}"]
 }

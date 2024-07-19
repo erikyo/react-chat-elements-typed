@@ -5,7 +5,7 @@ import "./PhotoMessage.css";
 
 import { FaCloudDownloadAlt, FaExclamationTriangle } from "react-icons/fa";
 import ProgressCircle from "../Circle/Circle.js";
-import type { IPhotoMessageProps, IProgressOptions } from "../type.js";
+import type { IPhotoMessageProps, IProgressOptions } from "../types.js";
 
 const PhotoMessage: FC<IPhotoMessageProps> = ({
 	text,
