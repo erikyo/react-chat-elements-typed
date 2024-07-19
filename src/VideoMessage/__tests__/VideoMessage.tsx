@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { expect, it } from "vitest";
 import React from "react";
 import VideoMessage from "../VideoMessage.js";
 import { render } from "@testing-library/react";

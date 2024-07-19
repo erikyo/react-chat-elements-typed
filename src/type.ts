@@ -56,7 +56,6 @@ import type {
  */
 export interface IChatItemProps {
 	id: string;
-	key?: Key;
 	avatar: string;
 	unread?: number;
 	className?: string;
@@ -212,7 +211,6 @@ export interface IMessage {
 	avatar?: string;
 	titleColor: string;
 	forwarded: boolean;
-	key?: string | Key;
 	replyButton: boolean;
 	removeButton: boolean;
 	status: "waiting" | "sent" | "received" | "read";
@@ -817,7 +815,6 @@ export interface IMeetingItemProps {
 	subjectLimit?: number;
 	avatarFlexible?: boolean;
 	alt?: string;
-	key?: Key;
 	title?: string;
 	subtitle?: string;
 	statusColorType?: string;
@@ -987,7 +984,6 @@ export interface IButtonProps {
 	disabled?: boolean;
 	onClick?: MouseEventHandler;
 	icon?: IButtonIcon;
-	key?: Key;
 }
 
 /**

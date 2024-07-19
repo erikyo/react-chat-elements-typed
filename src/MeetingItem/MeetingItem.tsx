@@ -15,7 +15,6 @@ const MeetingItem: FC<IMeetingItemProps> = ({
 	onClick = () => void 0,
 	avatarFlexible = false,
 	date = new Date(),
-	key = "0",
 	lazyLoadingImage = undefined,
 	avatarLimit = 5,
 	avatars = [],
@@ -61,48 +60,43 @@ const MeetingItem: FC<IMeetingItemProps> = ({
 				</div>
 				<div className="rce-mtitem-body">
 					<div className="rce-mtitem-body--avatars">
-						{
-							// props.avatars?.slice(0, AVATAR_LIMIT).map((x, i) => x instanceof Avatar ? x : (
-							avatars
-								?.slice(0, AVATAR_LIMIT)
-								.map((x, i) => (
-									<Avatar
-										key={i.toString()}
-										src={x.src}
-										alt={x.alt}
-										className={
-											x.statusColorType === "encircle"
-												? "rce-mtitem-avatar-encircle-status"
-												: ""
-										}
-										size={"small"}
-										letterItem={x.letterItem}
-										sideElement={
-											x.statusColor ? (
-												<span
-													className="rce-mtitem-status"
-													style={
-														statusColorType === "encircle"
-															? {
-																	boxShadow: `inset 0 0 0 2px ${x.statusColor}, inset 0 0 0 5px #FFFFFF`,
-																}
-															: {
-																	backgroundColor: x.statusColor,
-																}
-													}
-												>
-													{x.statusText}
-												</span>
-											) : (
-												<></>
-											)
-										}
-										onError={onAvatarError}
-										lazyLoadingImage={lazyLoadingImage}
-										type={classNames("circle", { flexible: avatarFlexible })}
-									/>
-								))
-						}
+						{avatars?.slice(0, AVATAR_LIMIT).map((x, i) => (
+							<Avatar
+								key={i.toString()}
+								src={x.src}
+								alt={x.alt}
+								className={
+									x.statusColorType === "encircle"
+										? "rce-mtitem-avatar-encircle-status"
+										: ""
+								}
+								size={"small"}
+								letterItem={x.letterItem}
+								sideElement={
+									x.statusColor ? (
+										<span
+											className="rce-mtitem-status"
+											style={
+												statusColorType === "encircle"
+													? {
+															boxShadow: `inset 0 0 0 2px ${x.statusColor}, inset 0 0 0 5px #FFFFFF`,
+														}
+													: {
+															backgroundColor: x.statusColor,
+														}
+											}
+										>
+											{x.statusText}
+										</span>
+									) : (
+										<></>
+									)
+								}
+								onError={onAvatarError}
+								lazyLoadingImage={lazyLoadingImage}
+								type={classNames("circle", { flexible: avatarFlexible })}
+							/>
+						))}
 
 						{avatars && AVATAR_LIMIT && avatars.length > AVATAR_LIMIT && (
 							<div className="rce-avatar-container circle small rce-mtitem-letter">

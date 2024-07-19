@@ -14,8 +14,9 @@
 		"types": [
 			"react",
 			"react-dom",
-			"vitest/globals",
 			"vitest/importMeta",
+			"vitest/jsdom",
+			"vitest/globals",
 			"@testing-library/jest-dom"
 		]
 	},

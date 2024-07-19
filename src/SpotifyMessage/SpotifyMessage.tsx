@@ -28,7 +28,6 @@ const SpotifyMessage: FC<ISpotifyMessageProps> = ({
 				src={`https://open.spotify.com/embed?${toUrl()}`}
 				width={width}
 				height={height}
-				allowTransparency={true}
 			/>
 		</div>
 	);

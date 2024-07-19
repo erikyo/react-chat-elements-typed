@@ -89,7 +89,9 @@ const Input: FC<IInputProps> = ({
 					placeholder={props.placeholder}
 					defaultValue={props.defaultValue}
 					style={props.inputStyle}
-					onChange={(e) => onChangeEvent({ ev: e })}
+					onChange={(e) =>
+						onChangeEvent({ ev: e, target: props.reference?.current })
+					}
 					onCopy={props.onCopy}
 					onCut={props.onCut}
 					onPaste={props.onPaste}
@@ -110,7 +112,9 @@ const Input: FC<IInputProps> = ({
 					placeholder={props.placeholder}
 					defaultValue={props.defaultValue}
 					style={props.inputStyle}
-					onChange={(e) => onChangeEvent({ ev: e })}
+					onChange={(e) =>
+						onChangeEvent({ ev: e, target: props.reference?.current })
+					}
 					onCopy={props.onCopy}
 					onCut={props.onCut}
 					onPaste={props.onPaste}
