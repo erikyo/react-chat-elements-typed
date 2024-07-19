@@ -4,7 +4,7 @@ import "./MeetingLink.css";
 import type {
 	IMeetingLinkMessageProps,
 	MeetingLinkActionButtons,
-} from "../type";
+} from "../type.js";
 
 const MeetingLink: FC<IMeetingLinkMessageProps> = (props) => {
 	return (
@@ -14,13 +14,11 @@ const MeetingLink: FC<IMeetingLinkMessageProps> = (props) => {
 					<div className="rce-mtlink-title">{props.text}</div>
 				</div>
 				<div className="rce-mtlink-btn">
-					{props?.actionButtons?.map((Item: MeetingLinkActionButtons, i) => {
+					{props?.actionButtons?.map((Item: MeetingLinkActionButtons) => {
 						return (
 							<div
-								key={`meetinglinkbtn-${i.toString()}`}
 								className="rce-mtlink-btn-content"
 								onClick={() => Item.onClickButton(props?.meetingID ?? "")}
-								onKeyDown={(e) => console.log("onKeyDown", e)}
 							>
 								<Item.Component />
 							</div>

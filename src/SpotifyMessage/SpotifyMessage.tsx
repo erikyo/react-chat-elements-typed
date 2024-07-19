@@ -1,8 +1,9 @@
+import type { FC } from "react";
 import type React from "react";
-import type { ISpotifyMessageProps } from "../type";
+import type { ISpotifyMessageProps } from "../type.js";
 import "./SpotifyMessage.css";
 
-const SpotifyMessage: React.FC<ISpotifyMessageProps> = ({
+const SpotifyMessage: FC<ISpotifyMessageProps> = ({
 	width = 300,
 	height = 380,
 	...props
@@ -23,10 +24,10 @@ const SpotifyMessage: React.FC<ISpotifyMessageProps> = ({
 	return (
 		<div className="rce-mbox-spotify">
 			<iframe
+				title={"Spotify"}
 				src={`https://open.spotify.com/embed?${toUrl()}`}
 				width={width}
 				height={height}
-				frameBorder="0"
 				allowTransparency={true}
 			/>
 		</div>

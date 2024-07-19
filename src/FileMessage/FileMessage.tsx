@@ -1,14 +1,15 @@
 import type React from "react";
+import type { FC } from "react";
 import {
 	FaFile,
 	FaCloudDownloadAlt,
 	FaExclamationTriangle,
 } from "react-icons/fa";
-import ProgressCircle from "../Circle/Circle";
-import type { IFileMessageProps } from "../type";
+import ProgressCircle from "../Circle/Circle.js";
+import type { IFileMessageProps } from "../type.js";
 import "./FileMessage.css";
 
-const FileMessage: React.FC<IFileMessageProps> = (props) => {
+const FileMessage: FC<IFileMessageProps> = (props) => {
 	const progressOptions = {
 		strokeWidth: 5,
 		color: "#333",
@@ -33,7 +34,7 @@ const FileMessage: React.FC<IFileMessageProps> = (props) => {
 
 	const error = props?.data?.status && props?.data?.status.error === true;
 
-	const onClick = (e: React.MouseEvent) => {
+	const onClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
 		if (!props?.data?.status) return;
 
 		if (!props?.data?.status.download && props.onDownload instanceof Function)
@@ -44,10 +45,12 @@ const FileMessage: React.FC<IFileMessageProps> = (props) => {
 
 	return (
 		<div className="rce-mbox-file">
-			<button type={"button"} onClick={onClick}>
+			<button onClick={onClick}>
 				<div className="rce-mbox-file--icon">
 					<FaFile color="#aaa" />
-					<div className="rce-mbox-file--size">{props?.data?.size}</div>
+					{props?.data?.size ? (
+						<div className="rce-mbox-file--size">{props?.data.size}</div>
+					) : null}
 				</div>
 				<div className="rce-mbox-file--text">{props.text}</div>
 				<div className="rce-mbox-file--buttons">
@@ -65,7 +68,7 @@ const FileMessage: React.FC<IFileMessageProps> = (props) => {
 						typeof props?.data?.status.loading === "number" &&
 						props?.data?.status.loading !== 0 && (
 							<ProgressCircle
-								animate={props?.data?.status.loading ?? 0}
+								animate={!!props?.data?.status.loading}
 								className="rce-mbox-file--loading"
 								progressOptions={progressOptions}
 							/>

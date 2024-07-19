@@ -1,12 +1,13 @@
 import type React from "react";
+import type { FC } from "react";
 import "./Popup.css";
 
-import Button from "../Button/Button";
+import Button from "../Button/Button.js";
 
 import classNames from "classnames";
-import type { IPopupProps } from "../type";
+import type { IPopupProps } from "../type.js";
 
-const Popup = ({ ...props }: IPopupProps): React.ReactElement | null => {
+const Popup: FC<IPopupProps> = ({ ...props }) => {
 	if (props.popup?.show === true)
 		return (
 			<div
@@ -21,9 +22,9 @@ const Popup = ({ ...props }: IPopupProps): React.ReactElement | null => {
 						<div className="rce-popup-header">
 							<span>{props.popup?.header}</span>
 							{props.popup?.header &&
-								props.popup?.headerButtons?.map((x, i) => {
-									return <Button key={i.toString()} {...x} />;
-								})}
+								props.popup?.headerButtons?.map((x, i) => (
+									<Button key={i.toString()} {...x} />
+								))}
 						</div>
 					)}
 					<div
@@ -37,9 +38,9 @@ const Popup = ({ ...props }: IPopupProps): React.ReactElement | null => {
 					<div className="rce-popup-footer">
 						{props.popup?.renderFooter
 							? props.popup?.renderFooter()
-							: props.popup?.footerButtons?.map((x, i) => {
-									return <Button key={i.toString()} {...x} />;
-								})}
+							: props.popup?.footerButtons?.map((x, i) => (
+									<Button key={i.toString()} {...x} />
+								))}
 					</div>
 				</div>
 			</div>

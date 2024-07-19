@@ -1,55 +1,45 @@
-import type React from "react";
 import type { FC } from "react";
+import type React from "react";
 import { useEffect, useRef } from "react";
 import "./MessageBox.css";
 
-import PhotoMessage from "../PhotoMessage/PhotoMessage";
-import FileMessage from "../FileMessage/FileMessage";
-import SystemMessage from "../SystemMessage/SystemMessage";
-import LocationMessage from "../LocationMessage/LocationMessage";
-import SpotifyMessage from "../SpotifyMessage/SpotifyMessage";
-import ReplyMessage from "../ReplyMessage/ReplyMessage";
-import MeetingMessage from "../MeetingMessage/MeetingMessage";
-import VideoMessage from "../VideoMessage/VideoMessage";
-import AudioMessage from "../AudioMessage/AudioMessage";
-import MeetingLink from "../MeetingLink/MeetingLink";
+import PhotoMessage from "../PhotoMessage/PhotoMessage.js";
+import FileMessage from "../FileMessage/FileMessage.js";
+import SystemMessage from "../SystemMessage/SystemMessage.js";
+import LocationMessage from "../LocationMessage/LocationMessage.js";
+import SpotifyMessage from "../SpotifyMessage/SpotifyMessage.js";
+import ReplyMessage from "../ReplyMessage/ReplyMessage.js";
+import MeetingMessage from "../MeetingMessage/MeetingMessage.js";
+import VideoMessage from "../VideoMessage/VideoMessage.js";
+import AudioMessage from "../AudioMessage/AudioMessage.js";
+import MeetingLink from "../MeetingLink/MeetingLink.js";
 
-import Avatar from "../Avatar/Avatar";
+import Avatar from "../Avatar/Avatar.js";
 
 import { RiShareForwardFill } from "react-icons/ri";
 import { IoIosDoneAll } from "react-icons/io";
 import {
 	MdAccessTime,
-	MdBlock,
 	MdCheck,
-	MdDelete,
-	MdDoneAll,
 	MdMessage,
+	MdDelete,
+	MdBlock,
+	MdDoneAll,
 } from "react-icons/md";
 import { TiArrowForward } from "react-icons/ti";
 
 import { format } from "date-fns";
 
 import classNames from "classnames";
-import type {
-	IAudioMessageProps,
-	IFileMessageProps,
-	ILocationMessageProps,
-	IMeetingMessageProps,
-	IMessageBoxProps,
-	IPhotoMessageProps,
-	ISpotifyMessageProps,
-	IVideoMessageProps,
-} from "../type";
-import type { IMeetingLinkMessage } from "../type";
+import type { MessageBoxType } from "../type.js";
 
-const MessageBox: FC<IMessageBoxProps> = ({
+const MessageBox: FC<MessageBoxType> = ({
 	focus = false,
 	notch = true,
 	styles,
 	actionButtons,
 	...props
-}): React.ReactElement => {
+}) => {
 	const prevProps = useRef(focus);
 	const messageRef = useRef<HTMLDivElement | null>(null);
 
@@ -60,13 +50,16 @@ const MessageBox: FC<IMessageBoxProps> = ({
 		!/(text|video|file|meeting|audio)/g.test(props.type || "text") &&
 		!(props.type === "location" && props.text);
 	const dateText =
-		props.date &&
-		(props.dateString || format(props.date, "dd/MM/yyyy HH:mm:ss"));
+		props.date && (props.dateString || format(props.date, "HH:mm"));
 
 	useEffect(() => {
 		if (prevProps.current !== focus && focus) {
 			if (messageRef?.current) {
-				(messageRef.current as HTMLDivElement)?.scrollIntoView();
+				(messageRef.current as HTMLDivElement)?.scrollIntoView({
+					behavior: "smooth",
+					block: "nearest",
+					inline: "start",
+				});
 
 				if (props.onMessageFocused instanceof Function)
 					props.onMessageFocused(true);
@@ -80,7 +73,7 @@ const MessageBox: FC<IMessageBoxProps> = ({
 			ref={messageRef}
 			className={classNames("rce-container-mbox", props.className)}
 			onClick={props.onClick}
-			onKeyDown={(e) => console.log(e)}
+			onKeyDown={console.log}
 		>
 			{props.renderAddCmp instanceof Function
 				? props.renderAddCmp()
@@ -98,7 +91,7 @@ const MessageBox: FC<IMessageBoxProps> = ({
 					)}
 				>
 					<div className="rce-mbox-body" onContextMenu={props.onContextMenu}>
-						{!props.retracted && props.forwarded && (
+						{!props.retracted && props.forwarded === true && (
 							<div
 								className={classNames(
 									"rce-mbox-forward",
@@ -106,7 +99,7 @@ const MessageBox: FC<IMessageBoxProps> = ({
 									{ "rce-mbox-forward-left": props.position === "right" },
 								)}
 								onClick={props.onForwardClick}
-								onKeyDown={(e) => console.log("handleKeyDown", e)}
+								onKeyDown={console.log}
 							>
 								<RiShareForwardFill />
 							</div>
@@ -132,7 +125,7 @@ const MessageBox: FC<IMessageBoxProps> = ({
 											)
 								}
 								onClick={props.onReplyClick}
-								onKeyDown={(e) => console.log("handleKeyDown", e)}
+								onKeyDown={console.log}
 							>
 								<MdMessage />
 							</div>
@@ -158,7 +151,7 @@ const MessageBox: FC<IMessageBoxProps> = ({
 											)
 								}
 								onClick={props.onRemoveMessageClick}
-								onKeyDown={(e) => console.log("handleKeyDown", e)}
+								onKeyDown={console.log}
 							>
 								<MdDelete />
 							</div>
@@ -168,7 +161,7 @@ const MessageBox: FC<IMessageBoxProps> = ({
 							<div
 								style={{ ...(props.titleColor && { color: props.titleColor }) }}
 								onClick={props.onTitleClick}
-								onKeyDown={(e) => console.log("handleKeyDown", e)}
+								onKeyDown={console.log}
 								className={classNames("rce-mbox-title", {
 									"rce-mbox-title--clear": props.type === "text",
 								})}
@@ -193,10 +186,7 @@ const MessageBox: FC<IMessageBoxProps> = ({
 						) : null}
 
 						{!props.forwardedMessageText && props.reply ? (
-							<ReplyMessage
-								onClick={(e) => props?.onReplyMessageClick}
-								{...props.reply}
-							/>
+							<ReplyMessage onClick={props.onReplyMessageClick} {...props} />
 						) : null}
 
 						{props.type === "text" && (
@@ -213,37 +203,34 @@ const MessageBox: FC<IMessageBoxProps> = ({
 						)}
 
 						{props.type === "location" && (
-							<LocationMessage {...(props as ILocationMessageProps)} />
+							<LocationMessage focus={focus} notch={notch} {...props} />
 						)}
 
 						{props.type === "photo" && (
-							<PhotoMessage {...(props as IPhotoMessageProps)} />
+							<PhotoMessage focus={focus} notch={notch} {...props} />
 						)}
 
 						{props.type === "video" && (
-							<VideoMessage {...(props as IVideoMessageProps)} />
+							<VideoMessage focus={focus} notch={notch} {...props} />
 						)}
 
 						{props.type === "file" && (
-							<FileMessage {...(props as IFileMessageProps)} />
+							<FileMessage focus={focus} notch={notch} {...props} />
 						)}
 
 						{props.type === "spotify" && (
-							<SpotifyMessage {...(props as ISpotifyMessageProps)} />
+							<SpotifyMessage focus={focus} notch={notch} {...props} />
 						)}
 
 						{props.type === "meeting" && (
-							<MeetingMessage {...(props as IMeetingMessageProps)} />
+							<MeetingMessage focus={focus} notch={notch} {...props} />
 						)}
 						{props.type === "audio" && (
-							<AudioMessage {...(props as IAudioMessageProps)} />
+							<AudioMessage focus={focus} notch={notch} {...props} />
 						)}
 
 						{props.type === "meetingLink" && (
-							<MeetingLink
-								{...(props as IMeetingLinkMessage)}
-								actionButtons={actionButtons}
-							/>
+							<MeetingLink {...props} actionButtons={actionButtons} />
 						)}
 
 						<div
@@ -257,7 +244,7 @@ const MessageBox: FC<IMessageBoxProps> = ({
 						>
 							{props.copiableDate &&
 								props.date &&
-								(props.dateString || format(props.date, "dd/MM/yyyy HH:mm:ss"))}
+								(props.dateString || format(props.date, "HH:mm"))}
 							{props.status && (
 								<span className="rce-mbox-status">
 									{props.status === "waiting" && <MdAccessTime />}

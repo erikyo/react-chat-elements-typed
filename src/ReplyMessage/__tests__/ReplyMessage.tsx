@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import React from "react";
-import ReplyMessage from "../ReplyMessage";
+import ReplyMessage from "../ReplyMessage.js";
 import { render } from "@testing-library/react";
 
 describe("Avatar component", () => {

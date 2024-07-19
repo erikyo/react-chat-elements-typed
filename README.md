@@ -1,8 +1,27 @@
 [![npm](https://img.shields.io/npm/dt/react-chat-elements.svg?label=npm-install&style=flat)]() [![Github pre-)release](https://img.shields.io/github/release-pre/Detaysoft/react-chat-elements.svg?style=flat)]()
 
-# this is a fork of react-chat-elements - you can find the original repository [here](https://github.com/Detaysoft/react-chat-elements)
+# react-chat-elements
+
+## Reactjs chat elements
+
+## NOTE: this package not support react-native anymore.
 
 ## **[Full Documentation](https://detaysoft.github.io/docs-react-chat-elements/)**, **[Changelog](https://github.com/Detaysoft/react-chat-elements/blob/master/CHANGELOG.md)**
+
+## Install
+
+```
+npm install react-chat-elements --save
+```
+
+### Imports
+
+```javascript
+// RCE CSS
+import 'react-chat-elements/dist/main.css'
+// MessageBox component
+import { MessageBox } from 'react-chat-elements'
+```
 
 ## Components
 
@@ -12,7 +31,7 @@
 4. [MessageList](#messagelist-component)
 5. [ChatList](#chatlist-component)
 6. [Input](#input-component)
-7. [Button](#button-component)
+7. [Avatar](#button-component)
 8. [Popup](#popup-component)
 9. [SideBar](#sidebar-component)
 10. [Navbar](#navbar-component)
@@ -247,10 +266,10 @@ import { SystemMessage } from 'react-chat-elements'
 
 ```javascript
 import { MessageList } from 'react-chat-elements'
-messageListReferance = React.createRef();
+messageListreference = React.createRef();
 
 <MessageList
-	reference={messageListReferance}
+	reference={messageListreference}
 	className='message-list'
 	lockable={true}
 	toBottomHeight={'100%'}
@@ -328,13 +347,13 @@ import { ChatList } from 'react-chat-elements'
 
 ```javascript
 import { Input } from 'react-chat-elements'
-inputReferance = React.createRef()
+inputreference = React.createRef()
 ;<Input
-  reference={inputReferance}
+  reference={inputreference}
   placeholder='Type here...'
   multiline={true}
   value={inputValue}
-  rightButtons={<Button color='white' backgroundColor='black' text='Send' />}
+  rightButtons={<Avatar color='white' backgroundColor='black' text='Send' />}
 />
 
 // Clear text, e.g.:
@@ -368,14 +387,14 @@ inputClear()
 | autofocus         | false   | bool              | input autofocus               |
 | value             | none    | string            | input value                   |
 
-## Button Component
+## Avatar Component
 
 ```javascript
-import { Button } from 'react-chat-elements'
-;<Button text={'click me!'} />
+import { Avatar } from 'react-chat-elements'
+;<Avatar text={'click me!'} />
 ```
 
-#### Button props
+#### Avatar props
 
 | prop      | default | type     | description                         |
 | --------- | ------- | -------- | ----------------------------------- |

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import React from "react";
-import MeetingLink from "../MeetingLink";
+import MeetingLink from "../MeetingLink.js";
 import { render } from "@testing-library/react";
 
 describe("Avatar component", () => {

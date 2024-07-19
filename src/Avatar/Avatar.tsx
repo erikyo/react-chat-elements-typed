@@ -1,14 +1,15 @@
-import { type FC, type JSX, useEffect } from "react";
+import type { FC } from "react";
+import { useEffect } from "react";
 import "./Avatar.css";
 import classNames from "classnames";
-import type { IAvatarProps } from "../type";
+import type { IAvatarProps } from "../type.js";
 
 const Avatar: FC<IAvatarProps> = ({
 	type = "default",
 	size = "default",
 	lazyLoadingImage = undefined,
 	...props
-}): JSX.Element => {
+}) => {
 	const loadedAvatars: string[] = [];
 	let loading = false;
 	let src = props.src;
@@ -28,7 +29,7 @@ const Avatar: FC<IAvatarProps> = ({
 				isLazyImage = false;
 			}
 		}
-	}, [loading, src, props.src, lazyLoadingImage, isLazyImage]);
+	}, [lazyLoadingImage, src, isLazyImage, loading, props.src]);
 
 	const isLoaded = (src: string) => {
 		return loadedAvatars.indexOf(src) !== -1;
@@ -63,7 +64,6 @@ const Avatar: FC<IAvatarProps> = ({
 	};
 
 	return (
-		// @ts-ignore
 		<div
 			className={classNames(
 				"rce-avatar-container",

@@ -1,5 +1,5 @@
 import type React from "react";
-import { useState } from "react";
+import { type FC, type MouseEvent, useState } from "react";
 import "./MeetingMessage.css";
 
 import { FaCalendar, FaCaretDown, FaCaretRight } from "react-icons/fa";
@@ -9,17 +9,13 @@ import { MdMoreHoriz } from "react-icons/md";
 
 import { format } from "date-fns";
 
-import Avatar from "../Avatar/Avatar";
-import Dropdown from "../Dropdown/Dropdown";
+import Avatar from "../Avatar/Avatar.js";
+import Dropdown from "../Dropdown/Dropdown.js";
 
 import classNames from "classnames";
-import type {
-	IMeetingMessage,
-	IMeetingMessageProps,
-	MeetingMessageEvent,
-} from "../type";
+import type { IMeetingMessageProps, MeetingMessageEvent } from "../type.js";
 
-const MeetingMessage = ({
+const MeetingMessage: FC<IMeetingMessageProps> = ({
 	date,
 	dateString,
 	title,
@@ -28,39 +24,36 @@ const MeetingMessage = ({
 	moreItems,
 	participants,
 	dataSource,
+
 	onClick,
 	onMeetingTitleClick,
 	onMeetingVideoLinkClick,
 	onMeetingMoreSelect,
 	...props
-}: IMeetingMessageProps) => {
-	const [toggle, setToggle] = useState(false);
+}) => {
+	const [toogle, setToogle] = useState(false);
 
 	const PARTICIPANT_LIMIT = props.participantsLimit;
 	const dateText = dateString
 		? dateString
-		: date && format(date, "dd/MM/yyyy hh:mm");
+		: date && format(date, "yyyy-MM-dd HH:mm:ss");
 
-	const _onMeetingLinkClick: MeetingMessageEvent = (
-		item: IMeetingMessage,
-		index: number,
-		event: React.MouseEvent<HTMLDivElement>,
-	) => {
+	const _onMeetingLinkClick: MeetingMessageEvent = (item, index, event) => {
 		if (onMeetingTitleClick instanceof Function)
 			onMeetingTitleClick(item, index, event);
 	};
 
 	const _onMeetingVideoLinkClick: MeetingMessageEvent = (
-		item: IMeetingMessage,
-		index: number,
-		event: React.MouseEvent<HTMLDivElement>,
+		item,
+		index,
+		event,
 	) => {
 		if (onMeetingVideoLinkClick instanceof Function)
 			onMeetingVideoLinkClick(item, index, event);
 	};
 
 	const toggleClick = () => {
-		setToggle(!toggle);
+		setToogle(!toogle);
 	};
 
 	return (
@@ -69,8 +62,8 @@ const MeetingMessage = ({
 				<div className="rce-mtmg-subject">{subject || "Unknown Meeting"}</div>
 				<div
 					className="rce-mtmg-body"
-					onClick={(e) => onClick}
-					onKeyDown={(e) => e.key === "Enter" && onClick}
+					onClick={onClick}
+					onKeyDown={console.log}
 				>
 					<div className="rce-mtmg-item">
 						<FaCalendar />
@@ -80,7 +73,7 @@ const MeetingMessage = ({
 						</div>
 					</div>
 
-					{onMeetingMoreSelect && moreItems?.length && (
+					{onMeetingMoreSelect && moreItems && moreItems.length > 0 && (
 						<div>
 							<Dropdown
 								animationType="bottom"
@@ -93,17 +86,13 @@ const MeetingMessage = ({
 									},
 								}}
 								items={moreItems}
-								onSelect={(e) => onMeetingMoreSelect}
+								onSelect={(e) => onMeetingMoreSelect?.(e)}
 							/>
 						</div>
 					)}
 				</div>
-				<div
-					className="rce-mtmg-body-bottom"
-					onClick={toggleClick}
-					onKeyDown={() => {}}
-				>
-					{toggle ? (
+				<div className="rce-mtmg-body-bottom" onClick={toggleClick}>
+					{toogle ? (
 						<div className="rce-mtmg-bottom--tptitle">
 							<FaCaretDown />
 							<span>{collapseTitle}</span>
@@ -114,7 +103,7 @@ const MeetingMessage = ({
 							<span>
 								{participants
 									?.slice(0, PARTICIPANT_LIMIT)
-									.map((x) => x.title || "Unknown")
+									.map((x) => x.title || "Unknow")
 									.join(", ")}
 								{participants &&
 									PARTICIPANT_LIMIT &&
@@ -126,12 +115,12 @@ const MeetingMessage = ({
 				</div>
 				<div
 					className={classNames("rce-mtmg-toogleContent", {
-						"rce-mtmg-toogleContent--click": toggle,
+						"rce-mtmg-toogleContent--click": toogle === true,
 					})}
 				>
 					{dataSource?.map((x, i) => {
 						return (
-							<div key={`mtmg-toggle-${i}`}>
+							<div key={i}>
 								{!x.event && (
 									<div className="rce-mitem">
 										<div
@@ -145,13 +134,9 @@ const MeetingMessage = ({
 											<div className="rce-mitem-body--top">
 												<div
 													className="rce-mitem-body--top-title"
-													onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+													onClick={(e: MouseEvent) =>
 														_onMeetingLinkClick(x, i, e)
 													}
-													onKeyDown={(e: React.KeyboardEvent) => {
-														// TODO: handle keyboard
-														console.log(e);
-													}}
 												>
 													{x.title}
 												</div>
@@ -160,7 +145,7 @@ const MeetingMessage = ({
 														? x.dateString
 														: x.date &&
 															x.date &&
-															format(x.date, "dd/MM/yyyy hh:mm")}
+															format(x.date, "yyyy-MM-dd HH:mm")}
 												</div>
 											</div>
 											<div className="rce-mitem-body--bottom">
@@ -182,7 +167,7 @@ const MeetingMessage = ({
 												<div className="rce-mitem-body--top-time">
 													{x.dateString
 														? x.dateString
-														: x.date && format(x.date, "dd/MM/yyyy hh:mm")}
+														: x.date && format(x.date, "yyyy-MM-dd HH:mm")}
 												</div>
 												<div className="rce-mitem-avatar-content">
 													{
@@ -190,7 +175,7 @@ const MeetingMessage = ({
 															{x.event.avatars
 																?.slice(0, x.event.avatarsLimit)
 																.map((x, i) => (
-																	<Avatar key={`avatar-${i}`} src={x.src} />
+																	<Avatar key={i.toString()} src={x.src} />
 																))}
 															{x.event.avatars &&
 																x.event.avatarsLimit &&
@@ -222,13 +207,9 @@ const MeetingMessage = ({
 													<div className="rce-mtmg-call-record">
 														<div className="rce-mtmg-call-body">
 															<div
-																onClick={(e) =>
+																onClick={(e: MouseEvent<HTMLElement>) =>
 																	_onMeetingVideoLinkClick(x, i, e)
 																}
-																onKeyDown={(e) => {
-																	// TODO: handle keyboard
-																	console.log(e);
-																}}
 																className="rce-mtmg-call-avatars"
 															>
 																<Avatar

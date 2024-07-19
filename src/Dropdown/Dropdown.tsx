@@ -1,15 +1,15 @@
-import type React from "react";
+import type { CSSProperties, FC } from "react";
 import { useState } from "react";
 import "./Dropdown.css";
 import classNames from "classnames";
-import Button from "../Button/Button";
-import type { IDropdownProps, IDropdownItemType } from "../type";
+import Button from "../Button/Button.js";
+import type { IDropdownItem, IDropdownProps } from "../type.js";
 
-const Dropdown = ({
+const Dropdown: FC<IDropdownProps> = ({
 	animationPosition = "nortwest",
 	animationType = "default",
 	...props
-}: IDropdownProps): JSX.Element => {
+}) => {
 	const [show, setShow] = useState<boolean | undefined>(undefined);
 
 	const onBlur = () => {
@@ -35,24 +35,32 @@ const Dropdown = ({
 					{props.title && (
 						<span className="rce-dropdown-title">{props.title}</span>
 					)}
-					{props.items?.map((x: IDropdownItemType, i) => (
+					{props.items?.map((x, i) => (
 						<li
-							key={`dropdown-item-${i.toString()}`}
-							onMouseDown={(e) => props?.onSelect}
+							key={i.toString()}
+							onMouseDown={(e) =>
+								props.onSelect instanceof Function
+									? props.onSelect(e, i)
+									: void 0
+							}
 						>
 							{typeof x !== "string" ? (
 								x.icon ? (
 									<span className="rce-button-icon--container">
 										{(x.icon.float === "right" || !x.icon.float) && (
-											<a href={"#"}>{x.text}</a>
+											<button type={"button"} className={"rce-button-link"}>
+												{x.text}
+											</button>
 										)}
 
 										<span
-											style={{
-												float: x.icon.float,
-												color: x.icon.color,
-												fontSize: x.icon.size || 12,
-											}}
+											style={
+												{
+													float: x.icon.float,
+													color: x.icon.color,
+													fontSize: x.icon.size || 12,
+												} as CSSProperties
+											}
 											className={classNames(
 												"rce-button-icon",
 												x.icon.className,
@@ -61,13 +69,21 @@ const Dropdown = ({
 											{x.icon.component}
 										</span>
 
-										{x.icon.float === "left" && <a href={"#"}>{x.text}</a>}
+										{x.icon.float === "left" && (
+											<button type={"button"} className={"rce-button-link"}>
+												{x.text}
+											</button>
+										)}
 									</span>
 								) : (
-									<a href={"#"}>{x.text}</a>
+									<button type={"button"} className={"rce-button-link"}>
+										{x.text}
+									</button>
 								)
 							) : (
-								<a href={"#"}>{x}</a>
+								<button type={"button"} className={"rce-button-link"}>
+									{x}
+								</button>
 							)}
 						</li>
 					))}

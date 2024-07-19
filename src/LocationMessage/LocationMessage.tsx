@@ -1,6 +1,6 @@
 import "./LocationMessage.css";
 import classNames from "classnames";
-import type { ILocationMessageProps } from "../type";
+import type { ILocationMessageProps } from "../type.js";
 import type { FC } from "react";
 
 const STATIC_URL =
@@ -16,8 +16,8 @@ const LocationMessage: FC<ILocationMessageProps> = ({
 }) => {
 	const buildURL = (url: string) => {
 		return url
-			.replace(/LATITUDE/g, props?.data?.latitude || "0")
-			.replace(/LONGITUDE/g, props?.data?.longitude || "0")
+			.replace(/LATITUDE/g, props?.data?.latitude.toString() ?? "0")
+			.replace(/LONGITUDE/g, props?.data?.longitude.toString() ?? "0")
 			.replace("MARKER_COLOR", markerColor)
 			.replace("ZOOM", zoom)
 			.replace("KEY", props.apiKey);
@@ -43,7 +43,7 @@ const LocationMessage: FC<ILocationMessageProps> = ({
 				className={className()}
 			>
 				<img
-					alt={"location"}
+					alt={props.alt}
 					onError={props.onError}
 					className="rce-mbox-location-img"
 					src={props.src || buildURL(props.data?.staticURL || STATIC_URL)}

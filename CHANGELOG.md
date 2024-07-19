@@ -113,10 +113,10 @@ Fixed issues:
 
     import { Input } from 'react-chat-elements'
     let clearRef = () => {};
-    this.inputReferance = React.createRef();
+    this.inputreference = React.createRef();
 
     <Input
-    	reference={this.inputReferance}
+    	reference={this.inputreference}
     	clear={(clear) => clearRef = clear}
     	placeholder="Type here..."
     	multiline={true}
@@ -133,10 +133,10 @@ Fixed issues:
 
     import { Input } from 'react-chat-elements'
     let clearRef = () => {};
-    const inputReferance = React.useRef();
+    const inputreference = React.useRef();
 
     <Input
-    	reference={inputReferance}
+    	reference={inputreference}
     	clear={(clear) => clearRef = clear}
     	placeholder="Type here..."
     	multiline={true}
@@ -177,10 +177,10 @@ Fixed issues:
 
     ```js
     import { MessageList } from 'react-chat-elements'
-    const messageListReferance = React.useRef();
+    const messageListreference = React.useRef();
 
     <MessageList
-    	reference={messageListReferance}
+    	reference={messageListreference}
     	className='message-list'
     	lockable={true}
     	toBottomHeight={'100%'}

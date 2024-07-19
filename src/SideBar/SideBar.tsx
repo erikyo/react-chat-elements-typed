@@ -1,10 +1,11 @@
 import type React from "react";
+import type { FC } from "react";
 import "./SideBar.css";
 
 import classNames from "classnames";
-import type { ISideBarProps } from "../type";
+import type { ISideBarProps } from "../type.js";
 
-const SideBar: React.FC<ISideBarProps> = ({ type = "dark", ...props }) => {
+const SideBar: FC<ISideBarProps> = ({ type = "dark", ...props }) => {
 	return (
 		<div className={classNames("rce-sbar", type, props.data?.className)}>
 			<div className="rce-sbar-item">{props.data?.top}</div>

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import React from "react";
-import Popup from "../Popup";
+import Popup from "../Popup.js";
 import { render } from "@testing-library/react";
 
 describe("Avatar component", () => {

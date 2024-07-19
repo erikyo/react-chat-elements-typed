@@ -1,12 +1,27 @@
 {
-	"name": "react-chat-elements",
-	"version": "12.0.16",
+	"name": "react-chat-elements-typed",
+	"version": "13.0.0",
 	"description": "Reactjs chat components",
 	"author": "Avare Kodcu <abdurrahmaneker58@gmail.com>",
-	"main": "dist/main.js",
-	"types": "dist/type.d.ts",
-	"module": "dist/main.es.js",
-	"type": "module",
+	"main": "dist/index.cjs",
+	"types": "dist/index.d.ts",
+	"sideEffects": false,
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js",
+			"default": "./dist/index.js"
+		},
+		"./types": {
+			"import": "./dist/index.d.mts",
+			"require": "./dist/index.d.ts"
+		},
+		"./styles.css": {
+			"import": "./dist/index.css",
+			"require": "./dist/index.css"
+		}
+	},
+	"files": ["dist", "*.json"],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/detaysoft/react-chat-elements.git"
@@ -21,27 +36,25 @@
 		"detaysoft"
 	],
 	"license": "MIT",
-	"browser": {
-		"[module-name]": false
-	},
 	"bugs": {
 		"url": "https://github.com/detaysoft/react-chat-elements/issues"
 	},
 	"homepage": "https://github.com/detaysoft/react-chat-elements#readme",
 	"scripts": {
-		"build": "yarn run clear:build && tsc",
+		"watch": "tsc --watch",
+		"build": "yarn run clear:build && tsup",
 		"postbuild": "postcss src/**/*.css --base src --dir dist",
 		"lint": "npx @biomejs/biome check --apply-unsafe -- src",
 		"clear:build": "rimraf dist build",
 		"test": "vitest",
 		"test:ui": "vitest --ui",
 		"test:watch": "vitest --watch",
-		"test:coverage": "vitest --coverage --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/index.js",
+		"test:coverage": "vitest --coverage",
 		"prepare": "npm run build"
 	},
 	"peerDependencies": {
-		"react": "^18.0.0 || ^19.0.0",
-		"react-dom": "^18.0.0 || ^19.0.0"
+		"react": "^17 || ^18 || ^19",
+		"react-dom": "^17 || ^18 || ^19"
 	},
 	"devDependencies": {
 		"@testing-library/jest-dom": "^6.4.6",
@@ -54,29 +67,26 @@
 		"@types/react-icons": "^3.0.0",
 		"@vitest/coverage-v8": "^2.0.2",
 		"autoprefixer": "^10.4.19",
-		"css-loader": "^7.1.2",
 		"identicon.js": "^2.3.1",
 		"jsdom": "^24.1.0",
 		"lorem-ipsum": "^2.0.8",
 		"postcss": "^8.4.39",
 		"postcss-cli": "^11.0.0",
 		"postcss-nested": "^6.0.1",
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1",
 		"react-test-renderer": "^18.3.1",
 		"rimraf": "^6.0.1",
+		"tailwindcss": "^3.4.6",
+		"tsup": "^8.1.2",
 		"typescript": "^5.5.3",
 		"vitest": "^2.0.2"
 	},
 	"dependencies": {
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
 		"classnames": "^2.5.1",
-		"progressbar.js": "1.1.1",
-		"react-icons": "^5.2.1",
-		"react-spinkit": "^3.0.0",
-		"date-fns": "^3.6.0"
-	},
-	"optionalDependencies": {
-		"@rollup/rollup-linux-x64-gnu": "^4.14.3"
+		"date-fns": "^3.6.0",
+		"progressbar.js": "^1.1.1",
+		"react-icons": "^5.2.1"
 	},
 	"browserslist": {
 		"production": [">0.2%", "not dead", "not op_mini all"],
@@ -85,5 +95,17 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"tsup": {
+		"clean": true,
+		"sourcemap": true,
+		"dts": true,
+		"minify": false,
+		"strict": false,
+		"splitting": false,
+		"tsconfig": "./tsconfig.json",
+		"entry": ["./src/**/*.ts?(x)", "!**/__tests__/**/*.{ts,tsx}"],
+		"format": ["cjs", "esm"],
+		"outDir": "dist/"
 	}
 }

@@ -1,11 +1,10 @@
-import type React from "react";
 import type { FC } from "react";
 import "./SystemMessage.css";
 
 import classNames from "classnames";
-import type { ISystemMessageProps } from "../type";
+import type { ISystemMessageProps } from "../type.js";
 
-const SystemMessage: FC<ISystemMessageProps> = (props): React.ReactElement => {
+const SystemMessage: FC<ISystemMessageProps> = (props) => {
 	return (
 		<div className={classNames("rce-container-smsg", props.className)}>
 			<div className="rce-smsg">

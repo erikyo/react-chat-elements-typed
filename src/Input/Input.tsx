@@ -1,11 +1,11 @@
 import type React from "react";
-import type { RefObject } from "react";
-import { type JSX, useEffect } from "react";
+import type { LegacyRef, FC, SyntheticEvent } from "react";
+import { useEffect } from "react";
 import "./Input.css";
 import classNames from "classnames";
-import type { IInputProps } from "../type";
+import type { IInputProps } from "../type.js";
 
-const Input = ({
+const Input: FC<IInputProps> = ({
 	type = "text",
 	multiline = false,
 	minHeight = 25,
@@ -13,42 +13,46 @@ const Input = ({
 	autoHeight = true,
 	autofocus = false,
 	...props
-}: IInputProps): JSX.Element => {
+}) => {
 	useEffect(() => {
-		if (autofocus) (props.reference?.current as HTMLElement)?.focus();
+		if (autofocus) props.reference?.current?.focus();
 
 		if (props.clear instanceof Function) {
 			props.clear(clear);
 		}
-	}, [autofocus, props.clear, props.reference?.current]);
+	}, [autofocus, props.clear, props.reference?.current?.focus]);
 
-	const onChangeEvent = (
-		e: React.SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>,
-	) => {
-		const element = e.target as HTMLTextAreaElement;
+	const onChangeEvent = ({
+		ev,
+		target,
+	}: {
+		ev?: SyntheticEvent;
+		FAKE_EVENT?: boolean;
+		target?: HTMLInputElement | HTMLTextAreaElement;
+	}) => {
+		const el = target as HTMLInputElement;
 		if (multiline) {
 			if (autoHeight) {
-				if (element.style.height !== `${minHeight}px`) {
-					element.style.height = `${minHeight}px`;
+				if (el.style.height !== `${minHeight}px`) {
+					el.style.height = `${minHeight}px`;
 				}
 
-				let height: string;
-				if ((e.target as HTMLElement).scrollHeight <= maxHeight)
-					height = `${(e.target as HTMLElement).scrollHeight}px`;
+				let height = "";
+				if (el.scrollHeight <= maxHeight) height = `${el.scrollHeight}px`;
 				else height = `${maxHeight}px`;
 
-				if (element.style.height !== height) {
-					element.style.height = height;
+				if (el.style.height !== height) {
+					el.style.height = height;
 				}
 			}
 		}
 
-		if (props.maxlength && (element.value || "").length > props.maxlength) {
+		if (props.maxlength && (el.value || "").length > props.maxlength) {
 			if (props.onMaxLengthExceed instanceof Function)
-				props?.onMaxLengthExceed?.();
+				props.onMaxLengthExceed();
 
-			if (props.reference?.current) {
-				props.reference.current.value = (element.value || "").substring(
+			if (props.reference) {
+				props.reference.current.value = (el.value || "").substring(
 					0,
 					props.maxlength,
 				);
@@ -56,11 +60,11 @@ const Input = ({
 			return;
 		}
 
-		if (props.onChange instanceof Function) props.onChange(e);
+		if (ev && props.onChange instanceof Function) props.onChange({ ev });
 	};
 
-	const clear = (): void => {
-		const _event = {
+	const clear = () => {
+		const current = {
 			FAKE_EVENT: true,
 			target: props.reference?.current,
 		};
@@ -69,8 +73,7 @@ const Input = ({
 			props.reference.current.value = "";
 		}
 
-		const onChangeEvent = (e: React.SyntheticEvent<HTMLInputElement>) =>
-			onChangeEvent;
+		onChangeEvent(current);
 	};
 
 	return (
@@ -80,13 +83,13 @@ const Input = ({
 			)}
 			{!multiline ? (
 				<input
-					ref={props.reference as RefObject<HTMLInputElement>}
+					ref={props.reference as LegacyRef<HTMLInputElement>}
 					type={type}
 					className={classNames("rce-input")}
 					placeholder={props.placeholder}
 					defaultValue={props.defaultValue}
 					style={props.inputStyle}
-					onChange={onChangeEvent}
+					onChange={(e) => onChangeEvent({ ev: e })}
 					onCopy={props.onCopy}
 					onCut={props.onCut}
 					onPaste={props.onPaste}
@@ -102,12 +105,12 @@ const Input = ({
 				/>
 			) : (
 				<textarea
-					ref={props.reference as RefObject<HTMLTextAreaElement>}
+					ref={props.reference as LegacyRef<HTMLTextAreaElement>}
 					className={classNames("rce-input", "rce-input-textarea")}
 					placeholder={props.placeholder}
 					defaultValue={props.defaultValue}
 					style={props.inputStyle}
-					onChange={onChangeEvent}
+					onChange={(e) => onChangeEvent({ ev: e })}
 					onCopy={props.onCopy}
 					onCut={props.onCut}
 					onPaste={props.onPaste}

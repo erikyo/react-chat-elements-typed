@@ -1,22 +1,19 @@
 import type React from "react";
+import type { FC } from "react";
 import "./ReplyMessage.css";
 
 import classNames from "classnames";
-import type { IReplyMessageProps } from "../type";
-import type { JSX } from "react";
+import type { IReplyMessageProps } from "../type.js";
 
-const ReplyMessage = ({
-	onClick,
-	...props
-}: IReplyMessageProps): JSX.Element => {
+const ReplyMessage: FC<IReplyMessageProps> = ({ onClick, ...props }) => {
 	return (
 		<div
 			className={classNames("rce-mbox-reply", {
 				"rce-mbox-reply-border": !!props.titleColor,
 			})}
 			style={{ ...(props.titleColor && { borderColor: props.titleColor }) }}
-			onClick={(e) => onClick}
-			onKeyDown={(e) => console.log(e)}
+			onClick={onClick}
+			onKeyDown={console.log}
 		>
 			<div className="rce-mbox-reply-left">
 				<div

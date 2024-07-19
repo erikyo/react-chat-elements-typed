@@ -1,8 +1,7 @@
-/// <reference types="vitest" />
-/// <reference types="vite/client" />
-import { defineConfig } from "vite";
+import { configDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
+	...configDefaults,
 	test: {
 		globals: true,
 		environment: "jsdom",
@@ -10,8 +9,8 @@ export default defineConfig({
 
 		coverage: {
 			reporter: ["text", "json", "html"],
-			exclude: ["**/node_modules/**", "**/lib/**"],
-			include: ["src/**/__tests__/**/*.{ts,tsx}"],
+			exclude: ["**/node_modules/**", "**/__tests__/**", "./lib"],
+			include: ["src/**/*.{ts,tsx}"],
 			extension: ["ts", "tsx"],
 		},
 

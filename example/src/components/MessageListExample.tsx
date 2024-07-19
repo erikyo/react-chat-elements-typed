@@ -1,7 +1,5 @@
-import { useRef, useState } from "react";
-import Button from "../../src/Button/Button";
-import Input from "../../src/Input/Input";
-import MessageList from "../../src/MessageList/MessageList";
+import React, { type RefObject, useRef, useState } from "react";
+import { Button, Input, MessageList } from "react-chat-elements-typed";
 import { token } from "../utils/common";
 import {
 	audioMessage,
@@ -16,23 +14,23 @@ import {
 	videoMessage,
 } from "../utils/MessageTypes";
 
-let clearRef = () => {};
-
-function useForceUpdate() {
+const MessageListExample = () => {
+	const [messageListArray, setMessageListArray] = useState([]);
+	const [status, setStatus] = useState("");
 	const [value, setValue] = useState(0);
-	return () => setValue(() => value + 1);
-}
+	const messageListreference = useRef(null);
+	const inputreference = useRef(null);
 
-function MessageListExample() {
-	const [messageListArray, setMessageListArray] = useState<any>([]);
-	const [status, setStatus] = useState<string>("");
-	const messageListReferance = useRef();
-	const inputReferance = useRef();
+	const clearRef = (inputRef: RefObject<HTMLInputElement>) => {
+		if (inputRef.current) {
+			inputRef.current.value = "";
+		}
+	};
 
-	const forceUpdate = useForceUpdate();
+	const forceUpdate = () => setValue(value + 1);
 
-	const addMessage = (data: number) => {
-		let Addmtype: string | number = data || token();
+	const addMessage = (data) => {
+		let Addmtype = "";
 		switch (data) {
 			case 0:
 				Addmtype = "photo";
@@ -74,11 +72,11 @@ function MessageListExample() {
 		}
 
 		setMessageListArray([...messageListArray, randomMessage(Addmtype)]);
-		clearRef();
+		clearRef(inputreference);
 		forceUpdate();
 	};
 
-	const randomMessage = (type: string) => {
+	const randomMessage = (type) => {
 		switch (type) {
 			case "photo":
 				return photoMessage;
@@ -101,7 +99,7 @@ function MessageListExample() {
 			case "text":
 				return textMessage;
 			default:
-				break;
+				return null;
 		}
 	};
 
@@ -109,7 +107,7 @@ function MessageListExample() {
 		<div className="right-panel rce-example-messageList">
 			<MessageList
 				className="message-list"
-				reference={messageListReferance}
+				reference={messageListreference}
 				dataSource={messageListArray}
 				lockable={true}
 				downButton={true}
@@ -134,15 +132,15 @@ function MessageListExample() {
 					multiline={true}
 					maxlength={300}
 					onMaxLengthExceed={() => console.log("onMaxLengthExceed")}
-					reference={inputReferance}
-					clear={(clear: any) => (clearRef = clear)}
+					reference={inputreference}
+					clear={() => clearRef(inputreference)}
 					maxHeight={50}
-					onKeyPress={(e: any) => {
+					onKeyPress={(e) => {
 						if (e.shiftKey && e.charCode === 13) {
 							return true;
 						}
 						if (e.charCode === 13) {
-							clearRef();
+							clearRef(inputreference);
 							addMessage(token());
 						}
 					}}
@@ -153,6 +151,6 @@ function MessageListExample() {
 			</div>
 		</div>
 	);
-}
+};
 
 export default MessageListExample;

@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import type React from "react";
 
 import "./VideoMessage.css";
@@ -5,10 +6,10 @@ import "./VideoMessage.css";
 import { FaCloudDownloadAlt, FaExclamationTriangle } from "react-icons/fa";
 
 import classNames from "classnames";
-import ProgressCircle from "../Circle/Circle";
-import type { IProgressOptions, IVideoMessageProps } from "../type";
+import ProgressCircle from "../Circle/Circle.js";
+import type { IProgressOptions, IVideoMessageProps } from "../type.js";
 
-const VideoMessage: React.FC<IVideoMessageProps> = (props) => {
+const VideoMessage: FC<IVideoMessageProps> = (props) => {
 	const progressOptions = {
 		strokeWidth: 2.3,
 		color: "#efe",
@@ -55,6 +56,7 @@ const VideoMessage: React.FC<IVideoMessageProps> = (props) => {
 						src={props?.data?.uri}
 						alt={props?.data?.alt}
 						onClick={props.onOpen}
+						onKeyDown={console.log}
 						onLoad={props.onLoad}
 						onError={props.onPhotoError}
 					/>
@@ -62,7 +64,7 @@ const VideoMessage: React.FC<IVideoMessageProps> = (props) => {
 
 				{downloaded && (
 					<video controls controlsList={props.controlsList}>
-						<source src={props?.data?.videoURL} type="video/mp4" />
+						<source src={props?.data.videoURL} type="video/mp4" />
 						Your browser does not support HTML video.
 					</video>
 				)}

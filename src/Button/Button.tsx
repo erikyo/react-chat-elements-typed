@@ -1,17 +1,17 @@
 import "./Button.css";
 import classNames from "classnames";
-import type { IButtonProps } from "../type";
-import type { ReactElement } from "react";
+import type { IButtonProps } from "../type.js";
+import type { FC, ReactElement } from "react";
 
-const Button = ({
+const Button: FC<IButtonProps> = ({
 	disabled = false,
 	backgroundColor = "#3979aa",
 	color = "white",
 	...props
-}: IButtonProps): ReactElement => {
+}): ReactElement<HTMLButtonElement> => {
 	return (
 		<button
-			type={"button"}
+			type={props?.type ?? "button"}
 			ref={props.buttonRef}
 			title={props.title}
 			className={classNames("rce-button", props.type, props.className)}
@@ -30,7 +30,10 @@ const Button = ({
 					)}
 
 					<span
-						style={{ float: props.icon.float, fontSize: props.icon.size || 12 }}
+						style={{
+							float: props.icon.float ?? "inherit",
+							fontSize: props.icon.size || 12,
+						}}
 						className="rce-button-icon"
 					>
 						{props.icon.component}

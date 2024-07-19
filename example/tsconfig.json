@@ -1,0 +1,9 @@
+{
+	"extends": "@tsconfig/react-native/tsconfig.json",
+	"compilerOptions": {
+		"lib": ["dom", "dom.iterable", "ES2015", "ES2022", "ESNext"],
+		"strict": false,
+		"baseUrl": "./src"
+	},
+	"include": ["src", "!**/__tests__/**/*.{ts,tsx}"]
+}

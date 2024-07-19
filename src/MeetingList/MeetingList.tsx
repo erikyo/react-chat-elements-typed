@@ -1,29 +1,16 @@
-import type React from "react";
-import type { FC } from "react";
+import type { FC, Key, LegacyRef } from "react";
 import "./MeetingList.css";
 
-import MeetingItem from "../MeetingItem/MeetingItem";
+import MeetingItem from "../MeetingItem/MeetingItem.js";
 import classNames from "classnames";
-import type {
-	IMeetingItemProps,
-	IMeetingListProps,
-	MeetingListEvent,
-} from "../type";
+import type { IMeetingListProps, MeetingListEvent } from "../type.js";
 
 const MeetingList: FC<IMeetingListProps> = (props) => {
-	const onClick: MeetingListEvent = (
-		item: IMeetingItemProps,
-		index: number,
-		event: React.MouseEvent<HTMLElement>,
-	) => {
+	const onClick: MeetingListEvent = (item, index, event) => {
 		if (props.onClick instanceof Function) props.onClick(item, index, event);
 	};
 
-	const onContextMenu: MeetingListEvent = (
-		item: IMeetingItemProps,
-		index: number,
-		event: React.MouseEvent<HTMLElement>,
-	) => {
+	const onContextMenu: MeetingListEvent = (item, index, event) => {
 		event.preventDefault();
 		if (props.onContextMenu instanceof Function)
 			props.onContextMenu(item, index, event);
@@ -51,34 +38,22 @@ const MeetingList: FC<IMeetingListProps> = (props) => {
 
 	return (
 		<div
-			ref={props.cmpRef}
+			ref={props.cmpRef as LegacyRef<HTMLDivElement>}
 			className={classNames("rce-container-mtlist", props.className)}
 		>
-			{props.dataSource?.map((x, i) => {
-				return (
-					<MeetingItem
-						{...x}
-						key={`meeting-item-${i.toString()}`}
-						lazyLoadingImage={props.lazyLoadingImage}
-						onAvatarError={(e: React.MouseEvent<HTMLElement>) =>
-							onAvatarError(x, i, e)
-						}
-						onContextMenu={(e: React.MouseEvent<HTMLElement>) =>
-							onContextMenu(x, i, e)
-						}
-						onClick={(e: React.MouseEvent<HTMLElement>) => onClick(x, i, e)}
-						onMeetingClick={(e: React.MouseEvent<HTMLElement>) =>
-							onMeetingClick(x, i, e)
-						}
-						onShareClick={(e: React.MouseEvent<HTMLElement>) =>
-							onShareClick(x, i, e)
-						}
-						onCloseClick={(e: React.MouseEvent<HTMLElement>) =>
-							onCloseClick(x, i, e)
-						}
-					/>
-				);
-			})}
+			{props.dataSource?.map((x, i: number) => (
+				<MeetingItem
+					{...x}
+					key={i as Key}
+					lazyLoadingImage={props.lazyLoadingImage}
+					onAvatarError={(e) => onAvatarError(x, i, e)}
+					onContextMenu={(e) => onContextMenu(x, i, e)}
+					onClick={(e) => onClick(x, i, e)}
+					onMeetingClick={(e) => onMeetingClick(x, i, e)}
+					onShareClick={(e) => onShareClick(x, i, e)}
+					onCloseClick={(e) => onCloseClick(x, i, e)}
+				/>
+			))}
 		</div>
 	);
 };

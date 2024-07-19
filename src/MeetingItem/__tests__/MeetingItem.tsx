@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import React from "react";
-import MeetingItem from "../MeetingItem";
+import MeetingItem from "../MeetingItem.js";
 import { render } from "@testing-library/react";
 
 describe("MeetingItem component", () => {

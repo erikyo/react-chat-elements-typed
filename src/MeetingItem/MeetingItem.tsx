@@ -3,33 +3,35 @@ import "./MeetingItem.css";
 
 import { MdVideoCall, MdLink, MdCall } from "react-icons/md";
 
-import Avatar from "../Avatar/Avatar";
+import Avatar from "../Avatar/Avatar.js";
 
 import { format } from "date-fns";
 
 import classNames from "classnames";
-import type { IMeetingItemProps } from "../type";
-import type { JSX } from "react";
+import type { IMeetingItemProps } from "../type.js";
 
 const MeetingItem: FC<IMeetingItemProps> = ({
 	subjectLimit = 60,
 	onClick = () => void 0,
 	avatarFlexible = false,
 	date = new Date(),
+	key = "0",
 	lazyLoadingImage = undefined,
 	avatarLimit = 5,
 	avatars = [],
 	audioMuted = true,
-	onAvatarError,
-	onMeetingClick,
-	onShareClick,
+	onAvatarError = () => void 0,
+	onMeetingClick = () => void 0,
+	onShareClick = () => void 0,
 	...props
-}): JSX.Element => {
+}) => {
 	const statusColorType = props.statusColorType;
 	const AVATAR_LIMIT = avatarLimit;
 
-	const dateText =
-		date && (props.dateString || format(date, "dd/MM/yyyy HH:mm:ss"));
+	const dateText: string =
+		(date &&
+			(props.dateString || format(date as Date, "yyyy-MM-dd HH:mm:ss"))) ||
+		new Date().toISOString();
 
 	const subject =
 		props.subject &&
@@ -41,7 +43,7 @@ const MeetingItem: FC<IMeetingItemProps> = ({
 		<div
 			className={classNames("rce-container-mtitem", props.className)}
 			onClick={onClick}
-			onKeyDown={(e) => e.key === "Enter" && onClick}
+			onKeyDown={console.log}
 			onContextMenu={props.onContextMenu}
 		>
 			<audio autoPlay loop muted={audioMuted} src={props.audioSource} />
@@ -49,7 +51,11 @@ const MeetingItem: FC<IMeetingItemProps> = ({
 			<div className="rce-mtitem">
 				<div className="rce-mtitem-top">
 					<div className="rce-mtitem-subject">{subject}</div>
-					<div className="rce-mtitem-share" onClick={onShareClick}>
+					<div
+						className="rce-mtitem-share"
+						onClick={onShareClick}
+						onKeyDown={console.log}
+					>
 						<MdLink />
 					</div>
 				</div>
@@ -59,45 +65,43 @@ const MeetingItem: FC<IMeetingItemProps> = ({
 							// props.avatars?.slice(0, AVATAR_LIMIT).map((x, i) => x instanceof Avatar ? x : (
 							avatars
 								?.slice(0, AVATAR_LIMIT)
-								.map((x, i) => {
-									return (
-										<Avatar
-											key={`avatar-${i.toString()}`}
-											src={x.src}
-											alt={x.alt}
-											className={
-												x.statusColorType === "encircle"
-													? "rce-mtitem-avatar-encircle-status"
-													: ""
-											}
-											size={"small"}
-											letterItem={x.letterItem}
-											sideElement={
-												x.statusColor ? (
-													<span
-														className="rce-mtitem-status"
-														style={
-															statusColorType === "encircle"
-																? {
-																		boxShadow: `inset 0 0 0 2px ${x.statusColor}, inset 0 0 0 5px #FFFFFF`,
-																	}
-																: {
-																		backgroundColor: x.statusColor,
-																	}
-														}
-													>
-														{x.statusText}
-													</span>
-												) : (
-													<></>
-												)
-											}
-											onError={onAvatarError}
-											lazyLoadingImage={lazyLoadingImage}
-											type={classNames("circle", { flexible: avatarFlexible })}
-										/>
-									);
-								})
+								.map((x, i) => (
+									<Avatar
+										key={i.toString()}
+										src={x.src}
+										alt={x.alt}
+										className={
+											x.statusColorType === "encircle"
+												? "rce-mtitem-avatar-encircle-status"
+												: ""
+										}
+										size={"small"}
+										letterItem={x.letterItem}
+										sideElement={
+											x.statusColor ? (
+												<span
+													className="rce-mtitem-status"
+													style={
+														statusColorType === "encircle"
+															? {
+																	boxShadow: `inset 0 0 0 2px ${x.statusColor}, inset 0 0 0 5px #FFFFFF`,
+																}
+															: {
+																	backgroundColor: x.statusColor,
+																}
+													}
+												>
+													{x.statusText}
+												</span>
+											) : (
+												<></>
+											)
+										}
+										onError={onAvatarError}
+										lazyLoadingImage={lazyLoadingImage}
+										type={classNames("circle", { flexible: avatarFlexible })}
+									/>
+								))
 						}
 
 						{avatars && AVATAR_LIMIT && avatars.length > AVATAR_LIMIT && (
@@ -111,7 +115,7 @@ const MeetingItem: FC<IMeetingItemProps> = ({
 							<div
 								className="rce-mtitem-closable"
 								onClick={props.onCloseClick}
-								onKeyDown={(e) => e.key === "Enter" && props.onCloseClick}
+								onKeyDown={console.log}
 							>
 								<MdCall />
 							</div>
@@ -119,7 +123,7 @@ const MeetingItem: FC<IMeetingItemProps> = ({
 						<div
 							className="rce-mtitem-button"
 							onClick={onMeetingClick}
-							onKeyDown={(e) => e.key === "Enter" && onMeetingClick}
+							onKeyDown={console.log}
 						>
 							<MdVideoCall />
 						</div>
