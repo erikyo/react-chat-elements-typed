@@ -1,12 +1,8 @@
-[![npm](https://img.shields.io/npm/dt/react-chat-elements.svg?label=npm-install&style=flat)]() [![Github pre-)release](https://img.shields.io/github/release-pre/Detaysoft/react-chat-elements.svg?style=flat)]()
+[![npm](https://img.shields.io/npm/dt/react-chat-elements-typed.svg?label=npm-install&style=flat)]() [![Github pre-)release](https://img.shields.io/github/release-pre/Detaysoft/react-chat-elements-typed.svg?style=flat)]()
 
-# react-chat-elements
+# react-chat-elements-typed
 
-## Reactjs chat elements
-
-## NOTE: this package not support react-native anymore.
-
-## **[Full Documentation](https://detaysoft.github.io/docs-react-chat-elements/)**, **[Changelog](https://github.com/Detaysoft/react-chat-elements/blob/master/CHANGELOG.md)**
+## NOTE: THIS IS A FORK. DO NOT USE. PLEASE USE [react-chat-elements](https://github.com/Detaysoft/react-chat-elements)
 
 ## Install
 

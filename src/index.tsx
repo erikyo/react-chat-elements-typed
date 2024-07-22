@@ -1,9 +1,4 @@
 /**
- * The tailwind base style
- */
-import "./styles.css";
-
-/**
  * The library components
  */
 import MessageBox from "./MessageBox/MessageBox.js";

@@ -1,5 +1,8 @@
 node_modules
 
+# source folder
+src
+
 # testing
 coverage
 tests
@@ -7,12 +10,10 @@ tests
 # examples
 example
 
+# workflows
+.github
+
 # misc
 .DS_Store
 npm-debug.log*
-
-# react-native
-/ios
-/android
-
-
+.idea

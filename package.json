@@ -1,8 +1,9 @@
 {
 	"name": "react-chat-elements-typed",
-	"version": "13.0.0",
+	"version": "13.0.1",
 	"description": "Reactjs chat components",
 	"author": "Avare Kodcu <abdurrahmaneker58@gmail.com>",
+	"contributors": ["Erik <https://github.com/erikyo>"],
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
 	"sideEffects": false,
@@ -10,17 +11,15 @@
 		".": {
 			"import": "./dist/index.mjs",
 			"require": "./dist/index.js",
-			"default": "./dist/index.js",
 			"types": {
 				"import": "./dist/index.d.mts",
 				"require": "./dist/index.d.ts",
-				"default": "./dist/index.d.ts"
+				"types": "./dist/index.d.ts"
 			}
 		},
-		"./styles.css": {
-			"import": "./dist/index.css",
-			"require": "./dist/index.css"
-		}
+		"./dist/ReactChatElements.css": "./dist/ReactChatElements.css",
+		"./dist/ReactChatElements.min.css": "./dist/ReactChatElements.min.css",
+		"./dist/ReactChatElements.min.css.map": "./dist/ReactChatElements.min.css.map"
 	},
 	"repository": {
 		"type": "git",
@@ -43,7 +42,9 @@
 	"scripts": {
 		"watch": "tsup --watch",
 		"build": "npm run clear:build && tsup",
-		"postbuild": "postcss src/**/*.css --base src --dir dist",
+		"build:component-styles": "set NODE_ENV=production && postcss src/**/*.css --base src --dir dist",
+		"build:style-min": "postcss dist/ReactChatElements.css --o dist/ReactChatElements.min.css --config postcss.config.js",
+		"postbuild": "npm run build:component-styles && npm run build:style-min",
 		"lint": "npx @biomejs/biome check --apply-unsafe -- src",
 		"clear:build": "rimraf dist build",
 		"test": "vitest",
@@ -65,35 +66,33 @@
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
 		"@types/react-icons": "^3.0.0",
-		"@vitest/coverage-v8": "^2.0.3",
+		"@vitest/coverage-v8": "^2.0.4",
 		"autoprefixer": "^10.4.19",
+		"cssnano": "^7.0.4",
 		"identicon.js": "^2.3.1",
 		"jsdom": "^24.1.0",
 		"lorem-ipsum": "^2.0.8",
 		"postcss": "^8.4.39",
 		"postcss-cli": "^11.0.0",
-		"postcss-nested": "^6.0.1",
+		"postcss-nested": "^6.2.0",
 		"react-test-renderer": "^18.3.1",
 		"rimraf": "^6.0.1",
 		"tailwindcss": "^3.4.6",
 		"tsup": "^8.2.0",
 		"typescript": "^5.5.3",
-		"vitest": "^2.0.3"
+		"vitest": "^2.0.4"
 	},
 	"dependencies": {
 		"classnames": "^2.5.1",
 		"date-fns": "^3.6.0",
+		"esbuild-sass-plugin": "^3.3.1",
 		"progressbar.js": "^1.1.1",
 		"react": "^17 || ^18 || ^19",
 		"react-dom": "^17 || ^18 || ^19",
 		"react-icons": "^5.2.1"
 	},
 	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
+		"production": [">0.2%", "not dead", "not op_mini all"],
 		"development": [
 			"last 1 chrome version",
 			"last 1 firefox version",

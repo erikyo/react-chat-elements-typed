@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Components Styles
+ */
+@import "./MessageBox/MessageBox.css";
+@import "./ChatItem/ChatItem.css";
+@import "./ChatList/ChatList.css";
+@import "./MessageList/MessageList.css";
+@import "./MeetingItem/MeetingItem.css";
+@import "./MeetingList/MeetingList.css";
+@import "./SystemMessage/SystemMessage.css";
+@import "./ReplyMessage/ReplyMessage.css";
+@import "./MeetingMessage/MeetingMessage.css";
+@import "./AudioMessage/AudioMessage.css";
+@import "./FileMessage/FileMessage.css";
+@import "./LocationMessage/LocationMessage.css";
+@import "./SpotifyMessage/SpotifyMessage.css";
+@import "./VideoMessage/VideoMessage.css";
+@import "./PhotoMessage/PhotoMessage.css";
+@import "./MeetingLink/MeetingLink.css";
+@import "./Input/Input.css";
+@import "./Button/Button.css";
+@import "./Avatar/Avatar.css";
+@import "./Navbar/Navbar.css";
+@import "./Dropdown/Dropdown.css";
+@import "./SideBar/SideBar.css";
+@import "./Popup/Popup.css";

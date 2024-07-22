@@ -196,7 +196,7 @@ export interface IMessage {
 	id?: string;
 	position?: string;
 	text: string;
-	title: string;
+	title?: string;
 	focus?: boolean;
 	date: number | string | Date;
 	dateString?: string;
