@@ -1,12 +1,12 @@
 {
 	"name": "react-chat-elements-typed",
-	"version": "13.0.2",
+	"version": "13.0.3",
 	"description": "Reactjs chat components",
 	"author": "Avare Kodcu <abdurrahmaneker58@gmail.com>",
 	"contributors": ["Erik <https://github.com/erikyo>"],
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
-	"sideEffects": false,
+	"sideEffects": ["*.css"],
 	"exports": {
 		".": {
 			"import": "./dist/index.mjs",
