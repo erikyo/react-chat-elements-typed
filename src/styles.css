@@ -1,6 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/**
+ * Tailwind base CSS
+ */
+@import "tailwind.css";
 
 /**
  * Components Styles
@@ -28,3 +29,4 @@
 @import "./Dropdown/Dropdown.css";
 @import "./SideBar/SideBar.css";
 @import "./Popup/Popup.css";
+

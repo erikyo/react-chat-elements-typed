@@ -1,5 +1,4 @@
 import { defineConfig } from "tsup";
-import { sassPlugin } from "esbuild-sass-plugin";
 
 export default defineConfig((options) => {
 	return {
@@ -13,9 +12,9 @@ export default defineConfig((options) => {
 			"./src/style.scss",
 			"!**/__tests__/**/*.{ts,tsx}",
 			"!**/*.{css}",
+			"!**/*.stories.{ts,tsx}",
 		],
 		format: ["cjs", "esm"],
 		outDir: "dist/",
-		esbuildPlugins: [sassPlugin()],
 	};
 });

@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import "./Navbar.css";
 import classNames from "classnames";
-import type { INavbarProps } from "../types.js";
+import type { INavbarProps } from "../types";
 
 const Navbar: FC<INavbarProps> = ({ type = "light", ...props }) => {
 	return (

@@ -1,9 +1,9 @@
-import type { CSSProperties, FC } from "react";
+import type { FC } from "react";
 import { useState } from "react";
 import "./Dropdown.css";
 import classNames from "classnames";
-import Button from "../Button/Button.js";
-import type { IDropdownItem, IDropdownProps } from "../types.js";
+import Button from "../Button/Button";
+import type { IDropdownProps } from "../types";
 
 const Dropdown: FC<IDropdownProps> = ({
 	animationPosition = "nortwest",
@@ -54,13 +54,11 @@ const Dropdown: FC<IDropdownProps> = ({
 										)}
 
 										<span
-											style={
-												{
-													float: x.icon.float,
-													color: x.icon.color,
-													fontSize: x.icon.size || 12,
-												} as CSSProperties
-											}
+											style={{
+												float: x.icon.float ?? "inherit",
+												color: String(x.icon.color) || "inherit",
+												fontSize: Number(x.icon.size) || 12,
+											}}
 											className={classNames(
 												"rce-button-icon",
 												x.icon.className,

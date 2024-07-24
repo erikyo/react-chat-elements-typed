@@ -3,7 +3,7 @@ import type { FC } from "react";
 import "./ReplyMessage.css";
 
 import classNames from "classnames";
-import type { IReplyMessageProps } from "../types.js";
+import type { IReplyMessageProps } from "../types";
 
 const ReplyMessage: FC<IReplyMessageProps> = ({ onClick, ...props }) => {
 	return (

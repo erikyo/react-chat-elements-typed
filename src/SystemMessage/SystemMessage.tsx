@@ -2,7 +2,7 @@ import type { FC } from "react";
 import "./SystemMessage.css";
 
 import classNames from "classnames";
-import type { ISystemMessageProps } from "../types.js";
+import type { ISystemMessageProps } from "../types";
 
 const SystemMessage: FC<ISystemMessageProps> = (props) => {
 	return (

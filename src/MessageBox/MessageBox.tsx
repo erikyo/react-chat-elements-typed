@@ -3,18 +3,18 @@ import type React from "react";
 import { useEffect, useRef } from "react";
 import "./MessageBox.css";
 
-import PhotoMessage from "../PhotoMessage/PhotoMessage.js";
-import FileMessage from "../FileMessage/FileMessage.js";
-import SystemMessage from "../SystemMessage/SystemMessage.js";
-import LocationMessage from "../LocationMessage/LocationMessage.js";
-import SpotifyMessage from "../SpotifyMessage/SpotifyMessage.js";
-import ReplyMessage from "../ReplyMessage/ReplyMessage.js";
-import MeetingMessage from "../MeetingMessage/MeetingMessage.js";
-import VideoMessage from "../VideoMessage/VideoMessage.js";
-import AudioMessage from "../AudioMessage/AudioMessage.js";
-import MeetingLink from "../MeetingLink/MeetingLink.js";
+import PhotoMessage from "../PhotoMessage/PhotoMessage";
+import FileMessage from "../FileMessage/FileMessage";
+import SystemMessage from "../SystemMessage/SystemMessage";
+import LocationMessage from "../LocationMessage/LocationMessage";
+import SpotifyMessage from "../SpotifyMessage/SpotifyMessage";
+import ReplyMessage from "../ReplyMessage/ReplyMessage";
+import MeetingMessage from "../MeetingMessage/MeetingMessage";
+import VideoMessage from "../VideoMessage/VideoMessage";
+import AudioMessage from "../AudioMessage/AudioMessage";
+import MeetingLink from "../MeetingLink/MeetingLink";
 
-import Avatar from "../Avatar/Avatar.js";
+import Avatar from "../Avatar/Avatar";
 
 import { RiShareForwardFill } from "react-icons/ri";
 import { IoIosDoneAll } from "react-icons/io";
@@ -31,7 +31,7 @@ import { TiArrowForward } from "react-icons/ti";
 import { format } from "date-fns";
 
 import classNames from "classnames";
-import type { MessageBoxType } from "../types.js";
+import type { MessageBoxType } from "../types";
 import { LeftNotch } from "../SvgIcon/leftNotch";
 import { RightNotch } from "../SvgIcon/rightNotch";
 

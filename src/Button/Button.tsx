@@ -1,6 +1,6 @@
 import "./Button.css";
 import classNames from "classnames";
-import type { IButtonProps } from "../types.js";
+import type { IButtonProps } from "../types";
 import type { FC, ReactElement } from "react";
 
 const Button: FC<IButtonProps> = ({

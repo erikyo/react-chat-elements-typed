@@ -960,14 +960,14 @@ export interface IMessageDataStatus {
 /**
  * IDropdownProps Interface
  *
- * @prop className The Dropdown's className and optional.
- * @prop buttonProps The Dropdown's button props and optional.
- * @prop animationType The Dropdown's animation type and optional.
- * @prop animationPosition The Dropdown's animation position and optional.
- * @prop title The Dropdown's title and optional.
- * @prop items The Dropdown's items is a IDropdownItemType array and required.
- * @prop onSelect The Dropdown's onSelect function and optional.
- * @prop style The Dropdown's style is an object containing color, borderColor and optional.
+ * @prop className The Dropdowns className and optional.
+ * @prop buttonProps The Dropdowns button props and optional.
+ * @prop animationType The Dropdowns animation type and optional.
+ * @prop animationPosition The Dropdowns animation position and optional.
+ * @prop title The Dropdowns title and optional.
+ * @prop items The Dropdowns items is a IDropdownItemType array and required.
+ * @prop onSelect The Dropdowns onSelect function and optional.
+ * @prop style The Dropdowns style is an object containing color, borderColor and optional.
  */
 export interface IDropdownProps {
 	className?: string;
@@ -1070,7 +1070,7 @@ export interface IDropdownItem {
  * @prop component The Dropdown Item Icon's component and optional.
  */
 export interface IDropdownItemIcon {
-	float?: string;
+	float?: "left" | "right" | "none" | "inherit" | "initial" | "unset";
 	color?: string;
 	size?: number;
 	className?: string;

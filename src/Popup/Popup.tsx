@@ -2,10 +2,10 @@ import type React from "react";
 import type { FC } from "react";
 import "./Popup.css";
 
-import Button from "../Button/Button.js";
+import Button from "../Button/Button";
 
 import classNames from "classnames";
-import type { IPopupProps } from "../types.js";
+import type { IPopupProps } from "../types";
 
 const Popup: FC<IPopupProps> = ({ ...props }) => {
 	if (props.popup?.show === true)

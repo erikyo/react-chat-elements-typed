@@ -5,8 +5,8 @@ import {
 	FaCloudDownloadAlt,
 	FaExclamationTriangle,
 } from "react-icons/fa";
-import ProgressCircle from "../Circle/Circle.js";
-import type { IFileMessageProps } from "../types.js";
+import ProgressCircle from "../Circle/Circle";
+import type { IFileMessageProps } from "../types";
 import "./FileMessage.css";
 
 const FileMessage: FC<IFileMessageProps> = (props) => {

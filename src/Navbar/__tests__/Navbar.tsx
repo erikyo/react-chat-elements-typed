@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import React from "react";
-import Navbar from "../Navbar.js";
+import Navbar from "../Navbar";
 import { render } from "@testing-library/react";
 
 describe("Avatar component", () => {

@@ -7,8 +7,9 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"forceConsistentCasingInFileNames": true,
+		"allowArbitraryExtensions": true,
 		"moduleResolution": "Bundler",
-		"outDir": "dist/",
+		"outDir": "./dist",
 		"declaration": true,
 		"baseUrl": "./src",
 		"types": [
@@ -17,9 +18,10 @@
 			"vitest/importMeta",
 			"vitest/jsdom",
 			"vitest/globals",
+			"storybook",
 			"@testing-library/jest-dom"
 		]
 	},
-	"include": ["./src/**/*"],
-	"exclude": ["./example", "**/__tests__/**", "dist", "./node_modules"]
+	"include": ["./src/**/*", "./example/**/*"],
+	"exclude": ["**/__tests__/**", "dist", "./node_modules"]
 }

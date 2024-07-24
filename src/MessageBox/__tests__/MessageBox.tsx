@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import React from "react";
-import MessageBox from "../MessageBox.js";
+import MessageBox from "../MessageBox";
 import { render } from "@testing-library/react";
 
 describe("Avatar component", () => {

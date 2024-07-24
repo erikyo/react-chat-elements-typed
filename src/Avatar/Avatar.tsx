@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { useEffect } from "react";
 import "./Avatar.css";
 import classNames from "classnames";
-import type { IAvatarProps } from "../types.js";
+import type { IAvatarProps } from "../types";
 
 const Avatar: FC<IAvatarProps> = ({
 	type = "default",

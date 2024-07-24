@@ -3,12 +3,12 @@ import "./MeetingItem.css";
 
 import { MdVideoCall, MdLink, MdCall } from "react-icons/md";
 
-import Avatar from "../Avatar/Avatar.js";
+import Avatar from "../Avatar/Avatar";
 
 import { format } from "date-fns";
 
 import classNames from "classnames";
-import type { IMeetingItemProps } from "../types.js";
+import type { IMeetingItemProps } from "../types";
 
 const MeetingItem: FC<IMeetingItemProps> = ({
 	subjectLimit = 60,

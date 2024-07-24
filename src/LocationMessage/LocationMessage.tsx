@@ -1,8 +1,8 @@
 import "./LocationMessage.css";
 import classNames from "classnames";
-import type { ILocationMessageProps } from "../types.js";
+import type { ILocationMessageProps } from "../types";
 import type { FC } from "react";
-import { MAP_URL, STATIC_URL } from "../constants.js";
+import { MAP_URL, STATIC_URL } from "../constants";
 
 const LocationMessage: FC<ILocationMessageProps> = ({
 	markerColor = "red",

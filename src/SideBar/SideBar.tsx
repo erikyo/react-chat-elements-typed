@@ -3,7 +3,7 @@ import type { FC } from "react";
 import "./SideBar.css";
 
 import classNames from "classnames";
-import type { ISideBarProps } from "../types.js";
+import type { ISideBarProps } from "../types";
 
 const SideBar: FC<ISideBarProps> = ({ type = "dark", ...props }) => {
 	return (
