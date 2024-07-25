@@ -332,15 +332,7 @@ export interface IMeetingMessageProps extends IMeetingMessage {
 		id?: number | string;
 		title?: string;
 	}>;
-	moreItems?: Array<{
-		text?: string;
-		icon?: {
-			component?: JSX.Element;
-			float?: string;
-			color?: string;
-			size?: number;
-		};
-	}>;
+	moreItems?: IDropdownItemType[];
 	dataSource?: IMeetingMessage[];
 	participantsLimit?: number;
 	onClick?: MouseEventHandler;
@@ -1014,7 +1006,7 @@ export interface ICircleProps {
  * @prop color The Button's color and optional.
  * @prop disabled The Button's disabled and optional.
  * @prop onClick The Button's onClick function and optional.
- * @prop icon The Button's icon is a IButtonIcon and optional.
+ * @prop icon The Button's icon is a IIcon and optional.
  */
 export interface IButtonProps {
 	title?: string;
@@ -1026,18 +1018,19 @@ export interface IButtonProps {
 	color?: string;
 	disabled?: boolean;
 	onClick?: MouseEventHandler;
-	icon?: IButtonIcon;
+	icon?: IIcon;
 }
 
 /**
- * IButtonIcon Interface
+ * IIcon Interface
  *
  * @prop float The Button Icon's float and optional.
  * @prop size The Button Icon's size and optional.
  * @prop component The Button Icon's components and optional.
  */
-export interface IButtonIcon {
-	float?: "left" | "right" | "none" | "inherit" | "initial" | "unset";
+export interface IIcon {
+	float?: CSSProperties["float"];
+	color?: CSSProperties["color"];
 	size?: number;
 	component?: ReactElement;
 }
