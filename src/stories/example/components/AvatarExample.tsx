@@ -1,4 +1,4 @@
-import { Avatar } from "react-chat-elements-typed";
+import Avatar from "../../../Avatar/Avatar";
 import { photo } from "../utils/common";
 
 function AvatarExample() {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
-import { Button, Popup } from "react-chat-elements-typed";
+import Popup from "../../../Popup/Popup";
+import Button from "../../../Button/Button";
 
 function PopupExample() {
 	const [show, setShow] = useState<boolean>(false);

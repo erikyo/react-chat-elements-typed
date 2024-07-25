@@ -1,7 +1,10 @@
 import { FaCircle, FaMapMarkerAlt, FaVideo } from "react-icons/fa";
 import { MdOutlineMoreVert } from "react-icons/md";
-import { Avatar, Button, Dropdown, Navbar } from "react-chat-elements-typed";
 import { photo } from "../utils/common";
+import Navbar from "../../../Navbar/Navbar";
+import Avatar from "../../../Avatar/Avatar";
+import Button from "../../../Button/Button";
+import Dropdown from "../../../Dropdown/Dropdown";
 
 function NavbarExample() {
 	return (

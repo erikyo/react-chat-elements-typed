@@ -1,5 +1,9 @@
-import React, { type RefObject, useRef, useState } from "react";
-import { Button, Input, MessageList } from "react-chat-elements-typed";
+import React, {
+	type MutableRefObject,
+	type RefObject,
+	useRef,
+	useState,
+} from "react";
 import { token } from "../utils/common";
 import {
 	audioMessage,
@@ -13,23 +17,29 @@ import {
 	textMessage,
 	videoMessage,
 } from "../utils/MessageTypes";
+import Input from "../../../Input/Input";
+import Button from "../../../Button/Button";
+import MessageList from "../../../MessageList/MessageList";
+import type { MessageType } from "../../../types";
 
 const MessageListExample = () => {
-	const [messageListArray, setMessageListArray] = useState([]);
+	const [messageListArray, setMessageListArray] = useState<MessageType[]>([]);
 	const [status, setStatus] = useState("");
 	const [value, setValue] = useState(0);
 	const messageListreference = useRef(null);
-	const inputreference = useRef(null);
+	const inputreference = useRef<HTMLInputElement | undefined>();
 
-	const clearRef = (inputRef: RefObject<HTMLInputElement>) => {
-		if (inputRef.current) {
-			inputRef.current.value = "";
+	const clearRef = (
+		inputRef: MutableRefObject<HTMLInputElement | undefined>,
+	) => {
+		if (inputRef?.current) {
+			(inputRef.current as HTMLInputElement).value = "";
 		}
 	};
 
 	const forceUpdate = () => setValue(value + 1);
 
-	const addMessage = (data) => {
+	const addMessage = (data: number): void => {
 		let Addmtype = "";
 		switch (data) {
 			case 0:
@@ -76,7 +86,7 @@ const MessageListExample = () => {
 		forceUpdate();
 	};
 
-	const randomMessage = (type) => {
+	const randomMessage = (type: string): MessageType => {
 		switch (type) {
 			case "photo":
 				return photoMessage;
@@ -96,10 +106,8 @@ const MessageListExample = () => {
 				return audioMessage;
 			case "meetingLink":
 				return meetingLinkMessage;
-			case "text":
-				return textMessage;
 			default:
-				return null;
+				return textMessage;
 		}
 	};
 

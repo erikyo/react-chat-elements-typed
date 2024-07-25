@@ -22,6 +22,6 @@
 			"@testing-library/jest-dom"
 		]
 	},
-	"include": ["./src/**/*", "./example/**/*"],
+	"include": ["./src/**/*"],
 	"exclude": ["**/__tests__/**", "dist", "./node_modules"]
 }

@@ -4,8 +4,9 @@ import type { ReactNode } from "react";
 import type React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { BsListTask } from "react-icons/bs";
-import { ChatList, SideBar } from "react-chat-elements-typed";
-import type { IChatItemProps } from "react-chat-elements-typed";
+import type { IChatItemProps } from "../../../types";
+import SideBar from "../../../SideBar/SideBar";
+import ChatList from "../../../ChatList/ChatList";
 
 const Test: ReactNode = (
 	<div
@@ -34,7 +35,7 @@ const Test: ReactNode = (
 );
 
 function ChatListExample() {
-	const photo = useCallback((size) => {
+	const photo = useCallback((size: number | undefined) => {
 		return new Identicon(String(Math.random()) + String(Math.random()), {
 			margin: 0,
 			size: size || 20,

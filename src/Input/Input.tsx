@@ -51,11 +51,10 @@ const Input: FC<IInputProps> = ({
 			if (props.onMaxLengthExceed instanceof Function)
 				props.onMaxLengthExceed();
 
-			if (props.reference) {
-				props.reference.current.value = (el.value || "").substring(
-					0,
-					props.maxlength,
-				);
+			if (props.reference?.current) {
+				(props.reference.current as HTMLInputElement).value = (
+					el.value || ""
+				).substring(0, props.maxlength);
 			}
 			return;
 		}
@@ -69,8 +68,8 @@ const Input: FC<IInputProps> = ({
 			target: props.reference?.current,
 		};
 
-		if (props.reference?.current?.value) {
-			props.reference.current.value = "";
+		if (props.reference?.current) {
+			(props.reference.current as HTMLInputElement).value = "";
 		}
 
 		onChangeEvent(current);

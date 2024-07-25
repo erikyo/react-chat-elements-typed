@@ -17,6 +17,7 @@ import type {
 	MouseEvent,
 	DragEvent,
 	UIEvent,
+	MutableRefObject,
 } from "react";
 
 /**
@@ -897,7 +898,9 @@ export interface IMeetingItemProps {
  */
 export interface IInputProps {
 	autofocus?: boolean;
-	reference?: { current: HTMLInputElement | HTMLTextAreaElement }; // sor ve 46.satır
+	reference?: MutableRefObject<
+		HTMLInputElement | HTMLTextAreaElement | undefined
+	>;
 	clear?: (clear: () => void) => void;
 	maxlength?: number;
 	maxHeight: number;

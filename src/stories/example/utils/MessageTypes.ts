@@ -1,7 +1,7 @@
 import { loremIpsum } from "lorem-ipsum";
 import { getRandomColor, photo, token } from "./common";
 import { MdOutlineVideoCall } from "react-icons/md";
-import type { MessageType } from "react-chat-elements-typed";
+import type { MessageType } from "../../../types";
 
 export const photoMessage: MessageType = {
 	type: "photo",
@@ -78,15 +78,6 @@ export const locationMessage: MessageType = {
 					message: loremIpsum({ count: 1, units: "sentences" }),
 				}
 			: undefined,
-};
-
-export const locationMessageMinimal: MessageType = {
-	type: "location",
-	data: { latitude: "", longitude: "", staticURL: "" },
-	date: undefined,
-	id: "",
-	text: "",
-	title: "",
 };
 
 export const fileMessage: MessageType = {

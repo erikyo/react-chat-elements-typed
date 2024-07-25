@@ -23,7 +23,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/detaysoft/react-chat-elements.git"
+		"url": "git+https://github.com/detaysoft/react-chat-elements-typed.git"
 	},
 	"keywords": [
 		"react",
@@ -36,9 +36,9 @@
 	],
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/detaysoft/react-chat-elements/issues"
+		"url": "https://github.com/detaysoft/react-chat-elements-typed/issues"
 	},
-	"homepage": "https://github.com/detaysoft/react-chat-elements#readme",
+	"homepage": "https://github.com/detaysoft/react-chat-elements-typed#readme",
 	"scripts": {
 		"watch": "tsup --watch",
 		"build": "npm run clear:build && tsup",
@@ -100,8 +100,8 @@
 		"classnames": "^2.5.1",
 		"date-fns": "^3.6.0",
 		"progressbar.js": "^1.1.1",
-		"react": "^17 || ^18 || ^19",
-		"react-dom": "^17 || ^18 || ^19",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
 		"react-icons": "^5.2.1"
 	},
 	"browserslist": {

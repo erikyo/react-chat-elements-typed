@@ -1,5 +1,5 @@
 import { FaComments } from "react-icons/fa";
-import { Button } from "react-chat-elements-typed";
+import Button from "../../../Button/Button";
 
 function ButtonExample() {
 	return (

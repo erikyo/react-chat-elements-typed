@@ -21,10 +21,15 @@ const componentMap = {
 	popup: PopupExample,
 };
 
-const App = () => {
-	const [showComponent, setShowComponent] = useState("");
+const Example = () => {
+	const [showComponent, setShowComponent] = useState<
+		keyof typeof componentMap | undefined
+	>(undefined);
 
 	const renderComponent = () => {
+		if (typeof showComponent === "undefined") {
+			return null;
+		}
 		const Component = componentMap[showComponent];
 		return Component ? <Component /> : null;
 	};
@@ -209,4 +214,4 @@ const App = () => {
 	);
 };
 
-export default App;
+export default Example;
