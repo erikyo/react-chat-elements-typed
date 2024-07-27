@@ -3,10 +3,14 @@
 	"version": "13.0.3",
 	"description": "Reactjs chat components",
 	"author": "Avare Kodcu <abdurrahmaneker58@gmail.com>",
-	"contributors": ["Erik <https://github.com/erikyo>"],
+	"contributors": [
+		"Erik <https://github.com/erikyo>"
+	],
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
-	"sideEffects": ["*.css"],
+	"sideEffects": [
+		"*.css"
+	],
 	"exports": {
 		".": {
 			"import": "./dist/index.mjs",
@@ -31,8 +35,7 @@
 		"chat",
 		"css",
 		"chat",
-		"components",
-		"detaysoft"
+		"components"
 	],
 	"license": "MIT",
 	"bugs": {
@@ -74,7 +77,6 @@
 		"@storybook/test": "^8.2.5",
 		"@testing-library/jest-dom": "^6.4.6",
 		"@testing-library/react": "^16.0.0",
-		"@types/identicon.js": "^2.3.4",
 		"@types/node": "^20.14.11",
 		"@types/progressbar.js": "^1.1.7",
 		"@types/react": "^18.3.3",
@@ -83,7 +85,6 @@
 		"@vitest/coverage-v8": "^2.0.4",
 		"autoprefixer": "^10.4.19",
 		"cssnano": "^7.0.4",
-		"identicon.js": "^2.3.1",
 		"jsdom": "^24.1.0",
 		"lorem-ipsum": "^2.0.8",
 		"postcss": "^8.4.39",
@@ -91,24 +92,32 @@
 		"react-test-renderer": "^18.3.1",
 		"rimraf": "^6.0.1",
 		"storybook": "^8.2.5",
+		"stylelint": "^16.8.1",
+		"stylelint-config-standard": "^36.0.1",
 		"tailwindcss": "^3.4.6",
 		"tsup": "^8.2.0",
 		"typescript": "^5.5.3",
 		"vitest": "^2.0.4"
 	},
 	"dependencies": {
+		"@dicebear/collection": "^9.2.1",
+		"@dicebear/core": "^9.2.1",
 		"classnames": "^2.5.1",
 		"date-fns": "^3.6.0",
 		"progressbar.js": "^1.1.1",
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1",
+		"react": "^17 || ^18 || ^19",
+		"react-dom": "^17 || ^18 || ^19",
 		"react-icons": "^5.2.1"
 	},
 	"optionalDependencies": {
 		"@rollup/rollup-linux-x64-gnu": "^4.14.3"
 	},
 	"browserslist": {
-		"production": [">0.2%", "not dead", "not op_mini all"],
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
 		"development": [
 			"last 1 chrome version",
 			"last 1 firefox version",
