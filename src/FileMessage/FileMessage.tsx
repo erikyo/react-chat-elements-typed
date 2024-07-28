@@ -5,16 +5,17 @@ import {
 	FaCloudDownloadAlt,
 	FaExclamationTriangle,
 } from "react-icons/fa";
-import ProgressCircle from "../Circle/Circle";
+import Loader from "../Loader/Loader";
 import type { IFileMessageProps } from "../types";
 import "./FileMessage.css";
 
 const FileMessage: FC<IFileMessageProps> = (props) => {
 	const progressOptions = {
-		strokeWidth: 5,
-		color: "#333",
-		trailColor: "#aaa",
-		trailWidth: 5,
+		strokeWidth: 6,
+		easing: "easeInOut",
+		duration: 1400,
+		color: "#0791f1",
+		trailColor: "#eee",
 		step: (
 			state: { color: string; width: string },
 			circle: {
@@ -45,7 +46,7 @@ const FileMessage: FC<IFileMessageProps> = (props) => {
 
 	return (
 		<div className="rce-mbox-file">
-			<button onClick={onClick}>
+			<button type={"button"} onClick={onClick}>
 				<div className="rce-mbox-file--icon">
 					<FaFile color="#aaa" />
 					{props?.data?.size ? (
@@ -66,8 +67,8 @@ const FileMessage: FC<IFileMessageProps> = (props) => {
 					{!error &&
 						props?.data?.status &&
 						typeof props?.data?.status.loading === "number" &&
-						props?.data?.status.loading !== 0 && (
-							<ProgressCircle
+						props?.data?.status.loading > 0 && (
+							<Loader
 								animate={!!props?.data?.status.loading}
 								className="rce-mbox-file--loading"
 								progressOptions={progressOptions}
