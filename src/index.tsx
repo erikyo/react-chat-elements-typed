@@ -24,7 +24,7 @@ import Navbar from "./Navbar/Navbar";
 import Dropdown from "./Dropdown/Dropdown";
 import SideBar from "./SideBar/SideBar";
 import Popup from "./Popup/Popup";
-import Circle from "./Circle/Circle";
+import Loader from "./Loader/Loader";
 
 /** Types exported from the library */
 export * from "./types";
@@ -54,5 +54,5 @@ export {
 	Dropdown,
 	SideBar,
 	Popup,
-	Circle,
+	Loader,
 };
