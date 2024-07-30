@@ -9,22 +9,23 @@ import type { CSSProperties } from "react";
  * @constructor
  */
 export const LeftNotch = ({
-	notchStyle = {},
+	size = 20,
+	style = {},
 	focus = false,
 }: {
-	notchStyle?: CSSProperties;
+	size?: number;
+	style?: CSSProperties;
 	focus?: boolean;
 }) => {
 	return (
 		<SVG
-			style={notchStyle}
+			style={style}
 			className={classNames("rce-mbox-left-notch", {
 				"message-focus": focus,
 			})}
-			xmlns="http://www.w3.org/2000/svg"
-			viewBox="0 0 20 20"
+			size={size}
 		>
-			<path d="M20 0v20L0 0" filter="url(#filter1)" />
+			<path d={`M${size} 0v${size}L0 0`} />
 		</SVG>
 	);
 };
