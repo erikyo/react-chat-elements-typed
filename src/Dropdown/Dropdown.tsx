@@ -6,8 +6,9 @@ import Button from "../Button/Button";
 import type { IDropdownProps } from "../types";
 
 const Dropdown: FC<IDropdownProps> = ({
-	animationPosition = "nortwest",
+	animationPosition = "northwest",
 	animationType = "default",
+	style = {},
 	...props
 }) => {
 	const [show, setShow] = useState<boolean | undefined>(undefined);
@@ -30,6 +31,7 @@ const Dropdown: FC<IDropdownProps> = ({
 					{ "dropdown-hide": show === false },
 					{ "dropdown-show": show === true },
 				)}
+				style={style}
 			>
 				<ul>
 					{props.title && (

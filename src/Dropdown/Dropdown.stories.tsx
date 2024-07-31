@@ -2,19 +2,28 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import Dropdown from "./Dropdown";
 import type { IDropdownProps } from "../types";
-import { generateAvatar, generateDropDownItem } from "../stories/utils";
+import { generateDropDownItem } from "../stories/utils";
+import { IoOpenOutline } from "react-icons/io5";
 
 const meta = {
 	component: Dropdown,
-} satisfies Meta<typeof Dropdown>;
+};
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 const Template: IDropdownProps = {
-	title: "Title",
-	animationType: "nortwest",
+	buttonProps: {
+		type: "button",
+		icon: {
+			component: <IoOpenOutline />,
+			float: "left",
+			size: 22,
+		},
+		text: "Click to open the Dropdown",
+	},
+	animationType: "northwest",
 	animationPosition: "default",
 	items: [
 		generateDropDownItem(1),
@@ -24,8 +33,11 @@ const Template: IDropdownProps = {
 	onSelect: (e) => {
 		console.log(e);
 	},
+	style: {
+		maxWidth: "200px",
+	},
 };
 
-export const Default: Story = {
+export const Default = {
 	args: Template,
 };
