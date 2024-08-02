@@ -1,13 +1,40 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import MessageList from './MessageList';
+import MessageList from "./MessageList";
+import {
+	textMessage,
+	systemMessage,
+} from "../stories/example/utils/MessageTypes.ts";
+import { randomMessage } from "../stories/example/components/MessageListExample";
 
 const meta = {
-  component: MessageList,
-} satisfies Meta<typeof MessageList>;
+	component: MessageList,
+	parameters: {
+		backgrounds: {
+			default: "dark",
+			values: [
+				{ name: "green", value: "#35A782" },
+				{ name: "dark", value: "#aaa", default: true },
+			],
+		},
+	},
+};
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default = {
+	args: {
+		downButton: true,
+		dataSource: [
+			systemMessage,
+			...Array.from({ length: 10 }).map((_, i) => {
+				return textMessage(i);
+			}),
+			...Array.from({ length: 5 }).map((_, i) => {
+				return randomMessage("random", i);
+			}),
+		],
+	},
+};

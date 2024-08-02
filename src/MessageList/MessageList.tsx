@@ -207,7 +207,7 @@ const MessageList: FC<IMessageListProps> = ({
 								onMeetingVideoLinkClick={props.onMeetingVideoLinkClick}
 								onMeetingLinkClick={(e) => onMeetingLinkClick(x, i, e)}
 								actionButtons={props.actionButtons}
-								styles={props.messageBoxStyles}
+								style={props.messageBoxStyles}
 								notchStyle={props.notchStyle}
 							/>
 						))
