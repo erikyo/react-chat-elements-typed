@@ -17,13 +17,12 @@ import MeetingLink from "../MeetingLink/MeetingLink";
 import Avatar from "../Avatar/Avatar";
 
 import { RiShareForwardFill } from "react-icons/ri";
-import { IoIosDoneAll } from "react-icons/io";
 import {
 	MdAccessTime,
 	MdCheck,
 	MdMessage,
 	MdDelete,
-	MdBlock,
+	MdOutlineEdit,
 	MdDoneAll,
 } from "react-icons/md";
 import { TiArrowForward } from "react-icons/ti";
@@ -38,8 +37,9 @@ import { RightNotch } from "../SvgIcon/rightNotch";
 const MessageBox: FC<MessageBoxType> = ({
 	focus = false,
 	notch = true,
-	styles,
+	style,
 	actionButtons,
+	notchStyle = { color: "var(--rce-color-white)" },
 	...props
 }) => {
 	const prevProps = useRef(focus);
@@ -84,7 +84,7 @@ const MessageBox: FC<MessageBoxType> = ({
 				<SystemMessage {...props} focus={focus} notch={notch} />
 			) : (
 				<div
-					style={styles}
+					style={style}
 					className={classNames(
 						positionCls,
 						{ "rce-mbox--clear-padding": thatAbsoluteTime },
@@ -92,6 +92,12 @@ const MessageBox: FC<MessageBoxType> = ({
 						{ "message-focus": focus },
 					)}
 				>
+					{notch &&
+						(props.position === "right" ? (
+							<RightNotch style={notchStyle} focus={focus} />
+						) : (
+							<LeftNotch style={notchStyle} focus={focus} />
+						))}
 					<div className="rce-mbox-body" onContextMenu={props.onContextMenu}>
 						{!props.retracted && props.forwarded === true && (
 							<div
@@ -169,9 +175,13 @@ const MessageBox: FC<MessageBoxType> = ({
 								})}
 							>
 								{props.avatar && (
-									<Avatar letterItem={props.letterItem} src={props.avatar} />
+									<Avatar
+										size={"xsmall"}
+										letterItem={props.letterItem}
+										src={props.avatar}
+									/>
 								)}
-								{props.title && <span>{props.title}</span>}
+								{props.title && !props.reply && <span>{props.title}</span>}
 							</div>
 						)}
 
@@ -188,7 +198,10 @@ const MessageBox: FC<MessageBoxType> = ({
 						) : null}
 
 						{!props.forwardedMessageText && props.reply ? (
-							<ReplyMessage onClick={props.onReplyMessageClick} {...props} />
+							<ReplyMessage
+								onClick={() => props.onReplyMessageClick}
+								{...props.reply}
+							/>
 						) : null}
 
 						{props.type === "text" && (
@@ -199,7 +212,9 @@ const MessageBox: FC<MessageBoxType> = ({
 									right: props.position === "right",
 								})}
 							>
-								{props.retracted && <MdBlock />}
+								{!props.forwardedMessageText && props.retracted && (
+									<MdOutlineEdit />
+								)}
 								{props.text}
 							</div>
 						)}
@@ -249,24 +264,37 @@ const MessageBox: FC<MessageBoxType> = ({
 								(props.dateString || format(props.date, "HH:mm"))}
 							{props.status && (
 								<span className="rce-mbox-status">
-									{props.status === "waiting" && <MdAccessTime />}
+									{props.status === "waiting" && (
+										<MdAccessTime
+											color={"var(--rce-color-gray)"}
+											style={{ fontSize: 18 }}
+										/>
+									)}
 
-									{props.status === "sent" && <MdCheck />}
+									{props.status === "sent" && (
+										<MdCheck
+											color={"var(--rce-color-light-blue)"}
+											style={{ fontSize: 18 }}
+										/>
+									)}
 
-									{props.status === "received" && <IoIosDoneAll />}
+									{props.status === "received" && (
+										<MdDoneAll
+											color={"var(--rce-color-green)"}
+											style={{ fontSize: 18 }}
+										/>
+									)}
 
-									{props.status === "read" && <MdDoneAll color="#4FC3F7" />}
+									{props.status === "read" && (
+										<MdDoneAll
+											color={"var(--rce-color-light-blue)"}
+											style={{ fontSize: 18 }}
+										/>
+									)}
 								</span>
 							)}
 						</div>
 					</div>
-
-					{notch &&
-						(props.position === "right" ? (
-							<RightNotch notchStyle={props.notchStyle} focus={focus} />
-						) : (
-							<LeftNotch notchStyle={props.notchStyle} focus={focus} />
-						))}
 				</div>
 			)}
 		</div>
