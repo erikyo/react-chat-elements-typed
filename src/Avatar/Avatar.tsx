@@ -5,9 +5,10 @@ import classNames from "classnames";
 import type { IAvatarProps } from "../types";
 
 const Avatar: FC<IAvatarProps> = ({
-	type = "default",
 	size = "default",
 	lazyLoadingImage = undefined,
+	style = {},
+	rounded = true,
 	...props
 }) => {
 	const loadedAvatars: string[] = [];
@@ -67,10 +68,11 @@ const Avatar: FC<IAvatarProps> = ({
 		<div
 			className={classNames(
 				"rce-avatar-container",
-				type,
 				size,
 				props.className,
+				rounded && "rounded",
 			)}
+			style={style}
 		>
 			{props.letterItem ? (
 				<div
