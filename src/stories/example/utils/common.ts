@@ -1,27 +1,41 @@
-import Identicon from "identicon.js";
-import { useState } from "react";
+import { loremIpsum } from "lorem-ipsum";
+import { createAvatar } from "@dicebear/core";
+import { miniavs } from "@dicebear/collection";
 
-export const photo = (size: number) => {
-	return new Identicon(String(Math.random()) + String(Math.random()), {
-		margin: 0,
-		size: size || 20,
-	}).toString();
+/**
+ * Returns a random avatar
+ */
+export const photo = () => {
+	return getAvatar(loremIpsum({ count: 1, units: "words" }));
 };
 
-export const getRandomColor = () => {
+/**
+ * Returns a random color
+ */
+export function getRandomColor() {
 	const letters = "0123456789ABCDEF";
 	let color = "#";
 	for (let i = 0; i < 6; i++) {
 		color += letters[Math.floor(Math.random() * 16)];
 	}
 	return color;
-};
+}
 
-export const token = () => {
-	return Math.floor((Math.random() * 10) % 10);
-};
+/**
+ * Returns a random token from 0 to 9
+ */
+export function token(base = 10): number {
+	return Math.floor((Math.random() * base) % base);
+}
 
-export function useForceUpdate() {
-	const [value, setValue] = useState(0);
-	return () => setValue(() => value + 1);
+/**
+ * Returns an avatar based on a name or a seed
+ * @param name the name of the avatar
+ */
+export function getAvatar(name?: string): string {
+	const avatar = createAvatar(miniavs, {
+		seed: name ?? loremIpsum({ count: 2, units: "words" }),
+	});
+
+	return avatar.toDataUri();
 }
