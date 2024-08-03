@@ -1,6 +1,6 @@
 import { loremIpsum } from "lorem-ipsum";
 import { useEffect, useState } from "react";
-import { photo, token } from "../utils/common";
+import { getAvatar, photo, token } from "../utils/common";
 import MeetingList from "../../../MeetingList/MeetingList";
 import type { IMeetingItemProps } from "../../../types";
 
@@ -21,7 +21,7 @@ function MeetingListExample() {
 				avatars: Array(token() + 2)
 					.fill(1)
 					.map((x) => ({
-						src: `data:image/png;base64,${photo(20)}`,
+						src: getAvatar(),
 						title: "react, rce",
 					})),
 				avatarFlexible: true,
@@ -34,13 +34,11 @@ function MeetingListExample() {
 	}, [meetingListArray]);
 
 	return (
-		<div>
-			<MeetingList
-				onMeetingClick={console.log}
-				onShareClick={console.log}
-				dataSource={meetingListArray}
-			/>
-		</div>
+		<MeetingList
+			onMeetingClick={console.log}
+			onShareClick={console.log}
+			dataSource={meetingListArray}
+		/>
 	);
 }
 
