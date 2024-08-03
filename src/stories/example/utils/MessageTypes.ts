@@ -1,7 +1,11 @@
 import { loremIpsum } from "lorem-ipsum";
-import { getRandomColor, photo, token } from "./common";
+import { getAvatar, getRandomColor, photo, token } from "./common";
 import { MdOutlineVideoCall } from "react-icons/md";
 import type { MessageType } from "../../../types";
+
+export const getMessageId = (index: number) => {
+	return index;
+};
 
 export const photoMessage: MessageType = {
 	type: "photo",
@@ -20,7 +24,7 @@ export const photoMessage: MessageType = {
 	status: "waiting",
 	statusTitle: token() >= 5 ? "Desktop" : "Mobile",
 	data: {
-		uri: `data:image/png;base64,${photo(150)}`,
+		uri: photo(),
 		status: {
 			click: () => {},
 			download: () => {},
@@ -53,7 +57,7 @@ export const locationMessage: MessageType = {
 	focus: true,
 	date: +new Date(),
 	dateString: "now",
-	avatar: `data:image/png;base64,${photo(20)}`,
+	avatar: getAvatar(),
 	titleColor: getRandomColor(),
 	forwarded: true,
 	replyButton: true,
@@ -72,10 +76,10 @@ export const locationMessage: MessageType = {
 	reply:
 		token() >= 1
 			? {
-					photoURL: token() >= 1 ? `data:image/png;base64,${photo(150)}` : null,
+					photoURL: token() >= 1 ? getAvatar() : undefined,
 					title: loremIpsum({ count: 2, units: "words" }),
 					titleColor: getRandomColor(),
-					message: loremIpsum({ count: 1, units: "sentences" }),
+					text: loremIpsum({ count: 1, units: "sentences" }),
 				}
 			: undefined,
 };
@@ -100,7 +104,7 @@ export const fileMessage: MessageType = {
 	focus: false,
 	date: +new Date(),
 	dateString: "now",
-	avatar: `data:image/png;base64,${photo(20)}`,
+	avatar: getAvatar(),
 	titleColor: getRandomColor(),
 	forwarded: true,
 	replyButton: true,
@@ -113,10 +117,10 @@ export const fileMessage: MessageType = {
 	reply:
 		token() >= 1
 			? {
-					photoURL: token() >= 1 ? `data:image/png;base64,${photo(150)}` : null,
+					photoURL: token() >= 1 ? getAvatar() : undefined,
 					title: loremIpsum({ count: 2, units: "words" }),
 					titleColor: getRandomColor(),
-					message: loremIpsum({ count: 1, units: "sentences" }),
+					text: loremIpsum({ count: 1, units: "sentences" }),
 				}
 			: undefined,
 };
@@ -124,23 +128,9 @@ export const fileMessage: MessageType = {
 export const systemMessage: MessageType = {
 	type: "system",
 	id: String(Math.random()),
-	position: token() >= 1 ? "right" : "left",
 	text: loremIpsum({ count: 2, units: "words" }),
 	title: loremIpsum({ count: 2, units: "words" }),
-	focus: true,
 	date: +new Date(),
-	dateString: "now",
-	avatar: `data:image/png;base64,${photo(20)}`,
-	titleColor: getRandomColor(),
-	forwarded: true,
-	replyButton: true,
-	removeButton: true,
-	status: "received",
-	statusTitle: token() >= 5 ? "Desktop" : "Mobile",
-	notch: true,
-	copiableDate: true,
-	retracted: false,
-	className: "",
 };
 
 export const spotifyMessage: MessageType = {
@@ -152,7 +142,7 @@ export const spotifyMessage: MessageType = {
 	focus: true,
 	date: +new Date(),
 	dateString: "now",
-	avatar: `data:image/png;base64,${photo(20)}`,
+	avatar: getAvatar(),
 	titleColor: getRandomColor(),
 	forwarded: true,
 	replyButton: true,
@@ -171,10 +161,10 @@ export const spotifyMessage: MessageType = {
 	reply:
 		token() >= 1
 			? {
-					photoURL: token() >= 1 ? `data:image/png;base64,${photo(150)}` : null,
+					photoURL: token() >= 1 ? photo() : undefined,
 					title: loremIpsum({ count: 2, units: "words" }),
 					titleColor: getRandomColor(),
-					message: loremIpsum({ count: 1, units: "sentences" }),
+					text: loremIpsum({ count: 1, units: "sentences" }),
 				}
 			: undefined,
 };
@@ -188,7 +178,7 @@ export const videoMessage: MessageType = {
 	focus: true,
 	date: +new Date(),
 	dateString: "now",
-	avatar: `data:image/png;base64,${photo(20)}`,
+	avatar: getAvatar(),
 	titleColor: getRandomColor(),
 	forwarded: true,
 	replyButton: true,
@@ -198,7 +188,7 @@ export const videoMessage: MessageType = {
 	forwardedMessageText: "Forwarded",
 	statusTitle: token() >= 5 ? "Desktop" : "Mobile",
 	data: {
-		uri: `data:image/png;base64,${photo(150)}`,
+		uri: getAvatar(`avatar${token()}`),
 		videoURL:
 			token() >= 1
 				? "https://www.w3schools.com/html/mov_bbb.mp4"
@@ -223,10 +213,10 @@ export const videoMessage: MessageType = {
 	reply:
 		token() >= 1
 			? {
-					photoURL: token() >= 1 ? `data:image/png;base64,${photo(150)}` : null,
+					photoURL: token() >= 1 ? photo() : undefined,
 					title: loremIpsum({ count: 2, units: "words" }),
 					titleColor: getRandomColor(),
-					message: loremIpsum({ count: 1, units: "sentences" }),
+					text: loremIpsum({ count: 1, units: "sentences" }),
 				}
 			: undefined,
 };
@@ -240,7 +230,7 @@ export const audioMessage: MessageType = {
 	focus: true,
 	date: +new Date(),
 	dateString: "now",
-	avatar: `data:image/png;base64,${photo(20)}`,
+	avatar: getAvatar(),
 	titleColor: getRandomColor(),
 	forwarded: true,
 	replyButton: true,
@@ -259,10 +249,10 @@ export const audioMessage: MessageType = {
 	reply:
 		token() >= 1
 			? {
-					photoURL: token() >= 1 ? `data:image/png;base64,${photo(150)}` : null,
+					photoURL: token() >= 1 ? photo() : undefined,
 					title: loremIpsum({ count: 2, units: "words" }),
 					titleColor: getRandomColor(),
-					message: loremIpsum({ count: 1, units: "sentences" }),
+					text: loremIpsum({ count: 1, units: "sentences" }),
 				}
 			: undefined,
 };
@@ -277,7 +267,7 @@ export const meetingMessage: MessageType = {
 	focus: true,
 	date: +new Date(),
 	dateString: "now",
-	avatar: `data:image/png;base64,${photo(20)}`,
+	avatar: getAvatar(),
 	titleColor: getRandomColor(),
 	forwarded: true,
 	replyButton: true,
@@ -292,10 +282,10 @@ export const meetingMessage: MessageType = {
 	reply:
 		token() >= 1
 			? {
-					photoURL: token() >= 1 ? `data:image/png;base64,${photo(150)}` : null,
+					photoURL: token() >= 1 ? photo() : undefined,
 					title: loremIpsum({ count: 2, units: "words" }),
 					titleColor: getRandomColor(),
-					message: loremIpsum({ count: 1, units: "sentences" }),
+					text: loremIpsum({ count: 1, units: "sentences" }),
 				}
 			: undefined,
 	subject: loremIpsum({ count: 2, units: "words" }),
@@ -321,7 +311,7 @@ export const meetingMessage: MessageType = {
 			notch: true,
 			retracted: false,
 			id: String(Math.random()),
-			avatar: `data:image/png;base64,${photo(20)}`,
+			avatar: getAvatar("avatar   1"),
 			message: loremIpsum({ count: 1, units: "sentences" }),
 			title: loremIpsum({ count: 2, units: "words" }),
 			avatarFlexible: true,
@@ -331,13 +321,13 @@ export const meetingMessage: MessageType = {
 				avatars: Array(token() + 2)
 					.fill(1)
 					.map((x) => ({
-						src: `data:image/png;base64,${photo(20)}`,
+						src: getAvatar(`avatar${token()}`),
 						title: "react, rce",
 					})),
 				avatarsLimit: 5,
 			},
 			record: {
-				avatar: `data:image/png;base64,${photo(20)}`,
+				avatar: getAvatar(`avatar${token()}`),
 				title: loremIpsum({ count: 1, units: "words" }),
 				savedBy: `Kaydeden: ${loremIpsum({ count: 2, units: "words" })}`,
 				time: new Date().toLocaleString(),
@@ -346,6 +336,10 @@ export const meetingMessage: MessageType = {
 };
 
 export const meetingLinkMessage: MessageType = {
+	data: {
+		meetingID: "https://www.w3schools.com/html/horse.mp3",
+		meetingLink: "https://www.w3schools.com/html/horse.mp3",
+	},
 	type: "meetingLink",
 	actionButtons: [
 		{
@@ -369,7 +363,7 @@ export const meetingLinkMessage: MessageType = {
 	focus: true,
 	date: +new Date(),
 	dateString: "now",
-	avatar: `data:image/png;base64,${photo(20)}`,
+	avatar: getAvatar(),
 	titleColor: getRandomColor(),
 	forwarded: true,
 	replyButton: true,
@@ -383,42 +377,63 @@ export const meetingLinkMessage: MessageType = {
 	reply:
 		token() >= 1
 			? {
-					photoURL: token() >= 1 ? `data:image/png;base64,${photo(150)}` : null,
+					photoURL: token() >= 1 ? getAvatar() : undefined,
 					title: loremIpsum({ count: 2, units: "words" }),
 					titleColor: getRandomColor(),
-					message: loremIpsum({ count: 1, units: "sentences" }),
+					text: loremIpsum({ count: 1, units: "sentences" }),
 				}
 			: undefined,
-};
+} as MessageType;
 
-export const textMessage: MessageType = {
-	type: "text",
-	id: String(Math.random()),
-	position: token() >= 1 ? "right" : "left",
-	text: loremIpsum({ count: 1, units: "sentences" }),
-	title: loremIpsum({ count: 2, units: "words" }),
-	focus: true,
-	date: +new Date(),
-	dateString: "now",
-	avatar: `data:image/png;base64,${photo(20)}`,
-	titleColor: getRandomColor(),
-	forwarded: true,
-	replyButton: true,
-	removeButton: true,
-	status: "received",
-	statusTitle: token() >= 5 ? "Desktop" : "Mobile",
-	notch: true,
-	copiableDate: true,
-	retracted: false,
-	forwardedMessageText: "Forwarded",
-	className: "",
-	reply:
-		token() >= 1
-			? {
-					photoURL: token() >= 1 ? `data:image/png;base64,${photo(150)}` : null,
-					title: loremIpsum({ count: 2, units: "words" }),
-					titleColor: getRandomColor(),
-					message: loremIpsum({ count: 1, units: "sentences" }),
-				}
-			: undefined,
+export const textMessage = (index: number): MessageType =>
+	({
+		type: "text",
+		id: String(getMessageId(index)),
+		position: token() >= 4 ? "right" : "left",
+		text: loremIpsum({ count: 1, units: "sentences" }),
+		title: loremIpsum({ count: 2, units: "words" }),
+		focus: false,
+		date: +new Date(),
+		dateString: "now",
+		avatar: getAvatar(),
+		titleColor: getRandomColor(),
+		forwarded: false,
+		replyButton: false,
+		removeButton: true,
+		status: ["sent", "received", "received", "sent"][token()],
+		statusTitle: token() >= 4 ? "Desktop" : "Mobile",
+		notch: true,
+		copiableDate: true,
+		retracted: false,
+		className: "",
+		reply:
+			token() >= 8
+				? {
+						src: token() >= 1 ? photo() : null,
+						title: loremIpsum({ count: 2, units: "words" }),
+						titleColor: getRandomColor(),
+						text: loremIpsum({ count: 1, units: "sentences" }),
+					}
+				: undefined,
+	}) as MessageType;
+
+export const chatListArray = () => {
+	const name = loremIpsum({ count: 2, units: "words" });
+	return {
+		id: String(Math.random()),
+		avatar: getAvatar(),
+		avatarFlexible: true,
+		avatarSize: "default",
+		statusColor: getRandomColor(),
+		statusColorType:
+			Math.floor((Math.random() * 100) % 2) === 1 ? "encircle" : undefined,
+		alt: name,
+		title: name,
+		date: new Date(),
+		subtitle: loremIpsum({ count: 1, units: "sentences" }),
+		unread: Math.floor((Math.random() * 10) % 3),
+		muted: Math.floor((Math.random() * 10) % 2) === 1,
+		showMute: Math.floor((Math.random() * 10) % 2) === 1,
+		showVideoCall: Math.floor((Math.random() * 10) % 2) === 1,
+	};
 };
