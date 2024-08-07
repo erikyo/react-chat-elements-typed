@@ -3,6 +3,10 @@ node_modules
 # source folder
 src
 
+# build related
+tsup.config.ts
+tailwind.config.js
+
 # testing
 coverage
 tests
@@ -17,3 +21,6 @@ example
 .DS_Store
 npm-debug.log*
 .idea
+
+#Storybook
+.storybook
