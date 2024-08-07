@@ -1,16 +1,12 @@
 {
 	"name": "react-chat-elements-typed",
-	"version": "13.0.3",
+	"version": "13.0.4",
 	"description": "Reactjs chat components",
 	"author": "Avare Kodcu <abdurrahmaneker58@gmail.com>",
-	"contributors": [
-		"Erik <https://github.com/erikyo>"
-	],
+	"contributors": ["Erik <https://github.com/erikyo>"],
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
-	"sideEffects": [
-		"*.css"
-	],
+	"sideEffects": ["*.css"],
 	"exports": {
 		".": {
 			"import": "./dist/index.mjs",
@@ -29,14 +25,7 @@
 		"type": "git",
 		"url": "git+https://github.com/detaysoft/react-chat-elements-typed.git"
 	},
-	"keywords": [
-		"react",
-		"reactjs",
-		"chat",
-		"css",
-		"chat",
-		"components"
-	],
+	"keywords": ["react", "reactjs", "chat", "css", "chat", "components"],
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/detaysoft/react-chat-elements-typed/issues"
@@ -113,11 +102,7 @@
 		"@rollup/rollup-linux-x64-gnu": "^4.14.3"
 	},
 	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
+		"production": [">0.2%", "not dead", "not op_mini all"],
 		"development": [
 			"last 1 chrome version",
 			"last 1 firefox version",
