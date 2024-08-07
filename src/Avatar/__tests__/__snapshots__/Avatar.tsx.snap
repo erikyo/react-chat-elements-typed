@@ -3,7 +3,7 @@
 exports[`Avatar component > should render without issues 1`] = `
 <div>
   <div
-    class="rce-avatar-container default default"
+    class="rce-avatar-container default rounded"
   >
     <img
       class="rce-avatar"

@@ -3,7 +3,8 @@
 exports[`Avatar component > should render without issues 1`] = `
 <div>
   <div
-    class="rce-navbar light"
+    class="rce-navbar default"
+    style="width: 100%;"
   >
     <div
       class="rce-navbar-item rce-navbar-item__left"
