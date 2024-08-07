@@ -3,9 +3,7 @@ import type { StoryObj } from "@storybook/react";
 import MessageBox from "./MessageBox";
 import type { MessageBoxType } from "../types";
 import type { FC } from "react";
-import { photo } from "../stories/example/utils/common";
-import Button from "../Button/Button";
-import { getAvatar } from "../stories/example/utils/MessageTypes";
+import { getAvatar, photo } from "../stories/example/utils/common";
 
 const meta = {
 	component: MessageBox satisfies FC<MessageBoxType>,
