@@ -3,7 +3,7 @@ import type { LegacyRef, FC, SyntheticEvent } from "react";
 import { useEffect } from "react";
 import "./Input.css";
 import classNames from "classnames";
-import type { IInputProps } from "../types.js";
+import type { IInputProps } from "../types";
 
 const Input: FC<IInputProps> = ({
 	type = "text",
@@ -12,6 +12,8 @@ const Input: FC<IInputProps> = ({
 	maxHeight = 200,
 	autoHeight = true,
 	autofocus = false,
+	placeholder = "Type here...",
+	style = {},
 	...props
 }) => {
 	useEffect(() => {
@@ -27,7 +29,6 @@ const Input: FC<IInputProps> = ({
 		target,
 	}: {
 		ev?: SyntheticEvent;
-		FAKE_EVENT?: boolean;
 		target?: HTMLInputElement | HTMLTextAreaElement;
 	}) => {
 		const el = target as HTMLInputElement;
@@ -51,11 +52,10 @@ const Input: FC<IInputProps> = ({
 			if (props.onMaxLengthExceed instanceof Function)
 				props.onMaxLengthExceed();
 
-			if (props.reference) {
-				props.reference.current.value = (el.value || "").substring(
-					0,
-					props.maxlength,
-				);
+			if (props.reference?.current) {
+				(props.reference.current as HTMLInputElement).value = (
+					el.value || ""
+				).substring(0, props.maxlength);
 			}
 			return;
 		}
@@ -65,19 +65,21 @@ const Input: FC<IInputProps> = ({
 
 	const clear = () => {
 		const current = {
-			FAKE_EVENT: true,
 			target: props.reference?.current,
 		};
 
-		if (props.reference?.current?.value) {
-			props.reference.current.value = "";
+		if (props.reference?.current) {
+			(props.reference.current as HTMLInputElement).value = "";
 		}
 
 		onChangeEvent(current);
 	};
 
 	return (
-		<div className={classNames("rce-container-input", props.className)}>
+		<div
+			className={classNames("rce-container-input", props.className)}
+			style={style}
+		>
 			{props.leftButtons && (
 				<div className="rce-input-buttons">{props.leftButtons}</div>
 			)}
@@ -86,7 +88,7 @@ const Input: FC<IInputProps> = ({
 					ref={props.reference as LegacyRef<HTMLInputElement>}
 					type={type}
 					className={classNames("rce-input")}
-					placeholder={props.placeholder}
+					placeholder={placeholder}
 					defaultValue={props.defaultValue}
 					style={props.inputStyle}
 					onChange={(e) =>
@@ -101,7 +103,6 @@ const Input: FC<IInputProps> = ({
 					onSubmit={props.onSubmit}
 					onReset={props.onReset}
 					onKeyDown={props.onKeyDown}
-					onKeyPress={props.onKeyPress}
 					onKeyUp={props.onKeyUp}
 					value={props.value}
 				/>
@@ -109,7 +110,7 @@ const Input: FC<IInputProps> = ({
 				<textarea
 					ref={props.reference as LegacyRef<HTMLTextAreaElement>}
 					className={classNames("rce-input", "rce-input-textarea")}
-					placeholder={props.placeholder}
+					placeholder={placeholder}
 					defaultValue={props.defaultValue}
 					style={props.inputStyle}
 					onChange={(e) =>

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import React from "react";
-import AudioMessage from "../AudioMessage.js";
+import AudioMessage from "../AudioMessage";
 import { render } from "@testing-library/react";
 
 describe("AudioMessage component", () => {

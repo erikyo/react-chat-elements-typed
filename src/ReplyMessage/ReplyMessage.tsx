@@ -3,16 +3,16 @@ import type { FC } from "react";
 import "./ReplyMessage.css";
 
 import classNames from "classnames";
-import type { IReplyMessageProps } from "../types.js";
+import type { IReplyMessageProps } from "../types";
 
-const ReplyMessage: FC<IReplyMessageProps> = ({ onClick, ...props }) => {
+const ReplyMessage: FC<IReplyMessageProps> = (props) => {
 	return (
 		<div
 			className={classNames("rce-mbox-reply", {
 				"rce-mbox-reply-border": !!props.titleColor,
 			})}
 			style={{ ...(props.titleColor && { borderColor: props.titleColor }) }}
-			onClick={onClick}
+			onClick={props.onClick}
 			onKeyDown={console.log}
 		>
 			<div className="rce-mbox-reply-left">
@@ -20,9 +20,9 @@ const ReplyMessage: FC<IReplyMessageProps> = ({ onClick, ...props }) => {
 					style={{ ...(props.titleColor && { color: props.titleColor }) }}
 					className="rce-mbox-reply-owner"
 				>
-					{props.title || "Unknown"}
+					{props.title}
 				</div>
-				<div className="rce-mbox-reply-message">{props.message || "..."}</div>
+				<div className="rce-mbox-reply-message">{props.text || "..."}</div>
 			</div>
 			{props.photoURL && (
 				<div className="rce-mbox-reply-right">

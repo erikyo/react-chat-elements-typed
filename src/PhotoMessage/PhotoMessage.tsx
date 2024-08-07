@@ -4,8 +4,8 @@ import type { FC } from "react";
 import "./PhotoMessage.css";
 
 import { FaCloudDownloadAlt, FaExclamationTriangle } from "react-icons/fa";
-import ProgressCircle from "../Circle/Circle.js";
-import type { IPhotoMessageProps, IProgressOptions } from "../types.js";
+import Loader from "../Loader/Loader";
+import type { IPhotoMessageProps, IProgressOptions } from "../types";
 
 const PhotoMessage: FC<IPhotoMessageProps> = ({
 	text,
@@ -80,7 +80,7 @@ const PhotoMessage: FC<IPhotoMessageProps> = ({
 						)}
 						{typeof data?.status.loading === "number" &&
 							data?.status.loading !== 0 && (
-								<ProgressCircle
+								<Loader
 									animate={data?.status.loading ?? false}
 									progressOptions={progressOptions}
 									className="rce-mbox-photo--img__block-item"

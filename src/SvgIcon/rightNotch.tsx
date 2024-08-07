@@ -3,20 +3,19 @@ import classNames from "classnames";
 import type { CSSProperties } from "react";
 
 export const RightNotch = ({
-	notchStyle = {},
+	style = {},
 	focus = false,
 }: {
-	notchStyle?: CSSProperties;
+	style?: CSSProperties;
 	focus?: boolean;
 }) => {
 	return (
 		<SVG
-			style={notchStyle}
+			style={style}
 			className={classNames("rce-mbox-right-notch", {
 				"message-focus": focus,
 			})}
-			xmlns="http://www.w3.org/2000/svg"
-			viewBox="0 0 20 20"
+			size={20}
 		>
 			<path d="M0 0v20L20 0" />
 		</SVG>

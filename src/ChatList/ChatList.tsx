@@ -2,12 +2,8 @@ import type { FC, Dispatch, SetStateAction, MouseEvent } from "react";
 import classNames from "classnames";
 import "./ChatList.css";
 
-import ChatItem from "../ChatItem/ChatItem.js";
-import type {
-	IChatListProps,
-	ChatListEvent,
-	ChatListElement,
-} from "../types.js";
+import ChatItem from "../ChatItem/ChatItem";
+import type { IChatListProps, ChatListEvent, ChatListElement } from "../types";
 
 const list: SetStateAction<boolean>[] = [];
 

@@ -9,11 +9,11 @@ import { MdMoreHoriz } from "react-icons/md";
 
 import { format } from "date-fns";
 
-import Avatar from "../Avatar/Avatar.js";
-import Dropdown from "../Dropdown/Dropdown.js";
+import Avatar from "../Avatar/Avatar";
+import Dropdown from "../Dropdown/Dropdown";
 
 import classNames from "classnames";
-import type { IMeetingMessageProps, MeetingMessageEvent } from "../types.js";
+import type { IMeetingMessageProps, MeetingMessageEvent } from "../types";
 
 const MeetingMessage: FC<IMeetingMessageProps> = ({
 	date,

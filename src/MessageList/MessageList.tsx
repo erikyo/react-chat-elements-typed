@@ -10,7 +10,7 @@ import {
 } from "react";
 import "./MessageList.css";
 
-import MessageBox from "../MessageBox/MessageBox.js";
+import MessageBox from "../MessageBox/MessageBox";
 
 import classNames from "classnames";
 import { FaChevronDown } from "react-icons/fa";
@@ -19,7 +19,7 @@ import type {
 	MeetingMessageEvent,
 	MessageListEvent,
 	MessageType,
-} from "../types.js";
+} from "../types";
 
 const MessageList: FC<IMessageListProps> = ({
 	reference,
@@ -207,7 +207,7 @@ const MessageList: FC<IMessageListProps> = ({
 								onMeetingVideoLinkClick={props.onMeetingVideoLinkClick}
 								onMeetingLinkClick={(e) => onMeetingLinkClick(x, i, e)}
 								actionButtons={props.actionButtons}
-								styles={props.messageBoxStyles}
+								style={props.messageBoxStyles}
 								notchStyle={props.notchStyle}
 							/>
 						))

@@ -1,11 +1,12 @@
-import Identicon from "identicon.js";
 import { loremIpsum } from "lorem-ipsum";
 import type { ReactNode } from "react";
 import type React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { BsListTask } from "react-icons/bs";
-import { ChatList, SideBar } from "react-chat-elements-typed";
-import type { IChatItemProps } from "react-chat-elements-typed";
+import type { IChatItemProps } from "../../../types";
+import SideBar from "../../../SideBar/SideBar";
+import ChatList from "../../../ChatList/ChatList";
+import { getAvatar, token } from "../utils/common";
 
 const Test: ReactNode = (
 	<div
@@ -34,17 +35,14 @@ const Test: ReactNode = (
 );
 
 function ChatListExample() {
-	const photo = useCallback((size) => {
-		return new Identicon(String(Math.random()) + String(Math.random()), {
-			margin: 0,
-			size: size || 20,
-		}).toString();
+	const photo = useCallback((size: number | undefined) => {
+		return getAvatar(loremIpsum({ count: 1, units: "words" }));
 	}, []);
 
 	const [chatListArray, setChatListArray] = useState<IChatItemProps[]>([
 		{
 			id: String(Math.random()),
-			avatar: `data:image/png;base64,${photo(20)}`,
+			avatar: getAvatar(`avatar${Math.random().toString()}`),
 			avatarFlexible: true,
 			statusColor: "lightgreen",
 			statusColorType:
@@ -53,10 +51,10 @@ function ChatListExample() {
 			title: loremIpsum({ count: 2, units: "words" }),
 			date: new Date(),
 			subtitle: loremIpsum({ count: 1, units: "sentences" }),
-			unread: Math.floor((Math.random() * 10) % 3),
-			muted: Math.floor((Math.random() * 10) % 2) === 1,
-			showMute: Math.floor((Math.random() * 10) % 2) === 1,
-			showVideoCall: Math.floor((Math.random() * 10) % 2) === 1,
+			unread: token(10),
+			muted: token(2) > 1,
+			showMute: token(2) > 1,
+			showVideoCall: token(2) > 1,
 			customStatusComponents: [Test],
 		} as IChatItemProps,
 	]);
@@ -67,7 +65,7 @@ function ChatListExample() {
 		const getRandomLiteChat = () => {
 			return {
 				id: String(Math.random()),
-				avatar: `data:image/png;base64,${photo(20)}`,
+				avatar: getAvatar(`avatar${Math.random().toString()}`),
 				avatarFlexible: true,
 				title: loremIpsum({ count: 2, units: "words" }),
 				subtitle: loremIpsum({ count: 1, units: "sentences" }),
@@ -79,52 +77,54 @@ function ChatListExample() {
 		const getRandomChat = (nested = true) => {
 			return {
 				id: String(Math.random()),
-				avatar: `data:image/png;base64,${photo(20)}`,
+				avatar: getAvatar(`avatar${Math.random().toString()}`),
 				avatarFlexible: true,
 				statusColor: "lightgreen",
 				statusColorType:
 					Math.floor((Math.random() * 100) % 2) === 1 ? "encircle" : undefined,
 				alt: loremIpsum({ count: 2, units: "words" }),
 				title: loremIpsum({ count: 2, units: "words" }),
-				date: new Date(),
 				subtitle: loremIpsum({ count: 1, units: "sentences" }),
+				date: new Date(),
 				unread: Math.floor((Math.random() * 10) % 3),
 				muted: Math.floor((Math.random() * 10) % 2) === 1,
 				showMute: Math.floor((Math.random() * 10) % 2) === 1,
 				showVideoCall: Math.floor((Math.random() * 10) % 2) === 1,
 				customStatusComponents: [Test],
-				subList: nested && [getRandomLiteChat(), getRandomLiteChat()],
 			} as IChatItemProps;
 		};
 
 		const randomChat: IChatItemProps = getRandomChat();
 		setChatListArray([...chatListArray, randomChat]);
-	}, [chatListArray, photo]);
+	}, [chatListArray]);
 
 	return (
-		<div className="chat-list">
-			<SideBar
-				data={{
-					center: (
-						<ChatList
-							dataSource={chatListArray}
-							onClickMute={({ ...props }) => console.log(props)}
-							onClickVideoCall={({ ...props }) => console.log(props)}
-							id={""}
-							lazyLoadingImage={""}
-							onDragEnter={(e, id) => console.log(e, id, "onDragEnter")}
-							onDragLeave={(e, id) => console.log(e, id, "onDragLeave")}
-							onDrop={(e, id) => console.log(e, id, "onDrop")}
-							onDragComponent={
-								<div className="on-drag-mlist">
-									{loremIpsum({ count: 4, units: "words" })}
-								</div>
-							}
-						/>
-					),
-				}}
-			/>
-		</div>
+		<SideBar
+			type={"default"}
+			style={{
+				width: "300px",
+				height: "100vh",
+				padding: "0px",
+			}}
+			data={{
+				top: (
+					<ChatList
+						id={"chatlist"}
+						dataSource={chatListArray}
+						onClickMute={({ ...props }) => console.log(props)}
+						onClickVideoCall={({ ...props }) => console.log(props)}
+						onDragEnter={(e, id) => console.log(e, id, "onDragEnter")}
+						onDragLeave={(e, id) => console.log(e, id, "onDragLeave")}
+						onDrop={(e, id) => console.log(e, id, "onDrop")}
+						onDragComponent={
+							<div className="on-drag-mlist">
+								{loremIpsum({ count: 4, units: "words" })}
+							</div>
+						}
+					/>
+				),
+			}}
+		/>
 	);
 }
 

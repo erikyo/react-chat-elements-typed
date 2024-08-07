@@ -1,0 +1,51 @@
+/**
+ * Tailwind base CSS
+ */
+@import url("tailwind.css");
+
+:root {
+    --rce-color-white: #fff;
+    --rce-color-blue: #3979aa;
+    --rce-color-light-blue: #0090ff;
+    --rce-color-purple: #6b46c1;
+    --rce-color-red: #e83d0e;
+    --rce-color-orange: #ff8300;
+    --rce-color-yellow: #ffd500;
+    --rce-color-green: #00a859;
+    --rce-color-slate: #1e293b;
+    --rce-color-black: #000;
+    --rce-color-light-gray: #f4f4f4;
+    --rce-color-gray: #575757;
+    --rce-color-primary: var(--rce-color-green);
+    --rce-color-secondary: var(--rce-color-blue);
+    --rce-color-dark: var(--rce-color-slate);
+    --rce-mbox-dark-bg: var(--rce-color-slate);
+    --rce-mbox-light-bg: var(--rce-color-light-gray);
+}
+
+/**
+ * Components Styles
+ */
+@import url("./MessageBox/MessageBox.css");
+@import url("./ChatItem/ChatItem.css");
+@import url("./ChatList/ChatList.css");
+@import url("./MessageList/MessageList.css");
+@import url("./MeetingItem/MeetingItem.css");
+@import url("./MeetingList/MeetingList.css");
+@import url("./SystemMessage/SystemMessage.css");
+@import url("./ReplyMessage/ReplyMessage.css");
+@import url("./MeetingMessage/MeetingMessage.css");
+@import url("./AudioMessage/AudioMessage.css");
+@import url("./FileMessage/FileMessage.css");
+@import url("./SpotifyMessage/SpotifyMessage.css");
+@import url("./VideoMessage/VideoMessage.css");
+@import url("./PhotoMessage/PhotoMessage.css");
+@import url("./MeetingLink/MeetingLink.css");
+@import url("./Input/Input.css");
+@import url("./Button/Button.css");
+@import url("./Avatar/Avatar.css");
+@import url("./Navbar/Navbar.css");
+@import url("./Dropdown/Dropdown.css");
+@import url("./SideBar/SideBar.css");
+@import url("./Popup/Popup.css");
+

@@ -17,41 +17,43 @@ import type {
 	MouseEvent,
 	DragEvent,
 	UIEvent,
+	MutableRefObject,
 } from "react";
 
+type StatusType = "waiting" | "sent" | "received" | "read";
 /**
  * IChatItemProps Interface
  *
- * @prop id The Chat Item's id and required.
- * @prop avatar The Chat Item's avatar and required.
- * @prop unread The Chat Item's message unread and optional.
- * @prop className The Chat Item's component className and optional.
- * @prop avatarFlexible The Chat Item's avatar avatarFlexible and optional.
- * @prop alt The Chat Item's avatar alt and optional.
- * @prop title The Chat Item's title and optional.
- * @prop subtitle The Chat Item's subtitle and optional.
- * @prop date The Chat Item's message date and optional.
- * @prop dateString The Chat Item's message dateString and optional.
- * @prop statusColor The Chat Item's statusColor and optional.
- * @prop statusText The Chat Item's statusText and optional.
- * @prop lazyLoadingImage The Chat Item's lazyLoadingImage and optional.
- * @prop muted The Chat Item's muted and optional.
- * @prop showMute The Chat Item's showMute icon and optional.
- * @prop showVideoCall The Chat Item's showVideoCall icon and optional.
- * @prop onAvatarError The Chat Item's avatar function onAvatarError(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onContextMenu The Chat Item's function onContextMenu(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onClick The Chat Item's function onClick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onClickMute The Chat Item's mute icon function onClickMute(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onClickVideoCall The Chat Item's videoCall icon function onClickVideoCall(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onDragOver The Chat Item's drag over function and optional.
- * @prop onDragEnter The Chat Item's drag enter function and optional.
- * @prop onDrop The Chat Item's drop function and optional.
- * @prop onDragLeave The Chat Item's drop leave function and optional.
- * @prop onDragComponent The Chat Item's drag component and optional.
- * @prop letterItem The Chat Item's avatar letterItem and optional.
- * @prop subList The Chat Item's sub chat items and optional.
- * @prop onExpandItem The Chat Item's expand function onExpandItem(id: string) and optional.
- * @prop expanded The Chat Item's expanded and optional.
+ * @prop id The Chat Item's id.
+ * @prop avatar The Chat Item's avatar.
+ * @prop unread The Chat Item's message unread.
+ * @prop className The Chat Item's component className.
+ * @prop avatarFlexible The Chat Item's avatar avatarFlexible.
+ * @prop alt The Chat Item's avatar alt.
+ * @prop title The Chat Item's title.
+ * @prop subtitle The Chat Item's subtitle.
+ * @prop date The Chat Item's message date.
+ * @prop dateString The Chat Item's message dateString.
+ * @prop statusColor The Chat Item's statusColor.
+ * @prop statusText The Chat Item's statusText.
+ * @prop lazyLoadingImage The Chat Item's lazyLoadingImage.
+ * @prop muted The Chat Item's muted.
+ * @prop showMute The Chat Item's showMute icon.
+ * @prop showVideoCall The Chat Item's showVideoCall icon.
+ * @prop onAvatarError The Chat Item's avatar function onAvatarError(event: MouseEvent<T, MouseEvent>).
+ * @prop onContextMenu The Chat Item's function onContextMenu(event: MouseEvent<T, MouseEvent>).
+ * @prop onClick The Chat Item's function onClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onClickMute The Chat Item's mute icon function onClickMute(event: MouseEvent<T, MouseEvent>).
+ * @prop onClickVideoCall The Chat Item's videoCall icon function onClickVideoCall(event: MouseEvent<T, MouseEvent>).
+ * @prop onDragOver The Chat Item's drag over function.
+ * @prop onDragEnter The Chat Item's drag enter function.
+ * @prop onDrop The Chat Item's drop function.
+ * @prop onDragLeave The Chat Item's drop leave function.
+ * @prop onDragComponent The Chat Item's drag component.
+ * @prop letterItem The Chat Item's avatar letterItem.
+ * @prop subList The Chat Item's sub chat items.
+ * @prop onExpandItem The Chat Item's expand function onExpandItem(id: string).
+ * @prop expanded The Chat Item's expanded.
  */
 export interface IChatItemProps {
 	id: string;
@@ -93,8 +95,8 @@ export interface IChatItemProps {
 /**
  * ILetterItem Interface
  *
- * @prop id The LetterItem's id and required.
- * @prop letter The Letter Item's letter is a component and optional.
+ * @prop id The LetterItem's id.
+ * @prop letter The Letter Item's letter is a component.
  */
 export interface ILetterItem {
 	id: string;
@@ -104,21 +106,21 @@ export interface ILetterItem {
 /**
  * IChatListProps Interface
  *
- * @prop id The ChatList's id and required.
- * @prop className The Chat List's component className and optional.
- * @prop lazyLoadingImage The Chat List's lazyLoadingImage and optional.
- * @prop cmpRef The Chat List's cmpRef and optional.
- * @prop onAvatarError The Chat Item's function onAvatarError(item: IChatItemProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onContextMenu The Chat Item's function onContextMenu(item: IChatItemProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onClick The Chat Item's function onClick(item: IChatItemProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onClickMute The Chat Item's function onClickMute(item: IChatItemProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onClickVideoCall The Chat Item's function onClickVideoCall(item: IChatItemProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onDragOver The Chat Item's drag over function and optional.
- * @prop onDragEnter The Chat Item's drag enter function and optional.
- * @prop onDrop The Chat Item's drop function and optional.
- * @prop onDragLeave The Chat Item's drop leave function and optional.
- * @prop onDragComponent The Chat Item's drag component and optional.
- * @prop onExpand The Chat Items expand function and optional.
+ * @prop id The ChatList's id.
+ * @prop className The Chat List's component className.
+ * @prop lazyLoadingImage The Chat List's lazyLoadingImage.
+ * @prop cmpRef The Chat List's cmpRef.
+ * @prop onAvatarError The Chat Item's function onAvatarError(item: IChatItemProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onContextMenu The Chat Item's function onContextMenu(item: IChatItemProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onClick The Chat Item's function onClick(item: IChatItemProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onClickMute The Chat Item's function onClickMute(item: IChatItemProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onClickVideoCall The Chat Item's function onClickVideoCall(item: IChatItemProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onDragOver The Chat Item's drag over function.
+ * @prop onDragEnter The Chat Item's drag enter function.
+ * @prop onDrop The Chat Item's drop function.
+ * @prop onDragLeave The Chat Item's drop leave function.
+ * @prop onDragComponent The Chat Item's drag component.
+ * @prop onExpand The Chat Items expand function.
  */
 export interface IChatListProps {
 	id: string;
@@ -171,26 +173,26 @@ export type ChatListElement = (
 /**
  * IMessage Interface
  *
- * @prop id The Message's id and required.
- * @prop position The Message's position and required.
- * @prop text The Message's text and required.
- * @prop title The Message's title and required.
- * @prop focus The Message's focus and required.
- * @prop date The Message's date and required.
- * @prop dateString The Message's dateString and optional.
- * @prop avatar The Message's avatar image and optional.
- * @prop titleColor The Message's titleColor and required.
- * @prop forwarded The Message's forwarded and required.
- * @prop replyButton The Message's replyButton icon and required.
- * @prop removeButton The Message's removeButton icon and required.
- * @prop status The Message's status icon and required.
- * @prop statusTitle The Message's statusTitle and required.
- * @prop notch The Message's notch and required.
- * @prop copiableDate The Message's copiableDate and optional.
- * @prop retracted The Message's retracted and required.
- * @prop className The Message's className and optional.
- * @prop letterItem The Message's letterItem is a ILetterItem and optional.
- * @prop reply The Message's reply and optional.
+ * @prop id The Message's id.
+ * @prop position The Message's position.
+ * @prop text The Message's text.
+ * @prop title The Message's title.
+ * @prop focus The Message's focus.
+ * @prop date The Message's date.
+ * @prop dateString The Message's dateString.
+ * @prop avatar The Message's avatar image.
+ * @prop titleColor The Message's titleColor.
+ * @prop forwarded The Message's forwarded.
+ * @prop replyButton The Message's replyButton icon.
+ * @prop removeButton The Message's removeButton icon.
+ * @prop status The Message's status icon.
+ * @prop statusTitle The Message's title for the status (the item that holds the status, date and time)
+ * @prop notch The Message's notch.
+ * @prop copiableDate The Message's copiableDate.
+ * @prop retracted The Message's retracted.
+ * @prop className The Message's className.
+ * @prop letterItem The Message's letterItem is a ILetterItem.
+ * @prop reply The Message's reply.
  */
 export interface IMessage {
 	id?: string;
@@ -205,14 +207,14 @@ export interface IMessage {
 	forwarded?: boolean;
 	replyButton?: boolean;
 	removeButton?: boolean;
-	status?: "waiting" | "sent" | "received" | "read";
+	status?: StatusType;
 	statusTitle?: string;
 	notch?: boolean;
 	copiableDate?: boolean;
 	retracted?: boolean;
 	className?: string;
 	letterItem?: ILetterItem;
-	reply?: IReplyMessage | unknown;
+	reply?: IReplyMessage;
 	type: string;
 	forwardedMessageText?: string;
 	actionButtons?: MeetingLinkActionButtons[] | undefined;
@@ -221,11 +223,11 @@ export interface IMessage {
 /**
  * IPhotoMessage Interface
  *
- * @prop type The Photo Message's type is "photo" and required.
- * @prop width The Photo Message's width and optional.
- * @prop height The Photo Message's height and optional.
- * @prop uri The Photo Message's uri and required.
- * @prop alt The Photo Message's alt and optional.
+ * @prop type The Photo Message's type is "photo".
+ * @prop width The Photo Message's width.
+ * @prop height The Photo Message's height.
+ * @prop uri The Photo Message's uri.
+ * @prop alt The Photo Message's alt.
  */
 export interface IPhotoMessage extends IMessage {
 	data?: {
@@ -244,12 +246,12 @@ export interface IPhotoMessage extends IMessage {
 /**
  * IPhotoMessageProps Interface
  *
- * @prop type The Photo Message's type is "photo" and required.
- * @prop message The Photo Message's message is a IPhotoMessage and required.
- * @prop onDownload The Photo Message's function onDownload(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onOpen The Photo Message's function onOpen(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onLoad The Photo Message's function onLoad(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onError The Photo Message's function onError(event: MouseEvent<T, MouseEvent>) and optional.
+ * @prop type The Photo Message's type is "photo".
+ * @prop message The Photo Message's message is a IPhotoMessage.
+ * @prop onDownload The Photo Message's function onDownload(event: MouseEvent<T, MouseEvent>).
+ * @prop onOpen The Photo Message's function onOpen(event: MouseEvent<T, MouseEvent>).
+ * @prop onLoad The Photo Message's function onLoad(event: MouseEvent<T, MouseEvent>).
+ * @prop onError The Photo Message's function onError(event: MouseEvent<T, MouseEvent>).
  */
 export interface IPhotoMessageProps extends IPhotoMessage {
 	onDownload?: MouseEventHandler;
@@ -261,21 +263,23 @@ export interface IPhotoMessageProps extends IPhotoMessage {
 /**
  * IReplyMessage Interface extends IMessage
  *
- * @prop type The Reply Message's type is "reply" and required.
- * @prop photoURL The Reply Message's photoURL and optional.
- * @prop message The Reply Message's message and optional.
+ * @prop type The Reply Message's type is "reply".
+ * @prop photoURL The Reply Message's photoURL.
+ * @prop message The Reply Message's message.
  */
-export interface IReplyMessage extends IMessage {
-	message?: string;
+export interface IReplyMessage {
+	text?: string;
 	photoURL?: string;
+	title?: string;
+	titleColor?: string;
 }
 
 /**
  * IReplyMessageProps Interface
  *
- * @prop type The Reply Message's type is "reply" and required.
- * @prop message The Reply Message's message is a IReplyMessage and required.
- * @prop onClick The Reply Message's function onClick(event: MouseEvent<T, MouseEvent>) and optional.
+ * @prop type The Reply Message's type is "reply".
+ * @prop message The Reply Message's message is a IReplyMessage.
+ * @prop onClick The Reply Message's function onClick(event: MouseEvent<T, MouseEvent>).
  */
 export interface IReplyMessageProps extends IReplyMessage {
 	onClick?: MouseEventHandler;
@@ -284,11 +288,11 @@ export interface IReplyMessageProps extends IReplyMessage {
 /**
  * IMeetingMessage Interface extens IMessage
  *
- * @prop type The Meeting Message's type is "meeting" and required.
- * @prop message The Meeting Message's message and optional.
- * @prop avatarFlexible The Meeting Message's avatarFlexible and optional.
- * @prop event The Meeting Message's event and optional.
- * @prop record The Meeting Message's record and optional.
+ * @prop type The Meeting Message's type is "meeting".
+ * @prop message The Meeting Message's message.
+ * @prop avatarFlexible The Meeting Message's avatarFlexible.
+ * @prop event The Meeting Message's event.
+ * @prop record The Meeting Message's record.
  */
 export interface IMeetingMessage extends IMessage {
 	message?: string;
@@ -309,19 +313,19 @@ export interface IMeetingMessage extends IMessage {
 /**
  * IMeetingMessageProps Interface
  *
- * @prop type The Meeting Message's type is "meeting" and required.
- * @prop subject The Meeting Message's subject and optional.
- * @prop title The Meeting Message's title and optional.
- * @prop date The Meeting Message's date and optional.
- * @prop dateString The Meeting Message's dateString and optional.
- * @prop collapseTitle The Meeting Message's collapseTitle and optional.
- * @prop participants The Meeting Message's participants and optional.
- * @prop message The Meeting Message's message is a IMeetingMessage and required.
- * @prop dataSource The Meeting Message's dataSource is a IMeetingMessage array and optional.
- * @prop participantsLimit The Meeting Message's participantsLimit and optional.
- * @prop onclick The Meeting Message's function onclick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onMeetingTitleClick The Meeting Message's function onMeetingTitleClick(item: IMeetingMessage, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onMeetingVideoLinkClick The Meeting Message's function onMeetingVideoLinkClick(item: IMeetingMessage, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
+ * @prop type The Meeting Message's type is "meeting".
+ * @prop subject The Meeting Message's subject.
+ * @prop title The Meeting Message's title.
+ * @prop date The Meeting Message's date.
+ * @prop dateString The Meeting Message's dateString.
+ * @prop collapseTitle The Meeting Message's collapseTitle.
+ * @prop participants The Meeting Message's participants.
+ * @prop message The Meeting Message's message is a IMeetingMessage.
+ * @prop dataSource The Meeting Message's dataSource is a IMeetingMessage array.
+ * @prop participantsLimit The Meeting Message's participantsLimit.
+ * @prop onclick The Meeting Message's function onclick(event: MouseEvent<T, MouseEvent>).
+ * @prop onMeetingTitleClick The Meeting Message's function onMeetingTitleClick(item: IMeetingMessage, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onMeetingVideoLinkClick The Meeting Message's function onMeetingVideoLinkClick(item: IMeetingMessage, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
  * @prop onMeetingMoreSelect The Meeting Message's function onMeetingMoreSelect  and optional.
  */
 export interface IMeetingMessageProps extends IMeetingMessage {
@@ -332,15 +336,7 @@ export interface IMeetingMessageProps extends IMeetingMessage {
 		id?: number | string;
 		title?: string;
 	}>;
-	moreItems?: Array<{
-		text?: string;
-		icon?: {
-			component?: JSX.Element;
-			float?: string;
-			color?: string;
-			size?: number;
-		};
-	}>;
+	moreItems?: IDropdownItemType[];
 	dataSource?: IMeetingMessage[];
 	participantsLimit?: number;
 	onClick?: MouseEventHandler;
@@ -352,18 +348,19 @@ export interface IMeetingMessageProps extends IMeetingMessage {
 /**
  * IVideoMessage Interface
  *
- * @prop type The Video Message's type is "video" and required.
- * @prop videoURL The Video Message's videoURL and required.
- * @prop uri The Video Message's uri and required.
- * @prop width The Video Message's width and optional.
- * @prop height The Video Message's height and optional.
- * @prop alt The Video Message's alt and optional.
+ * @prop type The Video Message's type is "video".
+ * @prop videoURL The Video Message's videoURL.
+ * @prop uri The Video Message's uri.
+ * @prop width The Video Message's width.
+ * @prop height The Video Message's height.
+ * @prop alt The Video Message's alt.
  */
 export interface IVideoMessage extends IMessage {
 	controlsList: string;
 	data: {
 		videoURL?: string;
 		thumbnailURL?: string;
+		videoCaptionsURL?: string;
 		width?: number;
 		height?: number;
 		name?: string;
@@ -379,12 +376,12 @@ export interface IVideoMessage extends IMessage {
 /**
  * IVideoMessageProps Interface
  *
- * @prop type The Video Message's type is "video" and required.
- * @prop message The Video Message's message is a IVideoMessage and required.
- * @prop onDownload The Video Message's function onDownload(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onOpen The Video Message's function onOpen(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onLoad The Video Message's function onLoad(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onPhotoError The Video Message's function onPhotoError(event: SyntheticEvent<T, Event>) and optional.
+ * @prop type The Video Message's type is "video".
+ * @prop message The Video Message's message is a IVideoMessage.
+ * @prop onDownload The Video Message's function onDownload(event: MouseEvent<T, MouseEvent>).
+ * @prop onOpen The Video Message's function onOpen(event: MouseEvent<T, MouseEvent>).
+ * @prop onLoad The Video Message's function onLoad(event: MouseEvent<T, MouseEvent>).
+ * @prop onPhotoError The Video Message's function onPhotoError(event: SyntheticEvent<T, Event>).
  */
 export interface IVideoMessageProps extends IVideoMessage {
 	onDownload?: MouseEventHandler;
@@ -396,8 +393,8 @@ export interface IVideoMessageProps extends IVideoMessage {
 /**
  * ISystemMessage Interface extends IMessage
  *
- * @prop type The System Message's type is "system" and required.
- * @prop text The System Message's text and required.
+ * @prop type The System Message's type is "system".
+ * @prop text The System Message's text.
  */
 export interface ISystemMessage extends IMessage {
 	text: string;
@@ -406,9 +403,9 @@ export interface ISystemMessage extends IMessage {
 /**
  * ISystemMessageProps Interface
  *
- * @prop type The System Message's type is "system" and required.
- * @prop message The System Message's message is ISystemMessage and required.
- * @prop className The System Message's className and optional.
+ * @prop type The System Message's type is "system".
+ * @prop message The System Message's message is ISystemMessage.
+ * @prop className The System Message's className.
  */
 export interface ISystemMessageProps extends ISystemMessage {
 	className?: string;
@@ -417,10 +414,10 @@ export interface ISystemMessageProps extends ISystemMessage {
 /**
  * IAudioMessage Interface extends IMessage
  *
- * @prop type The Audio Message's type is "audio" and required.
- * @prop audioURL The Audio Message's audio url and required.
- * @prop audioType The Audio Message's audio type and optional.
- * @prop controlsList The Audio Message's controls list and optional.
+ * @prop type The Audio Message's type is "audio".
+ * @prop audioURL The Audio Message's audio url.
+ * @prop audioType The Audio Message's audio type.
+ * @prop controlsList The Audio Message's controls list.
  */
 export interface IAudioMessage extends IMessage {
 	data: {
@@ -438,13 +435,13 @@ export interface IAudioMessage extends IMessage {
 /**
  * IAudioMessageProps Interface
  *
- * @prop type The Audio Message's type is "audio" and required.
- * @prop message The Audio Message's message is a IAudioMessage and required.
- * @prop audioProps The Audio Message's audioProps and optional.
- * @prop customStyle The Audio Message's customStyle and optional.
- * @prop onOpen The Audio Message's function onOpen(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onDownload The Audio Message's function onDownload(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onLoad The Audio Message's function onLoad(event: SyntheticEvent<T, Event>) and optional.
+ * @prop type The Audio Message's type is "audio".
+ * @prop message The Audio Message's message is a IAudioMessage.
+ * @prop audioProps The Audio Message's audioProps.
+ * @prop customStyle The Audio Message's customStyle.
+ * @prop onOpen The Audio Message's function onOpen(event: MouseEvent<T, MouseEvent>).
+ * @prop onDownload The Audio Message's function onDownload(event: MouseEvent<T, MouseEvent>).
+ * @prop onLoad The Audio Message's function onLoad(event: SyntheticEvent<T, Event>).
  */
 export interface IAudioMessageProps extends IAudioMessage {
 	audioProps?: {
@@ -459,8 +456,8 @@ export interface IAudioMessageProps extends IAudioMessage {
 /**
  * IFileMessage Interface
  *
- * @prop type The File Message's type is "file" and required.
- * @prop size The File Message's size and optional.
+ * @prop type The File Message's type is "file".
+ * @prop size The File Message's size.
  */
 export interface IFileMessage extends IMessage {
 	data: {
@@ -476,11 +473,11 @@ export interface IFileMessage extends IMessage {
 /**
  * IFileMessageProps Interface
  *
- * @prop type The File Message's type is "file" and required.
- * @prop message The File Message's message is a IFileMessage and required.
- * @prop text The File Message's text and optional.
- * @prop onDownload The File Message's function onDownload and optional.
- * @prop onOpen The File Message's function onOpen(event: MouseEvent<Element, MouseEvent>) and optional.
+ * @prop type The File Message's type is "file".
+ * @prop message The File Message's message is a IFileMessage.
+ * @prop text The File Message's text.
+ * @prop onDownload The File Message's function onDownload.
+ * @prop onOpen The File Message's function onOpen(event: MouseEvent<Element, MouseEvent>).
  */
 export interface IFileMessageProps extends IFileMessage {
 	onDownload?: MouseEventHandler;
@@ -490,11 +487,11 @@ export interface IFileMessageProps extends IFileMessage {
 /**
  * ILocationMessage Interface
  *
- * @prop type The Location Message's type is "location" and required.
- * @prop latitude The Location Message's latitude and required.
- * @prop longitude The Location Message's longitude and required.
- * @prop staticURL The Location Message's static url and required.
- * @prop mapURL The Location Message's map url and optional.
+ * @prop type The Location Message's type is "location".
+ * @prop latitude The Location Message's latitude.
+ * @prop longitude The Location Message's longitude.
+ * @prop staticURL The Location Message's static url.
+ * @prop mapURL The Location Message's map url.
  */
 export interface ILocationMessage extends IMessage {
 	data: {
@@ -508,18 +505,18 @@ export interface ILocationMessage extends IMessage {
 /**
  * ILocationMessageProps Interface
  *
- * @prop type The Location Message's type is "location" and required.
- * @prop message The Location Message's message is a ILocationMessage and required.
- * @prop marker The Location Message's marker and required.
- * @prop zoom The Location Message's zoom and required.
- * @prop apiKey The Location Message's api key and required.
- * @prop className The Location Message's className and optional.
- * @prop text The Location Message's text and optional.
- * @prop src The Location Message's source and optional.
- * @prop target The Location Message's target and optional.
- * @prop href The Location Message's href and optional.
- * @prop onOpen The Location Message's function onOpen(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onError The Location Message's function onError(event: SyntheticEvent<T, Event>) and optional.
+ * @prop type The Location Message's type is "location".
+ * @prop message The Location Message's message is a ILocationMessage.
+ * @prop marker The Location Message's marker.
+ * @prop zoom The Location Message's zoom.
+ * @prop apiKey The Location Message's api key.
+ * @prop className The Location Message's className.
+ * @prop text The Location Message's text.
+ * @prop src The Location Message's source.
+ * @prop target The Location Message's target.
+ * @prop href The Location Message's href.
+ * @prop onOpen The Location Message's function onOpen(event: MouseEvent<T, MouseEvent>).
+ * @prop onError The Location Message's function onError(event: SyntheticEvent<T, Event>).
  */
 export interface ILocationMessageProps extends ILocationMessage {
 	markerColor?: string;
@@ -537,13 +534,13 @@ export interface ILocationMessageProps extends ILocationMessage {
 /**
  * ISpotifyMessage Interface extends IMessage
  *
- * @prop type The Spotify Message's type is "spotify" and required.
- * @prop uri The Spotify Message's uri and required.
- * @prop theme The Spotify Message's theme and optional.
- * @prop view  The Spotify Message's view and optional.
- * @prop width The Spotify Message's width and optional.
- * @prop height The Spotify Message's height and optional.
- * @prop text The Spotify Message's text and optional.
+ * @prop type The Spotify Message's type is "spotify".
+ * @prop uri The Spotify Message's uri.
+ * @prop theme The Spotify Message's theme.
+ * @prop view  The Spotify Message's view.
+ * @prop width The Spotify Message's width.
+ * @prop height The Spotify Message's height.
+ * @prop text The Spotify Message's text.
  */
 export interface ISpotifyMessage extends IMessage {
 	uri: string;
@@ -556,31 +553,31 @@ export interface ISpotifyMessage extends IMessage {
 /**
  * ISpotifyMessageProps Interface
  *
- * @prop type The Spotify Message's type is "spotify" and required.
- * @prop message The Spotify Message's message is a ISpotifyMessage and required.
+ * @prop type The Spotify Message's type is "spotify".
+ * @prop message The Spotify Message's message is a ISpotifyMessage.
  */
 export interface ISpotifyMessageProps extends ISpotifyMessage {}
 
 /**
  * IMessageBoxProps Interface
  *
- * @prop data The Message Box'es data is a MessageType and required.
- * @prop onMessageFocused The Message Box'es onMessageFocused and optional.
- * @prop renderAddCmp The Message Box'es renderAddCmp is a component and optional.
- * @prop onClick The Message Box'es function onClick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onOpen The Message Box'es function onOpen(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onPhotoError The Message Box'es function onPhotoError(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onContextMenu The Message Box'es function onContextMenu(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onForwardClick The Message Box'es function onForwardClick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onReplyClick The Message Box'es function onReplyClick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onRemoveMessageClick The Message Box'es function onRemoveMessageClick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onTitleClick The Message Box'es function onTitleClick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onMeetingMessageClick The Message Box'es function onMeetingMessageClick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onDownload The Message Box'es function onDownload(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onMeetingMoreSelect The Message Box'es function onMeetingMoreSelect(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onMeetingLinkClick The Message Box'es function onMeetingLinkClick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onMeetingTitleClick The Message Box'es function onMeetingTitleClick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onMeetingVideoLinkClick The Message Box'es function onMeetingVideoLinkClick(event: MouseEvent<T, MouseEvent>) and optional.
+ * @prop data The Message Box'es data is a MessageType.
+ * @prop onMessageFocused The Message Box'es onMessageFocused.
+ * @prop renderAddCmp The Message Box'es renderAddCmp is a component.
+ * @prop onClick The Message Box'es function onClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onOpen The Message Box'es function onOpen(event: MouseEvent<T, MouseEvent>).
+ * @prop onPhotoError The Message Box'es function onPhotoError(event: MouseEvent<T, MouseEvent>).
+ * @prop onContextMenu The Message Box'es function onContextMenu(event: MouseEvent<T, MouseEvent>).
+ * @prop onForwardClick The Message Box'es function onForwardClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onReplyClick The Message Box'es function onReplyClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onRemoveMessageClick The Message Box'es function onRemoveMessageClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onTitleClick The Message Box'es function onTitleClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onMeetingMessageClick The Message Box'es function onMeetingMessageClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onDownload The Message Box'es function onDownload(event: MouseEvent<T, MouseEvent>).
+ * @prop onMeetingMoreSelect The Message Box'es function onMeetingMoreSelect(event: MouseEvent<T, MouseEvent>).
+ * @prop onMeetingLinkClick The Message Box'es function onMeetingLinkClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onMeetingTitleClick The Message Box'es function onMeetingTitleClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onMeetingVideoLinkClick The Message Box'es function onMeetingVideoLinkClick(event: MouseEvent<T, MouseEvent>).
  */
 export interface IMessageBoxProps {
 	onMessageFocused?: (arg: boolean) => void;
@@ -600,40 +597,40 @@ export interface IMessageBoxProps {
 	onMeetingLinkClick?: MouseEventHandler;
 	onMeetingTitleClick?: MeetingMessageEvent;
 	onMeetingVideoLinkClick?: MouseEventHandler;
-	styles?: CSSProperties;
+	style?: CSSProperties;
 	notchStyle?: CSSProperties;
 }
 
 /**
  * IMessageListProps Interface
  *
- * @prop className The Message List's className and optional.
- * @prop customProps The Message List's customProps and optional.
- * @prop children The Message List's children and optional.
- * @prop reference The Message List's reference is a ref and required.
- * @prop data The Message List's datasource is IMessageBoxProps and required.
- * @prop lockable The Message List's lockable and required.
- * @prop toBottomHeight The Message List's to bottom height and optional.
- * @prop downButtonBadge The Message List's down button badge and required.
- * @prop sendMessagePreview The Message List's send message preview and required.
- * @prop onScroll The Message List's function onScroll(event: UIEvent<T, UIEvent>) and optional.
- * @prop onContextMenu The Message List's function onContextMenu(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onDownButtonClick The Message List's onDownButtonClick is a ref and optional.
- * @prop onOpen The Message List's function onOpen(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onDownload The Message List's function onDownload(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onPhotoError The Message List's function onPhotoError(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onMeetingMoreSelect The Message List's function onMeetingMoreSelect(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onMessageFocused The Message List's function onMessageFocused(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onClick The Message List's function onClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onForwardClick The Message List's function onForwardClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onReplyClick The Message List's function onReplyClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onReplyMessageClick The Message List's function onReplyMessageClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onTitleClick The Message List's function onTitleClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onRemoveMessageClick The Message List's function onRemoveMessageClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onMeetingMessageClick The Message List's function onMeetingMessageClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
- * @prop onMeetingTitleClick The MessageList's function onMeetingTitleClick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onMeetingVideoLinkClick The MessageList's function onMeetingVideoLinkClick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onMeetingLinkClick The Message List's function onMeetingLinkClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>) and optional.
+ * @prop className The Message List's className.
+ * @prop customProps The Message List's customProps.
+ * @prop children The Message List's children.
+ * @prop reference The Message List's reference is a ref.
+ * @prop data The Message List's datasource is IMessageBoxProps.
+ * @prop lockable The Message List's lockable.
+ * @prop toBottomHeight The Message List's to bottom height.
+ * @prop downButtonBadge The Message List's down button badge.
+ * @prop sendMessagePreview The Message List's send message preview.
+ * @prop onScroll The Message List's function onScroll(event: UIEvent<T, UIEvent>).
+ * @prop onContextMenu The Message List's function onContextMenu(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onDownButtonClick The Message List's onDownButtonClick is a ref.
+ * @prop onOpen The Message List's function onOpen(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onDownload The Message List's function onDownload(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onPhotoError The Message List's function onPhotoError(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onMeetingMoreSelect The Message List's function onMeetingMoreSelect(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onMessageFocused The Message List's function onMessageFocused(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onClick The Message List's function onClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onForwardClick The Message List's function onForwardClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onReplyClick The Message List's function onReplyClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onReplyMessageClick The Message List's function onReplyMessageClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onTitleClick The Message List's function onTitleClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onRemoveMessageClick The Message List's function onRemoveMessageClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onMeetingMessageClick The Message List's function onMeetingMessageClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
+ * @prop onMeetingTitleClick The MessageList's function onMeetingTitleClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onMeetingVideoLinkClick The MessageList's function onMeetingVideoLinkClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onMeetingLinkClick The Message List's function onMeetingLinkClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
  */
 export interface IMessageListProps {
 	className?: string;
@@ -713,8 +710,8 @@ export interface IProgressOptions {
 /**
  * IMeetingLinkMessage Interface extends IMessage
  *
- * @prop meetingID The Meeting Link Message's meeting id and optional.
- * @prop title The Meeting Link Message's title and optional.
+ * @prop meetingID The Meeting Link Message's meeting id.
+ * @prop title The Meeting Link Message's title.
  */
 export interface IMeetingLinkMessage extends IMessage {
 	meetingID?: string;
@@ -730,8 +727,8 @@ export type TActionButton = FunctionComponent<unknown>;
 /**
  * TMeetingLinkActionButtons Interface
  *
- * @prop onClickButton The TMeetingLinkActionButtons's function onClickButton(id: string) and required.
- * @prop Component The TMeetingLinkActionButtons's function Component and required.
+ * @prop onClickButton The TMeetingLinkActionButtons's function onClickButton(id: string).
+ * @prop Component The TMeetingLinkActionButtons's function Component.
  */
 export interface MeetingLinkActionButtons {
 	// return meeting id
@@ -742,10 +739,10 @@ export interface MeetingLinkActionButtons {
 /**
  * IMeetingLinkMessageProps Interface
  *
- * @prop type The Meeting Link Message's type is "meetingLink" and required.
- * @prop message The Meeting Link Message's message is a IMeetingLinkMessage and required.
- * @prop onMeetingLinkClick The Meeting Link Message's function onMeetingLinkClick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onMeetingMoreSelect The Meeting More Select Message's function onMeetingMoreSelect(event: MouseEvent<T, MouseEvent>) and optional.
+ * @prop type The Meeting Link Message's type is "meetingLink".
+ * @prop message The Meeting Link Message's message is a IMeetingLinkMessage.
+ * @prop onMeetingLinkClick The Meeting Link Message's function onMeetingLinkClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onMeetingMoreSelect The Meeting More Select Message's function onMeetingMoreSelect(event: MouseEvent<T, MouseEvent>).
  */
 export interface IMeetingLinkMessageProps extends IMeetingLinkMessage {
 	actionButtons?: MeetingLinkActionButtons[];
@@ -767,31 +764,31 @@ export type MeetingMessageEvent = (
 /**
  * ITextMessage Interface extends IMessage
  *
- * @prop type The Text Message's type is "text" and required.
+ * @prop type The Text Message's type is "text".
  */
 export interface ITextMessage extends IMessage {}
 
 /**
  * ITextMessageProps Interface
  *
- * @prop type The Text Message's type is "text" and required.
- * @prop message The Text Message's message is a ITextMessage and required.
+ * @prop type The Text Message's type is "text".
+ * @prop message The Text Message's message is a ITextMessage.
  */
 export interface ITextMessageProps extends ITextMessage {}
 
 /**
  * Message List Props
  *
- * @param cmpRef The Message List's cmpRef and optional.
- * @param className The Message List's className and optional.
- * @param dataSource The Message List's dataSource and optional.
- * @param lazyLoadingImage The Message List's lazyLoadingImage and optional.
- * @param onClick The Message List's onClick and optional.
- * @param onMeetingClick The Message List's onMeetingClick and optional.
- * @param onShareClick The Message List's onShareClick and optional.
- * @param onCloseClick The Message List's onCloseClick and optional.
- * @param onContextMenu The Message List's onContextMenu and optional.
- * @param onAvatarError The Message List's onAvatarError and optional.
+ * @param cmpRef The Message List's cmpRef.
+ * @param className The Message List's className.
+ * @param dataSource The Message List's dataSource.
+ * @param lazyLoadingImage The Message List's lazyLoadingImage.
+ * @param onClick The Message List's onClick.
+ * @param onMeetingClick The Message List's onMeetingClick.
+ * @param onShareClick The Message List's onShareClick.
+ * @param onCloseClick The Message List's onCloseClick.
+ * @param onContextMenu The Message List's onContextMenu.
+ * @param onAvatarError The Message List's onAvatarError.
  */
 export interface IMeetingListProps {
 	cmpRef?: string;
@@ -822,28 +819,28 @@ export type MeetingListEvent = (
 /**
  * IMeetingItemProps Interface
  *
- * @prop id The Meeting Item's id and required.
- * @prop closable The Meeting Item's closable and optional.
- * @prop date The Meeting Item's date and optional.
- * @prop subject The Meeting Item's subject and optional.
- * @prop subjectLimit The Meeting Item's subject limit and optional.
- * @prop avatarFlexible The Meeting Item's avatar flexible and optional.
- * @prop alt The Meeting Item's alt and optional.
- * @prop title The Meeting Item's title and optional.
- * @prop subtitle The Meeting Item's subtitle and optional.
- * @prop statusColorType The Meeting Item's status color type and optional.
- * @prop dateString The Meeting Item's date string and optional.
- * @prop lazyLoadingImage The Meeting Item's lazyLoadingImage and optional.
- * @prop avatarLimit The Meeting Item's avatar limit and optional.
- * @prop avatars The Meeting Item's avatar array and optional.
- * @prop audioMuted The Meeting Item's audio muted and optional.
- * @prop audioSource The Meeting Item's audio source and optional.
- * @prop onClick The Meeting Item's function onClick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onAvatarError The Meeting Item's function onAvatarError(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onMeetingClick The Meeting Item's function onMeetingClick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onShareClick The Meeting Item's function onShareClick(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onContextMenu The Meeting Item's function onContextMenu(event: MouseEvent<T, MouseEvent>) and optional.
- * @prop onCloseClick The Meeting Item's function onCloseClick(event: MouseEvent<T, MouseEvent>) and optional.
+ * @prop id The Meeting Item's id.
+ * @prop closable The Meeting Item's closable.
+ * @prop date The Meeting Item's date.
+ * @prop subject The Meeting Item's subject.
+ * @prop subjectLimit The Meeting Item's subject limit.
+ * @prop avatarFlexible The Meeting Item's avatar flexible.
+ * @prop alt The Meeting Item's alt.
+ * @prop title The Meeting Item's title.
+ * @prop subtitle The Meeting Item's subtitle.
+ * @prop statusColorType The Meeting Item's status color type.
+ * @prop dateString The Meeting Item's date string.
+ * @prop lazyLoadingImage The Meeting Item's lazyLoadingImage.
+ * @prop avatarLimit The Meeting Item's avatar limit.
+ * @prop avatars The Meeting Item's avatar array.
+ * @prop audioMuted The Meeting Item's audio muted.
+ * @prop audioSource The Meeting Item's audio source.
+ * @prop onClick The Meeting Item's function onClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onAvatarError The Meeting Item's function onAvatarError(event: MouseEvent<T, MouseEvent>).
+ * @prop onMeetingClick The Meeting Item's function onMeetingClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onShareClick The Meeting Item's function onShareClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onContextMenu The Meeting Item's function onContextMenu(event: MouseEvent<T, MouseEvent>).
+ * @prop onCloseClick The Meeting Item's function onCloseClick(event: MouseEvent<T, MouseEvent>).
  */
 export interface IMeetingItemProps {
 	id: string;
@@ -874,53 +871,50 @@ export interface IMeetingItemProps {
 /**
  * IInputProps Interface
  *
- * @prop autofocus The Input's autofocus and optional.
- * @prop reference The Input's reference is a ref and optional.
- * @prop clear The Input's clear and optional.
- * @prop maxlength The Input's maxlength and optional.
- * @prop maxHeight The Input's maxheight and optional.
- * @prop onMaxLengthExceed The Input's onMaxLengthExceed function and optional.
- * @prop onChange The Input's onChange function and optional.
- * @prop multiline The Input's multiline and optional.
- * @prop autoHeight The Input's autoHeight and optional.
- * @prop minHeight The Input's minheight and optional.
- * @prop className The Input's classname and optional.
- * @prop leftButtons The Input's leftbuttons is a component and optional.
- * @prop rightButtons The Input's rightbuttons is a component and optional.
- * @prop type The Input's type and optional.
- * @prop placeholder The Input's placeholder and optional.
- * @prop defaultValue The Input's default value and optional.
- * @prop inputStyle The Input's input style and optional.
- * @prop onCopy The Input's function onCopy(event: ClipboardEvent<T>) and optional.
- * @prop onCut The Input's function onCut(event: ClipboardEvent<T>) and optional.
- * @prop onPaste The Input's function onPaste(event: ClipboardEvent<T>) and optional.
- * @prop onBlur The Input's function onBlur(event: FocusEvent<T, Element>) and optional.
- * @prop onFocus The Input's function onFocus(event: FocusEvent<T, Element>) and optional.
- * @prop onSelect The Input's function onSelect(event: SyntheticEvent<T, Event>) and optional.
- * @prop onSubmit The Input's function onSubmit(event: FormEvent<T>) and optional.
- * @prop onReset The Input's function onReset(event: FormEvent<T>) and optional.
- * @prop onKeyDown The Input's function onKeyDown(event: KeyboardEvent<T>) and optional.
- * @prop onKeyPress The Input's function onKeyPress(event: KeyboardEvent<T>) and optional.
- * @prop onKeyUp The Input's function onKeyUp(event: KeyboardEvent<T>) and optional.
+ * @prop autofocus The Input's autofocus.
+ * @prop reference The Input's reference is a ref.
+ * @prop clear The Input's clear.
+ * @prop maxlength The Input's maxlength.
+ * @prop maxHeight The Input's maxheight.
+ * @prop onMaxLengthExceed The Input's onMaxLengthExceed function.
+ * @prop onChange The Input's onChange function.
+ * @prop multiline The Input's multiline.
+ * @prop autoHeight The Input's autoHeight.
+ * @prop minHeight The Input's minheight.
+ * @prop className The Input's classname.
+ * @prop leftButtons The Input's leftbuttons is a component.
+ * @prop rightButtons The Input's rightbuttons is a component.
+ * @prop type The Input's type.
+ * @prop placeholder The Input's placeholder.
+ * @prop defaultValue The Input's default value.
+ * @prop inputStyle The Input's input style.
+ * @prop onCopy The Input's function onCopy(event: ClipboardEvent<T>).
+ * @prop onCut The Input's function onCut(event: ClipboardEvent<T>).
+ * @prop onPaste The Input's function onPaste(event: ClipboardEvent<T>).
+ * @prop onBlur The Input's function onBlur(event: FocusEvent<T, Element>).
+ * @prop onFocus The Input's function onFocus(event: FocusEvent<T, Element>).
+ * @prop onSelect The Input's function onSelect(event: SyntheticEvent<T, Event>).
+ * @prop onSubmit The Input's function onSubmit(event: FormEvent<T>).
+ * @prop onReset The Input's function onReset(event: FormEvent<T>).
+ * @prop onKeyDown The Input's function onKeyDown(event: KeyboardEvent<T>).
+ * @prop onKeyPress The Input's function onKeyPress(event: KeyboardEvent<T>).
+ * @prop onKeyUp The Input's function onKeyUp(event: KeyboardEvent<T>).
  */
 export interface IInputProps {
 	autofocus?: boolean;
-	reference?: { current: HTMLInputElement | HTMLTextAreaElement }; // sor ve 46.satır
+	className?: string;
+	style?: CSSProperties;
+	reference?: MutableRefObject<
+		HTMLInputElement | HTMLTextAreaElement | undefined
+	>;
 	clear?: (clear: () => void) => void;
 	maxlength?: number;
-	maxHeight: number;
+	maxHeight?: number;
 	onMaxLengthExceed?: () => void;
-	onChange?: ({
-		ev,
-		FAKE_EVENT,
-	}: {
-		ev: SyntheticEvent;
-		FAKE_EVENT?: boolean;
-	}) => void;
+	onChange?: ({ ev }: { ev: SyntheticEvent }) => void;
 	multiline?: boolean;
 	autoHeight?: boolean;
 	minHeight?: number;
-	className?: string;
 	leftButtons?: ReactNode;
 	rightButtons?: ReactNode;
 	type?: HTMLInputTypeAttribute;
@@ -944,10 +938,10 @@ export interface IInputProps {
 /**
  * IMessageDataStatus Interface
  *
- * @prop error The File Message Data Status's error and optional.
- * @prop download The File Message Data Status's download function and optional.
- * @prop click The File Message Data Status's click function and optional.
- * @prop loading The File Message Data Status's loading and optional.
+ * @prop error The File Message Data Status's error.
+ * @prop download The File Message Data Status's download function.
+ * @prop click The File Message Data Status's click function.
+ * @prop loading The File Message Data Status's loading.
  */
 export interface IMessageDataStatus {
 	autoDownload?: boolean;
@@ -960,14 +954,14 @@ export interface IMessageDataStatus {
 /**
  * IDropdownProps Interface
  *
- * @prop className The Dropdown's className and optional.
- * @prop buttonProps The Dropdown's button props and optional.
- * @prop animationType The Dropdown's animation type and optional.
- * @prop animationPosition The Dropdown's animation position and optional.
- * @prop title The Dropdown's title and optional.
- * @prop items The Dropdown's items is a IDropdownItemType array and required.
- * @prop onSelect The Dropdown's onSelect function and optional.
- * @prop style The Dropdown's style is an object containing color, borderColor and optional.
+ * @prop className The Dropdowns className.
+ * @prop buttonProps The Dropdowns button props.
+ * @prop animationType The Dropdowns animation type.
+ * @prop animationPosition The Dropdowns animation position.
+ * @prop title The Dropdowns title.
+ * @prop items The Dropdowns items is a IDropdownItemType array.
+ * @prop onSelect The Dropdowns onSelect function.
+ * @prop style The Dropdowns style is an object containing color, borderColor.
  */
 export interface IDropdownProps {
 	className?: string;
@@ -977,44 +971,44 @@ export interface IDropdownProps {
 	title?: string;
 	items: IDropdownItemType[];
 	onSelect?: (e: MouseEvent, i: number) => void;
-	style?: {
-		color?: string;
-		borderColor?: string;
-	};
+	style?: CSSProperties;
 }
 
 /**
  * ICircleProps Interface
  *
- * @prop animate The Circle's animation and required.
- * @prop progressOptions The Circle's progress options and optional.
- * @prop className The Circle's className and optional.
+ * @prop animate The Loader's animation.
+ * @prop progressOptions The Loader's progress options.
+ * @prop className The Loader's className.
  */
 export interface ICircleProps {
-	animate: boolean;
+	type?: "circle" | "progress";
+	animate?: boolean;
+	size?: number;
+	style?: CSSProperties;
+	className?: string;
 	progressOptions?: {
 		strokeWidth?: number;
 		color?: string;
 		trailColor?: string;
 		strokeLinecap?: string;
 	};
-	className?: string;
 	progress?: number;
 }
 
 /**
  * IButtonProps Interface
  *
- * @prop title The Button's title and optional.
- * @prop text The Button's text and optional.
- * @prop buttonRef The Button's ref and optional.
- * @prop type The Button's type and optional.
- * @prop className The Button's className and optional.
- * @prop backgroundColor The Button's background color and optional.
- * @prop color The Button's color and optional.
- * @prop disabled The Button's disabled and optional.
- * @prop onClick The Button's onClick function and optional.
- * @prop icon The Button's icon is a IButtonIcon and optional.
+ * @prop title The Button's title.
+ * @prop text The Button's text.
+ * @prop buttonRef The Button's ref.
+ * @prop type The Button's type.
+ * @prop className The Button's className.
+ * @prop backgroundColor The Button's background color.
+ * @prop color The Button's color.
+ * @prop disabled The Button's disabled.
+ * @prop onClick The Button's onClick function.
+ * @prop icon The Button's icon is a IIcon.
  */
 export interface IButtonProps {
 	title?: string;
@@ -1022,22 +1016,26 @@ export interface IButtonProps {
 	buttonRef?: RefObject<HTMLButtonElement>;
 	type?: "button" | "submit" | "reset";
 	className?: string;
+	style?: CSSProperties;
 	backgroundColor?: string;
 	color?: string;
+	outlined?: boolean;
+	circle?: boolean;
 	disabled?: boolean;
 	onClick?: MouseEventHandler;
-	icon?: IButtonIcon;
+	icon?: IIcon;
 }
 
 /**
- * IButtonIcon Interface
+ * IIcon Interface
  *
- * @prop float The Button Icon's float and optional.
- * @prop size The Button Icon's size and optional.
- * @prop component The Button Icon's components and optional.
+ * @prop float The Button Icon's float.
+ * @prop size The Button Icon's size.
+ * @prop component The Button Icon's components.
  */
-export interface IButtonIcon {
-	float?: "left" | "right" | "none" | "inherit" | "initial" | "unset";
+export interface IIcon {
+	float?: CSSProperties["float"];
+	color?: CSSProperties["color"];
 	size?: number;
 	component?: ReactElement;
 }
@@ -1045,15 +1043,15 @@ export interface IButtonIcon {
 /**
  * IDropDownItemType Type
  *
- * @type string The Dropdown's items is a IDropdownItemType array and required.
+ * @type string The Dropdown's items is a IDropdownItemType array.
  */
 export type IDropdownItemType = IDropdownItem | string;
 
 /**
  * IDropdownItem Interface
  *
- * @prop icon The Dropdown Item's icon and optional.
- * @prop text The Dropdown Item's text and optional.
+ * @prop icon The Dropdown Item's icon.
+ * @prop text The Dropdown Item's text.
  */
 export interface IDropdownItem {
 	icon?: IDropdownItemIcon;
@@ -1063,14 +1061,14 @@ export interface IDropdownItem {
 /**
  * IDropdownItemIcon Interface
  *
- * @prop float The Dropdown Item Icon's float and optional.
- * @prop color The Dropdown Item Icon's color and optional.
- * @prop size The Dropdown Item Icon's size and optional.
- * @prop className The Dropdown Item Icon's className and optional.
- * @prop component The Dropdown Item Icon's component and optional.
+ * @prop float The Dropdown Item Icon's float.
+ * @prop color The Dropdown Item Icon's color.
+ * @prop size The Dropdown Item Icon's size.
+ * @prop className The Dropdown Item Icon's className.
+ * @prop component The Dropdown Item Icon's component.
  */
 export interface IDropdownItemIcon {
-	float?: string;
+	float?: "left" | "right" | "none" | "inherit" | "initial" | "unset";
 	color?: string;
 	size?: number;
 	className?: string;
@@ -1080,21 +1078,22 @@ export interface IDropdownItemIcon {
 /**
  * ISideBarProps Interface
  *
- * @type type The Side Bar's type and optional.
- * @type data The Side Bar's data is ISideBar and optional.
+ * @type type The Side Bar's type.
+ * @type data The Side Bar's data is ISideBar.
  */
 export interface ISideBarProps extends ISideBar {
 	type?: string;
 	data: ISideBar;
+	style?: CSSProperties;
 }
 
 /**
  * ISideBar Interface
  *
- * @prop top The Side Bar's top is a component and optional.
- * @prop center The Side Bar's center is a component and optional.
- * @prop bottom The Side Bar's bottom is a component and optional.
- * @prop className The Side Bar's className and optional.
+ * @prop top The Side Bar's top is a component.
+ * @prop center The Side Bar's center is a component.
+ * @prop bottom The Side Bar's bottom is a component.
+ * @prop className The Side Bar's className.
  */
 export interface ISideBar {
 	top?: ReactElement;
@@ -1106,15 +1105,15 @@ export interface ISideBar {
 /**
  * IPopup Interface
  *
- * @prop show The Popup's show and optional.
- * @prop header The Popup's header and optional.
- * @prop text The Popup's text and optional.
- * @prop footerButtons The Popup's footer buttons array and optional.
- * @prop headerButtons The Popup's header buttons array and optional.
- * @prop renderHeader The Popup's renderHeader function and optional.
- * @prop renderContent The Popup's renderContent function and optional.
- * @prop renderFooter The Popup's renderFooter function and optional.
- * @prop color The Popup's color and optional.
+ * @prop show The Popup's show.
+ * @prop header The Popup's header.
+ * @prop text The Popup's text.
+ * @prop footerButtons The Popup's footer buttons array.
+ * @prop headerButtons The Popup's header buttons array.
+ * @prop renderHeader The Popup's renderHeader function.
+ * @prop renderContent The Popup's renderContent function.
+ * @prop renderFooter The Popup's renderFooter function.
+ * @prop color The Popup's color.
  */
 export interface IPopup {
 	show?: boolean;
@@ -1145,9 +1144,9 @@ export interface IPopup {
 /**
  * IPopupProps Interface
  *
- * @prop popup The Popup's popup is a IPopup and required.
- * @prop type The Popup's type and optional.
- * @prop className The Popup's className and optional.
+ * @prop popup The Popup's popup is a IPopup.
+ * @prop type The Popup's type.
+ * @prop className The Popup's className.
  */
 export interface IPopupProps {
 	popup: IPopup;
@@ -1158,19 +1157,20 @@ export interface IPopupProps {
 /**
  * IAvatarProps Interface
  *
- * @prop src The Avatar's src is an image source and required.
- * @prop title The Avatar's title and optional.
- * @prop lazyLoadingImage The Avatar's lazyLoadingImage and optional.
- * @prop letterItem The Avatar's letterItem is a ILetterItem and optional.
- * @prop type The Avatar's type and optional.
- * @prop size The Avatar's size and optional.
- * @prop className The Avatar's className and optional.
- * @prop alt The Avatar's alt and optional.
- * @prop sideElement The Avatar's sideElement is a component and optional.
- * @prop onError The Avatar's function onError(event: SyntheticEvent<T, Event>) and optional.
- * @prop statusColorType The Avatar's status color type and optional.
- * @prop statusColor The Avatar's status color and optional.
- * @prop statusText The Avatar's status text and optional.
+ * @prop src The Avatar's src is an image source.
+ * @prop title The Avatar's title.
+ * @prop lazyLoadingImage The Avatar's lazyLoadingImage.
+ * @prop letterItem The Avatar's letterItem is a ILetterItem.
+ * @prop type The Avatar's type.
+ * @prop size The Avatar's size.
+ * @prop rounded The Avatar's rounded.
+ * @prop className The Avatar's className.
+ * @prop alt The Avatar's alt.
+ * @prop sideElement The Avatar's sideElement is a component.
+ * @prop onError The Avatar's function onError(event: SyntheticEvent<T, Event>).
+ * @prop statusColorType The Avatar's status color type.
+ * @prop statusColor The Avatar's status color.
+ * @prop statusText The Avatar's status text.
  */
 export interface IAvatarProps {
 	src: string;
@@ -1178,7 +1178,9 @@ export interface IAvatarProps {
 	lazyLoadingImage?: string;
 	letterItem?: ILetterItem;
 	type?: string;
-	size?: string | CSSProperties;
+	style?: CSSProperties;
+	size?: "default" | "xsmall" | "small" | "medium" | "large" | "xlarge";
+	rounded?: boolean;
 	className?: string;
 	alt?: string;
 	sideElement?: JSX.Element | null;
@@ -1191,15 +1193,16 @@ export interface IAvatarProps {
 /**
  * INavbarProps Interface
  *
- * @prop type The Navbar's type and optional.
- * @prop className The Navbar's className and optional.
- * @prop top The Side Bar's top is a component and optional.
- * @prop center The Side Bar's center is a component and optional.
- * @prop bottom The Side Bar's bottom is a component and optional.
+ * @prop type The Navbar's type.
+ * @prop className The Navbar's className.
+ * @prop top The Side Bar's top is a component.
+ * @prop center The Side Bar's center is a component.
+ * @prop bottom The Side Bar's bottom is a component.
  */
 export interface INavbarProps {
-	type?: string;
+	type?: "default" | "light" | "dark";
 	className?: string;
+	style?: CSSProperties;
 	left?: string | ReactElement;
 	center?: string | ReactElement;
 	right?: string | ReactElement;

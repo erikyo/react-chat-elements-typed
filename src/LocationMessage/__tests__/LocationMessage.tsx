@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import React from "react";
-import LocationMessage from "../LocationMessage.js";
+import LocationMessage from "../LocationMessage";
 import { render } from "@testing-library/react";
 
 describe("Avatar component", () => {

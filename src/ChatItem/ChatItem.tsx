@@ -2,7 +2,7 @@ import type React from "react";
 import type { MouseEventHandler } from "react";
 import { useState, useEffect } from "react";
 import "./ChatItem.css";
-import Avatar from "../Avatar/Avatar.js";
+import Avatar from "../Avatar/Avatar";
 import { format } from "date-fns";
 import classNames from "classnames";
 import { MdVideoCall, MdVolumeOff, MdVolumeUp } from "react-icons/md";
@@ -11,7 +11,7 @@ import type {
 	IChatItemProps,
 	ChatItemDragEvent,
 	ChatItemEvent,
-} from "../types.js";
+} from "../types";
 
 const ChatItem: React.FC<IChatItemProps> = ({
 	avatarFlexible = false,

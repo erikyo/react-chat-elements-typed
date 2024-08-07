@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import React from "react";
-import SpotifyMessage from "../SpotifyMessage.js";
+import SpotifyMessage from "../SpotifyMessage";
 import { render } from "@testing-library/react";
 
 describe("Avatar component", () => {

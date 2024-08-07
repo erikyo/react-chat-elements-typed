@@ -1,9 +1,9 @@
 import type { FC, Key, LegacyRef } from "react";
 import "./MeetingList.css";
 
-import MeetingItem from "../MeetingItem/MeetingItem.js";
+import MeetingItem from "../MeetingItem/MeetingItem";
 import classNames from "classnames";
-import type { IMeetingListProps, MeetingListEvent } from "../types.js";
+import type { IMeetingListProps, MeetingListEvent } from "../types";
 
 const MeetingList: FC<IMeetingListProps> = (props) => {
 	const onClick: MeetingListEvent = (item, index, event) => {

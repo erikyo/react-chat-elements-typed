@@ -11,7 +11,7 @@
 
 .rce-citem {
   position: relative;
-  background: white;
+  background: var(--rce-color-white);
   display: flex;
   flex-direction: row;
   height: 72px;
@@ -23,7 +23,7 @@
 }
 
 .rce-citem:hover {
-  background: #f9f9f9;
+  background: var(--rce-color-light-gray);
 }
 
 .rce-citem-avatar {
@@ -49,10 +49,7 @@
 }
 
 .rce-citem-avatar.rce-citem-status-encircle .rce-citem-status {
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   background: transparent;
@@ -80,7 +77,7 @@
   flex-direction: column;
   justify-content: center;
   padding-right: 15px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgb(0 0 0 / 5%);
   overflow: hidden;
 }
 
@@ -112,7 +109,7 @@
 
 .rce-citem-body--top-time {
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgb(0 0 0 / 40%);
 }
 
 .rce-citem-body--bottom-status {
@@ -123,14 +120,14 @@
   width: 18px;
   height: 18px;
   font-size: 12px;
-  color: white;
+  color: var(--rce-color-white);
   font-weight: bold;
   text-align: center;
   align-items: center;
   justify-content: center;
   display: flex;
   border-radius: 100%;
-  background: red;
+  background: var(--rce-color-red);
 }
 
 .rce-citem-body--bottom-status-icon {
@@ -184,7 +181,7 @@
 .rce-citem-body--bottom-tools-item svg {
   width: 18px;
   height: 18px;
-  fill: #575757;
+  fill: var(--rce-color-gray);
 }
 
 .rce-container-citem.subitem .rce-citem {
@@ -208,14 +205,14 @@
     width: 14px;
     height: 14px;
     font-size: 10px !important;
-    color: white;
+    color: var(--rce-color-white);
     font-weight: bold;
     text-align: center;
     align-items: center;
     justify-content: center;
     display: flex;
     border-radius: 100%;
-    background: red;
+    background: var(--rce-color-red);
   }
 
 .rce-container-citem.subitem .rce-citem-body--bottom {
@@ -227,11 +224,11 @@
     border: none;
     cursor: pointer;
     padding: 2px 15px;
-    color: teal;
+    color: var(--rce-color-slate);
 }
 
 .rce-citem-expand-button:hover {
-    background-color: #eee;
+    background-color: var(--rce-color-white);
 }
 
 .rce-sublist-container {

@@ -1,14 +1,12 @@
 import SVG from "./icons";
 
-export const ArrowRight = (size = 20): JSX.Element => {
-	const backgroundSize: string = `new 0 0 ${size} ${size}`;
+/**
+ * The ArrowRight component is used to render the right arrow of the message box.
+ * @param size The size of the icon. The default is 20.
+ */
+export const ArrowRight = ({ size = 20 }): JSX.Element => {
 	return (
-		<SVG
-			x="0px"
-			y="0px"
-			viewBox={`0 0 ${size} ${size}`}
-			enableBackground={backgroundSize}
-		>
+		<SVG size={size}>
 			<polygon points={`0,0 0,${size} ${size},0`} />
 		</SVG>
 	);

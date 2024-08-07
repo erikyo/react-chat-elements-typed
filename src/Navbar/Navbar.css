@@ -1,31 +1,33 @@
 .rce-navbar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
 }
 
+.rce-navbar.default,
 .rce-navbar.light {
-  background: #f4f4f4;
+    background: var(--rce-mbox-light-bg);
 }
 
 .rce-navbar.dark {
-  background: #2f414c;
+    background: var(--rce-mbox-dark-bg);
+    color: #fff
 }
 
 .rce-navbar-item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .rce-navbar-item > * {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .rce-navbar-item > * > * {
-  margin-left: 5px;
+    margin-left: 5px;
 }
