@@ -1,17 +1,15 @@
-import type { IDropdownItem } from "../types";
+import type { IAvatarProps, IDropdownItem } from "../types";
 import Avatar from "../Avatar/Avatar";
+import { getAvatar } from "./example/utils/common";
 
-export function generateAvatar(index = 0) {
+export function generateAvatar(index = 0, { ...args } = {}): IAvatarProps {
 	return {
 		alt: "Avatar",
 		className: "rce-avatar",
 		type: "circle",
-		src: `https://i.pravatar.cc/300?img=${index}`,
-		size: "lg",
-		style: {
-			width: 100,
-			height: 100,
-		},
+		src: getAvatar(),
+		size: "default",
+		...args,
 	};
 }
 
