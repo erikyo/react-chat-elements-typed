@@ -1,6 +1,6 @@
 import { loremIpsum } from "lorem-ipsum";
-import type { ReactNode } from "react";
 import type React from "react";
+import type { ReactNode } from "react";
 import { useCallback, useEffect, useState } from "react";
 import { BsListTask } from "react-icons/bs";
 import type { IChatItemProps } from "../../../types";

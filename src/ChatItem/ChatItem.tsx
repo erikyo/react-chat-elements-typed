@@ -1,6 +1,6 @@
 import type React from "react";
 import type { MouseEventHandler } from "react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./ChatItem.css";
 import Avatar from "../Avatar/Avatar";
 import { format } from "date-fns";
@@ -8,9 +8,9 @@ import classNames from "classnames";
 import { MdVideoCall, MdVolumeOff, MdVolumeUp } from "react-icons/md";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import type {
-	IChatItemProps,
 	ChatItemDragEvent,
 	ChatItemEvent,
+	IChatItemProps,
 } from "../types";
 
 const ChatItem: React.FC<IChatItemProps> = ({

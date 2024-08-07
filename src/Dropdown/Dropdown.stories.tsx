@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { StoryObj } from "@storybook/react";
 
 import Dropdown from "./Dropdown";
 import type { IDropdownProps } from "../types";

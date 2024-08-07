@@ -1,6 +1,6 @@
 import { loremIpsum } from "lorem-ipsum";
 import { useEffect, useState } from "react";
-import { getAvatar, photo, token } from "../utils/common";
+import { getAvatar, token } from "../utils/common";
 import MeetingList from "../../../MeetingList/MeetingList";
 import type { IMeetingItemProps } from "../../../types";
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useCallback, useRef, type FC } from "react";
+import React, { type FC, useCallback, useEffect, useMemo, useRef } from "react";
 import { Circle, Line } from "progressbar.js";
 import type { ICircleProps } from "../types";
 import type Shape from "progressbar.js/shape";

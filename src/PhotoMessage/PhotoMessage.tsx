@@ -1,5 +1,5 @@
-import type React from "react";
 import type { FC } from "react";
+import type React from "react";
 
 import "./PhotoMessage.css";
 
@@ -23,7 +23,7 @@ const PhotoMessage: FC<IPhotoMessageProps> = ({
 		step: (
 			state: IProgressOptions,
 			circle: {
-				path: { setAttribute: (arg0: string, arg1: any) => void };
+				path: { setAttribute: (arg0: string, arg1: unknown) => void };
 				value: () => number;
 				setText: (arg0: string | number) => void;
 			},

@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { StoryObj } from "@storybook/react";
 
 import MessageList from "./MessageList";
 import {
-	textMessage,
 	systemMessage,
+	textMessage,
 } from "../stories/example/utils/MessageTypes.ts";
 import { randomMessage } from "../stories/example/components/MessageListExample";
 

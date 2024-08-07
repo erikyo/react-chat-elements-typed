@@ -1,12 +1,15 @@
 import type {
 	ClipboardEventHandler,
 	CSSProperties,
+	DragEvent,
 	FocusEventHandler,
 	FormEventHandler,
 	FunctionComponent,
 	HTMLInputTypeAttribute,
 	KeyboardEventHandler,
+	MouseEvent,
 	MouseEventHandler,
+	MutableRefObject,
 	ReactElement,
 	ReactEventHandler,
 	ReactNode,
@@ -14,10 +17,7 @@ import type {
 	RefObject,
 	SetStateAction,
 	SyntheticEvent,
-	MouseEvent,
-	DragEvent,
 	UIEvent,
-	MutableRefObject,
 } from "react";
 
 type StatusType = "waiting" | "sent" | "received" | "read";

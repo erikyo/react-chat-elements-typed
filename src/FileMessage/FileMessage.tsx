@@ -1,9 +1,9 @@
-import type React from "react";
 import type { FC } from "react";
+import type React from "react";
 import {
-	FaFile,
 	FaCloudDownloadAlt,
 	FaExclamationTriangle,
+	FaFile,
 } from "react-icons/fa";
 import Loader from "../Loader/Loader";
 import type { IFileMessageProps } from "../types";

@@ -1,6 +1,5 @@
 import {
 	type FC,
-	type Key,
 	type LegacyRef,
 	type MouseEvent,
 	type UIEvent,

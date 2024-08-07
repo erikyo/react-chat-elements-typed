@@ -1,5 +1,5 @@
 import type React from "react";
-import type { LegacyRef, FC, SyntheticEvent } from "react";
+import type { FC, LegacyRef, SyntheticEvent } from "react";
 import { useEffect } from "react";
 import "./Input.css";
 import classNames from "classnames";

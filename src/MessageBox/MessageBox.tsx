@@ -20,10 +20,10 @@ import { RiShareForwardFill } from "react-icons/ri";
 import {
 	MdAccessTime,
 	MdCheck,
-	MdMessage,
 	MdDelete,
-	MdOutlineEdit,
 	MdDoneAll,
+	MdMessage,
+	MdOutlineEdit,
 } from "react-icons/md";
 import { TiArrowForward } from "react-icons/ti";
 

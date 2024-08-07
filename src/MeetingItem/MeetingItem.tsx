@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import "./MeetingItem.css";
 
-import { MdVideoCall, MdLink, MdCall } from "react-icons/md";
+import { MdCall, MdLink, MdVideoCall } from "react-icons/md";
 
 import Avatar from "../Avatar/Avatar";
 
