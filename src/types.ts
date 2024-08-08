@@ -494,12 +494,10 @@ export interface IFileMessageProps extends IFileMessage {
  * @prop mapURL The Location Message's map url.
  */
 export interface ILocationMessage extends IMessage {
-	data: {
-		latitude: string;
-		longitude: string;
-		staticURL: string;
-		mapURL?: string;
-	};
+	latitude: string;
+	longitude: string;
+	mapURL?: string;
+	zoom?: string;
 }
 
 /**
@@ -509,7 +507,6 @@ export interface ILocationMessage extends IMessage {
  * @prop message The Location Message's message is a ILocationMessage.
  * @prop marker The Location Message's marker.
  * @prop zoom The Location Message's zoom.
- * @prop apiKey The Location Message's api key.
  * @prop className The Location Message's className.
  * @prop text The Location Message's text.
  * @prop src The Location Message's source.
@@ -520,8 +517,6 @@ export interface ILocationMessage extends IMessage {
  */
 export interface ILocationMessageProps extends ILocationMessage {
 	markerColor?: string;
-	zoom?: string;
-	apiKey?: string;
 	className?: string;
 	src?: string;
 	target?: string;
@@ -530,33 +525,6 @@ export interface ILocationMessageProps extends ILocationMessage {
 	onOpen?: MouseEventHandler;
 	onError?: ReactEventHandler;
 }
-
-/**
- * ISpotifyMessage Interface extends IMessage
- *
- * @prop type The Spotify Message's type is "spotify".
- * @prop uri The Spotify Message's uri.
- * @prop theme The Spotify Message's theme.
- * @prop view  The Spotify Message's view.
- * @prop width The Spotify Message's width.
- * @prop height The Spotify Message's height.
- * @prop text The Spotify Message's text.
- */
-export interface ISpotifyMessage extends IMessage {
-	uri: string;
-	theme?: string;
-	view?: string;
-	width?: number | string;
-	height?: number | string;
-}
-
-/**
- * ISpotifyMessageProps Interface
- *
- * @prop type The Spotify Message's type is "spotify".
- * @prop message The Spotify Message's message is a ISpotifyMessage.
- */
-export interface ISpotifyMessageProps extends ISpotifyMessage {}
 
 /**
  * IMessageBoxProps Interface
@@ -897,7 +865,6 @@ export interface IMeetingItemProps {
  * @prop onSubmit The Input's function onSubmit(event: FormEvent<T>).
  * @prop onReset The Input's function onReset(event: FormEvent<T>).
  * @prop onKeyDown The Input's function onKeyDown(event: KeyboardEvent<T>).
- * @prop onKeyPress The Input's function onKeyPress(event: KeyboardEvent<T>).
  * @prop onKeyUp The Input's function onKeyUp(event: KeyboardEvent<T>).
  */
 export interface IInputProps {
@@ -907,11 +874,11 @@ export interface IInputProps {
 	reference?: MutableRefObject<
 		HTMLInputElement | HTMLTextAreaElement | undefined
 	>;
-	clear?: (clear: () => void) => void;
+	clearButton?: boolean;
 	maxlength?: number;
 	maxHeight?: number;
 	onMaxLengthExceed?: () => void;
-	onChange?: ({ ev }: { ev: SyntheticEvent }) => void;
+	onChange?: (ev: SyntheticEvent<HTMLInputElement, Event>) => void;
 	multiline?: boolean;
 	autoHeight?: boolean;
 	minHeight?: number;
@@ -922,6 +889,8 @@ export interface IInputProps {
 	defaultValue?: string;
 	inputStyle?: CSSProperties;
 	value?: string;
+	clear?: () => void;
+	setValue?: (value: string) => void;
 	onCopy?: ClipboardEventHandler;
 	onCut?: ClipboardEventHandler;
 	onPaste?: ClipboardEventHandler;
@@ -931,7 +900,6 @@ export interface IInputProps {
 	onSubmit?: FormEventHandler;
 	onReset?: FormEventHandler;
 	onKeyDown?: KeyboardEventHandler;
-	onKeyPress?: KeyboardEventHandler;
 	onKeyUp?: KeyboardEventHandler;
 }
 
@@ -1015,6 +983,7 @@ export interface IButtonProps {
 	text?: string;
 	buttonRef?: RefObject<HTMLButtonElement>;
 	type?: "button" | "submit" | "reset";
+	borderWidth?: number;
 	className?: string;
 	style?: CSSProperties;
 	backgroundColor?: string;
@@ -1022,6 +991,7 @@ export interface IButtonProps {
 	outlined?: boolean;
 	circle?: boolean;
 	disabled?: boolean;
+	link?: boolean;
 	onClick?: MouseEventHandler;
 	icon?: IIcon;
 }
@@ -1083,7 +1053,7 @@ export interface IDropdownItemIcon {
  */
 export interface ISideBarProps extends ISideBar {
 	type?: string;
-	data: ISideBar;
+	className?: string;
 	style?: CSSProperties;
 }
 
@@ -1099,7 +1069,6 @@ export interface ISideBar {
 	top?: ReactElement;
 	center?: ReactElement;
 	bottom?: ReactElement;
-	className?: string;
 }
 
 /**
@@ -1116,25 +1085,10 @@ export interface ISideBar {
  * @prop color The Popup's color.
  */
 export interface IPopup {
-	show?: boolean;
 	header?: string;
 	text?: string;
-	footerButtons?: Array<{
-		color?: string;
-		backgroundColor?: string;
-		text?: string;
-		type?: "submit" | "reset" | "button";
-		onClick?: MouseEventHandler;
-	}>;
-	headerButtons?: Array<{
-		color?: string;
-		type?: "submit" | "reset" | "button";
-		icon?: {
-			component?: ReactElement;
-			size?: number;
-		};
-		onClick?: MouseEventHandler;
-	}>;
+	footerButtons?: IButtonProps[];
+	headerButtons?: IButtonProps[];
 	renderHeader?: () => ReactElement;
 	renderContent?: () => ReactElement;
 	renderFooter?: () => ReactElement;
@@ -1152,6 +1106,7 @@ export interface IPopupProps {
 	popup: IPopup;
 	type?: string;
 	className?: string;
+	show?: boolean;
 }
 
 /**
@@ -1214,7 +1169,6 @@ export interface INavbarProps {
  * @type ILocationMessageProps Location Message Props
  * @type IPhotoMessageProps Photo Message Props
  * @type IVideoMessageProps Video Message Props
- * @type ISpotifyMessageProps Spotify Message Props
  * @type IAudioMessageProps Audio Message Props
  * @type IMeetingLinkMessageProps Meeting Link Message Props
  * @type IFileMessageProps File Message Props
@@ -1226,7 +1180,6 @@ export type MessageType =
 	| ({ type: "location" } & ILocationMessageProps)
 	| ({ type: "photo" } & IPhotoMessageProps)
 	| ({ type: "video" } & IVideoMessageProps)
-	| ({ type: "spotify" } & ISpotifyMessageProps)
 	| ({ type: "audio" } & IAudioMessageProps)
 	| ({ type: "meetingLink" } & IMeetingLinkMessageProps)
 	| ({ type: "file" } & IFileMessageProps)
