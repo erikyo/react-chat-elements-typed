@@ -24,6 +24,7 @@ export const Outlined = {
 		backgroundColor: "var(--rce-color-secondary)",
 		color: "var(--rce-color-white)",
 		outlined: true,
+		borderWidth: 2,
 		onClick: () => console.log("clicked"),
 	},
 };
@@ -32,6 +33,13 @@ export const Disabled = {
 	args: {
 		text: "Disabled",
 		disabled: true,
+	},
+};
+
+export const Link = {
+	args: {
+		text: "Disabled",
+		link: true,
 	},
 };
 
