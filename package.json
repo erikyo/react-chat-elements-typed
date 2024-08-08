@@ -1,6 +1,6 @@
 {
 	"name": "react-chat-elements-typed",
-	"version": "13.0.5",
+	"version": "13.0.6",
 	"description": "Reactjs chat components",
 	"author": "Avare Kodcu <abdurrahmaneker58@gmail.com>",
 	"contributors": ["Erik <https://github.com/erikyo>"],
@@ -23,14 +23,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/detaysoft/react-chat-elements-typed.git"
+		"url": "git+https://github.com/erikyo/react-chat-elements-typed.git"
 	},
 	"keywords": ["react", "reactjs", "chat", "css", "chat", "components"],
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/detaysoft/react-chat-elements-typed/issues"
+		"url": "https://github.com/erikyo/react-chat-elements-typed/issues"
 	},
-	"homepage": "https://github.com/detaysoft/react-chat-elements-typed#readme",
+	"homepage": "https://erikyo.github.io/react-chat-elements-typed/",
 	"scripts": {
 		"watch": "tsup --watch",
 		"build": "npm run clear:build && tsup",
@@ -52,19 +52,20 @@
 	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "^1.6.1",
-		"@storybook/addon-essentials": "^8.2.5",
-		"@storybook/addon-interactions": "^8.2.5",
-		"@storybook/addon-links": "^8.2.5",
-		"@storybook/addon-onboarding": "^8.2.5",
+		"@storybook/addon-essentials": "^8.2.8",
+		"@storybook/addon-interactions": "^8.2.8",
+		"@storybook/addon-links": "^8.2.8",
+		"@storybook/addon-onboarding": "^8.2.8",
 		"@storybook/addon-postcss": "^2.0.0",
 		"@storybook/addon-styling-webpack": "^1.0.0",
-		"@storybook/addon-webpack5-compiler-swc": "^1.0.4",
-		"@storybook/blocks": "^8.2.5",
-		"@storybook/react": "^8.2.5",
-		"@storybook/react-webpack5": "^8.2.5",
-		"@storybook/test": "^8.2.5",
+		"@storybook/addon-webpack5-compiler-swc": "^1.0.5",
+		"@storybook/blocks": "^8.2.8",
+		"@storybook/react": "^8.2.8",
+		"@storybook/react-webpack5": "^8.2.8",
+		"@storybook/test": "^8.2.8",
 		"@testing-library/jest-dom": "^6.4.6",
 		"@testing-library/react": "^16.0.0",
+		"@types/leaflet": "^1.9.12",
 		"@types/node": "^20.14.11",
 		"@types/progressbar.js": "^1.1.7",
 		"@types/react": "^18.3.3",
@@ -90,12 +91,17 @@
 	"dependencies": {
 		"@dicebear/collection": "^9.2.1",
 		"@dicebear/core": "^9.2.1",
+		"@emoji-mart/data": "^1.2.1",
+		"@emoji-mart/react": "^1.1.1",
 		"classnames": "^2.5.1",
 		"date-fns": "^3.6.0",
+		"emoji-mart": "^5.6.0",
+		"leaflet": "^1.9.4",
 		"progressbar.js": "^1.1.1",
 		"react": "^17 || ^18 || ^19",
 		"react-dom": "^17 || ^18 || ^19",
-		"react-icons": "^5.2.1"
+		"react-icons": "^5.2.1",
+		"react-leaflet": "^4.2.1"
 	},
 	"optionalDependencies": {
 		"@rollup/rollup-linux-x64-gnu": "^4.14.3"
