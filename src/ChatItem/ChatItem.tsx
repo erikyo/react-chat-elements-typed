@@ -1,6 +1,5 @@
 import type React from "react";
-import type { ReactElement } from "react";
-import type { MouseEventHandler } from "react";
+import type { ReactElement, MouseEventHandler } from "react";
 import { useEffect, useState } from "react";
 import "./ChatItem.css";
 import Avatar from "../Avatar/Avatar";
@@ -13,8 +12,6 @@ import type {
 	ChatItemEvent,
 	IChatItemProps,
 } from "../types";
-import { Browser } from "leaflet";
-import retina = Browser.retina;
 
 const ChatItem: React.FC<IChatItemProps> = ({
 	avatarFlexible = false,
@@ -195,8 +192,11 @@ const ChatItem: React.FC<IChatItemProps> = ({
 								</div>
 								{props.customStatusComponents
 									? props.customStatusComponents.map(
-											(el: ReactElement, index) => {
-												return { ...el, key: index };
+											(el: ReactElement, index: number) => {
+												if ("key" in el.props) {
+													el.props.key = index.toString();
+												}
+												return el;
 											},
 										)
 									: null}

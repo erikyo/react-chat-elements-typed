@@ -142,9 +142,7 @@ const Input: FC<IInputProps> = ({
 						icon={{
 							component: <MdClear color={"var(--rce-color-gray)"} size={20} />,
 						}}
-					>
-						{clearButton}
-					</Button>
+					/>
 				)}
 			</div>
 			{props.rightButtons && (

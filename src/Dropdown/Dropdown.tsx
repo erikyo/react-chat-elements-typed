@@ -50,7 +50,7 @@ const Dropdown: FC<IDropdownProps> = ({
 								x.icon ? (
 									<span className="rce-button-icon--container">
 										{(x.icon.float === "right" || !x.icon.float) && (
-											<Button>{x.text}</Button>
+											<Button {...x} />
 										)}
 
 										<span
