@@ -2,7 +2,11 @@
 
 # react-chat-elements-typed
 
-## NOTE: THIS IS A FORK. DO NOT USE. PLEASE USE [react-chat-elements](https://github.com/Detaysoft/react-chat-elements)
+> [!WARNING]
+> NOTE: THIS IS A FORK. 
+> If you are looking for the original repository please visit [react-chat-elements](https://github.com/Detaysoft/react-chat-elements)
+
+---
 
 ## Install
 
@@ -565,7 +569,6 @@ import { LocationMessage } from 'react-chat-elements'
 | prop        | default | type     | description                   |
 | ----------- | ------- | -------- | ----------------------------- |
 | src         | none    | image    | image src                     |
-| apiKey      | none    | string   | google staticmap api key      |
 | zoom        | 14      | int      | google staticmap zoom level   |
 | markerColor | red     | string   | google staticmap marker color |
 | data        | {}      | object   | message data                  |
