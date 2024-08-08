@@ -1,16 +1,13 @@
 import "./LocationMessage.css";
 import classNames from "classnames";
 import type { ILocationMessageProps } from "../types";
-import type { FC } from "react";
+import type { FC, MouseEventHandler, ReactEventHandler } from "react";
 import { STATIC_URL } from "../constants";
 import { MapElement } from "./Map";
 
 const LocationMessage: FC<ILocationMessageProps> = (props) => {
+	const { latitude = "0", longitude = "0", zoom = "5" } = props;
 	const buildURL = (url: string) => {
-		const latitude = props?.latitude ?? "0";
-		const longitude = props?.longitude ?? "0";
-		const zoom = props?.zoom ?? "14";
-
 		return url
 			.replace(/LATITUDE/g, latitude)
 			.replace(/LONGITUDE/g, longitude)
@@ -37,11 +34,9 @@ const LocationMessage: FC<ILocationMessageProps> = (props) => {
 				className={className()}
 			>
 				<MapElement
-					latitude={props?.latitude ?? "0"}
-					longitude={props?.longitude ?? "0"}
-					zoom={props?.zoom}
 					onError={props.onError}
 					className="rce-mbox-location-img h-full w-full"
+					{...props}
 				/>
 			</a>
 			{props.text && (

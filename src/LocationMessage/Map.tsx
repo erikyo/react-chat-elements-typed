@@ -1,16 +1,7 @@
 // Map.tsx
 import type React from "react";
 import type { FC } from "react";
-import { useState } from "react";
-import {
-	MapContainer,
-	Marker,
-	Popup,
-	TileLayer,
-	useMap,
-	useMapEvents,
-} from "react-leaflet";
-import L, { type LatLng } from "leaflet";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import type { ILocationMessageProps } from "../types";
 
@@ -27,8 +18,6 @@ export const CustomMarker: React.FC<{
 	position: L.LatLngExpression;
 	children: React.ReactNode;
 }> = ({ position, children }) => {
-	const map = useMap();
-
 	return (
 		<Marker position={position} icon={markerIcon}>
 			{children}
@@ -38,33 +27,30 @@ export const CustomMarker: React.FC<{
 
 export const MapElement: FC<ILocationMessageProps> = (props) => {
 	const { latitude, longitude, zoom } = props;
-	function LocationMarker() {
-		const [position, setPosition] = useState<LatLng | null>(null);
-		const map = useMapEvents({
-			click(e: L.LeafletMouseEvent) {
-				setPosition(e.latlng);
-				map.flyTo(e.latlng, map.getZoom());
-			},
-		});
 
-		return position === null ? null : (
-			<CustomMarker position={position}>
-				<Popup>You clicked here</Popup>
+	function LocationMarker(props: ILocationMessageProps["marker"]) {
+		const { latLng, markerText, markerColor } = props;
+		return latLng ? (
+			<CustomMarker position={latLng}>
+				<Marker
+					options={{ icon: markerIcon, draggable: false, color: markerColor }}
+				/>
+				<Popup>{markerText}</Popup>
 			</CustomMarker>
-		);
+		) : null;
 	}
 
 	return (
 		<MapContainer
-			center={[Number.parseFloat(latitude), Number.parseFloat(longitude)]}
-			zoom={Number(zoom)}
+			center={[latitude, longitude]}
+			zoom={zoom}
 			scrollWheelZoom={false}
 		>
 			<TileLayer
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
-			<LocationMarker />
+			{props.marker && <LocationMarker {...props.marker} />}
 		</MapContainer>
 	);
 };

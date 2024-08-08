@@ -7,8 +7,8 @@ describe("Avatar component", () => {
 	it("should render without issues", () => {
 		const component = render(
 			<LocationMessage
-				latitude={"0"}
-				longitude={"0"}
+				latitude={"15"}
+				longitude={"44"}
 				date={new Date()}
 				type={"location"}
 				text={"ciao"}
