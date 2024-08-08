@@ -59,3 +59,9 @@
 .rce-input::placeholder {
     color: #afafaf;
 }
+
+.rce-emoji-picker {
+    position: absolute;
+    bottom: 72px;
+    left: 4px;
+}
