@@ -8,7 +8,6 @@
     min-height: 100%;
 }
 
-.rce-sbar.default,
 .rce-sbar.light {
     background: var(--rce-mbox-light-bg);
 }

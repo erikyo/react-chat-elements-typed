@@ -6,20 +6,18 @@ import classNames from "classnames";
 import type { ISideBarProps } from "../types";
 
 const SideBar: FC<ISideBarProps> = ({
-	type = "dark",
+	type = "default",
 	style = {},
 	...props
 }) => {
 	return (
 		<div
-			className={classNames("rce-sbar", type, props.data?.className)}
+			className={classNames("rce-sbar", type, props?.className)}
 			style={style}
 		>
-			<div className="rce-sbar-item">{props.data?.top}</div>
-			<div className="rce-sbar-item rce-sbar-item__center">
-				{props.data?.center}
-			</div>
-			<div className="rce-sbar-item">{props.data?.bottom}</div>
+			<div className="rce-sbar-item">{props?.top}</div>
+			<div className="rce-sbar-item rce-sbar-item__center">{props?.center}</div>
+			<div className="rce-sbar-item">{props?.bottom}</div>
 		</div>
 	);
 };

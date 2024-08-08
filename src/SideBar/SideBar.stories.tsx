@@ -1,40 +1,49 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { StoryObj } from "@storybook/react";
 
 import SideBar from "./SideBar";
 
 const meta = {
 	component: SideBar,
-} satisfies Meta<typeof SideBar>;
+};
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
 	args: {
 		style: {
 			width: "300px",
 			height: "100vh",
 		},
-		data: {
-			top: <div>'TOP' area</div>,
-			center: <div>'CENTER' area</div>,
-			bottom: <div>'BOTTOM' area</div>,
-		},
+		top: <div>'TOP' area</div>,
+		center: <div>'CENTER' area</div>,
+		bottom: <div>'BOTTOM' area</div>,
 	},
 };
 
-export const Light: Story = {
+export const Dark = {
+	args: {
+		type: "dark",
+		style: {
+			width: "300px",
+			height: "100vh",
+		},
+		top: <div>'TOP' area</div>,
+		center: <div>'CENTER' area</div>,
+		bottom: <div>'BOTTOM' area</div>,
+	},
+};
+
+export const Light = {
 	args: {
 		type: "light",
 		style: {
 			width: "300px",
 			height: "100vh",
 		},
-		data: {
-			top: <div>'TOP' area</div>,
-			center: <div>'CENTER' area</div>,
-			bottom: <div>'BOTTOM' area</div>,
-		},
+		top: <div>'TOP' area</div>,
+		center: <div>'CENTER' area</div>,
+		bottom: <div>'BOTTOM' area</div>,
 	},
 };
