@@ -5,7 +5,8 @@ import {
 	systemMessage,
 	textMessage,
 } from "../stories/example/utils/MessageTypes.ts";
-import { randomMessage } from "../stories/example/components/MessageListExample";
+
+import { randomMessage } from "../stories/example/components/RandomMessage";
 
 const meta = {
 	component: MessageList,
