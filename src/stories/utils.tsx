@@ -7,7 +7,7 @@ export function generateAvatar(index = 0, { ...args } = {}): IAvatarProps {
 		alt: "Avatar",
 		className: "rce-avatar",
 		type: "circle",
-		src: getAvatar(),
+		src: getAvatar(index.toString()),
 		size: "default",
 		...args,
 	};

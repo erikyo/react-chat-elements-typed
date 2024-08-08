@@ -40,6 +40,16 @@ export function getAvatar(name?: string): string {
 	return avatar.toDataUri();
 }
 
-export function getRandomInRange(from, to, fixed) {
+/**
+ * Returns a random number between from and to with fixed precision
+ * @param from starting number
+ * @param to ending number
+ * @param fixed precision
+ */
+export function getRandomInRange(
+	from: number,
+	to: number,
+	fixed: number,
+): string {
 	return (Math.random() * (to - from) + from).toFixed(fixed);
 }

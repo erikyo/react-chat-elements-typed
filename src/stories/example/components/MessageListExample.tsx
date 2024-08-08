@@ -15,6 +15,7 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { randomMessage } from "./RandomMessage";
 import { loremIpsum } from "lorem-ipsum";
+import { Emoji } from "emoji-mart";
 
 const MessageListExample = () => {
 	const [messageListArray, setMessageListArray] = useState<MessageType[]>([]);
@@ -68,7 +69,7 @@ const MessageListExample = () => {
 	};
 
 	const clearRef = (inputRef: HTMLInputElement | undefined) => {
-		if ("value" in inputreference.current) {
+		if (inputreference.current && "value" in inputreference.current) {
 			inputreference.current.value = "";
 		}
 		setInputValue("");
@@ -132,7 +133,7 @@ const MessageListExample = () => {
 						<div className={"rce-emoji-picker"}>
 							<Picker
 								data={data}
-								onEmojiSelect={(e) => {
+								onEmojiSelect={(e: { native: string }) => {
 									const newValue = inputreference.current?.value + e.native;
 									setInputValue(newValue);
 								}}
@@ -151,7 +152,7 @@ const MessageListExample = () => {
 							setInputValue(currentValue);
 						}}
 						onSubmit={(e) => {
-							if ("value" in inputreference.current) {
+							if (inputreference.current && "value" in inputreference.current) {
 								addMessage(token(), inputreference.current.value);
 								clearRef(inputreference.current);
 							}
@@ -185,7 +186,6 @@ const MessageListExample = () => {
 								circle
 								icon={{
 									component: <IconSend style={{ color: "#566570" }} />,
-									title: "Send",
 								}}
 								backgroundColor={"transparent"}
 							/>
