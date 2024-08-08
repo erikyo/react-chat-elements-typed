@@ -5,7 +5,15 @@ import { render } from "@testing-library/react";
 
 describe("Avatar component", () => {
 	it("should render without issues", () => {
-		const component = render(<LocationMessage />);
+		const component = render(
+			<LocationMessage
+				latitude={"0"}
+				longitude={"0"}
+				date={new Date()}
+				type={"location"}
+				text={"ciao"}
+			/>,
+		);
 		expect(component.container).toBeTruthy();
 		expect(
 			component.container.querySelector(".rce-mbox-location"),

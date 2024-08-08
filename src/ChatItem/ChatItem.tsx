@@ -1,4 +1,5 @@
-import type React, {ReactElement} from "react";
+import type React from "react";
+import type { ReactElement } from "react";
 import type { MouseEventHandler } from "react";
 import { useEffect, useState } from "react";
 import "./ChatItem.css";
@@ -12,7 +13,7 @@ import type {
 	ChatItemEvent,
 	IChatItemProps,
 } from "../types";
-import {Browser} from "leaflet";
+import { Browser } from "leaflet";
 import retina = Browser.retina;
 
 const ChatItem: React.FC<IChatItemProps> = ({
@@ -193,7 +194,11 @@ const ChatItem: React.FC<IChatItemProps> = ({
 									{unread > 0 ? <span>{unread}</span> : null}
 								</div>
 								{props.customStatusComponents
-									? props.customStatusComponents.map((el: ReactElement, index) => {return  {...el, key: index}})
+									? props.customStatusComponents.map(
+											(el: ReactElement, index) => {
+												return { ...el, key: index };
+											},
+										)
 									: null}
 							</div>
 						</div>

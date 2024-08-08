@@ -7,8 +7,8 @@ import { MapElement } from "./Map";
 
 const LocationMessage: FC<ILocationMessageProps> = (props) => {
 	const buildURL = (url: string) => {
-		const latitude = props?.latitude.toString() ?? "0";
-		const longitude = props?.longitude.toString() ?? "0";
+		const latitude = props?.latitude ?? "0";
+		const longitude = props?.longitude ?? "0";
 		const zoom = props?.zoom ?? "14";
 
 		return url

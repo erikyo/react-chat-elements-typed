@@ -1,3 +1,25 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Avatar component > should render without issues 1`] = `<div />`;
+exports[`Avatar component > should render without issues 1`] = `
+<div>
+  <div
+    class="rce-popup-wrapper"
+  >
+    <div
+      class="rce-popup"
+    >
+      <div
+        class="rce-popup-header"
+      >
+        <span />
+      </div>
+      <div
+        class="rce-popup-content"
+      />
+      <div
+        class="rce-popup-footer"
+      />
+    </div>
+  </div>
+</div>
+`;
