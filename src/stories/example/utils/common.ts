@@ -39,3 +39,7 @@ export function getAvatar(name?: string): string {
 
 	return avatar.toDataUri();
 }
+
+export function getRandomInRange(from, to, fixed) {
+	return (Math.random() * (to - from) + from).toFixed(fixed);
+}
