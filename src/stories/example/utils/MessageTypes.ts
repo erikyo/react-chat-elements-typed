@@ -7,7 +7,8 @@ import {
 	token,
 } from "./common";
 import { MdOutlineVideoCall } from "react-icons/md";
-import type { MessageType } from "../../../types";
+import type { ILocationMessage, MessageType } from "../../../types";
+import type { ILocationMessageProps } from "../../../types";
 
 export const getMessageId = (index: number) => {
 	return index;
@@ -51,19 +52,26 @@ export const photoMessageMinimal: MessageType = {
 
 export const locationMessage: MessageType = {
 	type: "location",
-	markerColor: "",
 	status: "received",
 	statusTitle: token() >= 5 ? "Desktop" : "Mobile",
 	id: loremIpsum({ count: 1, units: "words" }),
-	position: token() >= 1 ? "right" : "left",
+	position: token(2) >= 1 ? "right" : "left",
 	text: loremIpsum({ count: 1, units: "sentences" }),
 	title: loremIpsum({ count: 2, units: "words" }),
 	date: +new Date(),
 	dateString: "now",
 	avatar: getAvatar(),
-	zoom: "5",
-	latitude: getRandomInRange(-90, 90, 5),
-	longitude: getRandomInRange(-180, 180, 5),
+	latitude: Number(getRandomInRange(-90, 90, 5)),
+	longitude: Number(getRandomInRange(-180, 180, 5)),
+	zoom: 5,
+	marker: {
+		latLng: {
+			lat: Number(getRandomInRange(-90, 90, 5)),
+			lng: Number(getRandomInRange(-180, 180, 5)),
+		},
+		markerColor: "red",
+		markerText: "",
+	},
 };
 
 export const fileMessage: MessageType = {

@@ -6,13 +6,12 @@ import { STATIC_URL } from "../constants";
 import { MapElement } from "./Map";
 
 const LocationMessage: FC<ILocationMessageProps> = (props) => {
-	const { latitude = "0", longitude = "0", zoom = "5" } = props;
+	const { latitude = 0, longitude = 0, zoom = 5 } = props;
 	const buildURL = (url: string) => {
 		return url
-			.replace(/LATITUDE/g, latitude)
-			.replace(/LONGITUDE/g, longitude)
-			.replace("MARKER_COLOR", props?.markerColor ?? "red")
-			.replace("ZOOM", zoom);
+			.replace(/LATITUDE/g, latitude.toString())
+			.replace(/LONGITUDE/g, longitude.toString())
+			.replace("ZOOM", zoom.toString());
 	};
 
 	const className = () => {

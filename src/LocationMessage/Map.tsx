@@ -4,6 +4,7 @@ import type { FC } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import type { ILocationMessageProps } from "../types";
+import L, { type LatLngExpression } from "leaflet";
 
 export const markerIcon = L.icon({
 	iconUrl: "https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png",
@@ -28,15 +29,15 @@ export const CustomMarker: React.FC<{
 export const MapElement: FC<ILocationMessageProps> = (props) => {
 	const { latitude, longitude, zoom } = props;
 
-	function LocationMarker(props: ILocationMessageProps["marker"]) {
+	function LocationMarker(props: ILocationMessageProps["marker"] | undefined) {
+		if (!props) {
+			return null;
+		}
 		const { latLng, markerText, markerColor } = props;
 		return latLng ? (
-			<CustomMarker position={latLng}>
-				<Marker
-					options={{ icon: markerIcon, draggable: false, color: markerColor }}
-				/>
+			<Marker position={latLng as LatLngExpression} icon={markerIcon}>
 				<Popup>{markerText}</Popup>
-			</CustomMarker>
+			</Marker>
 		) : null;
 	}
 

@@ -19,6 +19,7 @@ import type {
 	SyntheticEvent,
 	UIEvent,
 } from "react";
+import type { LatLngExpression } from "leaflet";
 
 type StatusType = "waiting" | "sent" | "received" | "read";
 /**
@@ -498,7 +499,7 @@ export interface ILocationMessage extends IMessage {
 	mapURL?: string;
 	zoom?: number;
 	marker?: {
-		latLng: string;
+		latLng: LatLngExpression;
 		markerColor: string;
 		markerText: string;
 	};
