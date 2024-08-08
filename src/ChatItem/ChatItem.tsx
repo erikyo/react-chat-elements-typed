@@ -1,4 +1,4 @@
-import type React from "react";
+import type React, {ReactElement} from "react";
 import type { MouseEventHandler } from "react";
 import { useEffect, useState } from "react";
 import "./ChatItem.css";
@@ -12,6 +12,8 @@ import type {
 	ChatItemEvent,
 	IChatItemProps,
 } from "../types";
+import {Browser} from "leaflet";
+import retina = Browser.retina;
 
 const ChatItem: React.FC<IChatItemProps> = ({
 	avatarFlexible = false,
@@ -102,7 +104,6 @@ const ChatItem: React.FC<IChatItemProps> = ({
 				{((onDrag && !props.onDragComponent) || !onDrag) && (
 					<>
 						<div
-							key="avatar"
 							className={classNames("rce-citem-avatar", {
 								"rce-citem-status-encircle": statusColorType === "encircle",
 							})}
@@ -115,7 +116,7 @@ const ChatItem: React.FC<IChatItemProps> = ({
 										? "rce-citem-avatar-encircle-status"
 										: ""
 								}
-								size={props.avatarSize || "large"}
+								size={props.avatarSize || "default"}
 								letterItem={props.letterItem}
 								sideElement={
 									props.statusColor ? (
@@ -192,7 +193,7 @@ const ChatItem: React.FC<IChatItemProps> = ({
 									{unread > 0 ? <span>{unread}</span> : null}
 								</div>
 								{props.customStatusComponents
-									? props.customStatusComponents.map((item) => item)
+									? props.customStatusComponents.map((el: ReactElement, index) => {return  {...el, key: index}})
 									: null}
 							</div>
 						</div>
