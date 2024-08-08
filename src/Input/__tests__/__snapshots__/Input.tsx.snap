@@ -2,15 +2,20 @@
 
 exports[`Avatar component > should render without issues 1`] = `
 <div>
-  <div
+  <form
     class="rce-container-input"
   >
-    <input
-      class="rce-input"
-      placeholder="Type here..."
-      type="text"
-      value=""
-    />
-  </div>
+    <div
+      class="rce-input-content w-full relative"
+    >
+      <input
+        class="rce-input w-full"
+        name="chat-input"
+        placeholder="Type here..."
+        type="text"
+        value=""
+      />
+    </div>
+  </form>
 </div>
 `;

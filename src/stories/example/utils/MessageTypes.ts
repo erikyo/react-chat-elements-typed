@@ -1,7 +1,14 @@
 import { loremIpsum } from "lorem-ipsum";
-import { getAvatar, getRandomColor, photo, token } from "./common";
+import {
+	getAvatar,
+	getRandomColor,
+	getRandomInRange,
+	photo,
+	token,
+} from "./common";
 import { MdOutlineVideoCall } from "react-icons/md";
-import type { MessageType } from "../../../types";
+import type { ILocationMessage, MessageType } from "../../../types";
+import type { ILocationMessageProps } from "../../../types";
 
 export const getMessageId = (index: number) => {
 	return index;
@@ -9,7 +16,7 @@ export const getMessageId = (index: number) => {
 
 export const photoMessage: MessageType = {
 	type: "photo",
-	id: String(Math.random()),
+	id: loremIpsum({ count: 1, units: "words" }),
 	position: token() >= 1 ? "right" : "left",
 	title: loremIpsum({ count: 2, units: "words" }),
 	focus: true,
@@ -45,43 +52,26 @@ export const photoMessageMinimal: MessageType = {
 
 export const locationMessage: MessageType = {
 	type: "location",
-	markerColor: "",
-	zoom: "",
-	apiKey: "",
 	status: "received",
 	statusTitle: token() >= 5 ? "Desktop" : "Mobile",
-	id: String(Math.random()),
-	position: token() >= 1 ? "right" : "left",
+	id: loremIpsum({ count: 1, units: "words" }),
+	position: token(2) >= 1 ? "right" : "left",
 	text: loremIpsum({ count: 1, units: "sentences" }),
 	title: loremIpsum({ count: 2, units: "words" }),
-	focus: true,
 	date: +new Date(),
 	dateString: "now",
 	avatar: getAvatar(),
-	titleColor: getRandomColor(),
-	forwarded: true,
-	replyButton: true,
-	removeButton: true,
-	notch: true,
-	copiableDate: true,
-	retracted: false,
-	forwardedMessageText: "Forwarded",
-	className: "",
-	data: {
-		latitude: "37.773972",
-		longitude: "-122.431297",
-		staticURL:
-			"https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-s-circle+FF0000(LONGITUDE,LATITUDE)/LONGITUDE,LATITUDE,ZOOM/270x200@2x?access_token=KEY",
+	latitude: Number(getRandomInRange(-90, 90, 5)),
+	longitude: Number(getRandomInRange(-180, 180, 5)),
+	zoom: 5,
+	marker: {
+		latLng: {
+			lat: Number(getRandomInRange(-90, 90, 5)),
+			lng: Number(getRandomInRange(-180, 180, 5)),
+		},
+		markerColor: "red",
+		markerText: "",
 	},
-	reply:
-		token() >= 1
-			? {
-					photoURL: token() >= 1 ? getAvatar() : undefined,
-					title: loremIpsum({ count: 2, units: "words" }),
-					titleColor: getRandomColor(),
-					text: loremIpsum({ count: 1, units: "sentences" }),
-				}
-			: undefined,
 };
 
 export const fileMessage: MessageType = {
@@ -97,7 +87,7 @@ export const fileMessage: MessageType = {
 	},
 	status: "sent",
 	statusTitle: token() >= 5 ? "Desktop" : "Mobile",
-	id: String(Math.random()),
+	id: loremIpsum({ count: 1, units: "words" }),
 	position: token() >= 1 ? "right" : "left",
 	text: loremIpsum({ count: 1, units: "sentences" }),
 	title: loremIpsum({ count: 2, units: "words" }),
@@ -133,45 +123,9 @@ export const systemMessage: MessageType = {
 	date: +new Date(),
 };
 
-export const spotifyMessage: MessageType = {
-	type: "spotify",
-	id: String(Math.random()),
-	position: token() >= 1 ? "right" : "left",
-	text: loremIpsum({ count: 1, units: "sentences" }),
-	title: loremIpsum({ count: 2, units: "words" }),
-	focus: true,
-	date: +new Date(),
-	dateString: "now",
-	avatar: getAvatar(),
-	titleColor: getRandomColor(),
-	forwarded: true,
-	replyButton: true,
-	removeButton: true,
-	notch: true,
-	copiableDate: true,
-	retracted: false,
-	className: "",
-	status: "read",
-	statusTitle: token() >= 5 ? "Desktop" : "Mobile",
-	theme: "white",
-	view: "list",
-	width: 300,
-	height: 300,
-	uri: "spotify:track:0QjjaCaXE45mvhCnV3C0TA",
-	reply:
-		token() >= 1
-			? {
-					photoURL: token() >= 1 ? photo() : undefined,
-					title: loremIpsum({ count: 2, units: "words" }),
-					titleColor: getRandomColor(),
-					text: loremIpsum({ count: 1, units: "sentences" }),
-				}
-			: undefined,
-};
-
 export const videoMessage: MessageType = {
 	type: "video",
-	id: String(Math.random()),
+	id: loremIpsum({ count: 1, units: "words" }),
 	position: token() >= 1 ? "right" : "left",
 	text: loremIpsum({ count: 1, units: "sentences" }),
 	title: loremIpsum({ count: 2, units: "words" }),
@@ -223,7 +177,7 @@ export const videoMessage: MessageType = {
 
 export const audioMessage: MessageType = {
 	type: "audio",
-	id: String(Math.random()),
+	id: loremIpsum({ count: 1, units: "words" }),
 	position: token() >= 1 ? "right" : "left",
 	text: loremIpsum({ count: 1, units: "sentences" }),
 	title: loremIpsum({ count: 2, units: "words" }),
@@ -260,9 +214,9 @@ export const audioMessage: MessageType = {
 export const meetingMessage: MessageType = {
 	type: "meeting",
 	message: "asd",
-	id: String(Math.random()),
+	id: loremIpsum({ count: 1, units: "words" }),
 	position: token() >= 1 ? "right" : "left",
-	text: "spotify:track:0QjjaCaXE45mvhCnV3C0TA",
+	text: "text",
 	title: loremIpsum({ count: 2, units: "words" }),
 	focus: true,
 	date: +new Date(),
@@ -356,7 +310,7 @@ export const meetingLinkMessage: MessageType = {
 		},
 	],
 	meetingID: String(Math.random()),
-	id: String(Math.random()),
+	id: loremIpsum({ count: 1, units: "words" }),
 	position: token() >= 1 ? "right" : "left",
 	text: loremIpsum({ count: 1, units: "sentences" }),
 	title: loremIpsum({ count: 2, units: "words" }),
@@ -388,7 +342,7 @@ export const meetingLinkMessage: MessageType = {
 export const textMessage = (index: number): MessageType =>
 	({
 		type: "text",
-		id: String(getMessageId(index)),
+		id: loremIpsum({ count: 1, units: "words" }),
 		position: token() >= 4 ? "right" : "left",
 		text: loremIpsum({ count: 1, units: "sentences" }),
 		title: loremIpsum({ count: 2, units: "words" }),
@@ -420,7 +374,7 @@ export const textMessage = (index: number): MessageType =>
 export const chatListArray = () => {
 	const name = loremIpsum({ count: 2, units: "words" });
 	return {
-		id: String(Math.random()),
+		id: loremIpsum({ count: 1, units: "words" }),
 		avatar: getAvatar(),
 		avatarFlexible: true,
 		avatarSize: "default",

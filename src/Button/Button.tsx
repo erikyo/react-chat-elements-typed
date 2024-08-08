@@ -24,6 +24,7 @@ const Button: FC<IButtonProps> = ({
 	backgroundColor = "var(--rce-color-secondary)",
 	color = "var(--rce-color-white)",
 	style = {},
+	borderWidth = 2,
 	...props
 }): ReactElement<HTMLButtonElement> => {
 	return (
@@ -37,12 +38,13 @@ const Button: FC<IButtonProps> = ({
 				props.className,
 				props.outlined && "outlined",
 				props.circle && "circle",
+				props.link && "link",
 			)}
 			style={{
 				backgroundColor: props.outlined ? color : backgroundColor,
 				color: props.outlined ? backgroundColor : color,
 				borderColor: backgroundColor,
-				borderStyle: "solid",
+				borderWidth: borderWidth,
 				cursor: disabled ? "default" : "pointer",
 				filter: disabled ? "grayscale(1)" : "none",
 				flexDirection: props.icon?.float === "left" ? "row-reverse" : "row",

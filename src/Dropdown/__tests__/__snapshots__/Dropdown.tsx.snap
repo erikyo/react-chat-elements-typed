@@ -7,7 +7,7 @@ exports[`Avatar component > should render without issues 1`] = `
   >
     <button
       class="rce-button"
-      style="border-style: solid; cursor: pointer; filter: none; flex-direction: row;"
+      style="border-width: 2px; cursor: pointer; filter: none; flex-direction: row;"
       type="button"
     />
     <div

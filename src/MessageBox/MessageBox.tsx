@@ -7,7 +7,6 @@ import PhotoMessage from "../PhotoMessage/PhotoMessage";
 import FileMessage from "../FileMessage/FileMessage";
 import SystemMessage from "../SystemMessage/SystemMessage";
 import LocationMessage from "../LocationMessage/LocationMessage";
-import SpotifyMessage from "../SpotifyMessage/SpotifyMessage";
 import ReplyMessage from "../ReplyMessage/ReplyMessage";
 import MeetingMessage from "../MeetingMessage/MeetingMessage";
 import VideoMessage from "../VideoMessage/VideoMessage";
@@ -233,10 +232,6 @@ const MessageBox: FC<MessageBoxType> = ({
 
 						{props.type === "file" && (
 							<FileMessage focus={focus} notch={notch} {...props} />
-						)}
-
-						{props.type === "spotify" && (
-							<SpotifyMessage focus={focus} notch={notch} {...props} />
 						)}
 
 						{props.type === "meeting" && (

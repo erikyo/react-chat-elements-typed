@@ -1,109 +1,51 @@
 import React, { type MutableRefObject, useRef, useState } from "react";
-import { token } from "../utils/common";
-import {
-	audioMessage,
-	fileMessage,
-	locationMessage,
-	meetingLinkMessage,
-	meetingMessage,
-	photoMessage,
-	spotifyMessage,
-	systemMessage,
-	textMessage,
-	videoMessage,
-} from "../utils/MessageTypes";
+import { getAvatar, token } from "../utils/common";
 import Input from "../../../Input/Input";
 import Button from "../../../Button/Button";
 import MessageList from "../../../MessageList/MessageList";
 import type { MessageType } from "../../../types";
 import ChatListExample from "./ChatListExample";
-
-export const randomMessage = (type = "random", index = 0): MessageType => {
-	let messageType = type;
-	if (type === "random") {
-		messageType = [
-			"text",
-			"photo",
-			"file",
-			"system",
-			"location",
-			"spotify",
-			"meeting",
-			"video",
-			"audio",
-			"meetingLink",
-		][Math.floor(Math.random() * 10) % 10];
-	}
-	switch (messageType) {
-		case "photo":
-			return photoMessage;
-		case "file":
-			return fileMessage;
-		case "system":
-			return systemMessage;
-		case "location":
-			return locationMessage;
-		case "spotify":
-			return spotifyMessage;
-		case "meeting":
-			return meetingMessage;
-		case "video":
-			return videoMessage;
-		case "audio":
-			return audioMessage;
-		case "meetingLink":
-			return meetingLinkMessage;
-		default:
-			return textMessage(index);
-	}
-};
+import { IconEmoji } from "../../../SvgIcon/IconEmoji";
+import { IconPlus } from "../../../SvgIcon/IconPlus";
+import { IconSend } from "../../../SvgIcon/IconSend";
+import Navbar from "../../../Navbar/Navbar";
+import { IconMenu } from "../../../SvgIcon/IconMenu";
+import Avatar from "../../../Avatar/Avatar";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+import { randomMessage } from "./RandomMessage";
+import { loremIpsum } from "lorem-ipsum";
+import { Emoji } from "emoji-mart";
 
 const MessageListExample = () => {
 	const [messageListArray, setMessageListArray] = useState<MessageType[]>([]);
-	const [status, setStatus] = useState("");
-	const [value, setValue] = useState(0);
+	const [showEmojis, setShowEmojis] = useState(false);
+	const [inputValue, setInputValue] = useState<string>("");
+
 	const messageListreference = useRef(null);
 	const inputreference = useRef<HTMLInputElement | undefined>();
 
-	const clearRef = (
-		inputRef: MutableRefObject<HTMLInputElement | undefined>,
-	) => {
-		if (inputRef?.current) {
-			(inputRef.current as HTMLInputElement).value = "";
-		}
-	};
-
-	const forceUpdate = () => setValue(value + 1);
-
 	const addMessage = (data: number, text = ""): void => {
 		let Addmtype = "";
+		const message = text ? text : loremIpsum({ count: 1, units: "sentences" });
 		switch (data) {
 			case 0:
 				Addmtype = "photo";
-				setStatus("waiting");
 				break;
 			case 1:
 				Addmtype = "file";
-				setStatus("sent");
 				break;
 			case 2:
 				Addmtype = "system";
 				break;
 			case 3:
 				Addmtype = "location";
-				setStatus("received");
-				break;
-			case 4:
-				Addmtype = "spotify";
-				setStatus("waiting");
 				break;
 			case 5:
 				Addmtype = "meeting";
-				setStatus("sent");
 				break;
 			case 6:
 				Addmtype = "video";
-				setStatus("read");
 				break;
 			case 7:
 				Addmtype = "audio";
@@ -113,57 +55,143 @@ const MessageListExample = () => {
 				break;
 			default:
 				Addmtype = "text";
-				setStatus("read");
 				break;
 		}
 
 		setMessageListArray([
 			...messageListArray,
-			{ ...randomMessage(Addmtype), message: text } as MessageType,
+			{ ...randomMessage(Addmtype), text: message } as MessageType,
 		]);
-		clearRef(inputreference);
-		forceUpdate();
+
+		if (inputreference.current) {
+			clearRef(inputreference.current);
+		}
+	};
+
+	const clearRef = (inputRef: HTMLInputElement | undefined) => {
+		if (inputreference.current && "value" in inputreference.current) {
+			inputreference.current.value = "";
+		}
+		setInputValue("");
+		setShowEmojis(false);
 	};
 
 	return (
-		<div className="flex h-screen">
-			<ChatListExample />
-			<div className={"flex flex-col w-full justify-end bg-sky-400"}>
-				<MessageList
-					className="message-list w-full overflow-y-auto"
-					reference={messageListreference}
-					dataSource={messageListArray}
-					lockable={true}
-					downButton={true}
-					downButtonBadge={10}
-					sendMessagePreview={true}
-				/>
-				<Input
-					className="rce-example-input"
-					placeholder="Write your message here."
-					defaultValue=""
-					multiline={true}
-					maxlength={300}
-					onMaxLengthExceed={() => console.log("onMaxLengthExceed")}
-					reference={inputreference}
-					clear={() => clearRef(inputreference)}
-					maxHeight={50}
-					onKeyPress={(e) => {
-						if (e.shiftKey && e.key === "Enter") {
-							return true;
+		<div
+			className={"flex flex-col h-screen overflow-hidden"}
+			style={{ height: "100vh", maxHeight: "100vh" }}
+		>
+			<Navbar
+				style={{ padding: "0px", height: "50px" }}
+				left={
+					<div
+						style={{
+							width: "300px",
+							padding: "8px",
+							display: "flex",
+							justifyContent: "space-between",
+							alignItems: "center",
+						}}
+					>
+						<div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+							<Avatar
+								src={getAvatar("me")}
+								size={"small"}
+								style={{ backgroundColor: "white" }}
+							/>
+							<p>Me</p>
+						</div>
+						<IconPlus style={{ color: "#54656f" }} />
+					</div>
+				}
+				right={
+					<Button
+						backgroundColor={"transparent"}
+						color={"#54656f"}
+						icon={{
+							component: <IconMenu />,
+						}}
+						onClick={() => {
+							addMessage(token(), inputreference.current?.value || "");
+						}}
+					/>
+				}
+			/>
+			<div className="flex" style={{ height: "calc(100% - 50px)" }}>
+				<ChatListExample />
+				<div className={"flex flex-col w-full justify-end bg-sky-400 relative"}>
+					<MessageList
+						className="message-list w-full overflow-y-auto"
+						reference={messageListreference}
+						dataSource={messageListArray}
+						lockable={true}
+						downButton={true}
+						downButtonBadge={10}
+						sendMessagePreview={true}
+					/>
+					{showEmojis && (
+						<div className={"rce-emoji-picker"}>
+							<Picker
+								data={data}
+								onEmojiSelect={(e: { native: string }) => {
+									const newValue = inputreference.current?.value + e.native;
+									setInputValue(newValue);
+								}}
+							/>
+						</div>
+					)}
+					<Input
+						className="rce-example-input"
+						placeholder="Write your message here."
+						maxlength={300}
+						value={inputValue}
+						onChange={(e) => {
+							const currentValue: string = inputreference.current
+								?.value as string;
+							console.log(currentValue);
+							setInputValue(currentValue);
+						}}
+						onSubmit={(e) => {
+							if (inputreference.current && "value" in inputreference.current) {
+								addMessage(token(), inputreference.current.value);
+								clearRef(inputreference.current);
+							}
+						}}
+						onMaxLengthExceed={() => console.log("Message is too long")}
+						reference={inputreference}
+						autoHeight={true}
+						multiline={false}
+						maxHeight={50}
+						onKeyDown={(e) => {
+							if (e.shiftKey && e.key === "Enter") {
+								return true;
+							}
+							if (e.ctrlKey && e.key === "Enter") {
+								addMessage(token(), inputreference.current?.value);
+								clearRef(inputreference.current);
+							}
+						}}
+						leftButtons={
+							<Button
+								circle
+								backgroundColor={"transparent"}
+								style={{ display: "flex", gap: 10, justifyContent: "center" }}
+								onClick={() => setShowEmojis(!showEmojis)}
+								icon={{ component: <IconEmoji style={{ color: "#566570" }} /> }}
+							/>
 						}
-						if (e.key === "Enter") {
-							clearRef(inputreference);
-							addMessage(token(), inputreference.current?.value);
+						rightButtons={
+							<Button
+								type={"submit"}
+								circle
+								icon={{
+									component: <IconSend style={{ color: "#566570" }} />,
+								}}
+								backgroundColor={"transparent"}
+							/>
 						}
-					}}
-					rightButtons={
-						<Button
-							text="Submit"
-							onClick={() => addMessage(token(), inputreference.current?.value)}
-						/>
-					}
-				/>
+					/>
+				</div>
 			</div>
 		</div>
 	);

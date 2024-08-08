@@ -13,7 +13,6 @@ import MeetingMessage from "./MeetingMessage/MeetingMessage";
 import AudioMessage from "./AudioMessage/AudioMessage";
 import FileMessage from "./FileMessage/FileMessage";
 import LocationMessage from "./LocationMessage/LocationMessage";
-import SpotifyMessage from "./SpotifyMessage/SpotifyMessage";
 import VideoMessage from "./VideoMessage/VideoMessage";
 import PhotoMessage from "./PhotoMessage/PhotoMessage";
 import MeetingLink from "./MeetingLink/MeetingLink";
@@ -43,7 +42,6 @@ export {
 	AudioMessage,
 	FileMessage,
 	LocationMessage,
-	SpotifyMessage,
 	VideoMessage,
 	PhotoMessage,
 	MeetingLink,

@@ -7,8 +7,8 @@ import Button from "../Button/Button";
 import classNames from "classnames";
 import type { IPopupProps } from "../types";
 
-const Popup: FC<IPopupProps> = ({ ...props }) => {
-	if (props.popup?.show === true)
+const Popup: FC<IPopupProps> = (props) => {
+	if (props.show === true)
 		return (
 			<div
 				className={classNames("rce-popup-wrapper", props.type, props.className)}

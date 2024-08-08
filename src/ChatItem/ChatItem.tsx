@@ -1,5 +1,5 @@
 import type React from "react";
-import type { MouseEventHandler } from "react";
+import type { ReactElement, MouseEventHandler } from "react";
 import { useEffect, useState } from "react";
 import "./ChatItem.css";
 import Avatar from "../Avatar/Avatar";
@@ -102,7 +102,6 @@ const ChatItem: React.FC<IChatItemProps> = ({
 				{((onDrag && !props.onDragComponent) || !onDrag) && (
 					<>
 						<div
-							key="avatar"
 							className={classNames("rce-citem-avatar", {
 								"rce-citem-status-encircle": statusColorType === "encircle",
 							})}
@@ -115,7 +114,7 @@ const ChatItem: React.FC<IChatItemProps> = ({
 										? "rce-citem-avatar-encircle-status"
 										: ""
 								}
-								size={props.avatarSize || "large"}
+								size={props.avatarSize || "default"}
 								letterItem={props.letterItem}
 								sideElement={
 									props.statusColor ? (
@@ -192,7 +191,14 @@ const ChatItem: React.FC<IChatItemProps> = ({
 									{unread > 0 ? <span>{unread}</span> : null}
 								</div>
 								{props.customStatusComponents
-									? props.customStatusComponents.map((item) => item)
+									? props.customStatusComponents.map(
+											(el: ReactElement, index: number) => {
+												if ("key" in el.props) {
+													el.props.key = index.toString();
+												}
+												return el;
+											},
+										)
 									: null}
 							</div>
 						</div>

@@ -3,7 +3,7 @@
 exports[`Avatar component > should render without issues 1`] = `
 <div>
   <div
-    class="rce-sbar dark"
+    class="rce-sbar default"
   >
     <div
       class="rce-sbar-item"

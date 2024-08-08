@@ -1,7 +1,7 @@
 import { loremIpsum } from "lorem-ipsum";
 import type React from "react";
 import type { ReactNode } from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BsListTask } from "react-icons/bs";
 import type { IChatItemProps } from "../../../types";
 import SideBar from "../../../SideBar/SideBar";
@@ -35,14 +35,10 @@ const Test: ReactNode = (
 );
 
 function ChatListExample() {
-	const photo = useCallback((size: number | undefined) => {
-		return getAvatar(loremIpsum({ count: 1, units: "words" }));
-	}, []);
-
 	const [chatListArray, setChatListArray] = useState<IChatItemProps[]>([
 		{
 			id: String(Math.random()),
-			avatar: getAvatar(`avatar${Math.random().toString()}`),
+			avatar: getAvatar(),
 			avatarFlexible: true,
 			statusColor: "lightgreen",
 			statusColorType:
@@ -100,30 +96,26 @@ function ChatListExample() {
 
 	return (
 		<SideBar
-			type={"default"}
 			style={{
 				width: "300px",
-				height: "100vh",
 				padding: "0px",
 			}}
-			data={{
-				top: (
-					<ChatList
-						id={"chatlist"}
-						dataSource={chatListArray}
-						onClickMute={({ ...props }) => console.log(props)}
-						onClickVideoCall={({ ...props }) => console.log(props)}
-						onDragEnter={(e, id) => console.log(e, id, "onDragEnter")}
-						onDragLeave={(e, id) => console.log(e, id, "onDragLeave")}
-						onDrop={(e, id) => console.log(e, id, "onDrop")}
-						onDragComponent={
-							<div className="on-drag-mlist">
-								{loremIpsum({ count: 4, units: "words" })}
-							</div>
-						}
-					/>
-				),
-			}}
+			top={
+				<ChatList
+					id={"chatlist"}
+					dataSource={chatListArray}
+					onClickMute={({ ...props }) => console.log(props)}
+					onClickVideoCall={({ ...props }) => console.log(props)}
+					onDragEnter={(e, id) => console.log(e, id, "onDragEnter")}
+					onDragLeave={(e, id) => console.log(e, id, "onDragLeave")}
+					onDrop={(e, id) => console.log(e, id, "onDrop")}
+					onDragComponent={
+						<div className="on-drag-mlist">
+							{loremIpsum({ count: 4, units: "words" })}
+						</div>
+					}
+				/>
+			}
 		/>
 	);
 }

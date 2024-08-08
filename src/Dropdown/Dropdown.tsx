@@ -50,9 +50,7 @@ const Dropdown: FC<IDropdownProps> = ({
 								x.icon ? (
 									<span className="rce-button-icon--container">
 										{(x.icon.float === "right" || !x.icon.float) && (
-											<button type={"button"} className={"rce-button-link"}>
-												{x.text}
-											</button>
+											<Button {...x} />
 										)}
 
 										<span
@@ -70,18 +68,18 @@ const Dropdown: FC<IDropdownProps> = ({
 										</span>
 
 										{x.icon.float === "left" && (
-											<button type={"button"} className={"rce-button-link"}>
+											<button type={"button"} className={"rce-button link"}>
 												{x.text}
 											</button>
 										)}
 									</span>
 								) : (
-									<button type={"button"} className={"rce-button-link"}>
+									<button type={"button"} className={"rce-button link"}>
 										{x.text}
 									</button>
 								)
 							) : (
-								<button type={"button"} className={"rce-button-link"}>
+								<button type={"button"} className={"rce-button link"}>
 									{x}
 								</button>
 							)}

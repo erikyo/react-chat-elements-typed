@@ -1,23 +1,19 @@
 import "./LocationMessage.css";
 import classNames from "classnames";
 import type { ILocationMessageProps } from "../types";
-import type { FC } from "react";
-import { MAP_URL, STATIC_URL } from "../constants";
+import type { FC, MouseEventHandler, ReactEventHandler } from "react";
+import { STATIC_URL } from "../constants";
+import { MapElement } from "./Map";
 
-const LocationMessage: FC<ILocationMessageProps> = ({
-	markerColor = "red",
-	target = "_blank",
-	zoom = "14",
-	...props
-}) => {
+const LocationMessage: FC<ILocationMessageProps> = (props) => {
+	const { latitude = 0, longitude = 0, zoom = 5 } = props;
 	const buildURL = (url: string) => {
 		return url
-			.replace(/LATITUDE/g, props?.data?.latitude.toString() ?? "0")
-			.replace(/LONGITUDE/g, props?.data?.longitude.toString() ?? "0")
-			.replace("MARKER_COLOR", markerColor)
-			.replace("ZOOM", zoom)
-			.replace("KEY", props?.apiKey ?? "");
+			.replace(/LATITUDE/g, latitude.toString())
+			.replace(/LONGITUDE/g, longitude.toString())
+			.replace("ZOOM", zoom.toString());
 	};
+
 	const className = () => {
 		let _className = classNames("rce-mbox-location", props.className);
 
@@ -32,17 +28,14 @@ const LocationMessage: FC<ILocationMessageProps> = ({
 		<div className="rce-container-lmsg">
 			<a
 				onClick={props.onOpen}
-				target={target}
-				href={
-					props.href || props.src || buildURL(props.data?.mapURL || MAP_URL)
-				}
+				target={props.target ?? "_blank"}
+				href={props.href || props.src || buildURL(props?.mapURL || STATIC_URL)}
 				className={className()}
 			>
-				<img
-					alt={props.alt}
+				<MapElement
 					onError={props.onError}
-					className="rce-mbox-location-img"
-					src={props.src || buildURL(props.data?.staticURL || STATIC_URL)}
+					className="rce-mbox-location-img h-full w-full"
+					{...props}
 				/>
 			</a>
 			{props.text && (
