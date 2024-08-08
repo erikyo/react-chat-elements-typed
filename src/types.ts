@@ -86,7 +86,7 @@ export interface IChatItemProps {
 	onDragEnter?: (e: MouseEvent, i: string) => void;
 	onDragOver?: (e: MouseEvent, i: string) => void;
 	letterItem?: ILetterItem;
-	customStatusComponents?: ReactNode[];
+	customStatusComponents?: ReactElement[];
 	subList?: IChatItemProps[];
 	onExpandItem?: (e: MouseEvent | KeyboardEvent, i: string) => void;
 	expanded?: boolean;
@@ -490,14 +490,18 @@ export interface IFileMessageProps extends IFileMessage {
  * @prop type The Location Message's type is "location".
  * @prop latitude The Location Message's latitude.
  * @prop longitude The Location Message's longitude.
- * @prop staticURL The Location Message's static url.
  * @prop mapURL The Location Message's map url.
  */
 export interface ILocationMessage extends IMessage {
-	latitude: string;
-	longitude: string;
+	latitude: number;
+	longitude: number;
 	mapURL?: string;
-	zoom?: string;
+	zoom?: number;
+	marker?: {
+		latLng: string;
+		markerColor: string;
+		markerText: string;
+	};
 }
 
 /**
@@ -516,7 +520,6 @@ export interface ILocationMessage extends IMessage {
  * @prop onError The Location Message's function onError(event: SyntheticEvent<T, Event>).
  */
 export interface ILocationMessageProps extends ILocationMessage {
-	markerColor?: string;
 	className?: string;
 	src?: string;
 	target?: string;
