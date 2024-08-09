@@ -6,7 +6,7 @@ import { generateAvatar } from "../../stories/utils";
 
 describe("Avatar component", () => {
 	it("should render without issues", () => {
-		const component = render(<Avatar {...generateAvatar(1)} />);
+		const component = render(<Avatar {...generateAvatar({ title: "name" })} />);
 		expect(component.container).toBeTruthy();
 		expect(component.container).toMatchSnapshot();
 	});

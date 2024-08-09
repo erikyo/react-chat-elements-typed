@@ -18,18 +18,24 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
 	args: {
-		...generateAvatar(24),
+		...generateAvatar(),
 	},
 };
 
-export const small = {
+export const Small = {
 	args: {
-		...generateAvatar(1, { size: "small" }),
+		...generateAvatar({ size: "small" }),
 	},
 };
 
-export const big = {
+export const Big = {
 	args: {
-		...generateAvatar(1, { size: "xlarge" }),
+		...generateAvatar({ size: "xlarge" }),
+	},
+};
+
+export const Letter = {
+	args: {
+		title: "Pippo Goofy",
 	},
 };
