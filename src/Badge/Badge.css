@@ -1,0 +1,28 @@
+.rce-badge {
+    align-items: center;
+    z-index: 1;
+    box-sizing: border-box;
+    padding: 4px;
+    font-weight: 700;
+    text-shadow: 1px 1px 0 rgb(0 0 0 / 20%);
+    box-shadow: 1px 1px 0 rgb(0 0 0 / 10%);
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.rce-badge.top {
+    top: 0;
+}
+
+.rce-badge.right {
+    right: 0;
+}
+
+.rce-badge.bottom {
+    bottom: 0;
+}
+
+.rce-badge.left {
+    left: 0;
+}
