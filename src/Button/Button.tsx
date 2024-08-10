@@ -1,7 +1,7 @@
 import "./Button.css";
 import classNames from "classnames";
 import type { IButtonProps, IIcon } from "../types";
-import type { FC, ReactElement } from "react";
+import type { FC } from "react";
 
 const ButtonIcon: FC<IIcon> = (props) => {
 	return (
@@ -20,42 +20,50 @@ const ButtonIcon: FC<IIcon> = (props) => {
 };
 
 const Button: FC<IButtonProps> = ({
-	disabled = false,
 	backgroundColor = "var(--rce-color-secondary)",
 	color = "var(--rce-color-white)",
 	style = {},
 	borderWidth = 2,
-	...props
-}): ReactElement<HTMLButtonElement> => {
+	outlined,
+	disabled,
+	circle,
+	squared,
+	link,
+	icon,
+	buttonRef,
+	text,
+	className,
+	children,
+	...rest
+}) => {
 	return (
 		<button
-			type={props?.type ?? "button"}
-			ref={props.buttonRef}
-			title={props.title}
+			type={rest.type ?? "button"}
+			ref={buttonRef}
 			className={classNames(
 				"rce-button",
-				props.type,
-				props.className,
-				props.outlined && "outlined",
-				props.circle && "circle",
-				props.link && "link",
+				className,
+				outlined && "outlined",
+				circle && "circle",
+				link && "link",
+				squared && "squared",
+				disabled && "disabled",
 			)}
 			style={{
-				backgroundColor: props.outlined ? color : backgroundColor,
-				color: props.outlined ? backgroundColor : color,
+				backgroundColor: outlined ? color : backgroundColor,
+				color: outlined ? backgroundColor : color,
 				borderColor: backgroundColor,
 				borderWidth: borderWidth,
-				cursor: disabled ? "default" : "pointer",
-				filter: disabled ? "grayscale(1)" : "none",
-				flexDirection: props.icon?.float === "left" ? "row-reverse" : "row",
+				flexDirection: icon?.float === "left" ? "row-reverse" : "row",
 				...style,
 			}}
-			disabled={disabled}
-			onClick={props.onClick}
+			{...rest} // spreading only valid HTML attributes
 		>
-			{props.text ? <span>{props.text}</span> : null}
-			{props.icon ? <ButtonIcon {...props.icon} /> : null}
+			{children}
+			{text && <span>{text}</span>}
+			{icon?.component && <ButtonIcon {...icon} />}
 		</button>
 	);
 };
+
 export default Button;
