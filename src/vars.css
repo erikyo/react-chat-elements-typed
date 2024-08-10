@@ -1,31 +1,41 @@
 :root {
     /** colors scheme */
     --rce-color-white: #fff;
-    --rce-color-blue: #3979aa;
+    --rce-color-blue: #2b2bd3;
     --rce-color-light-blue: #0090ff;
     --rce-color-purple: #6b46c1;
     --rce-color-red: #e83d0e;
     --rce-color-orange: #ff8300;
     --rce-color-yellow: #ffd500;
-    --rce-color-green: #00a859;
+    --rce-color-green: #04d376;
     --rce-color-slate: #1e293b;
     --rce-color-black: #000;
-    --rce-color-light-gray: #f4f4f4;
+    --rce-color-gray-100: #f4f4f4;
     --rce-color-gray-200: #a4a4a4;
     --rce-color-gray: #575757;
-    --rce-mbox-background: var(--rce-color-white);
+    --rce-color-gray-600: #72767e;
+
     --rce-color-primary: var(--rce-color-green);
     --rce-color-secondary: var(--rce-color-blue);
     --rce-color-dark: var(--rce-color-slate);
     --rce-mbox-dark-bg: var(--rce-color-slate);
-    --rce-mbox-light-bg: var(--rce-color-light-gray);
+    --rce-mbox-light-bg: var(--rce-color-gray-100);
     --rce-mlist-scrollbar-thumb-color: var(--rce-color-secondary);
+    --rce-color-avatar-background: var(--rce-color-gray-100);
+
+    /* The color of the chat balloon */
+    --rce-mbox-background: var(--rce-color-white);
+    --rce-mbox-background-focus: #e0e0e0;
+    --rce-mbox-background-right: #ebffe7;
+    --rce-mbox-background-right-focus: #d1ffcb;
 
     /** message box */
     --rce-mbox-border-radius: 5px;
     --rce-mbox-font-size: 14px;
     --rce-mbox-font-size-sm: 12px;
+    --rce-mbox-min-width: 300px;
+    --rce-mbox-max-width: 500px;
     --rce-mbox-shadow: 0 0 5px 0 var(--rce-color-gray-200);
-    --rce-mbox-filter: drop-shadow(2px 1px 3px rgb(0 0 0 / 25%));
+    --rce-mbox-filter: 2px 1px 3px rgb(0 0 0 / 25%);
     --rce-mbox-inner-padding: 4px 12px 8px;
 }
