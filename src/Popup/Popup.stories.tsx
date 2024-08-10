@@ -3,18 +3,19 @@ import React, { useState } from "react";
 import Popup from "./Popup";
 import Button from "../Button/Button";
 import type { IPopup } from "../types";
-import { FaTimes } from "react-icons/fa";
+import { MdClose } from "react-icons/md";
 import { loremIpsum } from "lorem-ipsum";
 
 const Template = {
 	header: loremIpsum({ count: 2, units: "words" }),
-	text: loremIpsum({ count: 2, units: "sentence" }),
+	text: loremIpsum({ count: 4, units: "sentence" }),
+	wrapperColor: "rgb(0 0 0 / 75%)",
 } as IPopup;
 
 const PopupExample = () => {
 	const [show, setShow] = useState<boolean>(false);
 	return (
-		<>
+		<div style={{ margin: "45vh" }}>
 			<Popup
 				popup={{
 					...Template,
@@ -27,24 +28,27 @@ const PopupExample = () => {
 							},
 							icon: {
 								backgroundColor: "transparent",
-								component: <FaTimes />,
-								size: 18,
+								component: <MdClose color={"var(--rce-color-gray)"} />,
+								size: 24,
 							},
 						},
 					],
 					footerButtons: [
 						{
 							color: "white",
-							backgroundColor: "#ff5e3e",
+							backgroundColor: "var(--rce-color-gray)",
 							text: "No",
+							squared: true,
+							outlined: true,
 							onClick: () => {
 								setShow(false);
 							},
 						},
 						{
 							color: "white",
-							backgroundColor: "green",
+							backgroundColor: "var(--rce-color-primary)",
 							text: "Yes",
+							squared: true,
 							onClick: () => {
 								setShow(false);
 							},
@@ -59,12 +63,15 @@ const PopupExample = () => {
 					setShow(true);
 				}}
 			/>
-		</>
+		</div>
 	);
 };
 
 const meta = {
 	component: PopupExample,
+	parameters: {
+		layout: "fullscreen",
+	},
 };
 
 export default meta;
