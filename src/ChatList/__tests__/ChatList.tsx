@@ -5,7 +5,7 @@ import { render } from "@testing-library/react";
 
 describe("Avatar component", () => {
 	it("should render without issues", () => {
-		const component = render(<ChatList />);
+		const component = render(<ChatList dataSource={[]} />);
 		expect(
 			component.container.querySelectorAll(".rce-container-clist").length,
 		).toBeTruthy();
