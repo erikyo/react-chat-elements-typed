@@ -3,3 +3,5 @@ export const STATIC_URL =
 
 export const MAP_URL =
 	"https://www.openstreetmap.org/?mlat=LATITUDE&mlon=LONGITUDE#map=ZOOM/LATITUDE/LONGITUDE";
+
+export const DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
