@@ -15,12 +15,13 @@ type Story = StoryObj<typeof meta>;
 
 const Template: IDropdownProps = {
 	buttonProps: {
-		type: "button",
 		icon: {
 			component: <IoOpenOutline />,
 			float: "left",
 			size: 22,
 		},
+		squared: true,
+		outlined: true,
 		text: "Click to open the Dropdown",
 	},
 	animationType: "northwest",
@@ -30,9 +31,6 @@ const Template: IDropdownProps = {
 		generateDropDownItem(2),
 		generateDropDownItem(3),
 	],
-	onSelect: (e) => {
-		console.log(e);
-	},
 	style: {
 		maxWidth: "200px",
 	},
