@@ -3,6 +3,7 @@ import type { Meta } from "@storybook/react";
 import Button from "./Button";
 import { IconEmoji } from "../SvgIcon/IconEmoji";
 import { IconPlus } from "../SvgIcon/IconPlus";
+import { IconMic } from "../SvgIcon/IconMic";
 
 const meta = {
 	component: Button,
@@ -38,7 +39,7 @@ export const Disabled = {
 
 export const Link = {
 	args: {
-		text: "Disabled",
+		text: "Link Button",
 		link: true,
 	},
 };
@@ -56,13 +57,13 @@ export const IconButton = {
 
 export const ButtonWithIconOnLeftSide = {
 	args: {
-		text: "Icon",
+		text: "With Icon",
 		icon: {
-			component: <IconPlus />,
+			component: <IconMic />,
 			float: "left",
 			name: "chat",
 		},
-		backgroundColor: "var(--rce-color-purple)",
+		backgroundColor: "var(--rce-color-green)",
 	},
 };
 
@@ -73,6 +74,6 @@ export const Icon = {
 			name: "chat",
 		},
 		circle: true,
-		backgroundColor: "var(--rce-color-light-blue)",
+		backgroundColor: "var(--rce-color-red)",
 	},
 };
