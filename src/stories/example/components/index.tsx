@@ -1,10 +1,11 @@
-import React, { type MutableRefObject, useRef, useState } from "react";
-import { getAvatar, token } from "../utils/common";
+import React, { useEffect } from "react";
+import { useRef, useState } from "react";
 import Input from "../../../Input/Input";
 import Button from "../../../Button/Button";
 import MessageList from "../../../MessageList/MessageList";
-import type { MessageType } from "../../../types";
-import ChatListExample from "./ChatListExample";
+import type { IChatItemProps, MessageType } from "../../../types";
+import Side from "./Side";
+import { buildUsersList } from "./Side";
 import { IconEmoji } from "../../../SvgIcon/IconEmoji";
 import { IconPlus } from "../../../SvgIcon/IconPlus";
 import { IconSend } from "../../../SvgIcon/IconSend";
@@ -15,15 +16,16 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { randomMessage } from "./RandomMessage";
 import { loremIpsum } from "lorem-ipsum";
-import { Emoji } from "emoji-mart";
+import { getAvatar, token } from "../../utils/common";
 
-const MessageListExample = () => {
+const Index = () => {
 	const [messageListArray, setMessageListArray] = useState<MessageType[]>([]);
 	const [showEmojis, setShowEmojis] = useState(false);
 	const [inputValue, setInputValue] = useState<string>("");
+	const [users, setUsers] = useState<IChatItemProps[]>([]);
 
-	const messageListreference = useRef(null);
-	const inputreference = useRef<HTMLInputElement | undefined>();
+	const messageListReference = useRef(null);
+	const inputReference = useRef<HTMLInputElement | undefined>();
 
 	const addMessage = (data: number, text = ""): void => {
 		let Addmtype = "";
@@ -60,21 +62,30 @@ const MessageListExample = () => {
 
 		setMessageListArray([
 			...messageListArray,
-			{ ...randomMessage(Addmtype), text: message } as MessageType,
+			{
+				...randomMessage(Addmtype),
+				text: message,
+				id: `message-${messageListArray.length}`,
+			} as MessageType,
 		]);
 
-		if (inputreference.current) {
-			clearRef(inputreference.current);
+		if (inputReference.current) {
+			clearRef(inputReference.current);
 		}
 	};
 
 	const clearRef = (inputRef: HTMLInputElement | undefined) => {
-		if (inputreference.current && "value" in inputreference.current) {
-			inputreference.current.value = "";
+		if (inputReference.current && "value" in inputReference.current) {
+			inputReference.current.value = "";
 		}
 		setInputValue("");
 		setShowEmojis(false);
 	};
+
+	useEffect(() => {
+		const newUsers = buildUsersList();
+		setUsers(newUsers);
+	}, []);
 
 	return (
 		<div
@@ -95,6 +106,7 @@ const MessageListExample = () => {
 					>
 						<div style={{ display: "flex", alignItems: "center", gap: 10 }}>
 							<Avatar
+								title={"me"}
 								src={getAvatar("me")}
 								size={"small"}
 								style={{ backgroundColor: "white" }}
@@ -112,21 +124,21 @@ const MessageListExample = () => {
 							component: <IconMenu />,
 						}}
 						onClick={() => {
-							addMessage(token(), inputreference.current?.value || "");
+							addMessage(token(), inputReference.current?.value || "");
 						}}
 					/>
 				}
 			/>
 			<div className="flex" style={{ height: "calc(100% - 50px)" }}>
-				<ChatListExample />
+				<Side dataSource={users} />
 				<div className={"flex flex-col w-full justify-end bg-sky-400 relative"}>
 					<MessageList
 						className="message-list w-full overflow-y-auto"
-						reference={messageListreference}
+						reference={messageListReference}
 						dataSource={messageListArray}
 						lockable={true}
 						downButton={true}
-						downButtonBadge={10}
+						downButtonBadge={messageListArray.length}
 						sendMessagePreview={true}
 					/>
 					{showEmojis && (
@@ -134,7 +146,7 @@ const MessageListExample = () => {
 							<Picker
 								data={data}
 								onEmojiSelect={(e: { native: string }) => {
-									const newValue = inputreference.current?.value + e.native;
+									const newValue = inputReference.current?.value + e.native;
 									setInputValue(newValue);
 								}}
 							/>
@@ -145,20 +157,19 @@ const MessageListExample = () => {
 						placeholder="Write your message here."
 						maxlength={300}
 						value={inputValue}
-						onChange={(e) => {
-							const currentValue: string = inputreference.current
+						onChange={() => {
+							const currentValue: string = inputReference.current
 								?.value as string;
-							console.log(currentValue);
 							setInputValue(currentValue);
 						}}
 						onSubmit={(e) => {
-							if (inputreference.current && "value" in inputreference.current) {
-								addMessage(token(), inputreference.current.value);
-								clearRef(inputreference.current);
+							if (inputReference.current && "value" in inputReference.current) {
+								addMessage(token(), inputReference.current.value);
+								clearRef(inputReference.current);
 							}
 						}}
 						onMaxLengthExceed={() => console.log("Message is too long")}
-						reference={inputreference}
+						reference={inputReference}
 						autoHeight={true}
 						multiline={false}
 						maxHeight={50}
@@ -167,8 +178,8 @@ const MessageListExample = () => {
 								return true;
 							}
 							if (e.ctrlKey && e.key === "Enter") {
-								addMessage(token(), inputreference.current?.value);
-								clearRef(inputreference.current);
+								addMessage(token(), inputReference.current?.value);
+								clearRef(inputReference.current);
 							}
 						}}
 						leftButtons={
@@ -197,4 +208,4 @@ const MessageListExample = () => {
 	);
 };
 
-export default MessageListExample;
+export default Index;
