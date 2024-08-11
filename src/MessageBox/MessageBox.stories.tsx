@@ -3,10 +3,32 @@ import type { StoryObj } from "@storybook/react";
 import MessageBox from "./MessageBox";
 import type { MessageBoxType } from "../types";
 import type { FC } from "react";
-import { getAvatar, photo } from "../stories/example/utils/common";
+import {
+	reply,
+	audioMessage,
+	fileMessage,
+	locationMessage,
+	meetingMessage,
+	messageDefaultdata,
+	messageWithReply,
+	photoMessage,
+	systemMessage,
+	videoMessage,
+	meetingLinkMessage,
+} from "../stories/utils/MessageTypes";
+import { getAvatar } from "../stories/utils/common";
 
 const meta = {
 	component: MessageBox satisfies FC<MessageBoxType>,
+	parameters: {
+		backgrounds: {
+			default: "light",
+			values: [
+				{ name: "light", value: "#eeeae2" },
+				{ name: "dark", value: "#565656", default: true },
+			],
+		},
+	},
 };
 
 export default meta;
@@ -15,6 +37,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
 	args: {
+		...messageDefaultdata(),
 		type: "text",
 		id: "1",
 		title: "Title",
@@ -23,21 +46,17 @@ export const Default = {
 		content: null,
 		status: "read",
 		position: "left",
-		focus: false,
+		focus: true,
 		date: +new Date(),
-		dateString: "now",
 		avatar: getAvatar("avatar1"),
 		retracted: false,
-		forwarded: false,
-		replyButton: false,
-		removeButton: false,
-		statusTitle: "Status",
+		forwarded: true,
+		replyButton: true,
+		removeButton: true,
+		EmojiButton: true,
+		statusTitle: "Status Title",
 		notch: true,
-		copiableDate: true,
 		className: "custom-classname",
-		letterItem: null,
-		reply: null,
-		actionButtons: null,
 	},
 };
 
@@ -49,47 +68,111 @@ export const Simple = {
 	},
 };
 
-export const Reply = {
+export const customStyle = {
 	args: {
 		type: "text",
-		id: "1",
-		title: "Title",
-		titleColor: "red",
-		content: "Content",
-		status: "waiting",
-		position: "left",
+		id: "10",
 		text: "Text",
-		reply: {
-			src: photo(),
-			title: "Reply title",
-			message: "Reply text",
-			titleColor: "blue",
+		style: {
+			fontFamily: "cursive",
+			backgroundColor: "red",
+			color: "white",
+			fontSize: "20px",
+			border: "2px solid orange",
+			boxSizing: "border-box",
 		},
-		message: "Message text",
-		replyButton: true,
+		notchStyle: {
+			fill: "orange",
+		},
 	},
 };
 
-export const Forwarded = {
+export const Reply = {
 	args: {
+		...messageDefaultdata(),
 		type: "text",
-		id: "1",
-		title: "Title",
-		forwardedMessageText: "Forwarded",
-		titleColor: "red",
-		text: "Text",
-		content: "Content",
-		status: "read",
+		reply: reply,
+		forwarded: true,
+		forwardedMessageText: "Reply",
+		position: "left",
+		text: "This is a reply",
 	},
 };
 
 export const Retracted = {
 	args: {
+		...messageDefaultdata(),
 		type: "text",
 		id: "1",
 		retracted: true,
-		text: "Text",
+		text: "Retracted Text",
 		content: "Content",
 		status: "read",
+		position: "left",
+	},
+};
+
+export const Photo = {
+	args: {
+		...photoMessage(),
+		position: "left",
+	},
+};
+
+export const Location = {
+	args: {
+		...locationMessage(),
+		position: "left",
+	},
+};
+
+export const FileMessage = {
+	args: {
+		...fileMessage(),
+		position: "left",
+		text: "File Message",
+	},
+};
+
+export const AudioMessage = {
+	args: {
+		...audioMessage(),
+		position: "left",
+	},
+};
+
+export const Video = {
+	args: {
+		...videoMessage(),
+		position: "left",
+	},
+};
+
+export const System = {
+	args: {
+		...systemMessage(),
+		position: "left",
+	},
+};
+
+export const ReplyMessage = {
+	args: {
+		...messageWithReply(),
+		position: "left",
+		title: "Title",
+	},
+};
+
+export const Meeting = {
+	args: {
+		...meetingMessage(),
+		position: "left",
+	},
+};
+
+export const MeetingLink = {
+	args: {
+		...meetingLinkMessage(),
+		position: "left",
 	},
 };

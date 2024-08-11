@@ -1,158 +1,87 @@
-:root {
+.reverse-icon-horizontal {
+    transform: scaleX(-1);
 }
 
 .rce-container-mbox {
     flex-direction: column;
     display: block;
     overflow-x: hidden;
-    min-width: 300px;
 }
 
-.rce-mbox-forward {
-    width: 30px;
-    height: 30px;
-    border-radius: 20px;
-    position: absolute;
-    flex-direction: row;
-    align-self: center;
-    align-items: center;
-    justify-content: center;
-    background: var(--rce-mbox-background);
-    box-shadow: var(--rce-mbox-shadow);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    top: 0;
-    bottom: 0;
-    margin: auto;
+.rce-mbox-action {
+    border-color: rgb(15 15 20 / 100%);
 }
 
+.rce-mbox-forward,
 .rce-mbox-remove {
-    width: 30px;
-    height: 30px;
-    border-radius: 20px;
-    background: #fff;
-    position: absolute;
-    flex-direction: row;
-    align-self: center;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--rce-mbox-shadow);
-    cursor: pointer;
     transition: all 0.3s ease;
-    top: 0;
-    bottom: 0;
-    margin: auto;
 }
 
-.rce-mbox-forward-left {
-    display: flex;
-    opacity: 0;
-    visibility: hidden;
-    left: -50px;
-}
-
-.rce-mbox-forward-right {
-    display: flex;
-    opacity: 0;
-    visibility: hidden;
-    right: -50px;
-}
-
-.rce-mbox-reply-btn-left {
-    display: flex;
-    opacity: 0;
-    visibility: hidden;
-    left: -85px;
-}
-
+.rce-mbox-forward-left,
+.rce-mbox-forward-right,
+.rce-mbox-reply-btn-left,
 .rce-mbox-reply-btn-right {
-    display: flex;
     opacity: 0;
     visibility: hidden;
-    right: -85px;
 }
 
-.rce-container-mbox:hover .rce-mbox-forward-left {
-    opacity: 1;
-    visibility: visible;
-}
-
+.rce-container-mbox:hover .rce-mbox-forward-left,
 .rce-container-mbox:hover .rce-mbox-forward-right {
     opacity: 1;
     visibility: visible;
 }
 
-.rce-mbox-remove-left {
-    display: flex;
-    opacity: 0;
-    visibility: hidden;
-    left: -120px;
-}
-
+.rce-mbox-remove-left,
 .rce-mbox-remove-right {
-    display: flex;
     opacity: 0;
     visibility: hidden;
-    right: -120px;
 }
 
-.rce-container-mbox:hover .rce-mbox-remove-left {
-    opacity: 1;
-    visibility: visible;
-}
-
-.rce-container-mbox:hover .rce-mbox-remove-right {
-    opacity: 1;
-    visibility: visible;
-}
-
-.rce-container-mbox:hover .rce-mbox-reply-btn-left {
-    opacity: 1;
-    visibility: visible;
-}
-
+.rce-container-mbox:hover .rce-mbox-remove-left ,
+.rce-container-mbox:hover .rce-mbox-remove-right,
+.rce-container-mbox:hover .rce-mbox-reply-btn-left,
 .rce-container-mbox:hover .rce-mbox-reply-btn-right {
     opacity: 1;
     visibility: visible;
 }
 
 .rce-mbox {
+    min-width: var(--rce-mbox-min-width);
+    max-width: var(--rce-mbox-max-width);
     position: relative;
-    z-index: 1;
-    filter: var(--rce-mbox-filter);
     flex-direction: column;
     margin: 5px 5px 5px 20px;
     float: left;
-    min-width: 140px;
 }
 
-.rce-mbox.message-focus {
-    animation-iteration-count: 2;
+.rce-mbox-body {
+    box-shadow: var(--rce-mbox-filter);
+    font-size: var(--rce-mbox-font-size);
+    margin: 0;
+    padding: var(--rce-mbox-inner-padding);
+    position: relative;
+    z-index: 1;
+}
+
+.rce-mbox.rce-mbox-left .rce-mbox-body {
+    background-color: var(--rce-mbox-background);
+    border-radius: 0 var(--rce-mbox-border-radius) var(--rce-mbox-border-radius);
+    z-index: 3;
+}
+
+.rce-mbox.rce-mbox-right .rce-mbox-body {
+    background-color: var(--rce-mbox-background-right);
+    border-radius: var(--rce-mbox-border-radius) 0 var(--rce-mbox-border-radius) var(--rce-mbox-border-radius);
+}
+
+.rce-mbox-left .rce-mbox-body.message-focus {
     animation-name: message-box-default-focus;
     animation-duration: 1s;
 }
 
-@keyframes message-box-default-focus {
-    from {
-        background-color: #fff;
-    }
-
-    to {
-        background-color: #dfdfdf;
-    }
-}
-
-.rce-mbox-body {
-    background: var(--rce-mbox-background);
-    margin: 0;
-    padding: var(--rce-mbox-inner-padding);
-    border-radius: 0 var(--rce-mbox-border-radius) var(--rce-mbox-border-radius);
-    position: relative;
-    z-index: 2;
-}
-
-.rce-mbox.rce-mbox-right .rce-mbox-body{
-    border-radius: var(--rce-mbox-border-radius) 0 var(--rce-mbox-border-radius) var(--rce-mbox-border-radius);
+.rce-mbox-right .rce-mbox-body.message-focus {
+    animation-name: message-box-right-focus;
+    animation-duration: 1s;
 }
 
 .rce-mbox.rce-mbox-right {
@@ -163,25 +92,24 @@
     border-top-left-radius: var(--rce-mbox-border-radius);
 }
 
-.rce-mbox.rce-mbox-right.message-focus {
-    animation-iteration-count: 2;
-    animation-name: message-box-right-focus;
-    animation-duration: 1s;
+.rce-mbox-action-buttons {
+    position: absolute;
+    display: flex;
+    top: calc(50% - 10px);
+    left: calc(100% + 24px);
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-@keyframes message-box-right-focus {
-    from {
-        background-color: #d4f1fb;
-    }
-
-    to {
-        background-color: #b8dae6;
-    }
+.rce-mbox.rce-mbox-right .rce-mbox-action-buttons {
+    left: auto;
+    right: calc(100% + 24px);
 }
 
 .rce-mbox-text {
-    padding: 6px 0;
-    font-size: var(--rce-mbox-font-size);
+    margin: 6px 0;
     word-break: break-word;
 }
 
@@ -197,23 +125,22 @@
 }
 
 .rce-mbox-text-retracted.left {
-    color: #555555b3 !important;
+    color: var(--rce-color-gray) !important;
 }
 
 .rce-mbox-text-retracted.right {
-    color: #efefefb3 !important;
+    color: var(--rce-color-gray) !important;
 }
 
 .rce-mbox-time {
     display: flex;
     justify-content: flex-end;
+    gap: 4px;
     align-items: center;
     text-align: right;
-    color: #000;
+    color: var(--rce-color-gray);
     font-size: 12px;
-    line-height: 12px;
-    right: -4px;
-    bottom: -5px;
+    margin-top: 10px;
     user-select: none;
 }
 
@@ -225,18 +152,13 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    right: 0;
-    bottom: 0;
-    left: 0;
     margin-right: -6px;
     margin-left: -6px;
     padding-top: 5px;
     padding-right: 3px;
     padding-bottom: 2px;
-    background: linear-gradient(to top, rgb(0 0 0 / 33%), transparent);
     border-bottom-left-radius: var(--rce-mbox-border-radius);
     border-bottom-right-radius: var(--rce-mbox-border-radius);
-    color: var(--rce-mbox-background);
 }
 
 .rce-mbox--clear-padding {
@@ -249,63 +171,39 @@
 
 .rce-mbox-right-notch {
     position: absolute;
-    z-index: 0;
+    z-index: 2;
     right: -14px;
     top: 0;
     width: 15px;
     height: 15px;
-    fill: var(--rce-mbox-background);
-    filter: var(--rce-mbox-filter);
+    filter: drop-shadow(var(--rce-mbox-filter));
 }
 
 .rce-mbox-right-notch.message-focus {
-    animation-iteration-count: 2;
     animation-name: message-right-notch-focus;
     animation-duration: 1s;
 }
 
-@keyframes message-right-notch-focus {
-    from {
-        fill: #d4f1fb;
-    }
-
-    to {
-        fill: #b8dae6;
-    }
-}
-
 .rce-mbox-left-notch {
     position: absolute;
-    z-index: 0;
+    z-index: 2;
     left: -14px;
     top: 0;
     width: 15px;
     height: 15px;
-    fill: var(--rce-mbox-background);
-    filter: var(--rce-mbox-filter);
+    filter: drop-shadow(var(--rce-mbox-filter))
 }
 
 .rce-mbox-left-notch.message-focus {
-    animation-iteration-count: 2;
     animation-name: message-left-notch-focus;
     animation-duration: 1s;
-}
-
-@keyframes message-left-notch-focus {
-    from {
-        fill: #fff;
-    }
-
-    to {
-        fill: #dfdfdf;
-    }
 }
 
 .rce-mbox-title {
     margin: 0 0 8px;
     font-weight: 500;
     font-size: 13px;
-    color: #4f81a1;
+    color: var(--rce-color-secondary);
     user-select: none;
     cursor: pointer;
     display: flex;
@@ -317,7 +215,7 @@
 }
 
 .rce-mbox-title--clear {
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 }
 
 .rce-mbox-status {
@@ -330,21 +228,78 @@
     margin-right: 5px;
 }
 
-.rce-mbox-forwardedMessage {
+.rce-mbox-forwarded-message {
     position: relative;
     overflow: hidden;
     display: flex;
-    margin: -1px -6px 6px;
     border-radius: var(--rce-mbox-border-radius);
-    padding: 0 0 0 5px;
+    padding: 0 0 5px;
     transition: 200ms;
     user-select: none;
 }
 
-.rce-mbox-forwarded-message {
+.rce-mbox-forwarded-message-inner {
     display: flex;
+    gap: 3px;
     align-items: center;
-    padding: 1px;
+    padding: 5px 0;
     font-size: 13px;
     font-style: italic;
+    color: var(--rce-color-gray-200);
+}
+
+@keyframes message-box-default-focus {
+    0% {
+        background-color: var(--rce-mbox-background);
+    }
+
+    50% {
+        background-color: var(--rce-mbox-background-focus);
+    }
+
+    100% {
+        background-color: var(--rce-mbox-background);
+    }
+}
+
+@keyframes message-left-notch-focus {
+    0% {
+        fill: var(--rce-mbox-background);
+    }
+
+    50% {
+        fill: var(--rce-mbox-background-focus);
+    }
+
+    100% {
+        fill: var(--rce-mbox-background);
+    }
+}
+
+@keyframes message-box-right-focus {
+    0% {
+        background-color: var(--rce-mbox-background-right);
+    }
+
+    50% {
+        background-color: var(--rce-mbox-background-right-focus);
+    }
+
+    100% {
+        background-color: var(--rce-mbox-background-right);
+    }
+}
+
+@keyframes message-right-notch-focus {
+    0% {
+        fill: var(--rce-mbox-background-right);
+    }
+
+    50% {
+        fill: var(--rce-mbox-background-right-focus);
+    }
+
+    100% {
+        fill: var(--rce-mbox-background-right);
+    }
 }
