@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Avatar component > should render without issues 1`] = `
+<div>
+  <span
+    class="rce-badge"
+    style="font-size: 11px; aspect-ratio: 1/1; border-radius: 100%;"
+  />
+</div>
+`;
