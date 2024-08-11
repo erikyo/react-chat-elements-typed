@@ -13,117 +13,95 @@ import Avatar from "../Avatar/Avatar";
 import Dropdown from "../Dropdown/Dropdown";
 
 import classNames from "classnames";
-import type { IMeetingMessageProps, MeetingMessageEvent } from "../types";
+import type { IMeetingMessageProps } from "../types";
+import { DATE_FORMAT } from "../constants";
+import Button from "../Button/Button";
 
-const MeetingMessage: FC<IMeetingMessageProps> = ({
-	date,
-	dateString,
-	title,
-	subject,
-	collapseTitle,
-	moreItems,
-	participants,
-	dataSource,
-
-	onClick,
-	onMeetingTitleClick,
-	onMeetingVideoLinkClick,
-	onMeetingMoreSelect,
-	...props
-}) => {
+const MeetingMessage: FC<IMeetingMessageProps> = (props) => {
+	const [attributes, setAttributes] = useState(props);
 	const [toggle, setToggle] = useState(false);
 
 	const PARTICIPANT_LIMIT: number =
 		props.participantsLimit || Number.POSITIVE_INFINITY;
-	const dateText = dateString
-		? dateString
-		: date && format(date, "yyyy-MM-dd HH:mm:ss");
-
-	const _onMeetingLinkClick: MeetingMessageEvent = (item, index, event) => {
-		if (onMeetingTitleClick instanceof Function)
-			onMeetingTitleClick(item, index, event);
-	};
-
-	const _onMeetingVideoLinkClick: MeetingMessageEvent = (
-		item,
-		index,
-		event,
-	) => {
-		if (onMeetingVideoLinkClick instanceof Function)
-			onMeetingVideoLinkClick(item, index, event);
-	};
-
-	const toggleClick = () => {
-		setToggle(!toggle);
-	};
+	const dateText = attributes.dateString
+		? attributes.dateString
+		: attributes.date && format(attributes.date, DATE_FORMAT);
 
 	return (
 		<div className="rce-mbox-mtmg">
 			<div className="rce-mtmg">
-				<div className="rce-mtmg-subject">{subject || "Unknown Meeting"}</div>
-				<div
-					className="rce-mtmg-body"
-					onClick={onClick}
-					onKeyDown={console.log}
-				>
+				<div className="rce-mtmg-subject">
+					{attributes.subject || "Unknown Meeting"}
+				</div>
+				<div className="rce-mtmg-body">
 					<div className="rce-mtmg-item">
 						<FaCalendar />
 						<div className="rce-mtmg-content">
-							<span className="rce-mtmg-title">{title}</span>
-							<span className="rce-mtmg-date">{dateText}</span>
+							<span className="rce-mtmg-title">{attributes.title}</span>
+							<span className="rce-mtmg-date">{attributes.dateString}</span>
 						</div>
 					</div>
 
-					{onMeetingMoreSelect && moreItems && moreItems.length > 0 && (
-						<div>
-							<Dropdown
-								animationType="bottom"
-								animationPosition="norteast"
-								buttonProps={{
-									className: "rce-mtmg-right-icon",
-									icon: {
-										component: <MdMoreHoriz />,
-										size: 24,
-									},
-								}}
-								items={moreItems}
-								onSelect={(e) => onMeetingMoreSelect?.(e)}
-							/>
-						</div>
-					)}
+					{attributes.onMeetingMoreSelect &&
+						attributes.moreItems &&
+						attributes.moreItems.length > 0 && (
+							<div>
+								<Dropdown
+									animationType="bottom"
+									animationPosition="northeast"
+									buttonProps={{
+										className: "rce-mtmg-right-icon",
+										icon: {
+											component: <MdMoreHoriz />,
+											size: 24,
+										},
+									}}
+									items={attributes.moreItems}
+									onSelect={(e) =>
+										attributes.onMeetingMoreSelect?.(
+											e,
+											attributes,
+											setAttributes,
+										)
+									}
+								/>
+							</div>
+						)}
 				</div>
-				<div
+				<Button
 					className="rce-mtmg-body-bottom"
-					onClick={toggleClick}
-					onKeyDown={console.log}
-				>
-					{toggle ? (
-						<div className="rce-mtmg-bottom--tptitle">
-							<FaCaretDown />
-							<span>{collapseTitle}</span>
-						</div>
-					) : (
-						<div className="rce-mtmg-body-bottom--bttitle">
-							<FaCaretRight />
-							<span>
-								{participants
-									?.slice(0, PARTICIPANT_LIMIT)
-									.map((x) => x.title || "Unknow")
-									.join(", ")}
-								{participants &&
-									PARTICIPANT_LIMIT &&
-									participants.length > PARTICIPANT_LIMIT &&
-									`, +${participants.length - PARTICIPANT_LIMIT}`}
-							</span>
-						</div>
-					)}
-				</div>
+					link
+					onClick={() => setToggle(!toggle)}
+					icon={{
+						component: toggle ? <FaCaretDown /> : <FaCaretRight />,
+					}}
+					text={
+						toggle ? (
+							<div className="rce-mtmg-bottom--tptitle">
+								<span>{attributes.collapseTitle}</span>
+							</div>
+						) : (
+							<div className="rce-mtmg-body-bottom--bttitle">
+								<span>
+									{attributes.participants
+										?.slice(0, PARTICIPANT_LIMIT)
+										.map((x) => x.title || "Unknown")
+										.join(", ")}
+									{attributes.participants &&
+										PARTICIPANT_LIMIT &&
+										attributes.participants.length > PARTICIPANT_LIMIT &&
+										`, +${attributes.participants.length - PARTICIPANT_LIMIT}`}
+								</span>
+							</div>
+						)
+					}
+				/>
 				<div
 					className={classNames("rce-mtmg-toogleContent", {
 						"rce-mtmg-toogleContent--click": toggle,
 					})}
 				>
-					{dataSource?.map((x, i) => {
+					{attributes.dataSource?.map((x, i) => {
 						return (
 							<div key={x.id ?? i.toString()}>
 								{!x.event && (
@@ -133,14 +111,22 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 												"rce-mitem no-avatar": !x.avatar,
 											})}
 										>
-											{x.avatar ? <Avatar src={x.avatar} /> : <IoMdChatboxes />}
+											{x.avatar ? (
+												<Avatar title={x.title || "Unknown"} src={x.avatar} />
+											) : (
+												<IoMdChatboxes />
+											)}
 										</div>
 										<div className="rce-mitem-body">
 											<div className="rce-mitem-body--top">
 												<div
 													className="rce-mitem-body--top-title"
-													onClick={(e: MouseEvent) =>
-														_onMeetingLinkClick(x, i, e)
+													onClick={(e) =>
+														attributes.onMeetingLink?.(
+															e,
+															attributes,
+															setAttributes,
+														)
 													}
 													onKeyDown={console.log}
 												>
@@ -149,9 +135,7 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 												<div className="rce-mitem-body--top-time">
 													{x.dateString
 														? x.dateString
-														: x.date &&
-															x.date &&
-															format(x.date, "yyyy-MM-dd HH:mm")}
+														: x.date && x.date && format(x.date, DATE_FORMAT)}
 												</div>
 											</div>
 											<div className="rce-mitem-body--bottom">
@@ -165,78 +149,96 @@ const MeetingMessage: FC<IMeetingMessageProps> = ({
 								{x.event && (
 									<div className="rce-mitem-event">
 										<div className="rce-mitem-bottom-body">
-											<div className="rce-mitem-body avatar">
-												<HiOutlineVideoCamera />
-											</div>
-											<div className="rce-mitem-bottom-body-top">
-												{x.event.title}
-												<div className="rce-mitem-body--top-time">
-													{x.dateString
-														? x.dateString
-														: x.date && format(x.date, "yyyy-MM-dd HH:mm")}
+											<div className="rce-mitem-event-wrapper">
+												<div className="rce-mitem-body avatar">
+													<HiOutlineVideoCamera />
 												</div>
-												<div className="rce-mitem-avatar-content">
-													{
-														<div className="rce-mitem-avatar">
-															{x.event.avatars
-																?.slice(0, PARTICIPANT_LIMIT)
-																.map((x, i) => (
-																	<Avatar key={i.toString()} src={x.src} />
-																))}
-															{x.event.avatars &&
-																x.event.avatarsLimit &&
-																x.event.avatars.length >
-																	x.event.avatarsLimit && (
-																	<div
-																		className="rce-mitem-length rce-mitem-tooltip"
-																		tooltip={x.event.avatars
-																			.slice(
-																				x.event.avatarsLimit,
-																				x.event.avatars.length,
-																			)
-																			.map((avatar) => avatar.title)
-																			.join(",")
-																			.toString()}
-																	>
-																		<span className="rce-mitem-tooltip-text">
-																			{`+${
-																				x.event.avatars.length -
-																				x.event.avatarsLimit
-																			}`}
-																		</span>
-																	</div>
-																)}
-														</div>
-													}
-												</div>
-												{x.record && (
-													<div className="rce-mtmg-call-record">
-														<div className="rce-mtmg-call-body">
-															<div
-																onClick={(e: MouseEvent<HTMLElement>) =>
-																	_onMeetingVideoLinkClick(x, i, e)
-																}
-																onKeyDown={console.log}
-																className="rce-mtmg-call-avatars"
-															>
-																<Avatar
-																	className={"rce-mtmg-call-avatars"}
-																	src={x.record.avatar}
-																/>
-																<div className={"rce-mtmg-record-time"}>
-																	{x.record.time}
-																</div>
+												<div className="rce-mitem-bottom-body-top">
+													{x.event.title}
+													<div className="rce-mitem-body--top-time">
+														{x.dateString
+															? x.dateString
+															: x.date && format(x.date, "yyyy-MM-dd HH:mm")}
+													</div>
+													<div className="rce-mitem-avatar-content">
+														{
+															<div className="rce-mitem-avatar">
+																{x.event.avatars
+																	?.slice(0, PARTICIPANT_LIMIT)
+																	.map((x, i) => (
+																		<Avatar
+																			title={x.title}
+																			key={i.toString()}
+																			src={x.src}
+																			size={"small"}
+																		/>
+																	))}
+																{x.event.avatars &&
+																	x.event.avatarsLimit &&
+																	x.event.avatars.length >
+																		x.event.avatarsLimit && (
+																		<div
+																			className="rce-mitem-length rce-mitem-tooltip"
+																			tooltip={x.event.avatars
+																				.slice(
+																					x.event.avatarsLimit,
+																					x.event.avatars.length,
+																				)
+																				.map((avatar) => avatar.title)
+																				.join(",")
+																				.toString()}
+																		>
+																			<span className="rce-mitem-tooltip-text">
+																				{`+${
+																					x.event.avatars.length -
+																					x.event.avatarsLimit
+																				}`}
+																			</span>
+																		</div>
+																	)}
 															</div>
-															<div className="rce-mtmg-call-body-title">
-																<span>{x.record.title}</span>
-																<div className="rce-mtmg-call-body-bottom">
-																	{x.record.savedBy}
-																</div>
+														}
+													</div>
+												</div>
+											</div>
+											{x.record && (
+												<div className="rce-mtmg-call-record">
+													<div className="rce-mtmg-call-body">
+														<div
+															onClick={(e) =>
+																attributes.onMeetingVideoLink?.(
+																	e,
+																	attributes,
+																	setAttributes,
+																)
+															}
+															onKeyDown={(e) =>
+																attributes.onMeetingVideoLink?.(
+																	e,
+																	attributes,
+																	setAttributes,
+																)
+															}
+															className="rce-mtmg-call-avatars"
+														>
+															<img
+																alt="Meeting poster"
+																className={"rce-mtmg-call-avatars"}
+																src={x.record.cover}
+															/>
+															<div className={"rce-mtmg-record-time"}>
+																{x.record.time}
+															</div>
+														</div>
+														<div className="rce-mtmg-call-body-title">
+															<span>{x.record.title}</span>
+															<div className="rce-mtmg-call-body-bottom">
+																{x.record.savedBy}
 															</div>
 														</div>
 													</div>
-												)}
-											</div>
+												</div>
+											)}
 										</div>
 									</div>
 								)}

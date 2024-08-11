@@ -44,28 +44,41 @@ exports[`Avatar component > should render without issues 1`] = `
           </div>
         </div>
       </div>
-      <div
-        class="rce-mtmg-body-bottom"
+      <button
+        class="rce-button rce-mtmg-body-bottom link"
+        style="border-width: 2px; flex-direction: row;"
+        type="button"
       >
-        <div
-          class="rce-mtmg-body-bottom--bttitle"
-        >
-          <svg
-            fill="currentColor"
-            height="1em"
-            stroke="currentColor"
-            stroke-width="0"
-            viewBox="0 0 192 512"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
+        <span>
+          <div
+            class="rce-mtmg-body-bottom--bttitle"
           >
-            <path
-              d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"
-            />
-          </svg>
-          <span />
-        </div>
-      </div>
+            <span />
+          </div>
+        </span>
+        <span
+          class="rce-button-icon--container"
+        >
+          <span
+            class="rce-button-icon"
+            style="float: inherit; font-size: 12px;"
+          >
+            <svg
+              fill="currentColor"
+              height="1em"
+              stroke="currentColor"
+              stroke-width="0"
+              viewBox="0 0 192 512"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"
+              />
+            </svg>
+          </span>
+        </span>
+      </button>
       <div
         class="rce-mtmg-toogleContent"
       />
