@@ -1,6 +1,7 @@
 import { loremIpsum } from "lorem-ipsum";
 import { createAvatar } from "@dicebear/core";
 import { miniavs } from "@dicebear/collection";
+import type { StatusType } from "../../types";
 
 /**
  * Returns a random avatar
@@ -22,10 +23,10 @@ export function getRandomColor() {
 }
 
 /**
- * Returns a random token from 0 to 9
+ * Returns a random token from 1 to and the given base
  */
 export function token(base = 10): number {
-	return Math.floor((Math.random() * base) % base);
+	return Math.floor((Math.random() * base) % base) + 1;
 }
 
 /**
@@ -40,6 +41,10 @@ export function getAvatar(name?: string): string {
 	return avatar.toDataUri();
 }
 
+export function getRandomImage(height = 300, width = 300): string {
+	return `https://picsum.photos/${height}/${width}`;
+}
+
 /**
  * Returns a random number between from and to with fixed precision
  * @param from starting number
@@ -52,4 +57,13 @@ export function getRandomInRange(
 	fixed: number,
 ): string {
 	return (Math.random() * (to - from) + from).toFixed(fixed);
+}
+
+/**
+ * Returns a random status
+ * @return {"sent"|"received"|"received"|"sent"} the random status
+ */
+export function getRandomStatus(): StatusType {
+	const statuses: StatusType[] = ["sent", "received", "received", "sent"];
+	return statuses[token(4)];
 }
