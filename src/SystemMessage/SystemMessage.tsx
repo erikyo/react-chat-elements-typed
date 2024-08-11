@@ -6,7 +6,13 @@ import type { ISystemMessageProps } from "../types";
 
 const SystemMessage: FC<ISystemMessageProps> = (props) => {
 	return (
-		<div className={classNames("rce-container-smsg", props.className)}>
+		<div
+			className={classNames(
+				"rce-container-smsg",
+				props.className,
+				`rce-container-position-${props.position}`,
+			)}
+		>
 			<div className="rce-smsg">
 				<div className="rce-smsg-text">{props.text}</div>
 			</div>
