@@ -27,5 +27,5 @@
 .rce-smsg-text {
     text-align: center;
     display: inline-block;
-    font-size: 15px;
+    font-size: var(--rce-mbox-font-size);
 }

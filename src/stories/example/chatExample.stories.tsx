@@ -1,13 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import MessageListExample from "./components/MessageListExample";
+import Index from "./components";
 
 const meta = {
-	component: MessageListExample,
+	component: Index,
 	parameters: {
 		layout: "fullscreen",
 	},
-} satisfies Meta<typeof MessageListExample>;
+	argTypes: {
+		theme: {
+			control: "select",
+			options: ["light", "dark"],
+		},
+		toolbar: {
+			control: false,
+		},
+	},
+} satisfies Meta<typeof Index>;
 
 export default meta;
 

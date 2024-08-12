@@ -11,10 +11,13 @@ const Dropdown: FC<IDropdownProps> = ({
 	style = {},
 	...props
 }) => {
-	const [show, setShow] = useState<boolean | undefined>(undefined);
+	const [show, setShow] = useState<boolean>(false);
 
 	const onBlur = () => {
-		if (show === true) setShow(false);
+		if (show) {
+			console.log("blur");
+			setShow(false);
+		}
 	};
 
 	return (
@@ -22,14 +25,14 @@ const Dropdown: FC<IDropdownProps> = ({
 			className={classNames("rce-dropdown-container", props.className)}
 			onBlur={onBlur}
 		>
-			{<Button {...props.buttonProps} onClick={() => setShow(!show)} />}
+			{<Button {...props.buttonProps} onClick={(e) => setShow(!show)} />}
 			<div
 				className={classNames(
 					"rce-dropdown",
 					animationType,
 					`rce-dropdown-open__${animationPosition}`,
-					{ "dropdown-hide": show === false },
-					{ "dropdown-show": show === true },
+					{ "dropdown-hide": !show },
+					{ "dropdown-show": show },
 				)}
 				style={style}
 			>

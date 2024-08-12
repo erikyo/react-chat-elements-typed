@@ -9,7 +9,7 @@ exports[`Avatar component > should render without issues 1`] = `
       type="button"
     >
       <div
-        class="rce-mbox-file--icon"
+        class="rce-mbox-file--icon rce-mbox-file-extension-undefined"
       >
         <svg
           color="#aaa"

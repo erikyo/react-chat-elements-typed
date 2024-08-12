@@ -1,7 +1,10 @@
 import type {
+	ButtonHTMLAttributes,
 	ClipboardEventHandler,
 	CSSProperties,
-	DragEvent,
+	Dispatch,
+	DragEventHandler,
+	FocusEvent,
 	FocusEventHandler,
 	FormEventHandler,
 	FunctionComponent,
@@ -19,157 +22,117 @@ import type {
 	SyntheticEvent,
 	UIEvent,
 } from "react";
+
 import type { LatLngExpression } from "leaflet";
 
-type StatusType = "waiting" | "sent" | "received" | "read";
 /**
- * IChatItemProps Interface
+ * The StatusType enum
+ */
+export type StatusType = "waiting" | "sent" | "received" | "read";
+
+/**
+ * Avatar Related Types
+ */
+export type AvatarStatusType = "encircle" | "badge" | undefined;
+
+export type AvatarSize =
+	| "default"
+	| "xsmall"
+	| "small"
+	| "medium"
+	| "large"
+	| "xlarge";
+
+/**
+ * The animation position (dropdown)
+ */
+export type AnimationPosition =
+	| "northwest"
+	| "northeast"
+	| "southwest"
+	| "southeast";
+
+/**
+ * Message Type
+ */
+export type MessageTypes =
+	| "text"
+	| "location"
+	| "file"
+	| "photo"
+	| "audio"
+	| "video"
+	| "meeting"
+	| "meetingLink"
+	| "system";
+
+/**
+ * Avatar ILetterItem Interface
  *
- * @prop id The Chat Item's id.
- * @prop avatar The Chat Item's avatar.
- * @prop unread The Chat Item's message unread.
- * @prop className The Chat Item's component className.
- * @prop avatarFlexible The Chat Item's avatar avatarFlexible.
- * @prop alt The Chat Item's avatar alt.
- * @prop title The Chat Item's title.
- * @prop subtitle The Chat Item's subtitle.
- * @prop date The Chat Item's message date.
- * @prop dateString The Chat Item's message dateString.
- * @prop statusColor The Chat Item's statusColor.
- * @prop statusText The Chat Item's statusText.
- * @prop lazyLoadingImage The Chat Item's lazyLoadingImage.
- * @prop muted The Chat Item's muted.
- * @prop showMute The Chat Item's showMute icon.
- * @prop showVideoCall The Chat Item's showVideoCall icon.
- * @prop onAvatarError The Chat Item's avatar function onAvatarError(event: MouseEvent<T, MouseEvent>).
- * @prop onContextMenu The Chat Item's function onContextMenu(event: MouseEvent<T, MouseEvent>).
- * @prop onClick The Chat Item's function onClick(event: MouseEvent<T, MouseEvent>).
- * @prop onClickMute The Chat Item's mute icon function onClickMute(event: MouseEvent<T, MouseEvent>).
- * @prop onClickVideoCall The Chat Item's videoCall icon function onClickVideoCall(event: MouseEvent<T, MouseEvent>).
- * @prop onDragOver The Chat Item's drag over function.
- * @prop onDragEnter The Chat Item's drag enter function.
- * @prop onDrop The Chat Item's drop function.
- * @prop onDragLeave The Chat Item's drop leave function.
- * @prop onDragComponent The Chat Item's drag component.
- * @prop letterItem The Chat Item's avatar letterItem.
- * @prop subList The Chat Item's sub chat items.
- * @prop onExpandItem The Chat Item's expand function onExpandItem(id: string).
- * @prop expanded The Chat Item's expanded.
+ * @prop id The LetterItem's id.
+ * @prop letter The Letter Component to be shown in the avatar
+ */
+export interface ILetterItem {
+	id: string;
+	letter?: string;
+}
+export type IChatItemEvent = (
+	ev: MouseEvent | KeyboardEvent | SyntheticEvent,
+	attributes: IChatItemProps,
+	setAttributes: Dispatch<SetStateAction<IChatItemProps>>,
+) => void;
+
+/**
+ * The IChatItemProps Interface
+ * used to list the chat in the sidebar component
  */
 export interface IChatItemProps {
-	id: string;
-	avatar: string;
+	id?: string;
+	avatar?: string;
+	letterItem?: ILetterItem;
 	unread?: number;
 	className?: string;
 	avatarFlexible?: boolean;
-	avatarSize?: "xsmall" | "small" | "medium" | "large" | "xlarge";
+	avatarSize?: AvatarSize;
 	alt?: string;
-	title?: string;
+	title: string;
 	subtitle?: string;
 	date?: Date;
 	dateString?: string;
 	statusColor?: string;
-	statusColorType?: string;
+	statusColorType?: AvatarStatusType;
 	statusText?: string;
-	lazyLoadingImage?: string;
+	subList?: IChatItemProps[];
+	expanded?: boolean;
+	dataSource: IChatItemProps[];
+	customStatusComponents?: ReactElement[];
 	muted?: boolean;
 	showMute?: boolean;
 	showVideoCall?: boolean;
-	onAvatarError?: MouseEventHandler;
-	onContextMenu?: MouseEventHandler;
-	onClick?: (e: MouseEvent) => void;
-	onClickMute?: MouseEventHandler;
-	onClickVideoCall?: MouseEventHandler;
-	setDragStates?: (state: SetStateAction<boolean>) => void;
-	onDragComponent?: ReactNode;
-	onDragLeave?: (e: MouseEvent, id: string) => void;
-	onDrop?: (e: DragEvent, i: string) => void;
-	onDragEnter?: (e: MouseEvent, i: string) => void;
-	onDragOver?: (e: MouseEvent, i: string) => void;
-	letterItem?: ILetterItem;
-	customStatusComponents?: ReactElement[];
-	subList?: IChatItemProps[];
-	onExpandItem?: (e: MouseEvent | KeyboardEvent, i: string) => void;
-	expanded?: boolean;
-}
-
-/**
- * ILetterItem Interface
- *
- * @prop id The LetterItem's id.
- * @prop letter The Letter Item's letter is a component.
- */
-export interface ILetterItem {
-	id: string;
-	letter?: ReactElement;
+	onClick?: IChatItemEvent;
+	onAvatarError?: ReactEventHandler;
+	onContextMenu?: IChatItemEvent;
+	onKeyDown?: IChatItemEvent;
+	onMuteToggle?: IChatItemEvent;
+	onVideoCall?: IChatItemEvent;
+	onDragOver?: DragEventHandler;
+	onDragEnter?: DragEventHandler;
+	onDrop?: DragEventHandler;
+	onDragLeave?: DragEventHandler;
+	setDragStates?: boolean;
+	handleOnMouseEnter?: MouseEventHandler;
+	handleOnMouseLeave?: MouseEventHandler;
 }
 
 /**
  * IChatListProps Interface
- *
- * @prop id The ChatList's id.
- * @prop className The Chat List's component className.
- * @prop lazyLoadingImage The Chat List's lazyLoadingImage.
- * @prop cmpRef The Chat List's cmpRef.
- * @prop onAvatarError The Chat Item's function onAvatarError(item: IChatItemProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onContextMenu The Chat Item's function onContextMenu(item: IChatItemProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onClick The Chat Item's function onClick(item: IChatItemProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onClickMute The Chat Item's function onClickMute(item: IChatItemProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onClickVideoCall The Chat Item's function onClickVideoCall(item: IChatItemProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onDragOver The Chat Item's drag over function.
- * @prop onDragEnter The Chat Item's drag enter function.
- * @prop onDrop The Chat Item's drop function.
- * @prop onDragLeave The Chat Item's drop leave function.
- * @prop onDragComponent The Chat Item's drag component.
- * @prop onExpand The Chat Items expand function.
  */
 export interface IChatListProps {
-	id: string;
+	id?: string;
 	className?: string;
-	lazyLoadingImage?: string;
 	dataSource: IChatItemProps[];
 	cmpRef?: Ref<HTMLButtonElement>;
-	onAvatarError?: ChatListEvent;
-	onContextMenu?: ChatListEvent;
-	onClick?: ChatListEvent;
-	onClickMute?: ChatListEvent;
-	onClickVideoCall?: ChatListEvent;
-	onDragComponent?: ReactNode;
-	onDragLeave?: (e: MouseEvent, id: string) => void;
-	onDrop?: ((e: MouseEvent, i: string) => void) | undefined;
-	onDragEnter?: ((e: MouseEvent, i: string) => void) | undefined;
-	onDragOver?: ((e: MouseEvent, i: string) => void) | undefined;
-	onExpand?: ChatListElement;
 }
-
-/**
- * ChatListEvent Type
- *
- * @param item The ChatListEvent's item is a IChatItemProps.
- * @param index The Chat List's index.
- * @param event The Chat List's event.
- */
-export type ChatListEvent = (
-	item: IChatItemProps,
-	index: number,
-	event: MouseEvent,
-) => unknown;
-
-export type ChatItemEvent = (e: MouseEvent, i: string) => void;
-export type ChatItemDragEvent = (e: DragEvent, i: string) => void;
-
-/**
- * ChatListEvent Type
- *
- * @param item The ChatListEvent's item is a IChatItemProps.
- * @param index The Chat List's index.
- * @param event The Chat List's event.
- */
-export type ChatListElement = (
-	item: IChatItemProps,
-	index: number,
-	event: MouseEvent | KeyboardEvent | SyntheticEvent,
-) => void;
 
 /**
  * IMessage Interface
@@ -197,16 +160,17 @@ export type ChatListElement = (
  */
 export interface IMessage {
 	id?: string;
-	position?: string;
+	position?: "left" | "right";
 	text: string;
 	title?: string;
 	focus?: boolean;
 	date: number | string | Date;
 	dateString?: string;
 	avatar?: string;
-	titleColor?: string;
+	titleColor?: CSSProperties["color"];
 	forwarded?: boolean;
 	replyButton?: boolean;
+	EmojiButton?: boolean;
 	removeButton?: boolean;
 	status?: StatusType;
 	statusTitle?: string;
@@ -216,7 +180,9 @@ export interface IMessage {
 	className?: string;
 	letterItem?: ILetterItem;
 	reply?: IReplyMessage;
-	type: string;
+	type: MessageTypes;
+	style?: CSSProperties;
+	notchStyle?: CSSProperties;
 	forwardedMessageText?: string;
 	actionButtons?: MeetingLinkActionButtons[] | undefined;
 }
@@ -268,11 +234,8 @@ export interface IPhotoMessageProps extends IPhotoMessage {
  * @prop photoURL The Reply Message's photoURL.
  * @prop message The Reply Message's message.
  */
-export interface IReplyMessage {
-	text?: string;
+export interface IReplyMessage extends IMessage {
 	photoURL?: string;
-	title?: string;
-	titleColor?: string;
 }
 
 /**
@@ -304,12 +267,25 @@ export interface IMeetingMessage extends IMessage {
 		avatarsLimit?: number;
 	};
 	record?: {
-		avatar: string;
+		cover: string;
 		title?: string;
 		savedBy?: string;
 		time?: string;
 	};
 }
+
+/**
+ * MeetingMessageEvent Type
+ *
+ * @param item The MessageListEvent's item is a IMeetingMessage.
+ * @param index The MessageListEvent's index.
+ * @param event The MessageListEvent's event.
+ */
+export type MeetingMessageEvent = (
+	event: MouseEvent | KeyboardEvent | SyntheticEvent,
+	attributes: IMeetingMessageProps,
+	setAttributes: Dispatch<SetStateAction<IMeetingMessageProps>>,
+) => void;
 
 /**
  * IMeetingMessageProps Interface
@@ -329,7 +305,7 @@ export interface IMeetingMessage extends IMessage {
  * @prop onMeetingVideoLinkClick The Meeting Message's function onMeetingVideoLinkClick(item: IMeetingMessage, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
  * @prop onMeetingMoreSelect The Meeting Message's function onMeetingMoreSelect  and optional.
  */
-export interface IMeetingMessageProps extends IMeetingMessage {
+export interface IMeetingMessageProps extends IMessage {
 	subject?: string;
 	dateString?: string;
 	collapseTitle?: string;
@@ -340,10 +316,10 @@ export interface IMeetingMessageProps extends IMeetingMessage {
 	moreItems?: IDropdownItemType[];
 	dataSource?: IMeetingMessage[];
 	participantsLimit?: number;
-	onClick?: MouseEventHandler;
-	onMeetingTitleClick?: MeetingMessageEvent;
-	onMeetingVideoLinkClick?: MeetingMessageEvent;
-	onMeetingMoreSelect?: (event: MouseEvent) => void;
+	onMeetingMoreSelect?: MeetingMessageEvent;
+	onMeetingTitle?: MeetingMessageEvent;
+	onMeetingVideoLink?: MeetingMessageEvent;
+	onMeetingLink?: MeetingMessageEvent;
 }
 
 /**
@@ -462,9 +438,9 @@ export interface IAudioMessageProps extends IAudioMessage {
  */
 export interface IFileMessage extends IMessage {
 	data: {
-		name?: string;
+		name: string;
 		extension?: string;
-		size?: string;
+		size: string | number;
 		id?: string;
 		uri?: string;
 		status?: IMessageDataStatus;
@@ -531,6 +507,19 @@ export interface ILocationMessageProps extends ILocationMessage {
 }
 
 /**
+ * ChatListEvent Type
+ *
+ * @param item The ChatListEvent's item is a IChatItemProps.
+ * @param index The Chat List's index.
+ * @param event The Chat List's event.
+ */
+export type MessageBoxEvent = (
+	event: MouseEvent | KeyboardEvent | SyntheticEvent,
+	attributes: MessageBoxType,
+	setAttributes: Dispatch<SetStateAction<MessageBoxType>>,
+) => void;
+
+/**
  * IMessageBoxProps Interface
  *
  * @prop data The Message Box'es data is a MessageType.
@@ -540,37 +529,20 @@ export interface ILocationMessageProps extends ILocationMessage {
  * @prop onOpen The Message Box'es function onOpen(event: MouseEvent<T, MouseEvent>).
  * @prop onPhotoError The Message Box'es function onPhotoError(event: MouseEvent<T, MouseEvent>).
  * @prop onContextMenu The Message Box'es function onContextMenu(event: MouseEvent<T, MouseEvent>).
- * @prop onForwardClick The Message Box'es function onForwardClick(event: MouseEvent<T, MouseEvent>).
- * @prop onReplyClick The Message Box'es function onReplyClick(event: MouseEvent<T, MouseEvent>).
- * @prop onRemoveMessageClick The Message Box'es function onRemoveMessageClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onForward The Message Box'es function onForward(event: MouseEvent<T, MouseEvent>).
  * @prop onTitleClick The Message Box'es function onTitleClick(event: MouseEvent<T, MouseEvent>).
  * @prop onMeetingMessageClick The Message Box'es function onMeetingMessageClick(event: MouseEvent<T, MouseEvent>).
  * @prop onDownload The Message Box'es function onDownload(event: MouseEvent<T, MouseEvent>).
- * @prop onMeetingMoreSelect The Message Box'es function onMeetingMoreSelect(event: MouseEvent<T, MouseEvent>).
- * @prop onMeetingLinkClick The Message Box'es function onMeetingLinkClick(event: MouseEvent<T, MouseEvent>).
- * @prop onMeetingTitleClick The Message Box'es function onMeetingTitleClick(event: MouseEvent<T, MouseEvent>).
- * @prop onMeetingVideoLinkClick The Message Box'es function onMeetingVideoLinkClick(event: MouseEvent<T, MouseEvent>).
  */
 export interface IMessageBoxProps {
+	onTitleClick?: MessageBoxEvent;
 	onMessageFocused?: (arg: boolean) => void;
-	renderAddCmp?: JSX.Element | (() => JSX.Element);
-	onClick?: MouseEventHandler;
-	onOpen?: MouseEventHandler;
-	onPhotoError?: MouseEventHandler;
+	renderAddCmp?: ReactElement;
 	onContextMenu?: MouseEventHandler;
-	onForwardClick?: MouseEventHandler;
-	onReplyClick?: MouseEventHandler;
-	onRemoveMessageClick?: MouseEventHandler;
-	onTitleClick?: MouseEventHandler;
-	onReplyMessageClick?: MouseEventHandler;
-	onMeetingMessageClick?: MouseEventHandler;
-	onDownload?: MouseEventHandler;
-	onMeetingMoreSelect?: MouseEventHandler;
-	onMeetingLinkClick?: MouseEventHandler;
-	onMeetingTitleClick?: MeetingMessageEvent;
-	onMeetingVideoLinkClick?: MouseEventHandler;
-	style?: CSSProperties;
-	notchStyle?: CSSProperties;
+	onForward?: MessageBoxEvent;
+	AddEmoji?: MessageBoxEvent;
+	onReplyMessage?: MessageBoxEvent;
+	onRemoveMessage?: MessageBoxEvent;
 }
 
 /**
@@ -585,24 +557,6 @@ export interface IMessageBoxProps {
  * @prop toBottomHeight The Message List's to bottom height.
  * @prop downButtonBadge The Message List's down button badge.
  * @prop sendMessagePreview The Message List's send message preview.
- * @prop onScroll The Message List's function onScroll(event: UIEvent<T, UIEvent>).
- * @prop onContextMenu The Message List's function onContextMenu(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onDownButtonClick The Message List's onDownButtonClick is a ref.
- * @prop onOpen The Message List's function onOpen(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onDownload The Message List's function onDownload(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onPhotoError The Message List's function onPhotoError(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onMeetingMoreSelect The Message List's function onMeetingMoreSelect(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onMessageFocused The Message List's function onMessageFocused(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onClick The Message List's function onClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onForwardClick The Message List's function onForwardClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onReplyClick The Message List's function onReplyClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onReplyMessageClick The Message List's function onReplyMessageClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onTitleClick The Message List's function onTitleClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onRemoveMessageClick The Message List's function onRemoveMessageClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onMeetingMessageClick The Message List's function onMeetingMessageClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
- * @prop onMeetingTitleClick The MessageList's function onMeetingTitleClick(event: MouseEvent<T, MouseEvent>).
- * @prop onMeetingVideoLinkClick The MessageList's function onMeetingVideoLinkClick(event: MouseEvent<T, MouseEvent>).
- * @prop onMeetingLinkClick The Message List's function onMeetingLinkClick(item: IMessageBoxProps, index: number, event: MouseEvent<HTMLElement, MouseEvent>).
  */
 export interface IMessageListProps {
 	className?: string;
@@ -618,25 +572,9 @@ export interface IMessageListProps {
 	toBottomHeight?: string | number;
 	downButton?: boolean;
 	downButtonBadge?: number;
+	onDownButtonClick?: (e: MouseEvent) => void;
 	sendMessagePreview?: boolean;
 	onScroll?: (e: UIEvent) => void;
-	onContextMenu?: MessageListEvent;
-	onDownButtonClick?: (e: MouseEvent) => void;
-	onOpen?: MeetingMessageEvent;
-	onDownload?: MessageListEvent;
-	onPhotoError?: MessageListEvent;
-	onMeetingMoreSelect?: MessageListEvent;
-	onMessageFocused?: MessageFocusEvent;
-	onClick?: MessageListEvent;
-	onForwardClick?: MessageListEvent;
-	onReplyClick?: MessageListEvent;
-	onReplyMessageClick?: MessageListEvent;
-	onTitleClick?: MessageListEvent;
-	onRemoveMessageClick?: MessageListEvent;
-	onMeetingMessageClick?: MessageListEvent;
-	onMeetingTitleClick?: MeetingMessageEvent;
-	onMeetingVideoLinkClick?: MouseEventHandler & MeetingMessageEvent;
-	onMeetingLinkClick?: MessageListEvent;
 	messageBoxStyles?: CSSProperties;
 	notchStyle?: CSSProperties;
 }
@@ -664,7 +602,7 @@ export type MessageListEvent = (
 export type MessageFocusEvent = (
 	item: MessageType,
 	index: number,
-	isFocused: boolean,
+	event: FocusEvent,
 ) => void;
 
 /**
@@ -721,32 +659,12 @@ export interface IMeetingLinkMessageProps extends IMeetingLinkMessage {
 }
 
 /**
- * MeetingMessageEvent Type
- *
- * @param item The MessageListEvent's item is a IMeetingMessage.
- * @param index The MessageListEvent's index.
- * @param event The MessageListEvent's event.
- */
-export type MeetingMessageEvent = (
-	item: IMeetingMessage,
-	index: number,
-	event: MouseEvent,
-) => unknown;
-
-/**
- * ITextMessage Interface extends IMessage
- *
- * @prop type The Text Message's type is "text".
- */
-export interface ITextMessage extends IMessage {}
-
-/**
  * ITextMessageProps Interface
  *
  * @prop type The Text Message's type is "text".
  * @prop message The Text Message's message is a ITextMessage.
  */
-export interface ITextMessageProps extends ITextMessage {}
+export interface ITextMessageProps extends IMessage {}
 
 /**
  * Message List Props
@@ -754,11 +672,10 @@ export interface ITextMessageProps extends ITextMessage {}
  * @param cmpRef The Message List's cmpRef.
  * @param className The Message List's className.
  * @param dataSource The Message List's dataSource.
- * @param lazyLoadingImage The Message List's lazyLoadingImage.
  * @param onClick The Message List's onClick.
- * @param onMeetingClick The Message List's onMeetingClick.
- * @param onShareClick The Message List's onShareClick.
- * @param onCloseClick The Message List's onCloseClick.
+ * @param onMeeting The Message List's onMeeting.
+ * @param onShare The Message List's onShare.
+ * @param onClose The Message List's onClose.
  * @param onContextMenu The Message List's onContextMenu.
  * @param onAvatarError The Message List's onAvatarError.
  */
@@ -766,13 +683,17 @@ export interface IMeetingListProps {
 	cmpRef?: string;
 	className?: string;
 	dataSource?: IMeetingItemProps[];
-	lazyLoadingImage?: string;
-	onClick?: MeetingListEvent;
 	onMeetingClick?: MeetingListEvent;
 	onShareClick?: MeetingListEvent;
 	onCloseClick?: MeetingListEvent;
 	onContextMenu?: MeetingListEvent;
-	onAvatarError?: MeetingListEvent;
+	onAvatarError?: OnErrorEventHandler;
+	onMessageFocused?: MessageFocusEvent;
+	onMeetingMessageClick?: MeetingListEvent;
+	onMeetingMoreSelect?: MessageListEvent;
+	onMeetingLinkClick?: MeetingListEvent;
+	onMeetingTitleClick?: MeetingMessageEvent;
+	onMeetingVideoLinkClick?: MeetingMessageEvent;
 }
 
 /**
@@ -789,6 +710,19 @@ export type MeetingListEvent = (
 ) => void;
 
 /**
+ * MeetingListEvent Type with synthetic event type
+ *
+ * @param item The MessageListEvent's item is a IMeetingItemProps.
+ * @param index The MessageListEvent's index.
+ * @param event The MessageListEvent's event.
+ */
+export type IMeetingItemEvent = (
+	event: SyntheticEvent,
+	attributes: IMeetingItemProps,
+	setAttributes: Dispatch<SetStateAction<IMeetingItemProps>>,
+) => void;
+
+/**
  * IMeetingItemProps Interface
  *
  * @prop id The Meeting Item's id.
@@ -802,17 +736,16 @@ export type MeetingListEvent = (
  * @prop subtitle The Meeting Item's subtitle.
  * @prop statusColorType The Meeting Item's status color type.
  * @prop dateString The Meeting Item's date string.
- * @prop lazyLoadingImage The Meeting Item's lazyLoadingImage.
  * @prop avatarLimit The Meeting Item's avatar limit.
  * @prop avatars The Meeting Item's avatar array.
  * @prop audioMuted The Meeting Item's audio muted.
  * @prop audioSource The Meeting Item's audio source.
  * @prop onClick The Meeting Item's function onClick(event: MouseEvent<T, MouseEvent>).
  * @prop onAvatarError The Meeting Item's function onAvatarError(event: MouseEvent<T, MouseEvent>).
- * @prop onMeetingClick The Meeting Item's function onMeetingClick(event: MouseEvent<T, MouseEvent>).
- * @prop onShareClick The Meeting Item's function onShareClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onMeeting The Meeting Item's function onMeeting(event: MouseEvent<T, MouseEvent>).
+ * @prop onShare The Meeting Item's function onShare(event: MouseEvent<T, MouseEvent>).
  * @prop onContextMenu The Meeting Item's function onContextMenu(event: MouseEvent<T, MouseEvent>).
- * @prop onCloseClick The Meeting Item's function onCloseClick(event: MouseEvent<T, MouseEvent>).
+ * @prop onClose The Meeting Item's function onClose(event: MouseEvent<T, MouseEvent>).
  */
 export interface IMeetingItemProps {
 	id: string;
@@ -824,20 +757,17 @@ export interface IMeetingItemProps {
 	alt?: string;
 	title?: string;
 	subtitle?: string;
-	statusColorType?: string;
+	statusColorType?: AvatarStatusType;
 	className?: string;
 	dateString?: string;
-	lazyLoadingImage?: string;
 	avatarLimit?: number;
 	avatars?: IAvatarProps[];
 	audioMuted?: boolean;
 	audioSource?: string;
-	onClick?: MouseEventHandler;
-	onAvatarError?: MouseEventHandler;
-	onMeetingClick?: MouseEventHandler;
-	onShareClick?: MouseEventHandler;
-	onContextMenu?: MouseEventHandler;
-	onCloseClick?: MouseEventHandler;
+	onShare?: IMeetingItemEvent;
+	onClose?: IMeetingItemEvent;
+	onMeeting?: IMeetingItemEvent;
+	onAvatarError?: ReactEventHandler;
 }
 
 /**
@@ -907,6 +837,17 @@ export interface IInputProps {
 	onKeyUp?: KeyboardEventHandler;
 }
 
+export interface IBadgeProps {
+	value?: string | number;
+	className?: string;
+	style?: CSSProperties;
+	rounded?: boolean;
+	size?: number;
+	color?: string;
+	backgroundColor?: string;
+	position?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
+}
+
 /**
  * IMessageDataStatus Interface
  *
@@ -939,7 +880,7 @@ export interface IDropdownProps {
 	className?: string;
 	buttonProps?: IButtonProps;
 	animationType?: string;
-	animationPosition?: string;
+	animationPosition?: AnimationPosition;
 	title?: string;
 	items: IDropdownItemType[];
 	onSelect?: (e: MouseEvent, i: number) => void;
@@ -982,22 +923,19 @@ export interface ICircleProps {
  * @prop onClick The Button's onClick function.
  * @prop icon The Button's icon is a IIcon.
  */
-export interface IButtonProps {
-	title?: string;
-	text?: string;
+export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+	text?: string | ReactNode;
 	buttonRef?: RefObject<HTMLButtonElement>;
-	type?: "button" | "submit" | "reset";
 	borderWidth?: number;
-	className?: string;
-	style?: CSSProperties;
 	backgroundColor?: string;
 	color?: string;
 	outlined?: boolean;
-	circle?: boolean;
 	disabled?: boolean;
+	circle?: boolean;
+	squared?: boolean;
 	link?: boolean;
-	onClick?: MouseEventHandler;
 	icon?: IIcon;
+	children?: ReactNode;
 }
 
 /**
@@ -1093,9 +1031,9 @@ export interface IPopup {
 	text?: string;
 	footerButtons?: IButtonProps[];
 	headerButtons?: IButtonProps[];
-	renderHeader?: () => ReactElement;
-	renderContent?: () => ReactElement;
-	renderFooter?: () => ReactElement;
+	renderHeader?: ReactElement;
+	renderContent?: ReactElement;
+	renderFooter?: ReactElement;
 	color?: string;
 }
 
@@ -1111,6 +1049,7 @@ export interface IPopupProps {
 	type?: string;
 	className?: string;
 	show?: boolean;
+	wrapperColor?: CSSProperties["color"];
 }
 
 /**
@@ -1118,7 +1057,6 @@ export interface IPopupProps {
  *
  * @prop src The Avatar's src is an image source.
  * @prop title The Avatar's title.
- * @prop lazyLoadingImage The Avatar's lazyLoadingImage.
  * @prop letterItem The Avatar's letterItem is a ILetterItem.
  * @prop type The Avatar's type.
  * @prop size The Avatar's size.
@@ -1132,19 +1070,18 @@ export interface IPopupProps {
  * @prop statusText The Avatar's status text.
  */
 export interface IAvatarProps {
-	src: string;
-	title?: string;
-	lazyLoadingImage?: string;
+	src?: string;
+	title: string;
 	letterItem?: ILetterItem;
 	type?: string;
 	style?: CSSProperties;
-	size?: "default" | "xsmall" | "small" | "medium" | "large" | "xlarge";
+	size?: AvatarSize;
 	rounded?: boolean;
 	className?: string;
 	alt?: string;
 	sideElement?: JSX.Element | null;
 	onError?: ReactEventHandler;
-	statusColorType?: string;
+	statusColorType?: AvatarStatusType;
 	statusColor?: string;
 	statusText?: string;
 }

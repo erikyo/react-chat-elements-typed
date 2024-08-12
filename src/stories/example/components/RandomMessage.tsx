@@ -9,7 +9,8 @@ import {
 	systemMessage,
 	textMessage,
 	videoMessage,
-} from "../utils/MessageTypes";
+} from "../../utils/MessageTypes";
+import { token } from "../../utils/common";
 
 export const randomMessage = (type = "random", index = 0): MessageType => {
 	let messageType = type;
@@ -24,26 +25,26 @@ export const randomMessage = (type = "random", index = 0): MessageType => {
 			"video",
 			"audio",
 			"meetingLink",
-		][Math.floor(Math.random() * 10) % 10];
+		][token(9) - 1];
 	}
 	switch (messageType) {
 		case "photo":
-			return photoMessage;
+			return photoMessage();
 		case "file":
-			return fileMessage;
+			return fileMessage();
 		case "system":
-			return systemMessage;
+			return systemMessage();
 		case "location":
-			return locationMessage;
+			return locationMessage();
 		case "meeting":
-			return meetingMessage;
-		case "video":
-			return videoMessage;
-		case "audio":
-			return audioMessage;
+			return meetingMessage();
 		case "meetingLink":
-			return meetingLinkMessage;
+			return meetingLinkMessage();
+		case "video":
+			return videoMessage();
+		case "audio":
+			return audioMessage();
 		default:
-			return textMessage(index);
+			return textMessage();
 	}
 };

@@ -18,7 +18,7 @@ const MeetingLink: FC<IMeetingLinkMessageProps> = (props) => {
 						(Item: MeetingLinkActionButtons, index) => {
 							return (
 								<div
-									key={props?.meetingID ?? index.toString()}
+									key={`${props?.id}-${index.toString()}`}
 									className="rce-mtlink-btn-content"
 									onClick={() => Item.onClickButton(props?.meetingID ?? "")}
 									onKeyDown={console.log}

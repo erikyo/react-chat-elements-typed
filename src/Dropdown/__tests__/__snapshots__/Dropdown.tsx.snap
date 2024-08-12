@@ -7,11 +7,11 @@ exports[`Avatar component > should render without issues 1`] = `
   >
     <button
       class="rce-button"
-      style="border-width: 2px; cursor: pointer; filter: none; flex-direction: row;"
+      style="border-width: 2px; flex-direction: row;"
       type="button"
     />
     <div
-      class="rce-dropdown default rce-dropdown-open__northwest"
+      class="rce-dropdown default rce-dropdown-open__northwest dropdown-hide"
     >
       <ul />
     </div>

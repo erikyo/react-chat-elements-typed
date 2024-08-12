@@ -8,6 +8,7 @@
  * Components Styles
  */
 @import url("./MessageBox/MessageBox.css");
+@import url("./Badge/Badge.css");
 @import url("./ChatItem/ChatItem.css");
 @import url("./ChatList/ChatList.css");
 @import url("./MessageList/MessageList.css");

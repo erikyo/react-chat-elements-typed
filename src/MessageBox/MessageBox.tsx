@@ -1,7 +1,9 @@
 import type { FC } from "react";
 import type React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./MessageBox.css";
+
+import classNames from "classnames";
 
 import PhotoMessage from "../PhotoMessage/PhotoMessage";
 import FileMessage from "../FileMessage/FileMessage";
@@ -15,46 +17,58 @@ import MeetingLink from "../MeetingLink/MeetingLink";
 
 import Avatar from "../Avatar/Avatar";
 
-import { RiShareForwardFill } from "react-icons/ri";
 import {
 	MdAccessTime,
 	MdCheck,
 	MdDelete,
 	MdDoneAll,
-	MdMessage,
-	MdOutlineEdit,
+	MdReply,
+	MdReplyAll,
+	MdEdit,
+	MdOutlineEmojiEmotions,
 } from "react-icons/md";
-import { TiArrowForward } from "react-icons/ti";
 
 import { format } from "date-fns";
-
-import classNames from "classnames";
-import type { MessageBoxType } from "../types";
 import { LeftNotch } from "../SvgIcon/leftNotch";
 import { RightNotch } from "../SvgIcon/rightNotch";
+import type { MessageBoxType } from "../types";
+import Button from "../Button/Button";
+import { relativeDateFormat } from "../MeetingItem/MeetingItem";
 
-const MessageBox: FC<MessageBoxType> = ({
-	focus = false,
-	notch = true,
-	style,
-	actionButtons,
-	notchStyle = { color: "var(--rce-color-white)" },
-	...props
-}) => {
-	const prevProps = useRef(focus);
+const MessageBox: FC<MessageBoxType> = (props) => {
+	const [attributes, setAttributes] = useState<MessageBoxType>({
+		style: {},
+		actionButtons: undefined,
+		forwardedMessageText: "Forwarded",
+		notch: true,
+		...props,
+	});
+	const prevProps = useRef(attributes.focus);
 	const messageRef = useRef<HTMLDivElement | null>(null);
 
 	const positionCls = classNames("rce-mbox", {
-		"rce-mbox-right": props.position === "right",
+		"rce-mbox-right": attributes.position === "right",
+		"rce-mbox-left": attributes.position !== "right",
 	});
+
+	const defaultActionStyle = {
+		color: "var(--rce-color-white)",
+		backgroundColor: "rgba(110, 110, 120, .5)",
+		style: {
+			padding: "6px",
+			borderWidth: 0,
+		},
+	};
+
 	const thatAbsoluteTime =
-		!/(text|video|file|meeting|audio)/g.test(props.type || "text") &&
-		!(props.type === "location" && props.text);
+		!/(text|video|file|meeting|audio)/g.test(attributes.type || "text") &&
+		!(attributes.type === "location" && attributes.text);
 	const dateText =
-		props.date && (props.dateString || format(props.date, "HH:mm"));
+		attributes.date &&
+		(attributes.dateString || format(attributes.date, "HH:mm"));
 
 	useEffect(() => {
-		if (prevProps.current !== focus && focus) {
+		if (prevProps.current !== attributes.focus && attributes.focus) {
 			if (messageRef?.current) {
 				(messageRef.current as HTMLDivElement)?.scrollIntoView({
 					behavior: "smooth",
@@ -62,225 +76,288 @@ const MessageBox: FC<MessageBoxType> = ({
 					inline: "start",
 				});
 
-				if (props.onMessageFocused instanceof Function)
-					props.onMessageFocused(true);
+				if (attributes.onMessageFocused instanceof Function)
+					attributes.onMessageFocused(true);
 			}
 		}
-		prevProps.current = focus;
-	}, [focus, props.onMessageFocused]);
+		prevProps.current = attributes.focus;
+	}, [attributes.focus, attributes.onMessageFocused]);
 
 	return (
 		<div
 			ref={messageRef}
-			className={classNames("rce-container-mbox", props.className)}
-			onClick={props.onClick}
-			onKeyDown={console.log}
+			className={classNames("rce-container-mbox", attributes.className)}
 		>
-			{props.renderAddCmp instanceof Function
-				? props.renderAddCmp()
-				: props.renderAddCmp}
-			{props.type === "system" ? (
-				<SystemMessage {...props} focus={focus} notch={notch} />
+			{attributes?.renderAddCmp}
+			{attributes.type === "system" ? (
+				<SystemMessage {...attributes} />
 			) : (
 				<div
-					style={style}
 					className={classNames(
 						positionCls,
 						{ "rce-mbox--clear-padding": thatAbsoluteTime },
-						{ "rce-mbox--clear-notch": !notch },
-						{ "message-focus": focus },
+						{ "rce-mbox--clear-notch": !attributes.notch },
 					)}
 				>
-					{notch &&
-						(props.position === "right" ? (
-							<RightNotch style={notchStyle} focus={focus} />
+					{attributes.notch &&
+						(attributes.position === "right" ? (
+							<RightNotch
+								style={{
+									fill: "var(--rce-mbox-background-right)",
+									...attributes.notchStyle,
+								}}
+								focus={attributes.focus}
+							/>
 						) : (
-							<LeftNotch style={notchStyle} focus={focus} />
+							<LeftNotch
+								style={{
+									fill: "var(--rce-mbox-background)",
+									...attributes.notchStyle,
+								}}
+								focus={attributes.focus}
+							/>
 						))}
-					<div className="rce-mbox-body" onContextMenu={props.onContextMenu}>
-						{!props.retracted && props.forwarded === true && (
-							<div
-								className={classNames(
-									"rce-mbox-forward",
-									{ "rce-mbox-forward-right": props.position === "left" },
-									{ "rce-mbox-forward-left": props.position === "right" },
-								)}
-								onClick={props.onForwardClick}
-								onKeyDown={console.log}
-							>
-								<RiShareForwardFill />
-							</div>
-						)}
+					<div
+						className={classNames("rce-mbox-body", {
+							"message-focus": attributes.focus,
+						})}
+						onContextMenu={attributes?.onContextMenu}
+						style={attributes.style}
+					>
+						<div className={"rce-mbox-action-buttons"}>
+							{!attributes.retracted && attributes.EmojiButton === true && (
+								<Button
+									circle
+									className={classNames(
+										"rce-mbox-action",
+										"rce-mbox-emoji-button",
+										{
+											"rce-mbox-forward-right": attributes.position === "left",
+										},
+										{
+											"rce-mbox-forward-left": attributes.position === "right",
+										},
+									)}
+									onClick={(e) =>
+										attributes?.AddEmoji?.(e, attributes, setAttributes)
+									}
+									icon={{
+										component: <MdOutlineEmojiEmotions size={20} />,
+									}}
+									{...defaultActionStyle}
+								/>
+							)}
 
-						{!props.retracted && props.replyButton && (
+							{!attributes.retracted && !attributes.forwarded && (
+								<Button
+									circle
+									className={classNames(
+										"rce-mbox-action",
+										"rce-mbox-forward",
+										{
+											"rce-mbox-forward-right": attributes.position === "left",
+										},
+										{
+											"rce-mbox-forward-left": attributes.position === "right",
+										},
+									)}
+									onClick={(e) =>
+										attributes.onForward?.(e, attributes, setAttributes)
+									}
+									icon={{
+										component: (
+											<MdReplyAll
+												size={20}
+												className={"reverse-icon-horizontal"}
+											/>
+										),
+									}}
+									{...defaultActionStyle}
+								/>
+							)}
+
+							{!attributes.retracted && attributes.replyButton && (
+								<Button
+									circle
+									className={
+										!attributes.forwarded
+											? classNames(
+													"rce-mbox-action",
+													"rce-mbox-forward",
+													`rce-mbox-forward-${attributes.position}`,
+												)
+											: classNames(
+													"rce-mbox-action",
+													"rce-mbox-forward",
+													`rce-mbox-reply-btn-${attributes.position}`,
+												)
+									}
+									onClick={(ev) =>
+										attributes.onReplyMessage?.(ev, attributes, setAttributes)
+									}
+									icon={{
+										component: (
+											<MdReply
+												size={20}
+												className={"reverse-icon-horizontal"}
+											/>
+										),
+									}}
+									{...defaultActionStyle}
+								/>
+							)}
+
+							{!attributes.retracted && attributes.removeButton && (
+								<Button
+									circle
+									className={
+										attributes.forwarded
+											? classNames(
+													"rce-mbox-action",
+													"rce-mbox-remove",
+													`rce-mbox-remove-${attributes.position}`,
+												)
+											: classNames(
+													"rce-mbox-action",
+													"rce-mbox-forward",
+													`rce-mbox-reply-btn-${attributes.position}`,
+												)
+									}
+									onClick={(ev) =>
+										attributes.onRemoveMessage?.(ev, attributes, setAttributes)
+									}
+									icon={{
+										component: <MdDelete size={20} />,
+									}}
+									{...defaultActionStyle}
+								/>
+							)}
+						</div>
+
+						{(attributes.title || attributes.avatar) && (
 							<div
-								className={
-									!props.forwarded
-										? classNames(
-												"rce-mbox-forward",
-												{ "rce-mbox-forward-right": props.position === "left" },
-												{ "rce-mbox-forward-left": props.position === "right" },
-											)
-										: classNames(
-												"rce-mbox-forward",
-												{
-													"rce-mbox-reply-btn-right": props.position === "left",
-												},
-												{
-													"rce-mbox-reply-btn-left": props.position === "right",
-												},
-											)
+								style={{
+									...(attributes.titleColor && {
+										color: attributes.titleColor,
+									}),
+								}}
+								onClick={(event) =>
+									attributes.onTitleClick?.(event, attributes, setAttributes)
 								}
-								onClick={props.onReplyClick}
-								onKeyDown={console.log}
-							>
-								<MdMessage />
-							</div>
-						)}
-
-						{!props.retracted && props.removeButton && (
-							<div
-								className={
-									props.forwarded
-										? classNames(
-												"rce-mbox-remove",
-												{ "rce-mbox-remove-right": props.position === "left" },
-												{ "rce-mbox-remove-left": props.position === "right" },
-											)
-										: classNames(
-												"rce-mbox-forward",
-												{
-													"rce-mbox-reply-btn-right": props.position === "left",
-												},
-												{
-													"rce-mbox-reply-btn-left": props.position === "right",
-												},
-											)
+								onKeyDown={(event) =>
+									attributes.onTitleClick?.(event, attributes, setAttributes)
 								}
-								onClick={props.onRemoveMessageClick}
-								onKeyDown={console.log}
-							>
-								<MdDelete />
-							</div>
-						)}
-
-						{(props.title || props.avatar) && (
-							<div
-								style={{ ...(props.titleColor && { color: props.titleColor }) }}
-								onClick={props.onTitleClick}
-								onKeyDown={console.log}
 								className={classNames("rce-mbox-title", {
-									"rce-mbox-title--clear": props.type === "text",
+									"rce-mbox-title--clear": attributes.type === "text",
 								})}
 							>
-								{props.avatar && (
+								{attributes.avatar && (
 									<Avatar
+										title={attributes.title || "Unknown"}
 										size={"xsmall"}
-										letterItem={props.letterItem}
-										src={props.avatar}
+										letterItem={attributes.letterItem}
+										src={attributes.avatar}
 									/>
 								)}
-								{props.title && !props.reply && <span>{props.title}</span>}
+								{attributes.title && <span>{attributes.title}</span>}
 							</div>
 						)}
 
-						{props.forwardedMessageText ? (
-							<div className="rce-mbox-forwardedMessage">
-								<div className="rce-mbox-forwarded-message">
-									<TiArrowForward fontSize={18} />
-									<i style={{ margin: "0 3px 1px 0" }}>
-										{" "}
-										{props.forwardedMessageText}
-									</i>
+						{attributes.reply ? (
+							<ReplyMessage
+								onClick={(e) =>
+									attributes.onReplyMessage?.(e, attributes, setAttributes)
+								}
+								{...attributes.reply}
+							/>
+						) : null}
+
+						{attributes.forwarded ? (
+							<div className="rce-mbox-forwarded-message">
+								<div className="rce-mbox-forwarded-message-inner">
+									<MdReply
+										size={15}
+										style={{ padding: 0 }}
+										className={"reverse-icon-horizontal"}
+									/>
+									<i>{attributes.forwardedMessageText}</i>
 								</div>
 							</div>
 						) : null}
 
-						{!props.forwardedMessageText && props.reply ? (
-							<ReplyMessage
-								onClick={() => props.onReplyMessageClick}
-								{...props.reply}
-							/>
-						) : null}
-
-						{props.type === "text" && (
+						{attributes.type === "text" && (
 							<div
-								className={classNames("rce-mbox-text", {
-									"rce-mbox-text-retracted": props.retracted,
-									left: props.position === "left",
-									right: props.position === "right",
-								})}
-							>
-								{!props.forwardedMessageText && props.retracted && (
-									<MdOutlineEdit />
+								className={classNames(
+									"rce-mbox-text",
+									attributes?.position === "right" ? "right" : "left",
+									{
+										"rce-mbox-text-retracted": attributes.retracted,
+									},
 								)}
-								{props.text}
+							>
+								{!attributes.forwarded && attributes.retracted && <MdEdit />}
+								{attributes.text}
 							</div>
 						)}
 
-						{props.type === "location" && (
-							<LocationMessage focus={focus} notch={notch} {...props} />
+						{attributes.type === "location" && (
+							<LocationMessage {...attributes} />
 						)}
 
-						{props.type === "photo" && (
-							<PhotoMessage focus={focus} notch={notch} {...props} />
-						)}
+						{attributes.type === "photo" && <PhotoMessage {...attributes} />}
 
-						{props.type === "video" && (
-							<VideoMessage focus={focus} notch={notch} {...props} />
-						)}
+						{attributes.type === "video" && <VideoMessage {...attributes} />}
 
-						{props.type === "file" && (
-							<FileMessage focus={focus} notch={notch} {...props} />
-						)}
+						{attributes.type === "file" && <FileMessage {...attributes} />}
 
-						{props.type === "meeting" && (
-							<MeetingMessage focus={focus} notch={notch} {...props} />
+						{attributes.type === "meeting" && (
+							<MeetingMessage {...attributes} />
 						)}
-						{props.type === "audio" && (
-							<AudioMessage focus={focus} notch={notch} {...props} />
-						)}
+						{attributes.type === "audio" && <AudioMessage {...attributes} />}
 
-						{props.type === "meetingLink" && (
-							<MeetingLink {...props} actionButtons={actionButtons} />
+						{attributes.type === "meetingLink" && (
+							<MeetingLink
+								{...attributes}
+								actionButtons={props.actionButtons}
+							/>
 						)}
 
 						<div
-							title={props.statusTitle}
+							title={attributes.statusTitle}
 							className={classNames(
 								"rce-mbox-time",
 								{ "rce-mbox-time-block": thatAbsoluteTime },
-								{ "non-copiable": !props.copiableDate },
+								{ "non-copiable": !attributes.copiableDate },
 							)}
-							data-text={props.copiableDate ? undefined : dateText}
+							data-text={attributes.copiableDate ? undefined : dateText}
 						>
-							{props.copiableDate &&
-								props.date &&
-								(props.dateString || format(props.date, "HH:mm"))}
-							{props.status && (
+							{attributes.copiableDate &&
+								attributes.date !== undefined &&
+								relativeDateFormat(attributes.date)}
+							{attributes.status && (
 								<span className="rce-mbox-status">
-									{props.status === "waiting" && (
+									{attributes.status === "waiting" && (
 										<MdAccessTime
 											color={"var(--rce-color-gray)"}
 											style={{ fontSize: 18 }}
 										/>
 									)}
 
-									{props.status === "sent" && (
+									{attributes.status === "sent" && (
 										<MdCheck
 											color={"var(--rce-color-light-blue)"}
 											style={{ fontSize: 18 }}
 										/>
 									)}
 
-									{props.status === "received" && (
+									{attributes.status === "received" && (
 										<MdDoneAll
 											color={"var(--rce-color-green)"}
 											style={{ fontSize: 18 }}
 										/>
 									)}
 
-									{props.status === "read" && (
+									{attributes.status === "read" && (
 										<MdDoneAll
 											color={"var(--rce-color-light-blue)"}
 											style={{ fontSize: 18 }}

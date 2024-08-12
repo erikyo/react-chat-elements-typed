@@ -12,6 +12,7 @@
 
 .rce-input {
     flex: 1;
+    display: block;
     height: 42px;
     padding: 5px 12px;
     border: none;
@@ -23,6 +24,8 @@
 
 .rce-input-textarea {
     padding: 10px 12px;
+    width: 100%;
+    overflow: hidden;
     resize: none;
 }
 
@@ -62,6 +65,7 @@
 
 .rce-emoji-picker {
     position: absolute;
+    z-index: 1001;
     bottom: 72px;
     left: 4px;
 }

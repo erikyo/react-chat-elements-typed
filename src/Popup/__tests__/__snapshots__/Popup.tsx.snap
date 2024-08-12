@@ -9,7 +9,7 @@ exports[`Avatar component > should render without issues 1`] = `
       class="rce-popup"
     >
       <div
-        class="rce-popup-header"
+        class="rce-popup-header text-extrabold text-2xl"
       >
         <span />
       </div>

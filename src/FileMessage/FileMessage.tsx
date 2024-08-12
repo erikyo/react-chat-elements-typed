@@ -8,29 +8,44 @@ import {
 import Loader from "../Loader/Loader";
 import type { IFileMessageProps } from "../types";
 import "./FileMessage.css";
+import classNames from "classnames";
+
+/**
+ * Format file size or return "Unknown File Size"
+ * @param size
+ */
+function formatFileSize(size: string | number | undefined) {
+	if (typeof size === "string") {
+		return size;
+	}
+	if (typeof size === "number") {
+		return humanFileSize(size);
+	}
+	return "Unknown File Size";
+}
+
+/**
+ * Format file size in human-readable format
+ * @param bytes The size in bytes
+ * @param decimals The number of decimals
+ * @return {string} The size in human-readable format
+ */
+function humanFileSize(bytes: number, decimals = 2): string {
+	if (bytes === 0) return "0 Bytes";
+	const k = 1024;
+	const dm = decimals || 2;
+	const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+	const i = Math.floor(Math.log(bytes) / Math.log(k));
+	return `${Number.parseFloat((bytes / k ** i).toFixed(dm))} ${sizes[i]}`;
+}
 
 const FileMessage: FC<IFileMessageProps> = (props) => {
 	const progressOptions = {
 		strokeWidth: 6,
 		easing: "easeInOut",
 		duration: 1400,
-		color: "#0791f1",
-		trailColor: "#eee",
-		step: (
-			state: { color: string; width: string },
-			circle: {
-				path: { setAttribute: (arg0: string, arg1: string) => void };
-				value: () => number;
-				setText: (arg0: string | number) => void;
-			},
-		) => {
-			circle.path.setAttribute("trail", state.color);
-			circle.path.setAttribute("trailwidth-width", state.width);
-
-			const value = Math.round(circle.value() * 100);
-			if (value === 0) circle.setText("");
-			else circle.setText(value);
-		},
+		color: "var(--rce-color-primary)",
+		trailColor: "var(--rce-color-gray-100)",
 	};
 
 	const error = props?.data?.status && props?.data?.status.error === true;
@@ -44,16 +59,23 @@ const FileMessage: FC<IFileMessageProps> = (props) => {
 			props.onOpen(e);
 	};
 
+	const filesize = formatFileSize(props?.data?.size);
+
 	return (
 		<div className="rce-mbox-file">
 			<button type={"button"} onClick={onClick}>
-				<div className="rce-mbox-file--icon">
+				<div
+					className={classNames(
+						"rce-mbox-file--icon",
+						`rce-mbox-file-extension-${props?.data?.extension}`,
+					)}
+				>
 					<FaFile color="#aaa" />
 					{props?.data?.size ? (
-						<div className="rce-mbox-file--size">{props?.data.size}</div>
+						<div className="rce-mbox-file--size">{filesize}</div>
 					) : null}
 				</div>
-				<div className="rce-mbox-file--text">{props.text}</div>
+				<div className="rce-mbox-file--text">{props.data?.name}</div>
 				<div className="rce-mbox-file--buttons">
 					{error && (
 						<span className="rce-error-button">
