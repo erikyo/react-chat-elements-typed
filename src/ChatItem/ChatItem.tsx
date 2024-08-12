@@ -51,13 +51,7 @@ const ChatItem: React.FC<IChatItemProps> = ({
 			onContextMenu={(ev) =>
 				attributes?.onContextMenu?.(ev, attributes, setAttributes)
 			}
-			onKeyDown={(e) =>
-				attributes?.onKeyDown?.(
-					e as KeyboardEvent<HTMLDivElement>,
-					attributes,
-					setAttributes,
-				)
-			}
+			onKeyDown={(ev) => attributes?.onKeyDown?.(ev, attributes, setAttributes)}
 		>
 			<div className="rce-citem">
 				<div

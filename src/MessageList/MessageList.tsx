@@ -109,7 +109,7 @@ const MessageList: FC<IMessageListProps> = ({
 			</div>
 			{scrollButton && toBottomHeight !== "100%" && (
 				<Button
-					rounded
+					circle
 					className="rce-mlist-down-button"
 					onClick={(e) => toBottom(e)}
 					color={"var(--rce-color-gray)"}

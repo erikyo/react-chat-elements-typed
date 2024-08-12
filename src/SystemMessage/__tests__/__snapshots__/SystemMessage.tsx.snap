@@ -3,7 +3,7 @@
 exports[`Avatar component > should render without issues 1`] = `
 <div>
   <div
-    class="rce-container-smsg rce-container-position-undefined"
+    class="rce-container-smsg"
   >
     <div
       class="rce-smsg"

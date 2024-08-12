@@ -90,7 +90,7 @@ const MessageBox: FC<MessageBoxType> = (props) => {
 		>
 			{attributes?.renderAddCmp}
 			{attributes.type === "system" ? (
-				<SystemMessage {...attributes} position={"center"} />
+				<SystemMessage {...attributes} />
 			) : (
 				<div
 					className={classNames(
@@ -139,7 +139,7 @@ const MessageBox: FC<MessageBoxType> = (props) => {
 										},
 									)}
 									onClick={(e) =>
-										attributes.AddEmoji(e, attributes, setAttributes)
+										attributes?.AddEmoji?.(e, attributes, setAttributes)
 									}
 									icon={{
 										component: <MdOutlineEmojiEmotions size={20} />,
