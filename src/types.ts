@@ -77,7 +77,7 @@ export interface ILetterItem {
 	letter?: string;
 }
 export type IChatItemEvent = (
-	ev: MouseEvent | KeyboardEvent,
+	ev: MouseEvent | KeyboardEvent | SyntheticEvent,
 	attributes: IChatItemProps,
 	setAttributes: Dispatch<SetStateAction<IChatItemProps>>,
 ) => void;
@@ -386,7 +386,6 @@ export interface ISystemMessage extends IMessage {
  */
 export interface ISystemMessageProps extends ISystemMessage {
 	className?: string;
-	position?: "center" | "full" | "left" | "right" | undefined;
 }
 
 /**

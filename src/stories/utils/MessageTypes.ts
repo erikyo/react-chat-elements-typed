@@ -9,7 +9,7 @@ import {
 	token,
 } from "./common";
 import { MdOutlineVideoCall } from "react-icons/md";
-import type { IChatItemProps, MessageType } from "../../types";
+import type { IChatItemProps, IMessage, MessageType } from "../../types";
 import ChatItem from "../../ChatItem/ChatItem";
 import badge from "../../Badge/Badge";
 
@@ -18,6 +18,7 @@ export const messageDefaultdata = () =>
 		id: loremIpsum({ count: 1, units: "words" }),
 		position: token(2) > 1 ? "right" : "left",
 		date: +new Date(),
+		type: "text",
 		//date
 		dateString: undefined,
 		forwarded: false,
@@ -37,7 +38,7 @@ export const messageDefaultdata = () =>
 		// status
 		status: getRandomStatus(),
 		statusTitle: loremIpsum({ count: 1, units: "words" }),
-	}) as IChatItemProps;
+	}) as MessageType;
 
 export const avatar = {
 	avatar: photo(),
@@ -186,8 +187,8 @@ export const meetingMessage = () =>
 		dataSource: Array(token(5))
 			.fill(1)
 			.map((x) => ({
-				type: "meeting",
 				...messageDefaultdata(),
+				type: "meeting",
 				date: +new Date(),
 				event: {
 					title: loremIpsum({ count: 2, units: "words" }),
