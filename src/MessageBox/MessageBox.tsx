@@ -1,6 +1,5 @@
-import type { FC } from "react";
-import type React from "react";
-import { useEffect, useRef, useState } from "react";
+import type React, {FC} from "react";
+import {useEffect, useRef, useState} from "react";
 import "./MessageBox.css";
 
 import classNames from "classnames";
@@ -17,23 +16,16 @@ import MeetingLink from "../MeetingLink/MeetingLink";
 
 import Avatar from "../Avatar/Avatar";
 
-import {
-	MdAccessTime,
-	MdCheck,
-	MdDelete,
-	MdDoneAll,
-	MdReply,
-	MdReplyAll,
-	MdEdit,
-	MdOutlineEmojiEmotions,
-} from "react-icons/md";
+import {MdDelete, MdEdit, MdOutlineEmojiEmotions, MdReply, MdReplyAll,} from "react-icons/md";
 
-import { format } from "date-fns";
-import { LeftNotch } from "../SvgIcon/leftNotch";
-import { RightNotch } from "../SvgIcon/rightNotch";
-import type { MessageBoxType } from "../types";
+import {format} from "date-fns";
+import {LeftNotch} from "../SvgIcon/leftNotch";
+import {RightNotch} from "../SvgIcon/rightNotch";
+import type {MessageBoxType} from "../types";
 import Button from "../Button/Button";
-import { relativeDateFormat } from "../MeetingItem/MeetingItem";
+import {relativeDateFormat} from "../MeetingItem/MeetingItem";
+import {Reactions} from "./Reactions";
+import {MessageStatus} from "./MessageStatus";
 
 const MessageBox: FC<MessageBoxType> = (props) => {
 	const [attributes, setAttributes] = useState<MessageBoxType>({
@@ -63,6 +55,7 @@ const MessageBox: FC<MessageBoxType> = (props) => {
 	const thatAbsoluteTime =
 		!/(text|video|file|meeting|audio)/g.test(attributes.type || "text") &&
 		!(attributes.type === "location" && attributes.text);
+
 	const dateText =
 		attributes.date &&
 		(attributes.dateString || format(attributes.date, "HH:mm"));
@@ -334,38 +327,13 @@ const MessageBox: FC<MessageBoxType> = (props) => {
 							{attributes.copiableDate &&
 								attributes.date !== undefined &&
 								relativeDateFormat(attributes.date)}
-							{attributes.status && (
-								<span className="rce-mbox-status">
-									{attributes.status === "waiting" && (
-										<MdAccessTime
-											color={"var(--rce-color-gray)"}
-											style={{ fontSize: 18 }}
-										/>
-									)}
-
-									{attributes.status === "sent" && (
-										<MdCheck
-											color={"var(--rce-color-light-blue)"}
-											style={{ fontSize: 18 }}
-										/>
-									)}
-
-									{attributes.status === "received" && (
-										<MdDoneAll
-											color={"var(--rce-color-green)"}
-											style={{ fontSize: 18 }}
-										/>
-									)}
-
-									{attributes.status === "read" && (
-										<MdDoneAll
-											color={"var(--rce-color-light-blue)"}
-											style={{ fontSize: 18 }}
-										/>
-									)}
-								</span>
+							{attributes?.status && (
+								<MessageStatus status={attributes.status} />
 							)}
 						</div>
+						{attributes?.reactions && (
+							<Reactions reactions={attributes.reactions} />
+						)}
 					</div>
 				</div>
 			)}
