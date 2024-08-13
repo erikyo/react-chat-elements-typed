@@ -4,8 +4,6 @@ import { IconMic } from "./IconMic";
 import { IconEmoji } from "./IconEmoji";
 import { IconPlus } from "./IconPlus";
 import { IconSend } from "./IconSend";
-import { ArrowRight } from "./arrowRight";
-import { ArrowLeft } from "./arrowLeft";
 import { LeftNotch } from "./leftNotch";
 import { RightNotch } from "./rightNotch";
 
@@ -53,16 +51,17 @@ export const inputBarRelated = {
 					<IconSend style={{ color: "#333" }} /> IconSend
 				</p>
 				<p>
-					<ArrowRight /> ArrowRight
+					<LeftNotch
+						style={{ color: "#333", position: "relative", left: 0, top: 0 }}
+						size={20}
+					/>{" "}
+					LeftNotch
 				</p>
 				<p>
-					<ArrowLeft /> ArrowLeft
-				</p>
-				<p>
-					<LeftNotch /> LeftNotch
-				</p>
-				<p>
-					<RightNotch /> RightNotch
+					<RightNotch
+						style={{ color: "#333", position: "relative", left: 0, top: 0 }}
+					/>{" "}
+					RightNotch
 				</p>
 			</div>
 		);
