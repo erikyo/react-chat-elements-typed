@@ -94,8 +94,8 @@ const MessageList: FC<IMessageListProps> = ({
 
 	return (
 		<div
-			className={classNames(["rce-container-mlist", props.className])}
 			{...props.customProps}
+			className={classNames(["rce-container-mlist", props.className])}
 		>
 			{!!props.children && props.isShowChild && props.children}
 			<div
