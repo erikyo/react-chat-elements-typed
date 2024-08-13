@@ -8,6 +8,19 @@ exports[`Avatar component > should render without issues 1`] = `
     <div
       class="rce-mbox rce-mbox-left"
     >
+      <svg
+        class="rce-mbox-left-notch"
+        height="20"
+        role="img"
+        style="display: inline-flex; vertical-align: middle; fill: var(--rce-mbox-background);"
+        viewBox="0 0 20 20"
+        width="20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M20 0v20L0 0"
+        />
+      </svg>
       <div
         class="rce-mbox-body"
       >

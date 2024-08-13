@@ -3,10 +3,8 @@ import type {
 	ChangeEvent,
 	CSSProperties,
 	Dispatch,
-	DragEventHandler,
 	FocusEvent,
 	FormEventHandler,
-	FunctionComponent,
 	HTMLAttributes,
 	HTMLInputTypeAttribute,
 	InputHTMLAttributes,
@@ -84,15 +82,14 @@ export type MessageReaction = {
 
 export type IChatItemEvent = (
 	ev: MouseEvent | KeyboardEvent | SyntheticEvent,
-	attributes: IChatItemProps,
-	setAttributes: Dispatch<SetStateAction<IChatItemProps>>,
+	props: IChatItemProps,
 ) => void;
 
 /**
  * The IChatItemProps Interface
  * used to list the chat in the sidebar component
  */
-export interface IChatItemProps {
+export interface IChatItemProps extends HTMLAttributes<HTMLElement> {
 	id?: string;
 	avatar?: string;
 	letterItem?: ILetterItem;
@@ -115,16 +112,10 @@ export interface IChatItemProps {
 	muted?: boolean;
 	showMute?: boolean;
 	showVideoCall?: boolean;
-	onClick?: IChatItemEvent;
 	onAvatarError?: ReactEventHandler;
-	onContextMenu?: IChatItemEvent;
-	onKeyDown?: IChatItemEvent;
+	onItemContextMenu?: IChatItemEvent;
 	onMuteToggle?: IChatItemEvent;
 	onVideoCall?: IChatItemEvent;
-	onDragOver?: DragEventHandler;
-	onDragEnter?: DragEventHandler;
-	onDrop?: DragEventHandler;
-	onDragLeave?: DragEventHandler;
 	setDragStates?: boolean;
 	handleOnMouseEnter?: MouseEventHandler;
 	handleOnMouseLeave?: MouseEventHandler;
@@ -164,7 +155,7 @@ export interface IChatListProps {
  * @prop letterItem The Message's letterItem is a ILetterItem.
  * @prop reply The Message's reply.
  */
-export interface IMessage {
+export interface IMessage extends HTMLAttributes<HTMLElement> {
 	id?: string;
 	position?: "left" | "right";
 	text: string;
@@ -191,7 +182,6 @@ export interface IMessage {
 	style?: CSSProperties;
 	notchStyle?: CSSProperties;
 	forwardedMessageText?: string;
-	actionButtons?: MeetingLinkActionButtons[] | undefined;
 }
 
 /**
@@ -290,8 +280,7 @@ export interface IMeetingMessage extends IMessage {
  */
 export type MeetingMessageEvent = (
 	event: MouseEvent | KeyboardEvent | SyntheticEvent,
-	attributes: IMeetingMessageProps,
-	setAttributes: Dispatch<SetStateAction<IMeetingMessageProps>>,
+	props: IMeetingMessageProps,
 ) => void;
 
 /**
@@ -320,6 +309,7 @@ export interface IMeetingMessageProps extends IMessage {
 		id?: number | string;
 		title?: string;
 	}>;
+	actionButtons?: MeetingLinkActionButtons[];
 	moreItems?: IDropdownItemType[];
 	dataSource?: IMeetingMessage[];
 	participantsLimit?: number;
@@ -522,8 +512,7 @@ export interface ILocationMessageProps extends ILocationMessage {
  */
 export type MessageBoxEvent = (
 	event: MouseEvent | KeyboardEvent | SyntheticEvent,
-	attributes: MessageBoxType,
-	setAttributes: Dispatch<SetStateAction<MessageBoxType>>,
+	props: MessageBoxType,
 ) => void;
 
 /**
@@ -631,14 +620,8 @@ export interface IProgressOptions {
  */
 export interface IMeetingLinkMessage extends IMessage {
 	meetingID?: string;
+	meetingLinkText?: string;
 }
-
-/**
- * TActionButton Type
- *
- * @param props The TActionButton's props.
- */
-export type TActionButton = FunctionComponent<unknown>;
 
 /**
  * TMeetingLinkActionButtons Interface
@@ -649,7 +632,7 @@ export type TActionButton = FunctionComponent<unknown>;
 export interface MeetingLinkActionButtons {
 	// return meeting id
 	onClickButton: (id: string) => void;
-	Component: TActionButton;
+	Component: ReactElement;
 }
 
 /**
@@ -1067,9 +1050,9 @@ export interface IPopupProps {
  * @prop statusColor The Avatar's status color.
  * @prop statusText The Avatar's status text.
  */
-export interface IAvatarProps {
+export interface IAvatarProps extends HTMLAttributes<HTMLElement> {
 	src?: string;
-	title: string;
+	title?: string;
 	letterItem?: ILetterItem;
 	type?: string;
 	style?: CSSProperties;
@@ -1078,7 +1061,6 @@ export interface IAvatarProps {
 	className?: string;
 	alt?: string;
 	sideElement?: JSX.Element | null;
-	onError?: ReactEventHandler;
 	statusColorType?: AvatarStatusType;
 	statusColor?: string;
 	statusText?: string;

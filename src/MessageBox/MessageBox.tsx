@@ -89,7 +89,7 @@ const MessageBox: FC<MessageBoxType> = (props) => {
 						{ "rce-mbox--clear-notch": !!props?.notch },
 					)}
 				>
-					{props?.notch &&
+					{props?.notch !== false &&
 						(props.position === "right" ? (
 							<RightNotch
 								style={{
