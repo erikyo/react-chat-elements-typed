@@ -1,5 +1,6 @@
 import type {
 	ButtonHTMLAttributes,
+	ChangeEvent,
 	ClipboardEventHandler,
 	CSSProperties,
 	Dispatch,
@@ -8,7 +9,9 @@ import type {
 	FocusEventHandler,
 	FormEventHandler,
 	FunctionComponent,
+	HTMLAttributes,
 	HTMLInputTypeAttribute,
+	InputHTMLAttributes,
 	KeyboardEventHandler,
 	MouseEvent,
 	MouseEventHandler,
@@ -558,8 +561,7 @@ export interface IMessageBoxProps {
  * @prop downButtonBadge The Message List's down button badge.
  * @prop sendMessagePreview The Message List's send message preview.
  */
-export interface IMessageListProps {
-	className?: string;
+export interface IMessageListProps extends HTMLAttributes<HTMLDivElement> {
 	customProps?: {
 		[key: string]: unknown;
 	};
@@ -801,7 +803,8 @@ export interface IMeetingItemProps {
  * @prop onKeyDown The Input's function onKeyDown(event: KeyboardEvent<T>).
  * @prop onKeyUp The Input's function onKeyUp(event: KeyboardEvent<T>).
  */
-export interface IInputProps {
+export interface IInputProps
+	extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
 	autofocus?: boolean;
 	className?: string;
 	style?: CSSProperties;
@@ -812,7 +815,7 @@ export interface IInputProps {
 	maxlength?: number;
 	maxHeight?: number;
 	onMaxLengthExceed?: () => void;
-	onChange?: (ev: SyntheticEvent<HTMLInputElement, Event>) => void;
+	onChange?: (ev: ChangeEvent) => void;
 	multiline?: boolean;
 	autoHeight?: boolean;
 	minHeight?: number;
@@ -825,16 +828,7 @@ export interface IInputProps {
 	value?: string;
 	clear?: () => void;
 	setValue?: (value: string) => void;
-	onCopy?: ClipboardEventHandler;
-	onCut?: ClipboardEventHandler;
-	onPaste?: ClipboardEventHandler;
-	onBlur?: FocusEventHandler;
-	onFocus?: FocusEventHandler;
-	onSelect?: ReactEventHandler;
 	onSubmit?: FormEventHandler;
-	onReset?: FormEventHandler;
-	onKeyDown?: KeyboardEventHandler;
-	onKeyUp?: KeyboardEventHandler;
 }
 
 export interface IBadgeProps {
