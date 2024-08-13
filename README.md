@@ -1,4 +1,8 @@
-[![npm](https://img.shields.io/npm/dt/react-chat-elements-typed.svg?label=npm-install&style=flat)]() [![Github pre-)release](https://img.shields.io/github/release-pre/Detaysoft/react-chat-elements-typed.svg?style=flat)]()
+[![](https://img.shields.io/npm/v/react-chat-elements-typed.svg?label=npm%20version)](https://www.npmjs.com/package/react-chat-elements-typed)
+[![](https://badgen.net/bundlephobia/minzip/react-chat-elements-typed)](https://badgen.net/bundlephobia/minzip/react-chat-elements-typed)
+[![](https://img.shields.io/npm/l/react-chat-elements-typed)](https://github.com/erikyo/react-chat-elements-typed/blob/main/LICENSE)
+[![](https://github.com/erikyo/react-chat-elements-typed/actions/workflows/tests.yml/badge.svg)](https://github.com/erikyo/react-chat-elements-typed/actions/workflows/tests.yml)
+[![npm](https://img.shields.io/npm/dt/react-chat-elements-typed.svg?label=npm-install&style=flat)]()
 
 # react-chat-elements-typed
 
