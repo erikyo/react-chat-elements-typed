@@ -1,6 +1,7 @@
 .rce-container-mlist {
     position: relative;
     display: flex;
+    height: 100%;
 }
 
 .rce-mlist {
@@ -10,7 +11,7 @@
     flex: 1;
 }
 
-.rce-mlist-down-button {
+.rce-button.rce-mlist-down-button {
     position: absolute;
     z-index: 5;
     right: 18px;
@@ -20,7 +21,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
     transition: 200ms;
 }
 
