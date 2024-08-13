@@ -9,9 +9,7 @@ import {
 	token,
 } from "./common";
 import { MdOutlineVideoCall } from "react-icons/md";
-import type { IChatItemProps, IMessage, MessageType } from "../../types";
-import ChatItem from "../../ChatItem/ChatItem";
-import badge from "../../Badge/Badge";
+import type { IChatItemProps, MessageType } from "../../types";
 
 export const messageDefaultdata = () =>
 	({
@@ -172,21 +170,21 @@ export const meetingMessage = () =>
 			})),
 		actionButtons: [
 			{
-				onClickButton(id) {
+				onClickButton(id: string) {
 					console.log(id);
 				},
-				Component: () => MdOutlineVideoCall({ size: "25px" }),
+				Component: <MdOutlineVideoCall size="25px" />,
 			},
 			{
-				onClickButton(id) {
+				onClickButton(id: string) {
 					console.log(id);
 				},
-				Component: () => MdOutlineVideoCall({ size: "25px" }),
+				Component: <MdOutlineVideoCall size="25px" />,
 			},
 		],
 		dataSource: Array(token(5))
 			.fill(1)
-			.map((x) => ({
+			.map(() => ({
 				...messageDefaultdata(),
 				type: "meeting",
 				date: +new Date(),
@@ -218,13 +216,13 @@ export const meetingLinkMessage = () =>
 				onClickButton(id) {
 					console.log(id);
 				},
-				Component: () => MdOutlineVideoCall({ size: "25px" }),
+				Component: <MdOutlineVideoCall size="25px" />,
 			},
 			{
 				onClickButton(id) {
 					console.log(id);
 				},
-				Component: () => MdOutlineVideoCall({ size: "25px" }),
+				Component: <MdOutlineVideoCall size="25px" />,
 			},
 		],
 		meetingID: String(Math.round(Math.random() * 10)),
