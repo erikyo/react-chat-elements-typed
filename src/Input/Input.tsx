@@ -75,7 +75,7 @@ const Input: FC<IInputProps> = (props) => {
 		}
 
 		if (maxlength && (el.value || "").length > maxlength) {
-			if (onMaxLengthExceed instanceof Function) onMaxLengthExceed();
+			if (onMaxLengthExceed) onMaxLengthExceed();
 
 			if (rest.reference?.current) {
 				newValue = newValue.substring(0, maxlength);
