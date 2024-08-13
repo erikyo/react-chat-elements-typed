@@ -18,33 +18,33 @@ import { DATE_FORMAT } from "../constants";
 import Button from "../Button/Button";
 
 const MeetingMessage: FC<IMeetingMessageProps> = (props) => {
-	const [attributes, setAttributes] = useState(props);
 	const [toggle, setToggle] = useState(false);
 
 	const PARTICIPANT_LIMIT: number =
 		props.participantsLimit || Number.POSITIVE_INFINITY;
-	const dateText = attributes.dateString
-		? attributes.dateString
-		: attributes.date && format(attributes.date, DATE_FORMAT);
+
+	const dateText = props.dateString
+		? props.dateString
+		: props.date && format(props.date, DATE_FORMAT);
 
 	return (
 		<div className="rce-mbox-mtmg">
 			<div className="rce-mtmg">
 				<div className="rce-mtmg-subject">
-					{attributes.subject || "Unknown Meeting"}
+					{props.subject || "Unknown Meeting"}
 				</div>
 				<div className="rce-mtmg-body">
 					<div className="rce-mtmg-item">
 						<FaCalendar />
 						<div className="rce-mtmg-content">
-							<span className="rce-mtmg-title">{attributes.title}</span>
-							<span className="rce-mtmg-date">{attributes.dateString}</span>
+							<span className="rce-mtmg-title">{props.title}</span>
+							<span className="rce-mtmg-date">{dateText}</span>
 						</div>
 					</div>
 
-					{attributes.onMeetingMoreSelect &&
-						attributes.moreItems &&
-						attributes.moreItems.length > 0 && (
+					{props.onMeetingMoreSelect &&
+						props.moreItems &&
+						props.moreItems.length > 0 && (
 							<div>
 								<Dropdown
 									animationType="bottom"
@@ -56,14 +56,8 @@ const MeetingMessage: FC<IMeetingMessageProps> = (props) => {
 											size: 24,
 										},
 									}}
-									items={attributes.moreItems}
-									onSelect={(e) =>
-										attributes.onMeetingMoreSelect?.(
-											e,
-											attributes,
-											setAttributes,
-										)
-									}
+									items={props.moreItems}
+									onSelect={(e) => props.onMeetingMoreSelect?.(e, props)}
 								/>
 							</div>
 						)}
@@ -78,19 +72,19 @@ const MeetingMessage: FC<IMeetingMessageProps> = (props) => {
 					text={
 						toggle ? (
 							<div className="rce-mtmg-bottom--tptitle">
-								<span>{attributes.collapseTitle}</span>
+								<span>{props.collapseTitle}</span>
 							</div>
 						) : (
 							<div className="rce-mtmg-body-bottom--bttitle">
 								<span>
-									{attributes.participants
+									{props.participants
 										?.slice(0, PARTICIPANT_LIMIT)
 										.map((x) => x.title || "Unknown")
 										.join(", ")}
-									{attributes.participants &&
+									{props.participants &&
 										PARTICIPANT_LIMIT &&
-										attributes.participants.length > PARTICIPANT_LIMIT &&
-										`, +${attributes.participants.length - PARTICIPANT_LIMIT}`}
+										props.participants.length > PARTICIPANT_LIMIT &&
+										`, +${props.participants.length - PARTICIPANT_LIMIT}`}
 								</span>
 							</div>
 						)
@@ -101,7 +95,7 @@ const MeetingMessage: FC<IMeetingMessageProps> = (props) => {
 						"rce-mtmg-toogleContent--click": toggle,
 					})}
 				>
-					{attributes.dataSource?.map((x, i) => {
+					{props.dataSource?.map((x, i) => {
 						return (
 							<div key={x.id ?? i.toString()}>
 								{!x.event && (
@@ -121,13 +115,7 @@ const MeetingMessage: FC<IMeetingMessageProps> = (props) => {
 											<div className="rce-mitem-body--top">
 												<div
 													className="rce-mitem-body--top-title"
-													onClick={(e) =>
-														attributes.onMeetingLink?.(
-															e,
-															attributes,
-															setAttributes,
-														)
-													}
+													onClick={(e) => props.onMeetingLink?.(e, props)}
 													onKeyDown={console.log}
 												>
 													{x.title}
@@ -206,18 +194,10 @@ const MeetingMessage: FC<IMeetingMessageProps> = (props) => {
 													<div className="rce-mtmg-call-body">
 														<div
 															onClick={(e) =>
-																attributes.onMeetingVideoLink?.(
-																	e,
-																	attributes,
-																	setAttributes,
-																)
+																props.onMeetingVideoLink?.(e, props)
 															}
 															onKeyDown={(e) =>
-																attributes.onMeetingVideoLink?.(
-																	e,
-																	attributes,
-																	setAttributes,
-																)
+																props.onMeetingVideoLink?.(e, props)
 															}
 															className="rce-mtmg-call-avatars"
 														>
