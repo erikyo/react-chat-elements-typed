@@ -35,8 +35,8 @@
 }
 
 .rce-button.link {
-    background: inherit !important;
-    color: initial !important;
+    background: transparent !important;
+    color: currentcolor !important;
     border: none !important;
 }
 
