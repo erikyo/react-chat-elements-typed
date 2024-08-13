@@ -1,5 +1,6 @@
-import type React, {FC} from "react";
-import {useEffect, useRef, useState} from "react";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
+import type { FC } from "react";
 import "./MessageBox.css";
 
 import classNames from "classnames";
@@ -16,16 +17,22 @@ import MeetingLink from "../MeetingLink/MeetingLink";
 
 import Avatar from "../Avatar/Avatar";
 
-import {MdDelete, MdEdit, MdOutlineEmojiEmotions, MdReply, MdReplyAll,} from "react-icons/md";
+import {
+	MdDelete,
+	MdEdit,
+	MdOutlineEmojiEmotions,
+	MdReply,
+	MdReplyAll,
+} from "react-icons/md";
 
-import {format} from "date-fns";
-import {LeftNotch} from "../SvgIcon/leftNotch";
-import {RightNotch} from "../SvgIcon/rightNotch";
-import type {MessageBoxType} from "../types";
+import { format } from "date-fns";
+import { LeftNotch } from "../SvgIcon/leftNotch";
+import { RightNotch } from "../SvgIcon/rightNotch";
+import type { MessageBoxType } from "../types";
 import Button from "../Button/Button";
-import {relativeDateFormat} from "../MeetingItem/MeetingItem";
-import {Reactions} from "./Reactions";
-import {MessageStatus} from "./MessageStatus";
+import { relativeDateFormat } from "../MeetingItem/MeetingItem";
+import { Reactions } from "./Reactions";
+import { MessageStatus } from "./MessageStatus";
 
 const MessageBox: FC<MessageBoxType> = (props) => {
 	const [attributes, setAttributes] = useState<MessageBoxType>({
