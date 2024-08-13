@@ -49,23 +49,27 @@ const Input: FC<IInputProps> = (props) => {
 		if (rest.onSubmit instanceof Function) rest.onSubmit(ev);
 	};
 
-	const onChangeEvent = (ev: ChangeEvent) => {
+	const onChangeEvent = (
+		ev: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => {
 		const el = ev.target;
 		let newValue = el.value;
-		setValue(newValue);
+		if (newValue) {
+			setValue(newValue);
+		}
 
 		if (multiline) {
 			if (autoHeight) {
-				if (el.style.height !== `${minHeight}px`) {
-					el.style.height = `${minHeight}px`;
+				if (style.height !== `${minHeight}px`) {
+					style.height = `${minHeight}px`;
 				}
 
 				let height = "";
 				if (el.scrollHeight <= maxHeight) height = `${el.scrollHeight}px`;
 				else height = `${maxHeight}px`;
 
-				if (el.style.height !== height) {
-					el.style.height = height;
+				if (style.height !== height) {
+					style.height = height;
 				}
 			}
 		}
