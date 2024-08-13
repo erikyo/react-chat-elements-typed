@@ -73,6 +73,7 @@ export const Reacted = {
 		type: "text",
 		id: "10",
 		text: "Text",
+		EmojiButton: true,
 		reactions: [
 			{
 				author: "me",
