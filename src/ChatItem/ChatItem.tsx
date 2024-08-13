@@ -12,32 +12,30 @@ import Button from "../Button/Button";
 import Badge from "../Badge/Badge";
 
 const ChatItem: React.FC<IChatItemProps> = ({
-	avatarFlexible = false,
 	date = new Date(),
-	statusColor,
-	showVideoCall = false,
-	showMute = false,
-	avatar = undefined,
-	...rest
+	...props
 }) => {
-	const [isExpanded, setIsExpanded] = useState<boolean>(rest.expanded || false);
-	const [attributes, setAttributes] = useState<IChatItemProps>(rest);
+	const [isExpanded, setIsExpanded] = useState<boolean>(
+		props.expanded || false,
+	);
 
 	function getStatusItem() {
-		if (attributes?.statusColorType === "badge") {
+		if (props?.statusColorType === "badge") {
 			return (
 				<Badge
-					backgroundColor={statusColor}
-					value={attributes?.statusText}
+					backgroundColor={props?.statusColor}
+					value={props?.statusText}
 					position={"top-right"}
 				/>
 			);
 		}
-		if (attributes?.statusColorType === "encircle") {
+		if (props?.statusColorType === "encircle") {
 			return (
 				<span
 					className="rce-citem-status encircle"
-					style={{ borderColor: statusColor ?? "var(--rce-color-green)" }}
+					style={{
+						borderColor: props?.statusColor ?? "var(--rce-color-green)",
+					}}
 				/>
 			);
 		}
@@ -45,51 +43,46 @@ const ChatItem: React.FC<IChatItemProps> = ({
 	}
 
 	return (
-		<div
-			className={classNames("rce-container-citem", attributes.className)}
-			onClick={(ev) => attributes?.onClick?.(ev, attributes, setAttributes)}
-			onContextMenu={(ev) =>
-				attributes?.onContextMenu?.(ev, attributes, setAttributes)
-			}
-			onKeyDown={(ev) => attributes?.onKeyDown?.(ev, attributes, setAttributes)}
-		>
+		<div className={classNames("rce-container-citem", props.className)}>
 			<div className="rce-citem">
 				<div
 					className={classNames("rce-citem-avatar", {
-						"rce-citem-status-encircle":
-							attributes?.statusColorType === "encircle",
+						"rce-citem-status-encircle": props?.statusColorType === "encircle",
 					})}
 				>
 					<Avatar
-						src={avatar}
-						alt={attributes.alt}
-						title={attributes.title}
+						src={props?.avatar}
+						alt={props.alt}
+						title={props.title}
 						className={
-							attributes?.statusColorType === "encircle"
+							props?.statusColorType === "encircle"
 								? "rce-citem-avatar-encircle-status"
 								: undefined
 						}
-						size={attributes.avatarSize || "default"}
-						letterItem={attributes.letterItem}
+						size={props.avatarSize || "default"}
+						letterItem={props.letterItem}
 						sideElement={getStatusItem()}
-						onError={attributes.onAvatarError}
-						type={classNames("circle", { flexible: avatarFlexible })}
+						onError={props.onAvatarError}
+						type={classNames("circle", {
+							flexible: props?.avatarFlexible === true,
+						})}
 					/>
-					{attributes?.subList?.length && (
+					{props?.subList?.length && (
 						<>
-							<button
-								type="button"
+							<Button
+								link
 								className="rce-citem-expand-button"
 								onClick={() => setIsExpanded(!isExpanded)}
-							>
-								{attributes.expanded ? <FaArrowUp /> : <FaArrowDown />}
-							</button>
+								icon={{
+									component: isExpanded ? <FaArrowUp /> : <FaArrowDown />,
+								}}
+							/>
 
 							<div
 								className={"mce-citem-sublist"}
-								style={{ display: attributes.expanded ? "block" : "none" }}
+								style={{ display: props.expanded ? "block" : "none" }}
 							>
-								{attributes.subList?.map((sub, i) => (
+								{props.subList?.map((sub, i) => (
 									<ChatItem
 										{...sub}
 										className={"subitem"}
@@ -103,30 +96,26 @@ const ChatItem: React.FC<IChatItemProps> = ({
 				</div>
 				<div key="rce-citem-body" className="rce-citem-body">
 					<div className="rce-citem-body--top">
-						<div className="rce-citem-body--top-title">{attributes.title}</div>
+						<div className="rce-citem-body--top-title">{props.title}</div>
 						<div className="rce-citem-body--top-time">
-							{date && (attributes.dateString || relativeDateFormat(date))}
+							{date && (props.dateString || relativeDateFormat(date))}
 						</div>
 					</div>
 					<div className="rce-citem-body--bottom">
-						<div className="rce-citem-body--bottom-title">
-							{attributes.subtitle}
-						</div>
+						<div className="rce-citem-body--bottom-title">{props.subtitle}</div>
 						<div className={"rce-citem-body--bottom-elements"}>
 							<div
 								className="rce-citem-body--bottom-tools"
-								onMouseEnter={attributes?.handleOnMouseEnter}
-								onMouseLeave={attributes?.handleOnMouseLeave}
+								onMouseEnter={props?.handleOnMouseEnter}
+								onMouseLeave={props?.handleOnMouseLeave}
 							>
-								{showMute ? (
+								{props.showMute ? (
 									<Button
 										link
 										className="rce-citem-body--bottom-tools-item"
-										onClick={(ev) =>
-											attributes?.onMuteToggle?.(ev, attributes, setAttributes)
-										}
+										onClick={(ev) => props?.onMuteToggle?.(ev, props)}
 										icon={{
-											component: attributes?.muted ? (
+											component: props?.muted ? (
 												<MdVolumeOff />
 											) : (
 												<MdVolumeUp />
@@ -134,31 +123,33 @@ const ChatItem: React.FC<IChatItemProps> = ({
 										}}
 									/>
 								) : null}
-								{"showVideoCall" in attributes ? (
+								{props?.showVideoCall ? (
 									<Button
 										link
 										className="rce-citem-body--bottom-tools-item"
-										onClick={(ev) =>
-											attributes?.onVideoCall?.(ev, attributes, setAttributes)
-										}
+										onClick={(ev) => props?.onVideoCall?.(ev, props)}
 										icon={{ component: <MdVideoCall /> }}
 									/>
 								) : null}
 							</div>
 							<div className="rce-citem-body--bottom-tools-item-hidden-hover">
-								{showMute && attributes?.muted && (
-									<div className="rce-citem-body--bottom-tools-item">
+								{props?.showMute && props?.muted && (
+									<Button
+										link
+										className="rce-citem-body--bottom-tools-item"
+										onClick={(e) => props?.onMuteToggle?.(e, props)}
+									>
 										<MdVolumeOff />
-									</div>
+									</Button>
 								)}
 							</div>
-							{attributes?.unread ? (
+							{props?.unread ? (
 								<Badge
 									className={"rce-citem-body--bottom-status"}
-									value={attributes.unread}
+									value={props.unread}
 								/>
 							) : null}
-							{attributes?.customStatusComponents?.map(
+							{props?.customStatusComponents?.map(
 								(el: ReactElement, index: number) => {
 									return cloneElement(el, { key: index.toString() });
 								},

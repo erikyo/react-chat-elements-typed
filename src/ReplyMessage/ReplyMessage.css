@@ -13,7 +13,7 @@
 
 .rce-mbox-reply.rce-mbox-reply-border {
     border-left: 5px solid;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .rce-mbox-reply:hover {
@@ -33,7 +33,7 @@
 }
 
 .rce-mbox-reply-message {
-    color: #5a5a5a;
+    color: var(--rce-color-gray);
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

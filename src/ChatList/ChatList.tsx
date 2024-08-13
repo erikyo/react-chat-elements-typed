@@ -9,8 +9,8 @@ import type { IChatListProps } from "../types";
 const ChatList: FC<IChatListProps> = ({ dataSource, ...props }) => {
 	return (
 		<div className={classNames("rce-container-clist", props.className)}>
-			{dataSource?.map((el) => (
-				<ChatItem key={`chat-item-${el.title}`} {...el} />
+			{dataSource?.map((el, index) => (
+				<ChatItem key={`chat-item-${index.toString()}`} {...el} />
 			)) ?? <Loader />}
 		</div>
 	);

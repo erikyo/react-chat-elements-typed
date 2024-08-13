@@ -23,7 +23,7 @@ const MeetingLink: FC<IMeetingLinkMessageProps> = (props) => {
 									onClick={() => Item.onClickButton(props?.meetingID ?? "")}
 									onKeyDown={console.log}
 								>
-									<Item.Component />
+									{Item.Component}
 								</div>
 							);
 						},

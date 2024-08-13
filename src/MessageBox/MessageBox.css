@@ -3,8 +3,8 @@
 }
 
 .rce-container-mbox {
-    flex-direction: column;
     display: block;
+    clear: both;
 }
 
 .rce-mbox-action {
@@ -45,12 +45,20 @@
 }
 
 .rce-mbox {
+    float: left;
     min-width: var(--rce-mbox-min-width);
     max-width: var(--rce-mbox-max-width);
     position: relative;
     flex-direction: column;
-    margin: 5px 5px 5px 20px;
-    float: left;
+    margin: 4px 0 4px 20px;
+}
+
+.rce-mbox.rce-mbox-right {
+    float: right;
+    margin-left: 0;
+    margin-right: 20px;
+    border-top-right-radius: 0;
+    border-top-left-radius: var(--rce-mbox-border-radius);
 }
 
 .rce-mbox-body {
@@ -83,18 +91,10 @@
     animation-duration: 1s;
 }
 
-.rce-mbox.rce-mbox-right {
-    float: right;
-    margin-left: 5px;
-    margin-right: 20px;
-    border-top-right-radius: 0;
-    border-top-left-radius: var(--rce-mbox-border-radius);
-}
-
 .rce-mbox-action-buttons {
     position: absolute;
     display: flex;
-    top: calc(50% - 10px);
+    top: calc(50% - 15px);
     left: calc(100% + 24px);
     flex-direction: row;
     justify-content: flex-start;
@@ -219,7 +219,7 @@
     animation-duration: 1s;
 }
 
-.rce-mbox-title {
+.rce-button.rce-mbox-title {
     margin: 0 0 8px;
     font-weight: 500;
     font-size: 13px;
@@ -244,16 +244,13 @@
     height: 15px;
 }
 
-.rce-mbox-title > .rce-avatar-container {
-    margin-right: 5px;
-}
-
 .rce-mbox-forwarded-message {
     position: relative;
     overflow: hidden;
     display: flex;
     border-radius: var(--rce-mbox-border-radius);
     padding: 0 0 5px;
+    line-height: 1;
     transition: 200ms;
     user-select: none;
 }

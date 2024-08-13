@@ -28,7 +28,7 @@ exports[`Avatar component > should render without issues 1`] = `
           class="rce-mbox-action-buttons"
         >
           <button
-            class="rce-button rce-mbox-action rce-mbox-forward circle"
+            class="rce-button rce-mbox-action rce-mbox-forward rce-mbox-forward-left circle"
             style="background-color: rgba(110, 110, 120, 0.5); border-color: rgba(110, 110, 120, .5); border-width: 0px; flex-direction: row; padding: 6px;"
             type="button"
           >

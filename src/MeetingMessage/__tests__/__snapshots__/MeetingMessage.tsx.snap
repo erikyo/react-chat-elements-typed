@@ -40,7 +40,9 @@ exports[`Avatar component > should render without issues 1`] = `
             />
             <span
               class="rce-mtmg-date"
-            />
+            >
+              now
+            </span>
           </div>
         </div>
       </div>
