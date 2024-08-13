@@ -1,18 +1,15 @@
 import type {
 	ButtonHTMLAttributes,
 	ChangeEvent,
-	ClipboardEventHandler,
 	CSSProperties,
 	Dispatch,
 	DragEventHandler,
 	FocusEvent,
-	FocusEventHandler,
 	FormEventHandler,
 	FunctionComponent,
 	HTMLAttributes,
 	HTMLInputTypeAttribute,
 	InputHTMLAttributes,
-	KeyboardEventHandler,
 	MouseEvent,
 	MouseEventHandler,
 	MutableRefObject,
@@ -79,6 +76,12 @@ export interface ILetterItem {
 	id: string;
 	letter?: string;
 }
+
+export type MessageReaction = {
+	author: string;
+	emoji: string;
+};
+
 export type IChatItemEvent = (
 	ev: MouseEvent | KeyboardEvent | SyntheticEvent,
 	attributes: IChatItemProps,
@@ -183,6 +186,7 @@ export interface IMessage {
 	className?: string;
 	letterItem?: ILetterItem;
 	reply?: IReplyMessage;
+	reactions?: MessageReaction[];
 	type: MessageTypes;
 	style?: CSSProperties;
 	notchStyle?: CSSProperties;

@@ -68,6 +68,24 @@ export const Simple = {
 	},
 };
 
+export const Reacted = {
+	args: {
+		type: "text",
+		id: "10",
+		text: "Text",
+		reactions: [
+			{
+				author: "me",
+				emoji: "👍",
+			},
+			{
+				author: "Pippo",
+				emoji: "❤",
+			},
+		],
+	},
+};
+
 export const customStyle = {
 	args: {
 		type: "text",
