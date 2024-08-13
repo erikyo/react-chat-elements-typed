@@ -5,7 +5,6 @@
 .rce-container-mbox {
     flex-direction: column;
     display: block;
-    overflow-x: hidden;
 }
 
 .rce-mbox-action {
@@ -142,6 +141,27 @@
     font-size: 12px;
     margin-top: 10px;
     user-select: none;
+}
+
+.rce-reactions {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    gap: 4px;
+    transform: translateY(50%);
+}
+
+.rce-reaction {
+    text-align: center;
+    background: var(--rce-color-white);
+    box-shadow: 0 1px 0 rgb(0 0 0 / 7%),0 0 3px rgb(0 0 0 / 4%);
+    border: 1px solid rgb(0 0 0 / 5%);
+    padding: 4px;
+    box-sizing: border-box;
+    line-height: 20px;
+    width: 30px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .rce-mbox-time.non-copiable::before {
