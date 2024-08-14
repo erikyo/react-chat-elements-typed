@@ -1,5 +1,5 @@
-import SVG from "./icons";
 import type { CSSProperties } from "react";
+import SVG from "./SVG";
 
 export const IconMic = ({
 	style = {},

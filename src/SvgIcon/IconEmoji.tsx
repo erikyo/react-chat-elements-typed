@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
-import SVG from "./icons";
+
+import SVG from "./SVG";
 
 export const IconEmoji = ({
 	style = {},

@@ -1,11 +1,13 @@
-import SVG from "./icons";
 import classNames from "classnames";
 import type { CSSProperties } from "react";
+import SVG from "./SVG";
 
 export const RightNotch = ({
+	size = 20,
 	style = {},
 	focus = false,
 }: {
+	size?: number;
 	style?: CSSProperties;
 	focus?: boolean;
 }) => {
@@ -17,7 +19,7 @@ export const RightNotch = ({
 			})}
 			size={20}
 		>
-			<path d="M0 0v20L20 0" />
+			<path d={`M0 0v${size}L${size} 0`} />
 		</SVG>
 	);
 };

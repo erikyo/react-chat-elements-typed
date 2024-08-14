@@ -1,6 +1,6 @@
-import SVG from "./icons";
 import classNames from "classnames";
 import type { CSSProperties } from "react";
+import SVG from "./SVG";
 
 /**
  * The LeftNotch component is used to render the left notch of the message box.

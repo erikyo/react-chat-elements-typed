@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import SVG from "./icons";
 import { IconMic } from "./IconMic";
 import { IconEmoji } from "./IconEmoji";
 import { IconPlus } from "./IconPlus";
 import { IconSend } from "./IconSend";
 import { LeftNotch } from "./leftNotch";
 import { RightNotch } from "./rightNotch";
+import SVG from "./SVG";
 
 const meta = {
 	component: SVG,
