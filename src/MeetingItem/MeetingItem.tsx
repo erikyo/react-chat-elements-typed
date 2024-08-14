@@ -5,7 +5,7 @@ import { MdCall, MdLink, MdVideoCall } from "react-icons/md";
 
 import Avatar from "../Avatar/Avatar";
 
-import { formatDistance, parse, subDays } from "date-fns";
+import { formatDistance } from "date-fns";
 
 import classNames from "classnames";
 import type { IMeetingItemProps } from "../types";
@@ -41,7 +41,6 @@ const MeetingItem: FC<IMeetingItemProps> = (props) => {
 	const [attributes, setAttributes] = useState<IMeetingItemProps>({
 		subjectLimit: 60,
 		avatarFlexible: false,
-		date: new Date(),
 		avatarLimit: 5,
 		avatars: [] as IAvatarProps[],
 		audioMuted: true,

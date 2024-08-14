@@ -6,11 +6,11 @@ import MessageList from "../../../MessageList/MessageList";
 import type { IChatItemProps, MessageType } from "../../../types";
 import Side from "./Side";
 import { buildUsersList } from "./Side";
+import { IconMenu } from "../../../SvgIcon/IconMenu";
 import { IconEmoji } from "../../../SvgIcon/IconEmoji";
 import { IconPlus } from "../../../SvgIcon/IconPlus";
 import { IconSend } from "../../../SvgIcon/IconSend";
 import Navbar from "../../../Navbar/Navbar";
-import { IconMenu } from "../../../SvgIcon/IconMenu";
 import Avatar from "../../../Avatar/Avatar";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
@@ -168,9 +168,7 @@ const Index = () => {
 								clearRef(inputReference.current);
 							}
 						}}
-						onMaxLengthExceed={() => console.log("Message is too long")}
 						reference={inputReference}
-						autoHeight={true}
 						multiline={false}
 						maxHeight={50}
 						onKeyDown={(e) => {

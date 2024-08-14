@@ -8,6 +8,7 @@ describe("Avatar component", () => {
 		const component = render(
 			<MeetingMessage
 				type={"text"}
+				text={"ciao"}
 				date={new Date("2050-01-01")}
 				dateString={"now"}
 			/>,

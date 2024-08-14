@@ -737,9 +737,8 @@ export type IMeetingItemEvent = (
  * @prop onClose The Meeting Item's function onClose(event: MouseEvent<T, MouseEvent>).
  */
 export interface IMeetingItemProps {
-	id: string;
 	closable?: boolean;
-	date?: Date;
+	date: number | string | Date;
 	subject?: string;
 	subjectLimit?: number;
 	avatarFlexible?: boolean;
@@ -1102,10 +1101,10 @@ export type MessageType =
 	| ({ type: "photo" } & IPhotoMessageProps)
 	| ({ type: "video" } & IVideoMessageProps)
 	| ({ type: "audio" } & IAudioMessageProps)
-	| ({ type: "meetingLink" } & IMeetingLinkMessageProps)
 	| ({ type: "file" } & IFileMessageProps)
 	| ({ type: "text" } & ITextMessageProps)
 	| ({ type: "system" } & ISystemMessageProps)
-	| ({ type: "meeting" } & IMeetingMessageProps);
+	| ({ type: "meeting" } & IMeetingMessageProps)
+	| ({ type: "meetingLink" } & IMeetingLinkMessageProps);
 
 export type MessageBoxType = MessageType & IMessageBoxProps;
