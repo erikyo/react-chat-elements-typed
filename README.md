@@ -55,10 +55,9 @@ Please check the storybook documentation [here](https://erikyo.github.io/react-c
 11. [Dropdown](#dropdown-component)
 12. [Avatar](#avatar-component)
 13. [LocationMessage](#locationmessage-component)
-14. [SpotifyMessage](#spotifymessage-component)
-15. [MeetingItem](#meetingitem-component)
-16. [MeetingList](#meetinglist-component)
-17. [MeetingLink](#meetinglink-component)
+14. [MeetingItem](#meetingitem-component)
+15. [MeetingList](#meetinglist-component)
+16. [MeetingLink](#meetinglink-component)
 
 ## ChatItem Component
 
@@ -128,7 +127,7 @@ import { MessageBox } from 'react-chat-elements'
 | ----------------------- | ---------- | -------------------- | -------------------------------------------------------------------------------------------------- |
 | id                      | i (index)  | string               | message box id                                                                                     |
 | position                | left       | string               | message box position                                                                               |
-| type                    | text       | string               | message type (text, photo, file, location, spotify, video, audio)                                  |
+| type                    | text       | string               | message type (text, photo, file, location, video, audio)                                  |
 | text                    | none       | string               | message text                                                                                       |
 | title                   | none       | string               | message title                                                                                      |
 | titleColor              | none       | string(color)        | message title color                                                                                |
@@ -200,9 +199,7 @@ import { MeetingMessage } from 'react-chat-elements'
             id: '1',
             title: 'Facebook',
         },
-        .
-        .
-        .
+        {...},
     ]}
     dataSource={[
         {
@@ -589,26 +586,6 @@ import { LocationMessage } from 'react-chat-elements'
 | data        | {}      | object   | message data                  |
 | target      | \_blank | string   | image a tag target prop       |
 | onOpen      | none    | function | image on open                 |
-
-## SpotifyMessage Component
-
-![spotify](https://user-images.githubusercontent.com/15075759/31466094-ad5852b8-aede-11e7-91bc-8a29e7427552.png)
-
-```javascript
-import { SpotifyMessage } from 'react-chat-elements'
-;<SpotifyMessage theme='white' view='coverart' uri={'spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf'} />
-```
-
-#### SpotifyMessage props
-
-| prop   | default | type   | description                          |
-| ------ | ------- | ------ | ------------------------------------ |
-| uri    | none    | uri    | spotify uri                          |
-| theme  | black   | string | spotify theme color (black or white) |
-| view   | list    | string | spotify view type (list or coverart) |
-| data   | {}      | object | message data                         |
-| width  | 300     | int    | spotify embed width                  |
-| height | 380     | int    | spotify embed height                 |
 
 ## MeetingItem Component
 
