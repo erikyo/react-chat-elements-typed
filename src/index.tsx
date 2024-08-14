@@ -24,12 +24,15 @@ import Dropdown from "./Dropdown/Dropdown";
 import SideBar from "./SideBar/SideBar";
 import Popup from "./Popup/Popup";
 import Loader from "./Loader/Loader";
+import SVG from "./SvgIcon/icons";
+import { icons } from "./SvgIcon/icons";
 
 /** Types exported from the library */
 export * from "./types";
 
 /** All exported components */
 export {
+	icons,
 	MessageBox,
 	ChatItem,
 	ChatList,
@@ -53,4 +56,5 @@ export {
 	SideBar,
 	Popup,
 	Loader,
+	SVG,
 };
