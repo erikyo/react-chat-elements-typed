@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import SVG from "./SVG";
 
-export const IconMenu = ({
+const IconMenu = ({
 	style = {},
 	size = 24,
 }: { style?: CSSProperties; size?: number }) => {
@@ -14,3 +14,5 @@ export const IconMenu = ({
 		</SVG>
 	);
 };
+
+export default IconMenu;

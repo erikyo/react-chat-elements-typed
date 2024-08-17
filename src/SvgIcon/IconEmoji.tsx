@@ -1,8 +1,7 @@
 import type { CSSProperties } from "react";
-
 import SVG from "./SVG";
 
-export const IconEmoji = ({
+const IconEmoji = ({
 	style = {},
 	size = 24,
 }: { style?: CSSProperties; size?: number }) => {
@@ -15,3 +14,5 @@ export const IconEmoji = ({
 		</SVG>
 	);
 };
+
+export default IconEmoji;

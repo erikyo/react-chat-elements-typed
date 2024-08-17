@@ -1,8 +1,7 @@
 import type { CSSProperties } from "react";
-
 import SVG from "./SVG";
 
-export const IconSend = ({
+const IconSend = ({
 	style = {},
 	size = 24,
 }: { style?: CSSProperties; size?: number }) => {
@@ -15,3 +14,5 @@ export const IconSend = ({
 		</SVG>
 	);
 };
+
+export default IconSend;
