@@ -24,10 +24,13 @@ const Input: FC<IInputProps> = (props) => {
 		autofocus = false,
 		clearButton = true,
 		placeholder = "Type here...",
+		leftButtons = null,
+		rightButtons = null,
 		maxlength = 200,
 		onMaxLengthExceed = () => console.warn("The maxlength has been exceeded"),
 		value: propValue = "",
 		style = {},
+		reference = null,
 		...rest
 	} = props;
 	const [value, setValue] = useState<string>(
@@ -35,8 +38,8 @@ const Input: FC<IInputProps> = (props) => {
 	);
 
 	useEffect(() => {
-		if (autofocus) rest.reference?.current?.focus();
-	}, [autofocus, rest.reference?.current?.focus]);
+		if (autofocus) reference?.current?.focus();
+	}, [autofocus, reference?.current?.focus]);
 
 	/** Update state if propValue changes */
 	useEffect(() => {
@@ -77,9 +80,9 @@ const Input: FC<IInputProps> = (props) => {
 		if (maxlength && (el.value || "").length > maxlength) {
 			if (onMaxLengthExceed) onMaxLengthExceed();
 
-			if (rest.reference?.current) {
+			if (reference?.current) {
 				newValue = newValue.substring(0, maxlength);
-				(rest.reference.current as HTMLInputElement).value = newValue;
+				(reference.current as HTMLInputElement).value = newValue;
 				setValue(newValue);
 			}
 			return;
@@ -87,8 +90,8 @@ const Input: FC<IInputProps> = (props) => {
 	};
 
 	const clear = () => {
-		if (rest.reference?.current) {
-			(rest.reference.current as HTMLInputElement).value = "";
+		if (reference?.current) {
+			(reference.current as HTMLInputElement).value = "";
 		}
 
 		setValue("");
@@ -100,16 +103,14 @@ const Input: FC<IInputProps> = (props) => {
 			className={classNames("rce-container-input", rest.className)}
 			style={style}
 		>
-			{rest.leftButtons && (
-				<div className="rce-input-buttons">{rest.leftButtons}</div>
-			)}
+			{leftButtons && <div className="rce-input-buttons">{leftButtons}</div>}
 			<div className="rce-input-content w-full relative">
 				{!multiline ? (
 					<input
 						{...rest}
 						name={"chat-input"}
 						style={rest.inputStyle}
-						ref={rest.reference as LegacyRef<HTMLInputElement>}
+						ref={reference as LegacyRef<HTMLInputElement>}
 						type={type}
 						className={"rce-input w-full"}
 						placeholder={placeholder}
@@ -119,7 +120,7 @@ const Input: FC<IInputProps> = (props) => {
 				) : (
 					<textarea
 						{...rest}
-						ref={rest.reference as LegacyRef<HTMLTextAreaElement>}
+						ref={reference as LegacyRef<HTMLTextAreaElement>}
 						className={classNames("rce-input", "rce-input-textarea")}
 						placeholder={placeholder}
 						style={rest.inputStyle}
@@ -146,9 +147,7 @@ const Input: FC<IInputProps> = (props) => {
 					/>
 				)}
 			</div>
-			{rest.rightButtons && (
-				<div className="rce-input-buttons">{rest.rightButtons}</div>
-			)}
+			{rightButtons && <div className="rce-input-buttons">{rightButtons}</div>}
 		</form>
 	);
 };

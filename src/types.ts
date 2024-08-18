@@ -107,7 +107,6 @@ export interface IChatItemProps extends HTMLAttributes<HTMLElement> {
 	statusText?: string;
 	subList?: IChatItemProps[];
 	expanded?: boolean;
-	dataSource: IChatItemProps[];
 	customStatusComponents?: ReactElement[];
 	muted?: boolean;
 	showMute?: boolean;
@@ -805,8 +804,8 @@ export interface IInputProps
 	multiline?: boolean;
 	autoHeight?: boolean;
 	minHeight?: number;
-	leftButtons?: ReactNode;
-	rightButtons?: ReactNode;
+	leftButtons?: ReactElement;
+	rightButtons?: ReactElement;
 	type?: HTMLInputTypeAttribute;
 	placeholder?: string;
 	defaultValue?: string;
